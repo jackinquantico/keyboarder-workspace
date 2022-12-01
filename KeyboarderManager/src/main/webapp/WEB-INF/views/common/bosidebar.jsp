@@ -154,15 +154,15 @@
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-solid fa-gear"></i>
-              <p>입점업체 관리
+              <p>KEYBOAR-DER +
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="store.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>입점업체 수정/삭제</p>
+                  <p>입점업체 관리</p>
                 </a>
               </li>
               <li class="nav-item">
