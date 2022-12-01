@@ -86,7 +86,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="ViewAllOrder.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 주문내역</p>
                 </a>
