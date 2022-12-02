@@ -7,11 +7,11 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.kh.kmanager.common.model.vo.PGData" alias="pgd" />
+		<typeAlias type="com.kh.kmanager.bo.store.model.vo.Store" alias="store" />
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="/mappers/pgd-mapper.xml" />
+		<mapper resource="/mappers/store-mapper.xml" />
 	</mappers>
 
 </configuration>

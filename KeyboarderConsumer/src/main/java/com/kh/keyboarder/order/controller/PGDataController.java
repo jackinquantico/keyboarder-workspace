@@ -1,4 +1,4 @@
-package com.kh.kmanager.common;
+package com.kh.keyboarder.order.controller;
 
 import java.io.IOException;
 
@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.kmanager.common.model.vo.PGData;
+import com.kh.keyboarder.order.model.service.PGDataService;
+import com.kh.keyboarder.order.model.vo.PGData;
 
 @Controller
-public class SCY_Controller {
+public class PGDataController {
 	
 	@Autowired
-	private SCY_Service service;
+	private PGDataService service;
 		
 	
 	@RequestMapping("purchase.fo")
@@ -42,7 +43,7 @@ public class SCY_Controller {
 	}
 	
 	@RequestMapping(value="refundPay.fo")
-	public String  refundPay(PGData pgd, HttpSession session) throws IOException {
+	public String refundPay(PGData pgd, HttpSession session) throws IOException {
 		
 		// System.out.println(pgd);
 		
@@ -62,5 +63,4 @@ public class SCY_Controller {
 			return "redirect:/";
 		}
 	}
-	
 }

@@ -1,11 +1,10 @@
-package com.kh.kmanager.common;
+package com.kh.keyboarder.order.model.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Map;
 
@@ -17,14 +16,14 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.kh.kmanager.common.model.vo.PGData;
+import com.kh.keyboarder.order.model.dao.PGDataDao;
+import com.kh.keyboarder.order.model.vo.PGData;
 
 import lombok.Data;
 
-
 @Service
-public class SCY_Service {
-	
+public class PGDataService {
+
 	@Data
 	private class Response{
 		private PaymentInfo response;
@@ -36,7 +35,7 @@ public class SCY_Service {
 	}
 	
 	@Autowired
-	private SCY_Dao dao;
+	private PGDataDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;

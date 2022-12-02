@@ -6,6 +6,12 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
+	<typeAliases>
+		<typeAlias type="com.kh.keyboarder.order.model.vo.PGData" alias="pgd" />
+	</typeAliases>
 	
+	<mappers>
+		<mapper resource="/mappers/pgd-mapper.xml" />
+	</mappers>
 
 </configuration>

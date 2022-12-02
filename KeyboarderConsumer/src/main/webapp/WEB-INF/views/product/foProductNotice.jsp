@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
 	<style>
         div{
@@ -127,12 +132,18 @@
                         </form>
                     </div>
                     <div class="fo-product-all" align="center">
-                        <form>
+                        <form action="purchase.fo" method="post" id="request">
+                        	<input type="hidden" name="paymentNo" id="imp_uid">
+							<input type="hidden" name="orderNo" id="merchant_uid">
+							<input type="hidden" name="productNo" id="product_name">
+							<input type="hidden" name="amount" id="amount">
+							<input type="hidden" name="conNo" id="buyer_name">
+							<input type="hidden" name="couponPrice" id="couponPrice" value="3000">
                             <div class="fo-product-img"></div>
                             <div class="fo-product-name">상품 제목 넣어버리기</div>
                             <div class="fo-product-price">상품 가격 넣어버리기</div>
                             <div class="fo-buy-button" align="center">
-                                <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
+                                <button onclick="requestPay();" type="button" class="btn btn-outline-info" style="width: 100px; height: 40px;">
                                    	 구매하기
                                 </button>
                             </div>
@@ -142,6 +153,61 @@
             </div>
         </div>
     </div>
+
+	<script>
+		
+		// 주문번호 만들기
+		function createOrderNum(){
+			const date = new Date();
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+			
+			let orderNum = year + month + day;
+			for(let i=0;i<10;i++) {
+				orderNum += Math.floor(Math.random() * 8);	
+			}
+			return orderNum;
+		}
+	
+		var amount = 4000 - $("#couponPrice").val() + 2500;
+	
+		var IMP = window.IMP; // 생략 가능
+    	IMP.init("imp80773741"); // 예: imp00000000
+		
+    	function requestPay() {
+    	      // IMP.request_pay(param, callback) 결제창 호출
+    	      IMP.request_pay({ // param
+    	          pg: "html5_inicis.INIpayTest",
+    	          pay_method: "card",
+    	          merchant_uid: createOrderNum(),
+    	          name: 120031,
+    	          amount: amount,
+    	          buyer_email: "user01@gmail.com",
+    	          buyer_name: 1001,
+    	          buyer_tel: "010-4242-4242",
+    	          buyer_addr: "서울특별시 강남구 신사동"
+    	      }, function (rsp) { // callback
+    	          if (rsp.success) {
+    	        	  
+    	              $("#imp_uid").val(rsp.imp_uid);
+    	              $("#merchant_uid").val(rsp.merchant_uid);
+    	              $("#product_name").val(rsp.name);
+    	              $("#amount").val(rsp.paid_amount);
+    	              $("#buyer_name").val(rsp.buyer_name);
+    	              $("#request").submit();
+    	                  	        	  
+    	          } else {
+    	        	  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+    	          }
+    	     });
+    	 }
+		
+		function refundPay() {
+			
+			location.href = "refundPay.fo?orderNo=20180131-0000067&paymentNo=imp_872602395619";
+		}
+	</script>
 
 </body>
 </html>

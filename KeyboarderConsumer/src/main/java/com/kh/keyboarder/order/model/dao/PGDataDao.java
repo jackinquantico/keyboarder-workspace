@@ -1,12 +1,13 @@
-package com.kh.kmanager.common;
+package com.kh.keyboarder.order.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.kmanager.common.model.vo.PGData;
+import com.kh.keyboarder.order.model.vo.PGData;
 
 @Repository
-public class SCY_Dao {
+public class PGDataDao {
+
 
 	public int insertOrder(SqlSessionTemplate sqlSession, PGData pgd) {
 		return sqlSession.insert("pgdMapper.insertOrder", pgd);
