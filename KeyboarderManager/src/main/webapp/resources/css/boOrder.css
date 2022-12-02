@@ -39,7 +39,6 @@
     text-align : center;
 }
 
-
 #allOrder_result{
     border : 1px solid black;
     height : 600px;
@@ -86,49 +85,3 @@
 #result_table>thead {
     background-color: lightgray;
 }
-
-
-/* -------------- 주문내역 상세조회 모달창 설정 ------------------ */
-
-.modal-header {
-    border-bottom: none !important;
-    margin-bottom: 0px;
-}
-
-.modal-body {
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-}
-
-#orderDetail_table {
-    width : 100%;
-    font-size : 15px;
-}
-
-#orderDetail_table td {
-    border-top : 1px solid black;
-    border-bottom: 1px solid black;
-    border-left : 1px solid black;
-    border-right : 1px solid black;
-    padding : 5px 5px 5px 5px;
-}
-
-#expectedSettlement_table {
-    width : 100%;
-    font-size : 15px;
-}
-
-#expectedSettlement_table td {
-    border-top : 1px solid black;
-    border-bottom: 1px solid black;
-    border-left : 1px solid black;
-    border-right : 1px solid black;
-    padding : 5px 5px 5px 5px;
-}
-
-#orderDetailModal_info>p {
-    font-size : 12px;
-    font-weight: bold;
-}
-
-

@@ -11,9 +11,9 @@
 
 <jsp:include page="WEB-INF/views/common/header.jsp" />
 
-<jsp:include page="WEB-INF/views/common/posidebar.jsp" />
+<jsp:include page="WEB-INF/views/common/bosidebar.jsp" />
 
-<jsp:include page="WEB-INF/views/common/pomain.jsp" />
+<jsp:include page="WEB-INF/views/common/bomain.jsp" />
 
 </body>
 </html>
