@@ -11,27 +11,9 @@
 
 <jsp:include page="WEB-INF/views/common/header.jsp" />
 
-<jsp:include page="WEB-INF/views/common/posidebar.jsp" />
+<jsp:include page="WEB-INF/views/common/bosidebar.jsp" />
 
-<!-- 콘텐츠 영역 전체 래퍼 -->
-<div class="content-wrapper">
+<jsp:include page="WEB-INF/views/common/bomain.jsp" />
 
-<!-- 콘텐츠 영역 제목 -->
-<div class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1 class="m-0">&nbsp;K-MONEY 잔액관리</h1>
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
-</div>
-
-<!-- 실제 콘텐츠 영역 -->
-<div class="content">
-
-</div>
-
-</div> <!-- /.content-wrapper -->
 </body>
 </html>
