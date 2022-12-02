@@ -6,11 +6,6 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
-	<typeAliases>
-	</typeAliases>
-
-	<mappers>
-		<mapper resource="/mappers/pgd-mapper.xml" />
-	</mappers>
+	
 
 </configuration>

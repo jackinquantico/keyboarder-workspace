@@ -50,7 +50,7 @@
         }
 
         .delivery-header>#long-title{
-            font-size: 10px;
+            font-size: 15px;
             display: inline-block;
             margin-left: 1%;
         }
@@ -85,22 +85,20 @@
 
         #delivery-information-header{
             width: 100%;
-            height: 15%;
-            background-color: pink;
-            
+            height: 15%;            
         }
 
         #delivery-information-count, #delivery-information-count-num{
             display: inline-block;
             font-size: 150%;
             margin-left: 3.0%;
-            margin-top: 8px;
         }
 
         #delivery-information-main{
             width: 100%;
             height: 100%;
             margin-left: 0%;
+            padding-top: 5px;
         }
 
         .delivery-information-notice{
@@ -131,13 +129,11 @@
         #delivery-lookup{
             width: 100%;
             height: 80px;
-            background-color: red;
         }
         
         #delivery-period{
         	width: 100%;
         	height: 80px;
-        	background-color: yellow;
         }
         
     </style>
@@ -210,7 +206,7 @@
 		                    </div>
 		                </div>
 		                <div id="delivery-button" align="center">
-		                	<button type="submit" style="margin-top: 17px; width: 20%;">
+		                	<button type="button" class="btn btn-outline-success" style="margin-top: 17px; width: 20%; font-size: 17px;">
 		                		검색하기
 		                	</button>
 		                </div>
@@ -221,16 +217,18 @@
 		        <div class="delivery-information">
 		            <div id="delivery-information-header">
 		                <div id="delivery-information-main">
-		                    <div id="delivery-information-count">주문건 : </div>       
-		                    <div id="delivery-information-count-num">20</div>    
-		                    <button style="width: 20%; height: 60%; margin-left: 60%;">엑셀 다운로드</button>         
+		                    <div id="delivery-information-count" style="margin-top: 5px;">주문건&nbsp:&nbsp </div>       
+		                    <div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp20&nbsp</div>    
+		                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;">
+		                    	엑셀다운로드
+		                    </button>       
 		                </div>
 		            </div>
 		            <div class="delivery-information-notice">
 		                <form>
-		                    <table border="1"width="100%" id="delivery-list">
+		                    <table border="1" width="100%" id="delivery-list">
 		                        <thead>
-		                            <tr style="border-color: blue;">
+		                            <tr>
 		                                <th width="5%">주문번호</th>
 		                                <th width="7%">배송상태</th>
 		                                <th width="8%">상품코드</th>
@@ -247,6 +245,36 @@
 		                            </tr>
 		                        </thead>
 		                        <tbody>
+		                            <tr>
+		                                <td width="5%">30</td>
+		                                <td width="7%">배송완료</td>
+		                                <td width="8%">123456</td>
+		                                <td width="13%">아무개 키보드</td>
+		                                <td width="8%">100000</td>
+		                                <td width="8%">3000</td>
+		                                <td width="7%">3000</td>
+		                                <td width="7%">-</td>
+		                                <td width="7%">100000</td>
+		                                <td width="7%">apple</td>
+		                                <td width="7%">신짱구</td>
+		                                <td width="8%">2000-07-05</td>
+		                                <td width="8%">Y</td>
+		                            </tr>
+		                            <tr>
+		                                <td width="5%">30</td>
+		                                <td width="7%">배송완료</td>
+		                                <td width="8%">123456</td>
+		                                <td width="13%">아무개 키보드</td>
+		                                <td width="8%">100000</td>
+		                                <td width="8%">3000</td>
+		                                <td width="7%">3000</td>
+		                                <td width="7%">-</td>
+		                                <td width="7%">100000</td>
+		                                <td width="7%">apple</td>
+		                                <td width="7%">신짱구</td>
+		                                <td width="8%">2000-07-05</td>
+		                                <td width="8%">Y</td>
+		                            </tr>
 		                            <tr>
 		                                <td width="5%">30</td>
 		                                <td width="7%">배송완료</td>

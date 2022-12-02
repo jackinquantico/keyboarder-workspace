@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class JKW_Controller {
+public class JKW_PoOrderController {
 
 	@RequestMapping("delivery.poOrder")
 	public String deliveryMain() {

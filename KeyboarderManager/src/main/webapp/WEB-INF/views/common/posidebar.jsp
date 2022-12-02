@@ -162,7 +162,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/validation.html" class="nav-link">
+                <a href="################" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전자세금계산서 관리</p>
                 </a>
