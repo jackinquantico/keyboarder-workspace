@@ -67,54 +67,92 @@
 				<td>송금 정보</td>
 			</tr>
 		</thead>
+		
+	<c:if test="${ not empty list }">
 		<tbody>
+		
+		<c:forEach var="s" items="${ list }">
 			<tr>
-				<td>상호명</td>
-				<td>판매자 ID</td>
-				<td>사업자 등록번호</td>
-				<td>정상</td>
-				<td>가입일</td>
+				<td>${ s.sellerName }</td>
+				<td>${ s.sellerId }</td>
+				<td>${ s.accountNo }</td>
 				<td>
-					<a class="btn btn-secondary" href="storeDetail.bo">상세보기</a>
+					<c:choose>
+						<c:when test="${ s.sellerStatus eq 'Y' }">
+							정상
+						</c:when>
+						<c:otherwise>
+							탈퇴
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td>${ s.joinDate }</td>
+				<td>
+					<a class="btn btn-secondary" href="storeDetail.bo?sellerNo=${ s.sellerNo }">상세보기</a>
 				</td>
 				<td>
 					<!-- 인증 완료 시에는 인증 확인 / 아닐 때는 미인증 -->
-					<a class="btn btn-warning" data-toggle="modal" data-target="#identifyModal">미인증</a>
+					<c:choose>
+						<c:when test="${ s.identifyStatus eq 'N' }">
+							<form action="identify.bo" method="post" id="identify">
+								<input type="hidden" name="sellerNo" value="${ s.sellerNo }">
+								<button class="btn btn-warning" type="submit">미인증</button>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-primary">인증</a>
+						</c:otherwise>
+					</c:choose>
 				</td>
 				<td>
-					<a class="btn btn-secondary" data-toggle="modal" data-target="#accountModal">계좌변경</a>
+					<input type="hidden" id="originAccountNo" value="${ s.accountNo }">
+					<button class="btn btn-secondary" data-toggle="modal" data-target="#accountModal">계좌변경</button>
 				</td>
 			</tr>
+			
+		</c:forEach>
 		</tbody>
+	</c:if>
 	</table>
 
 </div>
 
+
+
 <!-- 인증 정보 모달 -->
+<!-- data-toggle="modal" data-target="#identifyModal" -->
 <div class="modal" id="identifyModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">입점 업체 인증 정보</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        	해당 업체 입점을 승인하시겠습니까?
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-secondary" onclick="">인증</button>
-      </div>
-
+		
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">입점 업체 인증 정보</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        	해당 업체 입점을 승인하시겠습니까?
+	      </div>
+	     <input type="hidden" id="sellerNo" name="sellerNo">
+	      
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-secondary" onclick="identifing();">인증</button>
+	      </div>
+	      
     </div>
   </div>
 </div> <!-- /.modal -->
+
+<script>
+function identifing() {
+		$("#identify").submit();
+		// console.log($("#identiySellerNo").val());
+}
+</script>
 
 <!-- 계좌 변경 모달 -->
 <div class="modal" id="accountModal">

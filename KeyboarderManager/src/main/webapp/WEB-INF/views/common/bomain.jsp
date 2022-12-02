@@ -18,13 +18,42 @@
 	margin: 50px;
 }
 #top-content { height: 470px; }
-#btm-content { height: 350px; }
+#btm-content { 
+	height: 350px; 
+	padding-bottom: 20px;
+}
 #left-status, #right-status {
 	height: 100%; 
-	display:inline; 
-	border: 1px solid black; 
-	float: right;
+	display:inline;
 	margin: 0px;
+	float: left;
+	padding: 10px;
+}
+#right-status table {
+	width: 100%;
+	height: 100%;
+}
+#right-status td {
+	padding-right: 15px;
+	height: 100%;
+}
+.topTitle {
+	vertical-align: top;
+	text-align: right;
+}
+.card-header {
+	font-size: 20px;
+	font-weight: bold;
+}
+#right-status td img {
+	width: 150px;
+	height: 150px;
+}
+.atag {
+	font-size: 14px;
+	color: blue;
+	font-weight: normal;
+	float: right;
 }
 </style>
 </head>
@@ -39,40 +68,60 @@
 		<div id="top-content" class="card">
 			<div class="card-header">
 				전체 매출 통계
+				<a href="" class="atag">전체보기</a>
 			</div>
 			<div class="card-body" style="width:100%; height: 90%;">
 				<canvas id="sales-chart" height="100%" style="display: block; width: 100%;" class="chartjs-render-monitor"></canvas>
 			</div>
 		</div>
 		
-		<div id="btm-content" class="card">
-			<div id="left-status" style="width:40%;">
-				<div class="card-header">
-					상품 통계
-				</div>
-				<div class="card-body">
-					<canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block;" class="chartjs-render-monitor"></canvas>
-				</div>
+		<div id="btm-content" class="card">		
+			<div class="card-header border-0">
+				상품 통계
+				<a href="" class="atag">전체보기</a>
 			</div>
-			<div id="right-status" style="width:60%;">
-				<div class="card-body">
-					<table >
+			<div class="card-body">
+			
+				<div id="left-status" style="width:35%;">
+					<canvas id="visitors-chart" style="display: block; height: 100%; width: 100%;" class="chartjs-render-monitor"></canvas>
+				</div>
+				<div id="right-status" style="width:65%;">
+					<table>
 						<tr>
-							<td>TOP 1</td>
+							<td class="topTitle" width="15%">TOP 1</td>
 							<td align="center">
-								<div style="border: 1px solid black;"><img class="card-img-top"
-									src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg"
-									alt="..." /></div>
+								<div>
+									<img class="card-img-top" style="width: 150px; height: 150px"
+									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
+									alt="..." />
+								</div>
+								<div>상품명</div>
+								<div>상품가격</div>
+							</td>
+							<td class="topTitle" width="15%">TOP 2</td>
+							<td align="center">
+								<div>
+									<img class="card-img-top"
+									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
+									alt="..." />
+								</div>
+								<div>상품명</div>
+								<div>상품가격</div>
+							</td>
+							<td class="topTitle" width="15%">TOP 3</td>
+							<td align="center">
+								<div>
+									<img class="card-img-top"
+									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
+									alt="..." />
+								</div>
 								<div>상품명</div>
 								<div>상품가격</div>
 							</td>
 						</tr>
 					</table>
 				</div>
-				<div class="card-body">
-				</div>
-				<div class="card-body">
-				</div>
+			
 			</div>
 		</div>
 	
