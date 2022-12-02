@@ -74,7 +74,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="delivery.poOrder" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>배송 관리</p>
                 </a>
