@@ -1,5 +1,101 @@
 @charset "UTF-8";
 
+.content-wrapper {
+    border:3px solid blue;
+    height : 100%;
+}
+
+.content-header {
+    border : 3px solid orange;
+}
+
 .content {
-    border:1px solid red;
+    border:2px solid red;
+    width : 100%;
+    height : 750px;
+}
+
+#selectOption{
+    border : 1px solid green;
+    padding : 0px 10px 0px 10px;
+    height : 120px;
+}
+
+#option_table {
+    border : 1px solid black !important;
+    width : 100%;
+    height : 100%;
+}
+
+#option_table th, #option_table td{
+    border-top : 1px solid rgb(232, 183, 34);
+    border-bottom : 1px solid rgb(232, 183, 34);
+    border-left : 1px solid rgb(232, 183, 34);
+    border-right: 1px solid rgb(232, 183, 34);
+}
+
+
+#option_table th{
+    padding-left: 10px;
+    padding-right : 10px;
+}
+
+#search_btn {
+    width : 100px;
+    background-color: #323232;
+    color : white;
+    border : none;
+    text-align : center;
+}
+
+
+#allOrder_result{
+    border : 2px solid purple;
+    padding : 10px 10px 10px 10px;
+    height : 600px;
+}
+
+#result_div {
+    border : 1px solid burlywood;
+    height : 32px;
+    position : relative;
+}
+
+#result_count {
+    padding : 0px 10px 0px 10px;
+    border : 1px solid yellow;
+    width : 50%;
+    height : 100%;
+    position : absolute;
+    font-size : 20px;
+    font-weight : bold;
+    padding : 0px 20px 0px 20px;
+}
+
+#result_btn {
+    border : 1px solid red;
+    width : 50%;
+    text-align: right;
+    float : right;
+    padding : 0px 20px 0px 20px;
+}
+
+#result_btn>button {
+    width : 200px;
+}
+
+#table_div {
+    border : 1px solid skyblue;
+    padding : 10px 20px 10px 20px;
+}
+
+#result_table{
+    border : 1px solid black;
+    text-align : center;
+    width:100%;
+    height:500px;
+}
+
+#result_table>thead {
+    background-color: lightgray;
 }
