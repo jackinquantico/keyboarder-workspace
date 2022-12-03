@@ -310,7 +310,7 @@
             </div>
             <br>
     
-            <input type="submit" id="next-btn" class="next-btn" value="다음단계">
+            <input type="button" id="next-btn" class="next-btn" value="다음단계" onclick="return agreeAll();">
         
         <script>
             // 체크박스 동의 모두선택 / 해제
@@ -323,23 +323,16 @@
             });
             
             // 체크박스 유효성 검사 
-            $(document).ready(function(){
-                $("#next-btn").click(function(){
-                    if($("#agree1").is("checked")==false){
-                        alert("모든약관에 동의해야 회원가입하실 수 있습니다.");
-                        return;
-                    } else if($("#agree2").is("checked")==false) {
-                        alert("모든약관에 동의해야 회원가입하실 수 있습니다.");
-                        return;
-                    } else if($("#agree3").is("checked")==false) {
-                        alert("모든약관에 동의해야 회원가입하실 수 있습니다.");
-                        return;
+            function agreeAll() {
+                if($("#agree1").prop("checked") == true 
+                && $("#agree2").prop("checked")==true 
+                && $("#agree3").prop("checked")==true) {
+                    $("#termsForm").submit();
                     } else {
-                        $("#termsForms").submit();
+                        alert("모든약관에 동의해야 회원가입하실 수 있습니다.");
+                        return false;
                     }
-                });
-            });
-            
+            }
         </script>
         
         </form>

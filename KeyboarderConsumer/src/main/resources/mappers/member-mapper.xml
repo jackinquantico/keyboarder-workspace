@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<resultMap id="memberResultSet" type="member">
+		<result column="CON_NO" property="conNo" />
+		<result column="CON_NAME" property="conName" />
+		<result column="CON_ID" property="conId" />
+		<result column="CON_PWD" property="conPwd" />
+		<result column="ADDRESS" property="address" />
+		<result column="CON_PHONE" property="conPhone" />
+		<result column="CON_EMAIL" property="conEmail" />
+	</resultMap>
+	
+	<select id="idCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM CONSUMER
+		WHERE CON_ID = #{conId}
+	</select>
+
+</mapper>

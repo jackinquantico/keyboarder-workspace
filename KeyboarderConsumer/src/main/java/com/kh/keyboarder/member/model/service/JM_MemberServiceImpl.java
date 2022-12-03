@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.keyboarder.member.model.dao.JM_MemberDao;
-import com.kh.keyboarder.member.model.vo.JM_Member;
+import com.kh.keyboarder.member.model.vo.Member;
 
 @Service
 public class JM_MemberServiceImpl  implements JM_MemberService{
@@ -17,21 +17,20 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	private JM_MemberDao memberDao;
 
 	@Override
-	public JM_Member loginMember(JM_Member m) {
+	public Member loginMember(Member m) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int insertMember(JM_Member m) {
+	public int insertMember(Member m) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int idCheck(String ckeckId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int idCheck(String checkId) {
+		return memberDao.idCheck(sqlSession, checkId);
 	}
 
 }
