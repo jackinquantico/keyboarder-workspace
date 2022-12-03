@@ -40,7 +40,7 @@
       </li>
       <!-- 홈버튼 -->
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/kmanager" class="nav-link">Home</a>
+        <a href="/kmanager/pomain" class="nav-link">Home</a>
       </li>
     </ul>
     

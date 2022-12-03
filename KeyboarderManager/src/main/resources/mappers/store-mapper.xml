@@ -29,12 +29,51 @@
 			 , IDENTIFY_STATUS
 			 , ACCOUNT_NO
 		FROM SELLER
-		ORDER BY SELLER_NO DESC
+		ORDER BY SELLER_NO
 	</select>
+	
+	<select id="selectStore" parameterType="store" resultMap="storeResultSet">
+		SELECT SELLER_NO
+			 , SELLER_NAME
+			 , CORP_NO
+			 , REP_NAME
+			 , LOCATION
+			 , SELLER_ID
+			 , TO_CHAR(JOIN_DATE, 'YYYY-MM-DD') AS "JOIN_DATE"
+			 , IDENTIFY_STATUS
+			 , ACCOUNT_NO
+			 , SELLER_PHONE
+			 , SELLER_EMAIL
+			 , LOGO_ATTACHMENT
+		FROM SELLER
+		WHERE SELLER_NO = #{sellerNo}
+	</select>
+	
+	<update id="updateStore" parameterType="store">
+		UPDATE SELLER
+		SET REP_NAME = #{repName}
+		  , LOCATION = #{location}
+		  , ACCOUNT_NO = #{accountNo}
+		  , SELLER_PHONE = #{sellerPhone}
+		  , SELLER_EMAIL = #{sellerEmail}
+		WHERE SELLER_NO = #{sellerNo}
+	</update>
+	
+	<update id="deleteStore" parameterType="store">
+		UPDATE SELLER
+		SET SELLER_STATUS = 'N'
+		WHERE SELLER_NO = #{sellerNo}
+	</update>
 	
 	<update id="identifyStore" parameterType="store">
 		UPDATE SELLER
 		SET IDENTIFY_STATUS = 'Y'
+		WHERE SELLER_NO = #{sellerNo}
+	</update>
+	
+	<update id="updateStoreAccount" parameterType="store">
+		UPDATE SELLER
+		SET ACCOUNT_NO = #{accountNo}
 		WHERE SELLER_NO = #{sellerNo}
 	</update>
 	

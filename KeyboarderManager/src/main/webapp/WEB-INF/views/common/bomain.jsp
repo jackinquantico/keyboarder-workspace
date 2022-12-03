@@ -59,6 +59,10 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
+<jsp:include page="/WEB-INF/views/common/boheader.jsp" />
+
+<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
+
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
 	
