@@ -32,7 +32,7 @@ public class StoreServiceImpl implements StoreService {
 	 */
 	@Override
 	public Store selectStore(Store s) {
-		return null;
+		return storeDao.selectStore(sqlSession, s);
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class StoreServiceImpl implements StoreService {
 	 */
 	@Override
 	public int updateStore(Store s) {
-		return 0;
+		return storeDao.updateStore(sqlSession, s);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class StoreServiceImpl implements StoreService {
 	 */
 	@Override
 	public int deleteStore(Store s) {
-		return 0;
+		return storeDao.deleteStore(sqlSession, s);
 	}
 
 	/**
@@ -68,6 +68,6 @@ public class StoreServiceImpl implements StoreService {
 	 */
 	@Override
 	public int updateStoreAccount(Store s) {
-		return 0;
+		return storeDao.updateStoreAccount(sqlSession, s);
 	}
 }

@@ -71,11 +71,11 @@
 	<c:if test="${ not empty list }">
 		<tbody>
 		
-		<c:forEach var="s" items="${ list }">
+		<c:forEach var="s" items="${ list }" varStatus="i">
 			<tr>
 				<td>${ s.sellerName }</td>
 				<td>${ s.sellerId }</td>
-				<td>${ s.accountNo }</td>
+				<td>${ s.corpNo }</td>
 				<td>
 					<c:choose>
 						<c:when test="${ s.sellerStatus eq 'Y' }">
@@ -96,7 +96,7 @@
 						<c:when test="${ s.identifyStatus eq 'N' }">
 							<form action="identify.bo" method="post" id="identify">
 								<input type="hidden" name="sellerNo" value="${ s.sellerNo }">
-								<button class="btn btn-warning" type="submit">미인증</button>
+								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#identifyModal">미인증</button>
 							</form>
 						</c:when>
 						<c:otherwise>
@@ -105,8 +105,11 @@
 					</c:choose>
 				</td>
 				<td>
-					<input type="hidden" id="originAccountNo" value="${ s.accountNo }">
-					<button class="btn btn-secondary" data-toggle="modal" data-target="#accountModal">계좌변경</button>
+					<form action="updateAccount.bo" method="post" id="accountForm">
+						<input type="hidden" name="sellerNo" value="${ s.sellerNo }">
+						<input type="hidden" id="accountNo" name="accountNo" value="">
+					</form>
+					<button class="btn btn-secondary" data-toggle="modal" data-target="#accountModal" onclick="resetAccountNo();">계좌변경</button>
 				</td>
 			</tr>
 			
@@ -140,19 +143,12 @@
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-secondary" onclick="identifing();">인증</button>
+	        <button type="button" class="btn btn-secondary" onclick="identify();">인증</button>
 	      </div>
 	      
     </div>
   </div>
 </div> <!-- /.modal -->
-
-<script>
-function identifing() {
-		$("#identify").submit();
-		// console.log($("#identiySellerNo").val());
-}
-</script>
 
 <!-- 계좌 변경 모달 -->
 <div class="modal" id="accountModal">
@@ -168,7 +164,7 @@ function identifing() {
       <!-- Modal body -->
       <div class="modal-body">
       	변경할 계좌번호를 입력하세요. <br><br>
-      	<input type="text" class="form-control">
+      	<input type="text" class="form-control" id="newAccount">
       </div>
 
       <!-- Modal footer -->
@@ -194,19 +190,62 @@ function identifing() {
 
       <!-- Modal body -->
       <div class="modal-body">
-      	입력하신 계좌번호는 <span>1112312012</span> 입니다. <br><br>
+      	입력하신 계좌번호는 <span id="accountConfirm"></span> 입니다. <br><br>
       	변경하시겠습니까?
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-secondary">변경</button>
+        <button type="button" class="btn btn-secondary" onclick="changeAccount();">변경</button>
       </div>
 
     </div>
   </div>
 </div> <!-- /.modal -->
+
+<script>
+// 인증모달
+function identify() {
+	$("#identify").submit();
+}
+
+
+// 계좌변경 모달 - submit
+function changeAccount() {
+	
+	// 입력한 계좌번호가 10자 미만일 경우에는 경고 alert();
+	var regex = /^(\d|\-){10,20}$/;
+	
+	if (!regex.test($("#newAccount").val())) {
+		
+		alert("숫자와 - 만 입력할 수 있습니다. 정확한 계좌번호를 입력해주세요.");
+		$("#newAccount").val().replace(/[^0-9]/g, '');
+		$("#accountSubmitModal").modal('hide');
+		$("#accountModal").modal("show");
+		resetAccountNo();
+		
+	} else {
+		$("#accountNo").val($("#newAccount").val());
+		$("#accountForm").submit();		
+	}
+}
+
+$(function() {
+	
+	// 계좌번호 입력 후 재확인시켜주기
+	$("#newAccount").keyup(function() {
+		$("#accountConfirm").text($("#newAccount").val());
+		
+	});
+});
+
+// 계좌번호 변경 취소 후 재입력시 기존 내역 삭제
+function resetAccountNo() {
+	$("#newAccount").val("");
+	$("#accountConfirm").text("");
+}
+</script>
 
 
 </div> <!-- /.content -->
