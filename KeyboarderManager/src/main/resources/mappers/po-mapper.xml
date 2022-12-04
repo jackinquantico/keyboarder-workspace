@@ -33,7 +33,7 @@
 	</insert>
 	 --> 
 	
-	<insert id="updateProduct" parameterType="product">
+	<insert id="insertProduct" parameterType="product">
 		INSERT INTO PRODUCT(PRODUCT_NO
 						 , PRODUCT_NAME
 						 , PRICE

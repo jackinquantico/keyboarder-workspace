@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.kmanager.po.product.model.service.NSJ_ProductService;
@@ -58,49 +59,47 @@ public class NSJ_ProductController {
 	 * po 상품 등록 메소드 -성진
 	 * @return
 	 */		
-	@RequestMapping(value="insert.pro")
-	public ModelAndView insertProduct(Product p,List<MultipartFile> upfile, HttpSession session, ModelAndView mv) {
-			if(upfile.isEmpty()==false) {
-			for (MultipartFile f : upfile) {
-            String originFile = f.getOriginalFilename(); // 원본 파일 명
-           
-            int ranNum = (int)(Math.random() * 90000) + 10000;
-			String path = session.getServletContext().getRealPath("/../resources/uploadFiles/");	
-			//String ext = extracFileName(originFile);
-			 
-		String changeName = ext;//파일업로드
-            try {
-	              f.transferTo(new File(changeName));
-           } catch (IllegalStateException e) {
-                // TODO Auto-generated catch block
-	                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-	                e.printStackTrace();
-            }
-	           
-	           System.out.println(p);
-           p.setAttachment1("resources/uploadFiles/"+changeName);
-	           
-           
-	           int result = productService.insertProduct(p);
-           
-	           if(result>0) {
-	        	   session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-       	   mv.setViewName("redirect:/show.pro");
-        	   		          }else {
-	        	   //에러페이지           }
-           
-        	
-      
-        	 }     return mv;
-	}
-
-	@RequestMapping("detail.pro")
-	public String detailProduct() {
-		return "po/poProduct/poProductDetailview";
-	}
-
+	@RequestMapping("insert.pro")
+	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session, ModelAndView mv)
+	throws Exception{
+			
+		 List<MultipartFile> upfiles = request.getFiles("upfile");
+		    
+		  String path = request.getSession().getServletContext().getRealPath("resources/uploadFiles");
+		    
+//		    File fileDir = new File(path);
+//		    
+//		    if (!fileDir.exists()) {
+//		    	fileDir.mkdirs();
+//		    }
+		    
+		    long time = System.currentTimeMillis();
+		    
+		    for (MultipartFile f : upfiles) {
+		    
+		    	String originFileName = f.getOriginalFilename(); // 원본 파일 명
+		        String saveFileName = String.format("%d_%s", time, originFileName);
+		        
+		        try {
+		        	// 파일생성
+		            f.transferTo(new File(path, saveFileName));
+		            p.setAttachment1(saveFileName);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		        System.out.println(p);
+		        int result = productService.insertProduct(p);
+		        if(result>0) {
+		        	session.setAttribute("alertMst", "사진이 업로드 되었습니다.");
+		        }
+		        else {
+		        	
+		        }
+		       
+		   }
+		    return mv;
+		}
+	
 	public String attachment(MultipartFile upfile, HttpSession session) {
 
 		// 파일명 수정 작업 후 서버에 업로드 시키기

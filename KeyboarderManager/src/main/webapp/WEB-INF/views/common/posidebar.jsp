@@ -56,7 +56,7 @@
             <!-- 하위 메뉴 -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="update.pro" class="nav-link">
+                <a href="show.pro" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>상품 전체 조회</p>
                 </a>
