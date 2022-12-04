@@ -56,7 +56,7 @@
             <!-- 하위 메뉴 -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="ViewAllOrder.bo" class="nav-link">
+                <a href="viewAllOrder.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 주문내역 조회</p>
                 </a>

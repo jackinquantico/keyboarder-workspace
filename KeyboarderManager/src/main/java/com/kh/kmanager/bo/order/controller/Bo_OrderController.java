@@ -10,7 +10,7 @@ public class Bo_OrderController {
 	 * BO 전체 주문내역 조회 페이지로 단순이동 처리를 해주는 메소드 - 백성현
 	 * @return : BO 전체 주문내역 조회 페이지 이동
 	 */
-	@RequestMapping("ViewAllOrder.bo")
+	@RequestMapping("viewAllOrder.bo")
 	public String selectAllOrder() {
 		
 		return "bo/boOrder/boSelectAllOrder";
