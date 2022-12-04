@@ -103,7 +103,7 @@
                         </div>
                         <div id="login-button" align="center">${ loginUser.conName } 님 </div>
                         <div id="logout-button">
-                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-outline-dark">로그아웃</button></a>
+                            <button type="button" class="btn btn-outline-dark" onclick="location.href='logout.me'">로그아웃</button>
                         </div>
                     </c:otherwise>
                 </c:choose>
