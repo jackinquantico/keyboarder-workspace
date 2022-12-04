@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style>
-        #header { margin : auto; width : 1500px; } 
+        #header { width : 1900px; margin-top : 20px;} 
         #enroll { margin : auto; width : 1100px; }
         #signup-form { 
             width : 90%;
@@ -68,35 +68,35 @@
         <br>
 
         <div id="enroll-form" align="center">
-            <form id="signup-form" action="" method="post">
+            <form id="signup-form" action="insert.me" method="post">
                 <table>
                     <tr>
                         <th width="130px"> 아이디 *</th>
-                        <td colspan="3"><input type="text" class="form-control" id="memId" name="memId" minlength="7" maxlength="20" placeholder="띄어쓰기 없는 영문,숫자 7~20자" required ></td>
+                        <td colspan="3"><input type="text" class="form-control" id="memId" name="conId" minlength="7" maxlength="20" placeholder="띄어쓰기 없는 영문,숫자 7~20자" required ></td>
                         <td width="130px" align="center"><button type="button" id="checkbutton" style="width:106px;" class="btn btn-dark" onclick="idCheck();">중복체크</button></td>
                     </tr>
                     <tr>
                         <th> 비밀번호 *</th>
-                        <td colspan="3"><input type="password" class="form-control" id ="memPwd" name="memPwd" minlength="12" maxlength="20" placeholder="영문,숫자,특수문자 12~20자" required></td>
+                        <td colspan="3"><input type="password" class="form-control" id ="memPwd" name="conPwd" minlength="12" maxlength="20" placeholder="영문,숫자,특수문자 12~20자" required></td>
                     </tr>
                     <tr>
                         <th> 비밀번호 확인 *</th>
-                        <td  colspan="3"><input type="password" class="form-control" id="checkPwd" name="checkPwd" minlength="12" maxlength="20"  placeholder="영문,숫자,특수문자 12~20자"></td>
+                        <td  colspan="3"><input type="password" class="form-control" id="checkPwd" name="" minlength="12" maxlength="20"  placeholder="영문,숫자,특수문자 12~20자"></td>
                         <!-- 서버로 넘기지는 않을것이기 때문에 name 속성은 생략 -->
                     </tr>
                     <tr>
                         <th> 이름 *</th>
-                        <td  colspan="3"><input type="text" class="form-control" id="memName" name="memName" minlength="6" maxlength="18" placeholder="띄어쓰기없는 한글 2~6자" required></td>
+                        <td  colspan="3"><input type="text" class="form-control" id="memName" name="conName" minlength="2" maxlength="6" placeholder="띄어쓰기없는 한글 2~6자" required></td>
                     </tr>
                     <tr>
                         <th> 전화번호 *</th>
-                        <td colspan="3"><input type="text" class="form-control" id="phone" name="phone" minlength="13" maxlength="13" placeholder="-포함" required></td>
+                        <td colspan="3"><input type="text" class="form-control" id="phone" name="conPhone" minlength="13" maxlength="13" placeholder="-포함" required></td>
                     </tr>
                     <tr>
                         <th> 이메일 *</th> <!-- 이메일 선택해서 인풋에 넣기 -->
                         <td colspan="3">
-                            <input type="text" id="email_id" name= "emailBno" class="form-control" maxlength="18" value="" style="width:137px; display:inline-block;" required> &nbsp;@&nbsp;
-                            <select class="custom-select" name="emailAno" title="이메일 도메인 주소 선택" style="width:130px; display:inline-block;" onclick="setEmailDomain(this.value); return false;" required>
+                            <input type="text" id="email_id" name= "conEmail" class="form-control" maxlength="18" value="" style="width:150px; display:inline-block;" required> &nbsp;@&nbsp;
+                            <select class="custom-select" name="emailAno" title="이메일 도메인 주소 선택" style="width:140px;  vertical-align:top; display:inline-block;" onclick="setEmailDomain(this.value); return false;" required>
                                 <option>선택</option>
                                     <option value="naver.com">naver.com</option>
                                     <option value="gmail.com">gmail.com</option>
@@ -104,13 +104,12 @@
                                     <option value="nate.com">nate.com</option>
                             </select>
                         </td>
-                        <td width="130px" align="center"><button type="button" id="checkbutton" class="btn btn-dark" onclick="emailCheck();">이메일인증</button></td>
                     </tr>
                     <tr>
                         <th> 우편번호 *</th>
                         <td colspan="3">
                             <input type="text" class="form-control" name="zip" id="sample6_postcode" maxlength="5" placeholder="우편번호" style="width:154px; display:inline-block;" required>&nbsp;&nbsp;&nbsp;
-                            <input type="button" name="address_search" class="btn btn-dark" style="display:inline-block; background-color: black;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                            <input type="button" name="address_search" class="btn btn-dark" style="display:inline-block;  vertical-align: top; background-color: black;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                         </td>
                         <td></td>
                     </tr>
@@ -281,7 +280,7 @@
                     }
                     
                     // 휴대폰 번호 정규식
-                    var regExp = /^(010)[0-9]{8}$/;
+                    var regExp = /^(010)-[0-9]{4}-[0-9]{4}$/;
                     if(!regExp.test(phone.value)) {
                         alert("유효한 전화번호를 입력해주세요.");
                         phone.select(); // 재입력 유도

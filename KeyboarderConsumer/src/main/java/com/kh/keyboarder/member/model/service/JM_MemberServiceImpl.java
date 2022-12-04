@@ -18,14 +18,13 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 
 	@Override
 	public Member loginMember(Member m) {
-		// TODO Auto-generated method stub
-		return null;
+		Member loginUser = memberDao.loginMember(sqlSession, m);
+		return loginUser;
 	}
 
 	@Override
 	public int insertMember(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.insertMember(sqlSession, m);
 	}
 
 	@Override

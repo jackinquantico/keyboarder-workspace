@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +64,7 @@
             height: 100%;
             float: left;
             line-height: 95px;
+            text-align: center;
         }
         
         a:hover{
@@ -70,9 +72,9 @@
         	opacity: 0.5;
         }
 		#infofind a {
-	            text-decoration: none;
-	            color : black;
-	        }
+            text-decoration: none;
+            color : black;
+	    }
     </style>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -84,20 +86,31 @@
                 <a href="index.jsp"><img src="" style="background-size: cover; width: 100%; height: 100%;"></a>
             </div>
             <div id="fo-header-login">
-                <div id="order-button" align="center">
-                    <a href="foTotalView.order"><button type="button" class="btn btn-outline-secondary">주문내역조회</button></a>
-                </div>
-                <div id="login-button" align="center">
-                    <a href=""><button type="button" class="btn btn-outline-success">회원가입</button></a>
-                </div>
-                <div id="logout-button">
-                    <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-outline-primary">로그인</button></a>
-                </div>
+                <c:choose>
+                    <c:when test="${ empty loginUser }">
+                        <!-- 로그인전 -->
+                        <div id="order-button" align="center"></div>
+                        <div id="login-button" align="center">
+                            <a href="termsForm.me"><button type="button" class="btn btn-outline-success">회원가입</button></a>
+                        </div>
+                        <div id="logout-button">
+                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-outline-dark">로그인</button></a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div id="order-button" align="center">
+                            <a href="foTotalView.order"><button type="button" class="btn btn-outline-secondary">주문내역조회</button></a>
+                        </div>
+                        <div id="login-button" align="center">${ loginUser.conName } 님 </div>
+                        <div id="logout-button">
+                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-outline-dark">로그아웃</button></a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
-        </div>
+    </div>
         
-        <!--  로그인 클릭시 뜨는 모달  -->
-        <!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->
+    <!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->
     <div class="modal fade" id="loginModal">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -110,22 +123,19 @@
                 <form action="login.me" method="post">
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="아이디" id="userId" name="userId" value="" required>
-                        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="비밀번호" id="userPwd" name="userPwd" required>
+                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="아이디" id="userId" name="conId" value="" required>
+                        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="비밀번호" id="userPwd" name="conPwd" required>
                         <br>
-                        <input type="button" class="btn btn-dark" style="width:266px;" value="로그인">
+                        <button type="submit" class="btn btn-dark" style="width:266px;">로그인</button>
                         <br><br>
-                        <input type="checkbox" id="saveId" name="saveId" value="y"><label for="savdId">&nbsp;&nbsp;아이디저장</label>
-                        <!--
                         <c:choose>
                             <c:when test="${ not empty cookie.saveId}">
-                                
+                                <input type="checkbox" id="saveId" name="saveId" value="y" checked><label for="savdId">&nbsp;&nbsp;아이디저장</label>
                             </c:when>
                             <c:otherwise>
                                 <input type="checkbox" id="saveId" name="saveId" value="y"><label for="savdId">아이디저장</label>
                             </c:otherwise>
                         </c:choose>
-                        -->
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer" id="infofind" style="font-size :13px;">
