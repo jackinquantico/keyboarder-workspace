@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.kmanager.bo.store.model.vo.Store" alias="store" />
+		
 	</typeAliases>
 
 	<mappers>

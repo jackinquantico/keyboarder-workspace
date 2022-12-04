@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="poMapper">
+
+	<!-- <resultMap id="ProductResultSet" type="product">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="BOARD_TITLE" property="boardTitle" />
+		<result column="BOARD_WRITER" property="boardWriter" />
+		<result column="COUNT" property="count" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="ORIGIN_NAME" property="originName" />
+		
+		<result column="BOARD_CONTENT" property="boardContent" />
+		<result column="CHANGE_NAME" property="changeName" />
+	</resultMap> -->
+	
+	<!-- 이미지업로드 -->
+	
+<!-- <insert id="productCouponInsert">
+	INSERT INTO COUPON_STORE(COUPON_NO
+							,COUPON_NAME
+							,COUPON_PRICE
+							,CREATE_DATE
+							,USE_DATE
+							,DUE_DATE
+							,COUPON_STMT
+							,SELLER_NO)
+							VALUES(SEQ_COUPON_STORE_NO.NEXTVAL
+							#{couponName},
+							#{couponPrice},
+							#{createDate},
+							#{})
+	</insert>
+	 --> 
+	
+	<insert id="updateProduct" parameterType="product">
+		INSERT INTO PRODUCT(PRODUCT_NO
+						 , PRODUCT_NAME
+						 , PRICE
+						 , DESCRIPTION
+						 , ATTACHMENT1
+						 , ATTACHMENT2
+						 , ATTACHMENT3
+						 , ATTACHMENT4)				 
+				   VALUES (SEQ_PRODUCT_NO.NEXTVAL
+				   		 , #{productName}
+				   		 , #{price}
+				   		 , #{description}
+				   		 , #{attachment1}
+				   		 , #{attachment2}
+				   		 , #{attachment3}
+				   		 , #{attachment4})
+		</insert>
+</mapper>
+
+
+
+
+
+
