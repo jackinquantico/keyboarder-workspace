@@ -15,11 +15,6 @@ public class Member {
 	private String conName;
 	private String conId;
 	private String conPwd;
-	// 기본주소
-	private String address1;
-	// 상세주소
-	private String address2;
-	// 전체주소
 	private String address; 
 	private String conPhone;
 	private String conEmail;

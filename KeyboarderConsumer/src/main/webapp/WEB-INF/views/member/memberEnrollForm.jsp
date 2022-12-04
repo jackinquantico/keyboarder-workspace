@@ -124,6 +124,7 @@
                             <input type="text" class="form-control" id="sample6_extraAddress" style="width:150px; display:inline-block;" placeholder="참고항목">
                         </td>
                     </tr>
+                    <input type="hidden" id="address" name="address">
                 </table>
 
                 <script>
@@ -233,10 +234,11 @@
 
                 <br>
                 <div align="center">
-                    <button type="submit" id="enroll-btn" onclick="return validate();" disabled>가입하기</button>
+                    <button type="submit" id="enroll-btn" onclick="return validate(); btnClick(); " disabled>가입하기</button>
                 </div>
                 <br>
             </form>
+
             <script>
                 function validate() {
                     
@@ -246,7 +248,7 @@
                     var memName = document.getElementById("memName");
                     var phone = document.getElementById("phone");
                     
-                    // 아이디 정규식 영문자, 숫자로만 총 7 ~ 15자로 이루어지게
+                    // 아이디 정규식 영문자, 숫자로만 총 7 ~ 20자로 이루어지게
                     var regExp = /^[a-z\d]{7,20}$/i;
                     if(!regExp.test(memId.value)) {
                         alert("아이디를 영문자, 숫자로만 총 7~20자로 입력해주세요.");
@@ -255,7 +257,7 @@
                     }
                     
                     // 비밀번호 정규식
-                    // 영문자, 숫자, 특수문자(!@#$%^&*()) 로 총 8 ~ 15 자 로 이루어져야함
+                    // 영문자, 숫자, 특수문자(!@#$%^&*()) 로 총 12~20 자 로 이루어져야함
                     regExp = /^[a-z\d!@#$%^&*()]{12,20}$/i;
                     if(!regExp.test(memPwd.value)) {
                         alert("비밀번호를 영문자,숫자,특수문자로 총 12~20자로 입력해주세요.");
@@ -282,12 +284,25 @@
                     // 휴대폰 번호 정규식
                     var regExp = /^(010)-[0-9]{4}-[0-9]{4}$/;
                     if(!regExp.test(phone.value)) {
-                        alert("유효한 전화번호를 입력해주세요.");
+                        alert("-포함 유효한 전화번호를 입력해주세요.");
                         phone.select(); // 재입력 유도
                         return false;
                     }
                 }
-            </script>		      
+            </script>
+            
+            <!-- 안됨 시발 다시 생각해보기...
+            	zip + address1 + address2 값 합쳐서 한번에 address로 넘기기 시발시발시발시발
+            <script>
+                function btnClick() {
+                    var zip= document.getElementById("sample6_postcode").value;
+                    var address1 = document.getElementById("sample6_address").value;
+                    var address2 = document.getElementById("sample6_detailAddress").value;
+                    var address = zip+address1+address2;
+                    document.getElementById("address").innerHTML = address;
+                }
+            </script>
+            --> 
         </div>
         <br>
     </div>

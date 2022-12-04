@@ -50,10 +50,7 @@ public class JM_MemberController {
 	
 	@RequestMapping("insert.me")
 	public String insertMember(Member m , Model model, HttpSession session) {
-		
-		String address = m.getAddress1()+m.getAddress2();
-		System.out.println(address);
-		
+	
 		int result = memberService.insertMember(m);
 		if(result>0) {
 			session.setAttribute("alertMsg", "회원가입에 성공하였습니다. 이메일 인증 후 로그인 해주세요.");
