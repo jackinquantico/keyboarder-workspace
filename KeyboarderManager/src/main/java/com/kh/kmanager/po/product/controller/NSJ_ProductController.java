@@ -3,6 +3,7 @@ package com.kh.kmanager.po.product.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,39 +65,65 @@ public class NSJ_ProductController {
 	throws Exception{
 			
 		 List<MultipartFile> upfiles = request.getFiles("upfile"); //파일name 담기
+		 
+		 String path = request.getSession().getServletContext().getRealPath("resources/uploadFiles"); //실제 경로 알아내기
 		    
-		  String path = request.getSession().getServletContext().getRealPath("resources/uploadFiles"); //실제 경로 알아내기
 		    
+		 String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		    
-		    String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	     for (MultipartFile f : upfiles) {
+	    
+	    	 String originFileName = f.getOriginalFilename();// 원본 파일 명
+	    	 String ext = originFileName.substring(originFileName.lastIndexOf("."));
+	         String saveFileName = String.format("%s%s", currentTime, ext);//수정파일명 만들기
+	        
+	         try {
+	        	 // 파일생성 하기
+	             f.transferTo(new File(path, saveFileName));
+	             p.setAttachment1(saveFileName);//Product에 담아주기
+	         } catch (Exception e) {
+	             e.printStackTrace();
+	         }
+	         System.out.println(p);
+	         int result = productService.insertProduct(p); //Service단으로 보내기
+	         System.out.println(result);
+	         if(result>0) {
+	         	 session.setAttribute("alertMst", "사진이 업로드 되었습니다.");
+	         	 mv.setViewName("redirect:/insertEnroll.pro");
+	         }
+	         else {
+	        	
+	         }
+	       
+	   }
 		    
-		    for (MultipartFile f : upfiles) {
+		// 파일 1개 첨부일 때 코드		    
+//	    String originFileName = upfile2.getOriginalFilename();// 원본 파일 명
+//    	String ext = originFileName.substring(originFileName.lastIndexOf("."));
+//        String saveFileName = String.format("%s%s", currentTime, ext);//수정파일명 만들기
+//        
+//        try {
+//        	// 파일생성 하기
+//        	upfile2.transferTo(new File(path, saveFileName));
+//            p.setAttachment1(saveFileName);//Product에 담아주기
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        
+//        int result = productService.insertProduct(p); //Service단으로 보내기
+//        System.out.println(result);
+//        if(result>0) {
+//        	session.setAttribute("alertMst", "사진이 업로드 되었습니다.");
+//        	mv.setViewName("redirect:/insertEnroll.pro");
+//        }
+//        else {
+//        	
+//        }
+       
+		   
 		    
-		    	String originFileName = f.getOriginalFilename();// 원본 파일 명
-		    	String ext = originFileName.substring(originFileName.lastIndexOf("."));
-		        String saveFileName = String.format("%s%s", currentTime, ext);//수정파일명 만들기
-		        
-		        try {
-		        	// 파일생성 하기
-		            f.transferTo(new File(path, saveFileName));
-		            p.setAttachment1(saveFileName);//Product에 담아주기
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		        System.out.println(p);
-		        int result = productService.insertProduct(p); //Service단으로 보내기
-		        System.out.println(result);
-		        if(result>0) {
-		        	session.setAttribute("alertMst", "사진이 업로드 되었습니다.");
-		        	mv.setViewName("redirect:/insertEnroll.pro");
-		        }
-		        else {
-		        	
-		        }
-		       
-		   }
-		    return mv;
-		}
+		 return mv;
+	}
 	
 	public String attachment(MultipartFile upfile, HttpSession session) {
 

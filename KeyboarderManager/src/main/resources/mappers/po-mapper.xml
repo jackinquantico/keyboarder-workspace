@@ -39,17 +39,13 @@
 						 , PRICE
 						 , DESCRIPTION
 						 , ATTACHMENT1
-						 , ATTACHMENT2
-						 , ATTACHMENT3
-						 , ATTACHMENT4)				 
+						 , SELLER_NO)			 
 				   VALUES (SEQ_PRODUCT_NO.NEXTVAL
 				   		 , #{productName}
 				   		 , #{price}
 				   		 , #{description}
 				   		 , #{attachment1}
-				   		 , #{attachment2}
-				   		 , #{attachment3}
-				   		 , #{attachment4})
+				   		 , #{sellerNo})
 		</insert>
 </mapper>
 

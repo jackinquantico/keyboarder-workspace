@@ -68,6 +68,9 @@ td {
 
 	<form id="insertEnrollForm" method="post" action="insert.pro"
 		enctype="multipart/form-data">
+		
+		<!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
+		<input type="hidden" name="sellerNo" value="10000">
 		<div class="content-wrapper">
 		
 			<br>

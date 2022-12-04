@@ -19,5 +19,9 @@ public class ProductDao {
 		return sqlSession.insert("poMapper.productCouponInsert",p);
 		
 	}
+	
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.insert("poMapper.insertProduct", p);
+	}
 
 }
