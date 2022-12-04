@@ -9,11 +9,13 @@
 	<typeAliases>
 		<typeAlias type="com.kh.kmanager.bo.store.model.vo.Store" alias="store" />		
 		<typeAlias type="com.kh.kmanager.po.product.model.vo.Product" alias="product" />
+		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Withdraw" alias="withdraw" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/store-mapper.xml" />
 		<mapper resource="/mappers/po-mapper.xml" />
+		<mapper resource="/mappers/settlement-mapper.xml" />
 	</mappers>
 
 </configuration>

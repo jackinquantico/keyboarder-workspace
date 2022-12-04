@@ -66,16 +66,40 @@
 					<th>처리결과</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>키보더마켓</td>
-					<td>2022-12-12</td>
-					<td>000000원</td>
-					<td>123-123-123</td>
-					<td>홍길동</td>
-					<td>미처리</td>
-				</tr>
-			</tbody>
+			<c:choose>
+				<c:when test="${ not empty list }">
+					<tbody>
+						<c:forEach var="w" items="${ list }">
+							<tr>
+								<td>${ w.sellerName }</td>
+								<td>${ w.withdrawDate }</td>
+								<td>${ w.withdrawMoney }원</td>
+								<td>${ w.accountNo }</td>
+								<td>${ w.repName }</td>
+								<td>
+									<c:choose>
+										<c:when test="${ w.reqResult eq 'N' }">
+											미처리
+										</c:when>
+										<c:otherwise>
+											완료
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</c:when>
+				<c:otherwise>
+					<tbody>
+						<tr>
+							<td colspan="6">
+								해당 기간에 출금 신청한 내역이 없습니다.
+							</td>
+						</tr>
+					</tbody>
+				</c:otherwise>
+			</c:choose>
 		</table>
 	</div>
 	

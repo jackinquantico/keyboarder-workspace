@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="settlementMapper">
+
+	<resultMap id="withdrawResultSet" type="withdraw">
+		<result column="SELLER_NO" property="sellerNo" />
+		<result column="WITHDRAW_DATE" property="withdrawDate" />
+		<result column="WITHDRAW_MONEY" property="withdrawMoney" />
+		<result column="ACCOUNT_NO" property="accountNo" />
+		<result column="REP_NAME" property="repName" />
+		<result column="REQ_RESULT" property="reqResult" />
+		<result column="SELLER_NAME" property="sellerName" />
+	</resultMap>
+
+	<insert id="insertWithdraw" parameterType="withdraw">
+		INSERT INTO WITHDRAW (SELLER_NO
+							, WITHDRAW_MONEY
+							, ACCOUNT_NO
+							, REP_NAME
+							, REQ_RESULT)
+		VALUES (#{sellerNo}
+			  , #{withdrawMoney}
+			  , #{accountNo}
+			  , #{repName}
+			  , 'N')
+	</insert>
+	
+	<select id="selectWithdrawRequestList" parameterType="withdraw" resultMap="withdrawResultSet">
+		SELECT S.SELLER_NAME AS "SELLER_NAME"
+			 , TO_CHAR(WITHDRAW_DATE, 'YYYY-MM-DD') AS "WITHDRAW_DATE"
+			 , WITHDRAW_MONEY
+			 , W.ACCOUNT_NO AS "ACCOUNT_NO"
+			 , W.REP_NAME AS "REP_NAME"
+			 , REQ_RESULT
+		FROM WITHDRAW W
+		JOIN SELLER S USING (SELLER_NO)
+		WHERE SELLER_NO = #{sellerNo}
+		AND WITHDRAW_DATE BETWEEN #{startDate} AND #{endDate}
+		ORDER BY WITHDRAW_DATE DESC
+	</select>
+	
+</mapper>
+
+
+
+
+
+

@@ -120,13 +120,17 @@ input[name=startDate] {
 	<table class="table-bordered" id="listTable">
 		<tr>
 			<td>
-				<form action="" method="get">
+				<form action="withdraw.po" method="get">
 					<div id="ableMoney">
 						출금 가능 금액 <span style="float:right;"><span id="allMoney">100000</span>원</span>
 					</div>
 					출금신청 <br>
-					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney">원 &nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-secondary" onclick="selectAllMoney();">전액출금</button> <br>
+					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" name="withdrawMoney" required>원 &nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-secondary" onclick="selectAllMoney();">전액출금</button> <br>
 					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : 0000-000-000000 </span> | <span id="accountOwner"> 예금주 : 키보더(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
+					<!-- 임시로 하드코딩 -->
+					<input type="hidden" name="sellerNo" value="10000">
+					<input type="hidden" name="accountNo" value="0000-000-000000">
+					<input type="hidden" name="repName" value="홍길동">
 				</form>
 			</td>
 		</tr>
@@ -134,12 +138,14 @@ input[name=startDate] {
 			<td>
 				<form action="kmoneyWithdraw.po" method="get">
 					출금신청내역 <br>
-					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2" name="startDate"> ~ <input type="date" class="form-control col-lg-2" style="display:inline;"> <br>
+					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2" name="startDate" required> ~ <input type="date" class="form-control col-lg-2" style="display:inline;" name="endDate" required> <br>
 					<br>
 					<div align="center" class="btn-area">
 						<button type="submit" class="btn btn-secondary">검색</button>
 						<button type="reset" class="btn btn-secondary">초기화</button>
 					</div>
+					<!-- 임시로 하드코딩 -->
+					<input type="hidden" name="sellerNo" value="10000">
 				</form>
 			</td>
 		</tr>
