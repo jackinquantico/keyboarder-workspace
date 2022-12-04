@@ -7,16 +7,13 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.kh.kmanager.bo.store.model.vo.Store" alias="store" />
-		
-	</typeAliases>
-	
-	<typeAliases>
+		<typeAlias type="com.kh.kmanager.bo.store.model.vo.Store" alias="store" />		
 		<typeAlias type="com.kh.kmanager.po.product.model.vo.Product" alias="product" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/store-mapper.xml" />
+		<mapper resource="/mappers/po-mapper.xml" />
 	</mappers>
 
 </configuration>
