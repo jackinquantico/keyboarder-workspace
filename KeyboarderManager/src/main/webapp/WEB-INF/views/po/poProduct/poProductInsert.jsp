@@ -66,7 +66,7 @@ td {
 	<jsp:include page="../../common/posidebar.jsp" />
 
 
-	<form id="insertProduct" method="post" action="insert.pro"
+	<form id="insertEnrollForm" method="post" action="insert.pro"
 		enctype="multipart/form-data">
 		<div class="content-wrapper">
 		
