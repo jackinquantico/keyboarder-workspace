@@ -24,7 +24,7 @@ public class PGDataController {
 		int amount = Integer.parseInt(pgd.getAmount()); // 실결제금액
 		pgd.setOrderPrice(amount + pgd.getCouponPrice()); // 주문금액
 		pgd.setPaymentBill(amount); // 결제금액
-		pgd.setCommition((int)(pgd.getOrderPrice() * 0.15)); // 수수료
+		pgd.setCommition((int)(pgd.getPaymentBill() * 0.15)); // 수수료
 		pgd.setSettleDept(pgd.getPaymentBill() - pgd.getCommition()); // 정산금액
 		pgd.setSupplyValue((int)(pgd.getPaymentBill() / 1.1)); // 공급가액
 		pgd.setTaxAmount(pgd.getPaymentBill() - pgd.getSupplyValue()); // 세액

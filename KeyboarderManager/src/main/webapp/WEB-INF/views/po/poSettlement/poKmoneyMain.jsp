@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#conTitle {
+#conTitle, input[type=date] {
 	display : inline-block;
 }
 #moneyTable, #listTable {
@@ -28,13 +28,15 @@
 #intable {
 	margin-bottom: 20px;
 }
-#withdrawMoney,  {
+#withdrawMoney {
 	display:inline;
 	margin-left: 100px;
 }
-#withdrawAccount, #accountOwner {
+#withdrawAccount {
 	margin-left: 100px;
+	margin-right: 30px;
 }
+#accountOwner { margin-left: 10px; }
 button {
 	width: 8%;
 }
@@ -46,6 +48,13 @@ button {
 #ableMoney span {
 	font-size: 16pt;
 	font-weight: bold;
+}
+.card {
+	width: 95%;
+	margin: auto;
+}
+input[name=startDate] {
+	margin-left: 115px;
 }
 </style>
 </head>
@@ -63,15 +72,16 @@ button {
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1 class="m-0" id="conTitle">&nbsp;K-MONEY 잔액관리</h1> <br><br>
-        <h6>* K-MONEY는 판매활동시 부가서비스를 이용할 수 있는 키보더 전용 사이버 화폐입니다.</h6>
+      <div class="col-m-6">
+        <h1 class="m-0" id="conTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-MONEY 잔액관리</h1>
+        <span>* K-MONEY는 판매활동시 부가서비스를 이용할 수 있는 키보더 전용 사이버 화폐입니다.</span>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
 </div>
 
 <div class="content">
+	<div class=card>
 	<table class="table-bordered" id="moneyTable">
 		<thead>
 			<tr>
@@ -90,6 +100,7 @@ button {
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </div>
 
 <br>
@@ -97,32 +108,33 @@ button {
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
-			<div class="col-sm-6">
-				<h1 class="m-0">&nbsp;K-MONEY 출금 신청 / 내역</h1>
+			<div class="col-m-6">
+				<h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-MONEY 출금 신청 / 내역</h1>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 	</div><!-- /.container-fluid -->
 </div>
 
 <div class="content">
+	<div class=card>
 	<table class="table-bordered" id="listTable">
 		<tr>
 			<td>
 				<form action="" method="get">
 					<div id="ableMoney">
-						출금 가능 금액 <span style="float:right;">000000원</span>
+						출금 가능 금액 <span style="float:right;"><span id="allMoney">100000</span>원</span>
 					</div>
 					출금신청 <br>
-					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" >원 &nbsp;&nbsp;&nbsp; <button class="btn btn-secondary">전액출금</button> <br>
-					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : 0000-000-000000 </span> <span id="accountOwner">| 예금주 : 키보더(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
+					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney">원 &nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-secondary" onclick="selectAllMoney();">전액출금</button> <br>
+					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : 0000-000-000000 </span> | <span id="accountOwner"> 예금주 : 키보더(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
 				</form>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<form action="" method="get">
+				<form action="kmoneyWithdraw.po" method="get">
 					출금신청내역 <br>
-					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2 "> ~ <input type="date" class="form-control col-lg-2" style="display:inline;"> <br>
+					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2" name="startDate"> ~ <input type="date" class="form-control col-lg-2" style="display:inline;"> <br>
 					<br>
 					<div align="center" class="btn-area">
 						<button type="submit" class="btn btn-secondary">검색</button>
@@ -132,7 +144,18 @@ button {
 			</td>
 		</tr>
 	</table>
+	</div>
 </div>
+
+<script>
+
+// 전액출금 버튼 클릭시 함수
+function selectAllMoney() {
+	var ableMoney = $("#allMoney").text();
+	
+	$("#withdrawMoney").val(ableMoney);
+}
+</script>
 
 </div>
 </body>

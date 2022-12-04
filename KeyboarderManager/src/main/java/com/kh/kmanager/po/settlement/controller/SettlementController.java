@@ -14,4 +14,14 @@ public class SettlementController {
 	public String kmoneyMain() {
 		return "po/poSettlement/poKmoneyMain";
 	}
+	
+	/**
+	 * K-Money 출금신청내역 페이지 - 채영
+	 * @return
+	 */
+	@RequestMapping("kmoneyWithdraw.po")
+	public String kmoneyWithdraw() {
+		
+		return "po/poSettlement/poKmoneyList";
+	}
 }
