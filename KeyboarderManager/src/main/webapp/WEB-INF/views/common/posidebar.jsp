@@ -217,7 +217,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="noticeList.po" class="nav-link">
               <i class="nav-icon fas fa-solid fa-circle-exclamation"></i>
               <p>공지사항</p>
             </a>

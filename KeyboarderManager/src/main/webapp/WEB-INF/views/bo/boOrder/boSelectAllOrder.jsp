@@ -9,7 +9,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<jsp:include page="../../common/header.jsp" />
+	<jsp:include page="../../common/boheader.jsp" />
 
 	<jsp:include page="../../common/bosidebar.jsp" />
 	

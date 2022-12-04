@@ -166,7 +166,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="noticeList.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>공지사항 관리</p>
                 </a>

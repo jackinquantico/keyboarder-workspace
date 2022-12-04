@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+/* -------------- BO 공지사항 관리 페이지 적용 CSS ------------------ */
+.content {
+    width : 100%;
+    height : 800px;
+}
+
+#writeNotice {
+    width : 100%;
+    height : 5%;
+    padding-right : 30px;
+}
+
+#writeNotice_btn {
+    float: right;
+    height : 100%;
+    background-color : #323232;
+    color : white;
+    border : none;
+    width : 100px;
+}
+
+#noticeList {
+    width : 100%;
+    height : 70%;
+    padding : 0px 20px 0px 20px;
+}
+
+#noticeList_table {
+    width : 100%;
+    height : 100%;
+    text-align : center;
+}
+
+#noticeList_table>thead {
+    height : 10%;
+}
+
+#pagingArea {
+    text-align : center;
+}
+
+#pagingArea>button {
+    border : 1px solid black;
+    width : 30px;
+    height : 30px;
+}
+
+
+/* -------------- BO 공지사항 작성 페이지 적용 CSS ------------------ */
+#noticeEnrollForm>hr {
+    border-color : rgb(219, 221, 224);
+}
+
+#noticeTitle, #noticeContent {
+    margin : -15px 0px -15px 0px;
+}
+
+#noticeTitle {
+    height : 70px;
+    position : relative;
+}
+
+#noticeContent {
+    height : 500px;
+}
+
+#title, #content {
+    width : 100%;
+    height : 100%;
+    border : none;
+    padding-left : 20px;
+    padding-right : 20px;
+    font-size : 25px;
+}
+
+#content { 
+    padding-top : 15px;
+}
+
+#noticeBtns {
+    text-align: right;
+    width : 100%;
+}
+
+#write_btn, #cancle_btn {
+    border : 1px solid black;
+    width : 120px;
+    height : 40px;
+    font-weight: bold;
+}
+
+#write_btn {
+    background-color : #323232;
+    color : white;
+}
+
+#cancle_btn {
+    background-color : white;
+    color : black;
+}
+
+
+/* -------------- BO 공지사항 상세조회 페이지 적용 CSS ------------------ */
+#writer, #writeDate {
+    height : 80%;
+    font-size : 25px;
+    margin-top : 7px;
+    margin-bottom: 7px;
+    border : none;
+}
+
+#writer {
+    width : 6%;
+    float : center;
+    position : absolute;
+    border-right: 1px solid rgb(219, 221, 224) !important;
+}
+
+#writeDate {
+    width : 9%;
+    float : right;
+    padding-left : 20px;
+}
+
+#update_btn, #delete_btn {
+    border : 1px solid black;
+    width : 120px;
+    height : 40px;
+    font-weight: bold;
+}
+
+#update_btn {
+    background-color : #323232;
+    color : white;
+}
+
+#delete_btn {
+    background-color : white;
+    color : black;
+}
