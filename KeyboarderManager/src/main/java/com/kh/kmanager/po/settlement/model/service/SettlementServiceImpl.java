@@ -6,14 +6,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.kmanager.bo.settlement.model.dao.SettlementDao;
+import com.kh.kmanager.po.settlement.model.dao.PoSettlementDao;
+import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
 
 @Service
 public class SettlementServiceImpl implements SettlementService {
 
 	@Autowired
-	private SettlementDao settlementDao;
+	private PoSettlementDao settlementDao;
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -32,6 +33,15 @@ public class SettlementServiceImpl implements SettlementService {
 	@Override
 	public ArrayList<Withdraw> selectWithdrawRequestList(Withdraw w) {
 		return settlementDao.selectWithdrawRequestList(sqlSession, w);
+	}
+
+	/**
+	 * K-money 잔액관리 메인페이지용 금액 조회용 - 채영
+	 * @return : 총 잔액, 정산확정금액, 정산예정금액, 송금예정잔액, 출금가능금액
+	 */
+	@Override
+	public Settlement selectKmoneySettlement(int sellerNo) {
+		return settlementDao.selectKmoneySettlement(sqlSession, sellerNo);
 	}
 
 }

@@ -93,10 +93,10 @@ input[name=startDate] {
 		</thead>
 		<tbody>
 			<tr>
-				<td>000000원</td>
-				<td>000000원</td>
-				<td>000000원</td>
-				<td>000000원</td>
+				<td>${ s.allBalance }원</td>
+				<td>${ s.confirmSettlement }원</td>
+				<td>${ s.preSettlement }원</td>
+				<td>${ s.remitBalance }원</td>
 			</tr>
 		</tbody>
 	</table>
@@ -122,7 +122,7 @@ input[name=startDate] {
 			<td>
 				<form action="withdraw.po" method="get">
 					<div id="ableMoney">
-						출금 가능 금액 <span style="float:right;"><span id="allMoney">100000</span>원</span>
+						출금 가능 금액 <span style="float:right;"><span id="allMoney">${ s.ableBalance }</span>원</span>
 					</div>
 					출금신청 <br>
 					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" name="withdrawMoney" required>원 &nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-secondary" onclick="selectAllMoney();">전액출금</button> <br>

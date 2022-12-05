@@ -10,6 +10,7 @@
 		<typeAlias type="com.kh.kmanager.bo.store.model.vo.Store" alias="store" />		
 		<typeAlias type="com.kh.kmanager.po.product.model.vo.Product" alias="product" />
 		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Withdraw" alias="withdraw" />
+		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Settlement" alias="settlement" />
 	</typeAliases>
 	
 	<mappers>

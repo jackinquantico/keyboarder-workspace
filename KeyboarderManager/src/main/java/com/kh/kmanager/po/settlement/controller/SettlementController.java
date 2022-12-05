@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.kmanager.po.settlement.model.service.SettlementService;
+import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
 
 @Controller
@@ -23,9 +24,13 @@ public class SettlementController {
 	 * @return
 	 */
 	@RequestMapping("kmoney.po")
-	public String kmoneyMain() {
+	public String kmoneyMain(Model model) {
 		
 		// 총 잔액, 정산확정금액, 정산예정금액, 송금예정잔액, 출금가능금액 필요
+		// SELLER_NO 필요함 => 임시로 하드코딩
+		Settlement s = settlementService.selectKmoneySettlement(10000);
+		
+		model.addAttribute("s", s);
 		
 		return "po/poSettlement/poKmoneyMain";
 	}
