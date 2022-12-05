@@ -35,7 +35,7 @@
 	
 	<select id="selectWithdrawRequestList" parameterType="withdraw" resultMap="withdrawResultSet">
 		SELECT S.SELLER_NAME AS "SELLER_NAME"
-			 , TO_CHAR(WITHDRAW_DATE, 'YYYY-MM-DD') AS "WITHDRAW_DATE"
+			 , TO_CHAR(WITHDRAW_DATE, 'YYYY-MM-DD HH24:mm:SS') AS "WITHDRAW_DATE"
 			 , WITHDRAW_MONEY
 			 , W.ACCOUNT_NO AS "ACCOUNT_NO"
 			 , W.REP_NAME AS "REP_NAME"
