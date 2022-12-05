@@ -11,12 +11,14 @@
 		<typeAlias type="com.kh.kmanager.po.product.model.vo.Product" alias="product" />
 		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Withdraw" alias="withdraw" />
 		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Settlement" alias="settlement" />
+		<typeAlias type="com.kh.kmanager.common.model.vo.Notice" alias="notice" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/store-mapper.xml" />
 		<mapper resource="/mappers/po-mapper.xml" />
 		<mapper resource="/mappers/settlement-mapper.xml" />
+		<mapper resource="/mappers/notice-mapper.xml" />
 	</mappers>
 
 </configuration>

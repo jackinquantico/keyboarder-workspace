@@ -29,15 +29,15 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<form id="noticeEnrollForm" method="post" action="">
+			<form id="noticeEnrollForm" method="post" action="insertNotice.bo">
 			
 				<hr>
 				<div id="noticeTitle">
-					<input type="text" id="title" placeholder="제목을 입력해주세요" required>
+					<input type="text" id="title" placeholder="제목을 입력해주세요" name="noticeTitle" required>
 				</div>
 				<hr>
 				<div id="noticeContent">
-					<textarea id="content" rows="10" style="resize:none;" placeholder="내용을 입력해주세요 " required></textarea>
+					<textarea id="content" rows="10" style="resize:none;" placeholder="내용을 입력해주세요 " name="noticeContent" required></textarea>
 				</div>
 				<hr>
 				<div id="noticeBtns">

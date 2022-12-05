@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+
+	<insert id="insertNotice" parameterType="notice">
+		INSERT INTO NOTICE (NOTICE_NO
+						  , NOTICE_TITLE
+						  , NOTICE_CONTENT)
+					VALUES (SEQ_NOTICE.NEXTVAL
+						  , #{noticeTitle}
+						  , #{noticeContent})
+	</insert>
+	
+</mapper>
