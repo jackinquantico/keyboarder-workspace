@@ -1,14 +1,16 @@
-package com.kh.kmanager.common.controller;
+package com.kh.kmanager.common.notice.controller;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.kmanager.common.model.service.NoticeService;
-import com.kh.kmanager.common.model.vo.Notice;
+import com.kh.kmanager.common.notice.model.service.NoticeService;
+import com.kh.kmanager.common.notice.model.vo.Notice;
 
 @Controller
 public class NoticeController {
@@ -21,7 +23,11 @@ public class NoticeController {
 	 * @return : BO 공지사항 리스트 조회 페이지 이동
 	 */
 	@RequestMapping("noticeList.bo")
-	public String boSelectListNotice() {
+	public String boSelectListNotice(@RequestParam(value="cpage", defaultValue="1")int currentPage) {
+		
+		int listCount = noticeService.selectListCount();
+		int pageLimit = 5;
+		int boardLimit = 10;
 		
 		return "common/noticeListView";
 	}
@@ -56,6 +62,13 @@ public class NoticeController {
 		return "common/boNoticeUpdateForm";
 	}
 	
+	/**
+	 * BO 공지사항 작성 메소드 - 백성현
+	 * @param n : 새로 작성한 공지사항 객체
+	 * @param session : alert 메시지 알람
+	 * @param mv : 공지사항 리스트 조회 페이지로 리다이렉트
+	 * @return
+	 */
 	@RequestMapping("insertNotice.bo")
 	public ModelAndView insertNotice(Notice n, HttpSession session, ModelAndView mv) {
 		

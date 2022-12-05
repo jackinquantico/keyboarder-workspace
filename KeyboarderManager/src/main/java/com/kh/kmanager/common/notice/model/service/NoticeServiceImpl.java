@@ -1,4 +1,4 @@
-package com.kh.kmanager.common.model.service;
+package com.kh.kmanager.common.notice.model.service;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.kmanager.common.model.dao.NoticeDao;
-import com.kh.kmanager.common.model.vo.Notice;
 import com.kh.kmanager.common.model.vo.PageInfo;
+import com.kh.kmanager.common.notice.model.dao.NoticeDao;
+import com.kh.kmanager.common.notice.model.vo.Notice;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -20,10 +20,10 @@ public class NoticeServiceImpl implements NoticeService{
 	private SqlSessionTemplate sqlSession;
 
 	
-	
 	@Override
 	public int selectListCount() {
-		return 0;
+		
+		return noticeDao.selectListCount(sqlSession);
 	}
 
 	@Override

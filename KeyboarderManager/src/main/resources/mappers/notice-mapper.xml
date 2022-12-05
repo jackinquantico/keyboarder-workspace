@@ -11,4 +11,9 @@
 						  , #{noticeContent})
 	</insert>
 	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM NOTICE
+	</select>
+	
 </mapper>

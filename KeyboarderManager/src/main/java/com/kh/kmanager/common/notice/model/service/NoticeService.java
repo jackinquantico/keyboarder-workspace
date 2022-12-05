@@ -1,9 +1,9 @@
-package com.kh.kmanager.common.model.service;
+package com.kh.kmanager.common.notice.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.kmanager.common.model.vo.Notice;
 import com.kh.kmanager.common.model.vo.PageInfo;
+import com.kh.kmanager.common.notice.model.vo.Notice;
 
 public interface NoticeService {
 

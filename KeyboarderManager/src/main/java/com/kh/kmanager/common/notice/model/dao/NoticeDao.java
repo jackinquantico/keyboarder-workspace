@@ -1,9 +1,9 @@
-package com.kh.kmanager.common.model.dao;
+package com.kh.kmanager.common.notice.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.kmanager.common.model.vo.Notice;
+import com.kh.kmanager.common.notice.model.vo.Notice;
 
 @Repository
 public class NoticeDao {
@@ -13,5 +13,8 @@ public class NoticeDao {
 		return sqlSession.insert("noticeMapper.insertNotice", n);
 	}
 	
-	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("noticeMapper.selectListCount");
+	}
 }

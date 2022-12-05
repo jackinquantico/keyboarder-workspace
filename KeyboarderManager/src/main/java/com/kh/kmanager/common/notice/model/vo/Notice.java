@@ -1,4 +1,4 @@
-package com.kh.kmanager.common.model.vo;
+package com.kh.kmanager.common.notice.model.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
