@@ -13,13 +13,13 @@
 	
 	<style>
         div{
-            border: 1px solid red;
+            /* border: 1px solid red; */
             box-sizing: border-box;
         }
 
         #fo-full-main{
-            width: 1000px;
-            height: 1000px;
+            width: 1200px;
+            height: 1200px;
             margin: auto;
         }
 
@@ -30,26 +30,30 @@
 
         #fo-product-body{
             width: 100%;
-            height: 80%;
+            height: 900px;
         }
 
         #fo-product-main{
             width: 80%;
-            height: 73%;
+            height: 750px;
             margin: auto;
             margin-top: 80px;
         }
 
         .fo-product-all{
-            width: 24.47%;
-            height: 280px;
+            width: 24.5%;
+            height: 320px;
             display: inline-block;
             margin-bottom: 10px;
+            border-radius: 30px;
+            border: 2px solid #ffad00;
         }
 
         .fo-product-img{
             width: 100%;
             height: 140px;
+            border-radius: 30px;
+            background-color: #ffad00;
         }
 
         .fo-product-name{
@@ -66,9 +70,31 @@
             width: 100%;
             height: 45px;
         }
+        
+        .page-item{
+        	border: 2px solid #ffad00;
+        	background-color: #ffad00;
+        	color: #ffad00;
+        }
+        
+        #page-btn{
+        	color: #ffad00;
+        }
+        
+        #buy-btn{
+        	width: 100px;
+        	height: 40px; 
+        	border: 2px solid #ffad00;
+        }
+        
+        #buy-btn:hover{
+        	background-color: #ffad00;
+        	cursor: pointer;
+        	color: white;
+        }
 
     </style>
-	
+    
 </head>
 <body>
 
@@ -86,8 +112,32 @@
                             <div class="fo-product-img">
                                 <img src="" style="background-size: cover; width: 100%; height: 100%;">
                             </div>
+                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">상품 제목 넣어버리기</div>
+                            <div class="fo-product-price">상품 가격 넣어버리기</div>
+                            <div class="fo-product-coupon">
+                            	<select>
+                            		<option>쿠폰이름들어감</option>
+                            		<option>쿠폰이름들어감</option>
+                            	</select>
+                            </div>
+                            <div class="fo-buy-button" align="center" style="padding: 9px; margin: 0px;">
+                                <button type="submit" id="buy-btn" class="btn">
+                                   	 구매하기
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="fo-product-all" align="center">
+                        <form>
+                            <div class="fo-product-img"></div>
                             <div class="fo-product-name">상품 제목 넣어버리기</div>
                             <div class="fo-product-price">상품 가격 넣어버리기</div>
+                            <div class="fo-product-coupon">
+                            	<select>
+                            		<option>쿠폰이름들어감</option>
+                            		<option>쿠폰이름들어감</option>
+                            	</select>
+                            </div>
                             <div class="fo-buy-button" align="center">
                                 <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
                                    	 구매하기
@@ -100,6 +150,12 @@
                             <div class="fo-product-img"></div>
                             <div class="fo-product-name">상품 제목 넣어버리기</div>
                             <div class="fo-product-price">상품 가격 넣어버리기</div>
+                            <div class="fo-product-coupon">
+                            	<select>
+                            		<option>쿠폰이름들어감</option>
+                            		<option>쿠폰이름들어감</option>
+                            	</select>
+                            </div>
                             <div class="fo-buy-button" align="center">
                                 <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
                                    	 구매하기
@@ -112,18 +168,12 @@
                             <div class="fo-product-img"></div>
                             <div class="fo-product-name">상품 제목 넣어버리기</div>
                             <div class="fo-product-price">상품 가격 넣어버리기</div>
-                            <div class="fo-buy-button" align="center">
-                                <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
-                                   	 구매하기
-                                </button>
+                            <div class="fo-product-coupon">
+                            	<select>
+                            		<option>쿠폰이름들어감</option>
+                            		<option>쿠폰이름들어감</option>
+                            	</select>
                             </div>
-                        </form>
-                    </div>
-                    <div class="fo-product-all" align="center">
-                        <form>
-                            <div class="fo-product-img"></div>
-                            <div class="fo-product-name">상품 제목 넣어버리기</div>
-                            <div class="fo-product-price">상품 가격 넣어버리기</div>
                             <div class="fo-buy-button" align="center">
                                 <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
                                    	 구매하기
@@ -142,6 +192,12 @@
                             <div class="fo-product-img"></div>
                             <div class="fo-product-name">상품 제목 넣어버리기</div>
                             <div class="fo-product-price">상품 가격 넣어버리기</div>
+                            <div class="fo-product-coupon">
+                            	<select>
+                            		<option>쿠폰이름들어감</option>
+                            		<option>쿠폰이름들어감</option>
+                            	</select>
+                            </div>
                             <div class="fo-buy-button" align="center">
                                 <button onclick="requestPay();" type="button" class="btn btn-outline-info" style="width: 100px; height: 40px;">
                                    	 구매하기
@@ -149,8 +205,31 @@
                             </div>
                         </form>
                     </div>
+                    
+                    <!-- 페이징 처리 -->
+		            <div style="padding: 30px 50px; margin: 0px;">
+			            <nav aria-label="Page navigation example">
+						  <ul class="pagination" style="justify-content: center;">
+						    <li class="page-item">
+						      <a class="page-link" href="#" aria-label="Previous" id="page-btn">
+						        <span aria-hidden="true">&laquo;</span>
+						      </a>
+						    </li>
+						    <li class="page-item"><a class="page-link" href="#" id="page-btn">1</a></li>
+						    <li class="page-item"><a class="page-link" href="#" id="page-btn">2</a></li>
+						    <li class="page-item"><a class="page-link" href="#" id="page-btn">3</a></li>
+						    <li class="page-item">
+						      <a class="page-link" href="#" aria-label="Next" id="page-btn">
+						        <span aria-hidden="true">&raquo;</span>
+						      </a>
+						    </li>
+						  </ul>
+						</nav>
+					</div>
                 
             </div>
+            
+            
         </div>
     </div>
 

@@ -162,7 +162,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="################" class="nav-link">
+                <a href="electronicTaxInvoice.poOrder" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전자세금계산서 관리</p>
                 </a>

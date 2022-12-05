@@ -12,4 +12,10 @@ public class JKW_PoOrderController {
 		return "po/poOrder/poOrderDeliveryMain";
 	}
 	
+	@RequestMapping("electronicTaxInvoice.poOrder")
+	public String electronicTaxInvoice() {
+		
+		return "po/poSettlement/poElectronicTaxInvoice";
+	}
+	
 }
