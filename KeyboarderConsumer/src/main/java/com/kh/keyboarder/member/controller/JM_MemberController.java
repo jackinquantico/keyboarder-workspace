@@ -50,10 +50,12 @@ public class JM_MemberController {
 	
 	@RequestMapping("insert.me")
 	public String insertMember(Member m , Model model, HttpSession session) {
-	
+		//System.out.println(m.getAddress());
+		//System.out.println(m.getConEmail());
 		int result = memberService.insertMember(m);
 		if(result>0) {
 			session.setAttribute("alertMsg", "회원가입에 성공하였습니다. 이메일 인증 후 로그인 해주세요.");
+			
 			return "redirect:/";
 		} else {
 			model.addAttribute("errorMsg", "회원가입에 실패했습니다.");

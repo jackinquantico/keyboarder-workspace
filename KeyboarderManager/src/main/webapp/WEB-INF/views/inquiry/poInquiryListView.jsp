@@ -66,8 +66,7 @@
             		});
             	});
             </script>
-           
-             
+
         </div>
     </div>
 </div> <!-- /.content -->
