@@ -10,12 +10,11 @@
 #btnarea {
 	width: 97%;
 }
-#btnarea a {
+#btnarea button {
 	float: right;
 	margin-right: 10px;
 }
 #contentarea {
-	border: 1px solid lightgray;
 	width: 95%;
 	margin: auto;
 	padding: 20px;
@@ -47,8 +46,8 @@
         <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;입점업체 상세 조회</h1>
       </div><!-- /.col -->
 	<div id="btnarea">
-		<a onclick="storeUpdate(2);" class="btn btn-secondary">탈퇴처리</a>
-		<a onclick="storeUpdate(1);" class="btn btn-secondary">수정하기</a>
+		<button onclick="storeUpdate(2);" class="btn btn-secondary">탈퇴처리</button>
+		<button onclick="storeUpdate(1);" class="btn btn-secondary" id="updateBtn">수정하기</button>
 	</div>
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -58,7 +57,7 @@
 <!-- 실제 콘텐츠 영역 -->
 <div class="content" style="clear: both;">
 
-<div id="contentarea">
+<div id="contentarea" class="card">
 	<form action="" method="post" id="storeInfo">
 	<table id="contentTable">
 		<tr>
@@ -77,14 +76,14 @@
 		<tr>
 			<td>대표자명(실명)</td>
 			<td>
-				<input type="text" class="form-control" name="repName" value="${ s.repName }">
+				<input type="text" class="form-control" name="repName" value="${ s.repName }" maxlength="6" required>
 			</td>
 			<td rowspan="7" width="30%" align="center">
 				<div style="height: 350px; width: 350px">
 					<c:choose>
 						<c:when test="${ empty s.logoAttachment }">
 							<img width="95%" height="95%" 
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPsAAADJCAMAAADSHrQyAAAAY1BMVEX///+VlZWPj4/j4+O0tLT7+/ucnJyfn5/b29uSkpKkpKSrq6uurq7m5uZmZmaWlpbz8/OIiIjs7Ox5eXlkZGRsbGzNzc2BgYF0dHTU1NRvb2+7u7ve3t7w8PDCwsKKiopcXFxuhZvhAAAELklEQVR4nO3b25KiOhQG4HBIICgHUQgg6rz/U85Kgt3OlNDs6mrdrPm/Kwtzwc9KApIoBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAU3LBu8/tR8k23i2IW77xcxXqRaGq332OPyRSOviCVjwrX5dfRg+CsH33af6Eqerhc/fLouN3n+cPqF10rdvombzVfLNHrsNrlT//ulZ8s+e+6uVM9Ivi2+f9NDcbfaq65pjdT3PzHX4aD2fNL/uUTc91+MR3+HEM2WX301yQzDyyTVcmyEXKLns+DeY2f353m2bBUYieW/aPpzk981TjZzmKzq7u9dfP8KSMbFtu2Xdrogepa8ssexU+Sfr35QhH35hZ9shnV3N89sg35ph94Xep+wkT+i7PMnu50KBknj1ZaJDpz+zM7u/IvtCAeXb9D2dfXfd/ea5D9pec1ysg+0IDZPefMc+/5LxeAdkXGjxmb3m9o/4vz3W5vU7Msq+su1/AYLQGvT77/TU9n70Hq7N/sU67RWuz31fnGUVfmX2sta86q51Gq7Lra+KjRy87r1dYlT3wVQ9YVX1t9oDbNOeszs5rmnP8usxCg/JedWYdXny9LtP7suuS1zTn+LprtX9OhVN0flX/XIed2Tt87/AMqy4e5vF5DKc5776JaiE6u5vbh3r30b21fYjRbgB8bEDQesdxrN9d8iWckwMAAAAAAAAA/A/FqqyEONtliTExJptez1S7sxBXpXr6nCfKbTDJy+lvg73yDa/u7ySbfYsng6GhfOpE0bpuv+tM5Y5XByVF3DQZfW6bQdtj16Zxixd9YeJsuFX0vUo2nF2Ux+NOiISyx4P9y+Pg12Z89uFg6HPSGbdaVQadvRSyPF7oQpxSERfVG8/8+8qbogra7MqWPD/6/VNT9uxIXdvog627NLE2969ESn0gLi5vPffvKsNrEz1m37vDU5+/dqkQp7PLHnXpeaCwl8N9vXbz2W91Ec9mT81VpMVobPb2mPd2bnjMHlWXarsbrsqbMLe57EUdKnE1tcu+M1XenX32KI7jiMbEsevMdl/clzdJPTmbyV7tjcxK6bLfSn/UZu/DQ0HjvWn7vt9y3eU49LPZWyp9LGx2WVDNE2rj+rzsCwZz3U1Wh11STNnrP7NfquLc9S572jSnU9Pk03hPeWQXmQkKW1MauWP3eI8rLtIc6CZus8cDdXCa+UV1CyWX7BU9uJnCPrZdhcjsTC4+s4tk6IQb7+pAiauCap4N1KZ12Wmev2x2vMuQerpsml+USzfD0CQ+SmVKKfa/anp+S4Q8hjQY3J2tM1LUxjakobAvGhoI291QHdn/84+p3SFd9efzOFVRjhEN/lSKKrUjIRIydfeyiA6JCzXsc7oIqbXt51oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+K7fw2lApeR5FTgAAAAASUVORK5CYII=" />
+							src="http://tourbiz.spectory.net/src/images/noImg.gif" />
 						</c:when>
 						<c:otherwise>
 							<img width="95%" height="95%"  src="${ s.logoAttachment }" />
@@ -96,7 +95,7 @@
 		<tr>
 			<td>본사 소재지</td>
 			<td>
-				<input type="text" class="form-control" name="location" value="${ s.location }">
+				<input type="text" class="form-control" name="location" value="${ s.location }" maxlength="33" required>
 			</td>
 		</tr>
 		<tr>
@@ -120,37 +119,129 @@
 		<tr>
 			<td>계좌번호</td>
 			<td>
-				<input type="text" class="form-control" name="accountNo" value="${ s.accountNo }">
+				<input type="text" class="form-control" name="accountNo" value="${ s.accountNo }" maxlength="20" required>
 			</td>
 		</tr>
 		<tr>
 			<td>휴대폰 번호</td>
 			<td>
-				<input type="text" class="form-control" name="sellerPhone" value="${ s.sellerPhone }">
+				<input type="text" class="form-control" name="sellerPhone" value="${ s.sellerPhone }" maxlength="13" required>
 			</td>
 		</tr>
 		<tr>
 			<td>이메일</td>
 			<td>
-				<input type="email" class="form-control" name="sellerEmail" value="${ s.sellerEmail }">
+				<input type="email" class="form-control" name="sellerEmail" value="${ s.sellerEmail }" maxlength="50" required>
 			</td>
 		</tr>
 	</table>
 	</form>
 </div>
 
+<!-- 인증 정보 모달 -->
+<!-- data-toggle="modal" data-target="#identifyModal" -->
+<div class="modal" id="resignModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">입점 업체 인증 정보</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        	해당 업체를 탈퇴처리하시겠습니까?
+	      </div>
+	      
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-secondary" onclick="resign();">탈퇴처리</button>
+	      </div>
+	      
+    </div>
+  </div>
+</div> <!-- /.modal -->
+
 <script>
 	function storeUpdate(num) {
 		
 		if (num == 1) {
+			
+			// 입력한 계좌번호가 10자 미만일 경우에는 경고 alert();
+			var regex = /^(\d|\-){10,20}$/;
+			
+			if (!regex.test($("input[name=accountNo]").val())) {
+				alert("숫자와 - 만 입력할 수 있습니다. 정확한 계좌번호를 입력해주세요.");
+				$("input[name=accountNo]").focus();
+				return;
+			}
+			
+			if (!regex.test($("input[name=sellerPhone]").val())) {
+				alert("숫자와 - 만 입력할 수 있습니다. 정확한 휴대폰 번호를 입력해주세요.");
+				$("input[name=sellerPhone]").focus();
+				return;
+			}
+			
 			$("#storeInfo").attr("action", "updateStore.bo");
 			$("#storeInfo").submit();
+			
 		} else if (num == 2) {
-			$("#storeInfo").attr("action", "deleteStore.bo");
-			$("#storeInfo").submit();
+			$("#resignModal").modal("show");
 		}
 	}
+	
+	function resign() {
+
+		$("#storeInfo").attr("action", "deleteStore.bo");
+		$("#storeInfo").submit();
+	}
+
+	$(function() {
 		
+		var repName = $("input[name=repName]").val();
+		var location = $("input[name=location]").val();
+		var accountNo = $("input[name=accountNo]").val();
+		var sellerPhone = $("input[name=sellerPhone]").val();
+		var sellerEmail = $("input[name=sellerEmail]").val();
+		
+		if (repName.length == 0 
+				|| location.length == 0
+				|| accountNo.length == 0
+				|| sellerPhone.length == 0
+				|| sellerEmail.length == 0) {
+			$("#updateBtn").attr("disabled", true);
+		}
+	});
+	
+	$("input").keyup(function() {
+		var repName = $("input[name=repName]").val();
+		var location = $("input[name=location]").val();
+		var accountNo = $("input[name=accountNo]").val();
+		var sellerPhone = $("input[name=sellerPhone]").val();
+		var sellerEmail = $("input[name=sellerEmail]").val();
+		
+		if (repName.length < 2 
+				|| location.length < 10
+				|| accountNo.length == 0
+				|| sellerPhone.length == 0
+				|| sellerEmail.length == 0) {
+			$("#updateBtn").attr("disabled", true);
+		}
+		
+		if (repName.length > 0
+				&& location.length > 0
+				&& accountNo.length > 0
+				&& sellerPhone.length > 0
+				&& sellerEmail.length > 0) {
+			$("#updateBtn").attr("disabled", false);
+		}
+		
+	});
+	
+
 </script>
 
 </div> <!-- /.content -->

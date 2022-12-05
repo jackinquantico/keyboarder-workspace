@@ -9,7 +9,7 @@
 <style>
 #listarea {
 	width: 95%;
-	height: 800px;
+	height: 850px;
 	margin: auto;
 	overflow: auto;
 }
@@ -53,7 +53,7 @@
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
 
-<div id="listarea">
+<div id="listarea" class="card">
 	<table id="listTable" class="table-bordered">
 		<thead>
 			<tr>
@@ -100,7 +100,7 @@
 							</form>
 						</c:when>
 						<c:otherwise>
-							<a class="btn btn-primary">인증</a>
+							<button class="btn btn-primary">인증</button>
 						</c:otherwise>
 					</c:choose>
 				</td>
