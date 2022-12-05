@@ -126,8 +126,9 @@ input[name=startDate] {
 					</div>
 					출금신청 <br>
 					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" name="withdrawMoney" required>원 &nbsp;&nbsp;&nbsp; 
-					<button type="button" class="btn btn-secondary" onclick="selectAllMoney();">전액출금</button> 
-					<button type="button" class="btn btn-secondary" onclick="selectHundred();">100만원</button><br>
+					<button type="button" class="btn btn-outline-secondary" onclick="selectAllMoney();">전액출금</button> 
+					<button type="button" class="btn btn-outline-secondary" onclick="selectHundred();">100만원</button>
+					<button type="button" class="btn btn-outline-secondary" onclick="selectTen();">10만원</button><br>
 					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : 0000-000-000000 </span> | <span id="accountOwner"> 예금주 : 키보더(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
 					<!-- 임시로 하드코딩 -->
 					<input type="hidden" name="sellerNo" value="10000">
@@ -164,14 +165,26 @@ function selectAllMoney() {
 	$("#withdrawMoney").val(ableMoney);
 }
 
-/* // 100만원씩 추가 함수
+var allMoney = Number($("#allMoney").text());
+var money = Number($("#withdrawMoney").val());
+
+// 100만원 단위 추가 함수
 function selectHundred() {
-	if ($("#allMoney").text() >= 1000000) {
-		var money = $("#withdrawMoney").val();
+	if (allMoney >= 1000000) {
 		money += 1000000;
 		$("#withdrawMoney").val(money);
+		allMoney -= 1000000;
 	}
-} */
+}
+
+// 10만원 단위 추가 함수
+function selectTen() {
+	if (allMoney >= 100000) {
+		money += 100000;
+		$("#withdrawMoney").val(money);
+		allMoney -= 100000;
+	}
+}
 </script>
 
 </div>
