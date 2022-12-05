@@ -8,7 +8,8 @@
 </head>
 <body>
 
-	<jsp:forward page="WEB-INF/views/product/foProductNotice.jsp" />
+	<%-- <jsp:forward page="WEB-INF/views/product/foProductNotice.jsp" /> --%>
+	<jsp:forward page="foProductNotice.order?cpage=1"/>
 	
 </body>
 </html>

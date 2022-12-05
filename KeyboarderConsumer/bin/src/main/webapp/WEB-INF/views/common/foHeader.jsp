@@ -24,7 +24,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<style>
         .fo-header-full{
-            width: 1000px;
+            width: 1200px;
             height: 100px;
             margin: auto; 
         }

@@ -95,14 +95,15 @@
                     <tr>
                         <th> 이메일 *</th> <!-- 이메일 선택해서 인풋에 넣기 -->
                         <td colspan="3">
-                            <input type="text" id="email_id" name= "conEmail" class="form-control" maxlength="18" value="" style="width:150px; display:inline-block;" required> &nbsp;@&nbsp;
-                            <select class="custom-select" name="emailAno" title="이메일 도메인 주소 선택" style="width:140px;  vertical-align:top; display:inline-block;" onclick="setEmailDomain(this.value); return false;" required>
+                            <input type="text" id="email_id" name= "email_id" class="form-control" maxlength="18" value="" style="width:150px; display:inline-block;" required> &nbsp;@&nbsp;
+                            <select class="custom-select" id="domain" name="emailAno" title="이메일 도메인 주소 선택" style="width:140px; vertical-align:top; display:inline-block;" required>
                                 <option>선택</option>
                                     <option value="naver.com">naver.com</option>
                                     <option value="gmail.com">gmail.com</option>
                                     <option value="hanmail.net">hanmail.net</option>
                                     <option value="nate.com">nate.com</option>
                             </select>
+                            <input type="hidden" name="conEmail" id="conEmail" value="">
                         </td>
                     </tr>
                     <tr>
@@ -124,7 +125,7 @@
                             <input type="text" class="form-control" id="sample6_extraAddress" style="width:150px; display:inline-block;" placeholder="참고항목">
                         </td>
                     </tr>
-                    <input type="hidden" id="address" name="address">
+                    <input type="hidden" id="address" name="address" value="" />
                 </table>
 
                 <script>
@@ -134,7 +135,7 @@
                         var memId = document.getElementById("memId");
                         
                         // 아이디를 입력하는 input 요소 객체
-                        var $memId = $("#signup-form input[name=memId]");
+                        var $memId = $("#signup-form input[name=conId]");
                         // name 속성이 userId 인 요소가 menubar.jsp 에도 있기 때문에
                         // 확실하게 어디에 속해있는 요소인지 잘 적어둬야함
                         
@@ -234,7 +235,7 @@
 
                 <br>
                 <div align="center">
-                    <button type="submit" id="enroll-btn" onclick="return validate(); btnClick(); " disabled>가입하기</button>
+                    <button type="submit" id="enroll-btn" onclick="return validate();  " disabled>가입하기</button>
                 </div>
                 <br>
             </form>
@@ -291,18 +292,19 @@
                 }
             </script>
             
-            <!-- 안됨 시발 다시 생각해보기...
-            	zip + address1 + address2 값 합쳐서 한번에 address로 넘기기 시발시발시발시발
             <script>
-                function btnClick() {
-                    var zip= document.getElementById("sample6_postcode").value;
-                    var address1 = document.getElementById("sample6_address").value;
-                    var address2 = document.getElementById("sample6_detailAddress").value;
-                    var address = zip+address1+address2;
-                    document.getElementById("address").innerHTML = address;
-                }
+                // 주소, 이메일 값 합쳐서 한번에 넘기기
+                $(function() {
+                    $("#enroll-btn").click(function() {
+                        var address = "" + $("#sample6_postcode").val() + $("#sample6_address").val() + $("#sample6_detailAddress").val();
+                        $("#address").val(address);
+                        //console.log($("#address").val);
+                        var conEmail = "" + $("#email_id").val() + "@" + $("#domain option:selected").val();
+                        $("#conEmail").val(conEmail);
+                    });
+                });
+                
             </script>
-            --> 
         </div>
         <br>
     </div>

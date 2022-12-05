@@ -9,11 +9,15 @@
 	<typeAliases>
 		<typeAlias type="com.kh.keyboarder.order.model.vo.PGData" alias="pgd" />
 		<typeAlias type="com.kh.keyboarder.member.model.vo.Member"  alias="member"/>
+		<typeAlias type="com.kh.keyboarder.order.model.vo.Order"  alias="order"/>
+		<typeAlias type="com.kh.keyboarder.product.model.vo.Product"  alias="product"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/pgd-mapper.xml" />
 		<mapper resource="/mappers/member-mapper.xml" />
+		<mapper resource="/mappers/product-mapper.xml" />
+		<mapper resource="/mappers/order-mapper.xml" />
 	</mappers>
 	
 </configuration>
