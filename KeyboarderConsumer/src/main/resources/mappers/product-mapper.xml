@@ -27,7 +27,7 @@
 		WHERE PRODUCT_STATUS = 1
 	</select>
 	
-	<select id="selectList" resultType="productResultSet">
+	<select id="selectList" resultMap="productResultSet">
 		SELECT PRO.PRODUCT_NO
 		     , PRO.PRODUCT_NAME
 		     , PRO.PRICE
