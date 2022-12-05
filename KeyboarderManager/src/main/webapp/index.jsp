@@ -22,7 +22,8 @@
 
 	<div class="card" style="width:20%; margin: auto; margin-top: 300px;">		
 		<a href="bomain" class="btn btn-secondary">bo 메인으로 가기</a> <br>
-		<a href="pomain" class="btn btn-secondary">po 메인으로 가기</a>
+		<a href="pomain" class="btn btn-secondary">po 메인으로 가기</a> <br>
+		<a href="loginForm" class="btn btn-secondary">로그인 화면으로 가기</a>
 	</div>
 
 </body>

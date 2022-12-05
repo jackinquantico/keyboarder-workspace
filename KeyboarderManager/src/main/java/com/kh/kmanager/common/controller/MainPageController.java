@@ -23,4 +23,13 @@ public class MainPageController {
 		
 		return "common/bomain";
 	}
+	
+	/**
+	 * 로그인 페이지로 이동
+	 */
+	@RequestMapping("loginForm")
+	public String loginForm() {
+		
+		return "/common/login";
+	}
 }
