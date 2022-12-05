@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,66 +49,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>24</td>
-							<td>공지사항1</td>
-							<td>1</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>23</td>
-							<td>공지사항2</td>
-							<td>23</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>22</td>
-							<td>공지사항3</td>
-							<td>45</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>21</td>
-							<td>공지사항4</td>
-							<td>27</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>20</td>
-							<td>공지사항5</td>
-							<td>8</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>19</td>
-							<td>공지사항6</td>
-							<td>49</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>18</td>
-							<td>공지사항7</td>
-							<td>3</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>17</td>
-							<td>공지사항8</td>
-							<td>345</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>16</td>
-							<td>공지사항9</td>
-							<td>27</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>15</td>
-							<td>공지사항10</td>
-							<td>34</td>
-							<td></td>
-						</tr>
+						<c:forEach var="n" items="${ list }">
+							<tr>
+								<td>${ n.noticeNo }</td>
+								<td>${ n.noticeTitle }</td>
+								<td>${ n.viewCount }</td>
+								<td>${ n.writeDate }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -115,15 +64,30 @@
 			<br>
 
 			<div id="pagingArea">
-				<button>&lt;</button>&nbsp;
-				<button>1</button>&nbsp;
-				<button>2</button>&nbsp;
-				<button>3</button>&nbsp;
-				<button>&gt;</button>
+				<c:choose>
+					<c:when test="${ pi.currentPage eq 1 }">
+						<button disabled>&lt;</button>&nbsp;
+					</c:when>
+					<c:otherwise>
+						<button>&lt;</button>&nbsp;
+					</c:otherwise>
+				</c:choose>
+				
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<button>${ p }</button>&nbsp;
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${ pi.currentPage eq pi.maxPage }">
+						<button disabled>&gt;</button>
+					</c:when>
+					<c:otherwise>
+						<button>&gt;</button>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 		</div>
-	
 	</div> <!-- /.content-wrapper -->
 
 	<script>

@@ -37,6 +37,11 @@
     height : 10%;
 }
 
+#noticeList_table>tbody>tr:hover {
+    cursor : pointer;
+    background-color: rgb(219, 221, 224);
+}
+
 #pagingArea {
     text-align : center;
 }

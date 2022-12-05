@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="noticeMapper">
 
+	<resultMap id="noticeResultSet" type="notice">
+		<result column="NOTICE_NO" property="noticeNo" />
+		<result column="NOTICE_TITLE" property="noticeTitle" />
+		<result column="VIEW_COUNT" property="viewCount" />
+		<result column="WRITE_DATE" property="writeDate" />
+		
+		<result column="NOTICE_CONTENT" property="noticeContent" />
+	</resultMap>
+
 	<insert id="insertNotice" parameterType="notice">
 		INSERT INTO NOTICE (NOTICE_NO
 						  , NOTICE_TITLE
@@ -14,6 +23,15 @@
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM NOTICE
+	</select>
+	
+	<select id="selectNoticeList" resultMap="noticeResultSet">
+		SELECT NOTICE_NO
+			 , NOTICE_TITLE
+			 , VIEW_COUNT
+			 , TO_CHAR(WRITE_DATE, 'YYYY.MM.DD') AS "WRITE_DATE"
+		  FROM NOTICE
+		 ORDER BY NOTICE_NO DESC
 	</select>
 	
 </mapper>
