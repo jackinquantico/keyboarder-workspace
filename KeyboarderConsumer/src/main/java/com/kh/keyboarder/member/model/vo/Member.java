@@ -18,6 +18,8 @@ public class Member {
 	private String address; 
 	private String conPhone;
 	private String conEmail;
+	private String mailKey;
+	private String mailAuth;
 	
 	
 }

@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
- <jsp:forward page="WEB-INF/views/product/foProductNotice.jsp" /> 	
- <!--<jsp:forward page="foProductNotice.order?cpage=1"/>-->
-	
+	<script>
+		alert("이메일 인중 후 다시 시도해주세요.")
+		location.href="login.me";
+	</script>
 </body>
 </html>

@@ -18,4 +18,15 @@ public class JM_MemberDao {
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("memberMapper.idCheck", checkId);
 	}
+	
+	public int updateMailKey(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMailKey", m);
+	}
+	public  int updateMailAuth(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMailAuth", m);
+	}
+	public  int emailAuthFail(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("memberMapper.emailAuthFail", id);
+	}
+	
 }

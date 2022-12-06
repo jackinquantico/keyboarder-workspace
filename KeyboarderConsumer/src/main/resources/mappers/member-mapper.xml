@@ -11,6 +11,8 @@
 		<result column="ADDRESS" property="address" />
 		<result column="CON_PHONE" property="conPhone" />
 		<result column="CON_EMAIL" property="conEmail" />
+		<result column="MAIL_AUTH" property="mailAuth" />
+		<result column="MAIL_KEY" property="mailKey" />
 	</resultMap>
 	
 	
@@ -43,5 +45,28 @@
 		FROM CONSUMER
 		WHERE CON_ID = #{conId}
 	</select>
-
+	
+	<!-- 회원가입 시 이메일 인증을 위한 랜덤번호 저장 -->
+	<update id="updateMailKey" parameterType="member">
+		UPDATE CONSUMER 
+			SET MAIL_KEY = #{mailKey} 
+			WHERE CON_EMAIL = #{conEmail} 
+					AND CON_ID = #{conId}
+	</update>
+	
+	<!--  메일 인증 mail_auth 기본값 0에서 1로 변경하여 로그인 허용 -->
+	<update id="updateMailAuth" parameterType="member">
+		UPDATE CONSUMER
+			SET MAIL_AUTH='1'
+			WHERE CON_EMAIL = #{conEmail} 
+				AND MAIL_KEY = #{mailKey}
+	</update>
+	
+	<!-- 이메일 인증을 안했을 경우 0반환, 로그인시 이메일인증여부 체크 -->
+	<select id="emailAuthFail" parameterType="String" resultType="_int">
+		SELECT COUNT(*)
+		FROM CONSUMER
+		WHERE CON_ID = #{conId}
+			AND MAIL_AUTH = '1'
+	</select>
 </mapper>
