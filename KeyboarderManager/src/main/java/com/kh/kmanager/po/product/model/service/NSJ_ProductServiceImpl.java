@@ -1,5 +1,7 @@
 package com.kh.kmanager.po.product.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,15 +33,15 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 	}
 
 	@Override
-	public Product showProduct(Product p) {
+	public ArrayList<Product> showProduct(Product p) {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.showProduct(sqlSession,p);
 	}
 
 	@Override
 	public Product detailProduct(int productNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.detailProduct(sqlSession,productNo);
 	}
 
 	@Override
@@ -50,6 +52,12 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 
 	public interface FileUploadService {
 		public String saveFile();
+	}
+
+	@Override
+	public int deleteProduct(int productNo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

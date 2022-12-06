@@ -8,35 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.content {
-	
-}
-
-#productCount, #productSearch, #productList {
-	width: 95%;
-	margin: auto;
-}
-
-#productCount {
-	padding-top: 30px;
-	height: 1000px;
-	border: 1px solid black;
-}
-
-#productCount table td {
-	text-align: center;
-}
-
-#productSearch {
-	height: 100px;
-	border: 1px solid black;
-	padding-top: 30px;
-}
-
-#productList {
-	height: 300px;
-	border: 1px solid black;
-}
 
 #title_sub {
 	font-size: 13px;
@@ -45,16 +16,19 @@
 
 #product_img_list{
     border-collapse: collapse;
-}
-#description {
-	width: 100%;
-	height: 150px;
+    width: 100%;
+    margin:auto;
 }
 #buttonarea{
 	width: 95%;
 }
 #buttonarea button{
 	float: right;
+}
+#contentarea {
+	width: 95%;
+	margin: auto;
+	padding: 20px;
 }
 </style>
 </head>
@@ -65,7 +39,7 @@
 	<jsp:include page="../../common/posidebar.jsp" />
 
 	<div class="content-wrapper">
-		
+
 	<!-- 콘텐츠 영역 제목 -->
 	<div class="content-header">
 		<div class="container-fluid">
@@ -81,24 +55,33 @@
 	</div>
 	
 	<div id="buttonarea">
-		<button type="submit" class="btn-secondary">등록하기</button>
+		<button type="submit" class=" btn btn-secondary">수정하기</button>
+		<button type="submit" class="btn btn-secondary">삭제하기</button>
 	</div>
 
-	<div class="content" style="padding-left: 50px;">
-							
-            <form style="width:95%;">
-                 <table id="product_img_list" style="width:100%; height:500px;">
+	<div class="content">
+		<div id="contentarea" class="card">
+            <form style="width:100%;" id="detailProduct" method="get" action="detail.pro?productNo=${p.productNo }">
+            <!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
+    <input type="hidden" name="sellerNo" value="10000">
+   
+      
+                 <table id="product_img_list" style="height:500px;">
                      
                  <tr>
                   <td rowspan="2" style="width:40%;">
                       <!-- Product image-->
                       <img class="card-img-top"
-                          src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-                          alt="..." style="width: 800px; height:800px;" />
+                          src="resources/uploadFiles/${ p.attachment1}"
+                          alt="..." style="width: 500px; height:500px;"/>
                  	</td>
-                  <td colspan="6" style="height: 405px; width:60%">
-                  		<div style="height: 30%; width: 1200px;">상품가격 : 000000  원</div>
-                  		<div style="height: 70%; width: 1200px;">상품가격 : 000000  원</div>	
+                  <td colspan="6" style="height: 250px; width:60%">
+                  		<div style="height: 30%;">
+                  			상품명 : <input type="text" style="width:700px; border:none;" value="${p.productName}"><br><Br>
+                  			상품가격: <input type="text" style="width:400px; border:none;"value="${p.price}">
+                  		</div>
+                  		<div style="height: 70%;">상품설명
+                  		<textarea style="resize: none; width: 100%; height: 170px; border:none;" value="${p.description}"></textarea></div>	
                   </td>
                  </tr>
 				<tr id="subpic">
@@ -106,32 +89,33 @@
                   <div id="sub_items">
                        <!-- Product image-->
                        <img class="card-img-top"
-                           src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-                           alt="..." style="width: 400px; height: 400px;" />
+                           src="resources/uploadFiles/${ p.attachment2}"
+                           alt="..." style="width: 250px; height: 250px;" />
                   </div> 
                  </td>
                  <td>
                   <div id="sub_items">
                        <!-- Product image-->
                        <img class="card-img-top"
-                           src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-                           alt="..." style="width: 400px; height: 400px;" />
+                           src="resources/uploadFiles/${ p.attachment3}"
+                           alt="..." style="width: 250px; height: 250px;"/>
                   </div>
                  </td>
                  <td>
                   <div id="sub_items">
                        <!-- Product image-->
                        <img class="card-img-top"
-                           src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-                           alt="..." style="width: 400px; height: 400px;" />
+                           src="resources/uploadFiles/${ p.attachment4}"
+                           alt="..." style="width: 250px; height: 250px;"/>
                   </div>
                  </td>
                  <td colspan="3">
-                 	<div style="width:750px;"></div>
                  </td>
              	</tr>
              </table>
 		</form>
+		
+		</div> <!-- /#contentarea -->
 	</div>
 </div>
 </body>

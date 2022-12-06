@@ -57,6 +57,10 @@ td {
 	boarder: 1px solid black;
 	width: 95%
 }
+img {
+width:150px;
+height:150px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -68,11 +72,11 @@ td {
 
 	<form id="insertEnrollForm" method="post" action="insert.pro"
 		enctype="multipart/form-data">
-		
+
 		<!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
 		<input type="hidden" name="sellerNo" value="10000">
 		<div class="content-wrapper">
-		
+
 			<br>
 			<!-- 콘텐츠 영역 제목 -->
 			<div class="content-header">
@@ -110,32 +114,28 @@ td {
 								<!-- 상품 한 개 단위 -->
 								<div class="col mb-10">
 									<div align="left">대표이미지</div>
-									<div class="card h-20">
+									<div class="card h-20" id ="thumbnail">
 										<!-- Product image-->
-										<img class="card-img-top"
+										<img class="card-img-top" id="img1"
 											src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-											alt="..." />
-											 <label for="attachNo">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										사진 선택하기 </label> 
-										<input type="file" id="attachNo1" name="upfile"
-										/>
+											alt="..." /> <label for="attachNo">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											사진 선택하기 </label> <input type="file" id="file1" name="upfile"
+											onchange="addImg();" />
 									</div>
 								</div>
-								
+
 								<!-- 상품 한 개 단위 -->
 								<div class="col mb-10">
 									<div align="left">추가이미지1</div>
 									<div class="card h-20">
 										<!-- Product image-->
-										<img class="card-img-top"
+										<img class="card-img-top" id="img2"
 											src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-											alt="..." />
-											 <label for="attachNo">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										사진 선택하기 </label> 
-										<input type="file" id="attachNo2" name="upfile"
-										/>
+											alt="..." /> <label for="attachNo">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											사진 선택하기 </label> <input type="file"  id="file2"
+											name="upfile" />
 									</div>
 								</div>
 
@@ -144,14 +144,12 @@ td {
 									<div align="left">추가이미지2</div>
 									<div class="card h-20">
 										<!-- Product image-->
-										<img class="card-img-top"
+										<img class="card-img-top" id="img3"
 											src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-											alt="..." /> 
-											<label for="attachNo">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										사진 선택하기 </label> 
-										<input type="file" id="attachNo3" name="upfile"
-										/>
+											alt="..." /> <label for="attachNo">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											사진 선택하기 </label> <input type="file"  name="upfile"
+											id="file3"  />
 									</div>
 								</div>
 
@@ -160,13 +158,12 @@ td {
 									<div align="left">추가이미지3</div>
 									<div class="card h-20">
 										<!-- Product image-->
-										<img class="card-img-top"
+										<img class="card-img-top" id="img4"
 											src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
 											alt="..." /> <label for="attachNo">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										사진 선택하기 </label> 
-									<input type="file" id="attachNo4" name="upfile"
-									/>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											사진 선택하기 </label> <input type="file" name="upfile"
+											id="file4" />
 									</div>
 								</div>
 
@@ -183,44 +180,105 @@ td {
 
 				<div id="productList">
 					<div id="productdetail">
-					<table width="100%">
-					
-						<tr>
-							<td>판매상품명</td>
-							
-							<td width="730px"><input type="text" style="width: 700px;"
-								placeholder="상품명은 50자까지 등록 가능합니다." id="productName"
-								name="productName" required></td>
+						<table width="100%">
 
-							<td>판매가</td>
-							<td><input type="text" style="width: 500px;" id="price"
-								name="price" placeholder=" 원 단위로입력하세요."></td>
-							
-						</tr>
-						<!-- 판매상품설명 작성란 -->
-						<tr>
-							<td>상품설명</td>
-							<td colspan="5">
-								<div id="product_detial">
-									<textarea placeholder="상품설명을 이미지로 노출하는 경우에도 상세이미지에 대한 대체 텍스트를 입력해주세요."
-									style="resize: none; width: 102%; height: 180px;" name="description"></textarea> 
-								</div>
-							</td>
-						</tr>
-						
-					</table>
+							<tr>
+								<td>판매상품명</td>
+
+								<td width="730px"><input type="text" style="width: 700px;"
+									placeholder="상품명은 50자까지 등록 가능합니다." id="productName"
+									name="productName" required></td>
+
+								<td>판매가</td>
+								<td><input type="text" style="width: 500px;" id="price"
+									name="price" placeholder=" 원 단위로입력하세요."></td>
+
+							</tr>
+							<!-- 판매상품설명 작성란 -->
+							<tr>
+								<td>상품설명</td>
+								<td colspan="5">
+									<div id="product_detial">
+										<textarea
+											placeholder="상품설명을 이미지로 노출하는 경우에도 상세이미지에 대한 대체 텍스트를 입력해주세요."
+											style="resize: none; width: 102%; height: 180px;"
+											name="description"></textarea>
+									</div>
+								</td>
+							</tr>
+
+						</table>
 					</div>
 				</div>
 				<!-- /#productList -->
 			</div>
 			<!-- content -->
 		</div>
+		
+		<!-- <script>
+		 function addImg(){
+			
+			var file= $('#upfile')[0].files[0];
+			var formData = new FormData();
+			formData.append("file",file);
+			
+			$ajax({
+				url:"insert.pro",
+				type:"post",
+				enctype:'multypart/form-data',
+				processData:false,
+				contentType:false,
+				cache:false,
+				success:function(data){
+					if(data!=null){
+						$("#upfile").val(data);
+					var img=<"img class="card-img-top" id="img1" "src='"data"'>;
+						$("thumbnail").html(img);
+						}
+					}					
+				}
+				}
+			}); 
+		</script> -->
+		
+		<script>
+		
+		$('#file1').change(function(){
+		    setImageFromFile(this,'#img1');
+		});
+		$('#file2').change(function(){
+		    setImageFromFile(this,'#img2');
+		});
+		$('#file3').change(function(){
+		    setImageFromFile(this,'#img3');
+		});
+		$('#file4').change(function(){
+		    setImageFromFile(this,'#img4');
+		});
+
+		function setImageFromFile(input, expression) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+		            $(expression).attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		
+		</script>
+		
+		
+		
+		
+		
+		
 	</form>
 	<!-- content-wrapper -->
-	
+
 	<!-- 이미지 업로드 -->
-	
-	
-	
+
+
+
 </body>
 </html>

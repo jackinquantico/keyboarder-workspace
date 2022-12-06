@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.kmanager.po.product.model.service.NSJ_ProductService;
+import com.kh.kmanager.po.product.model.service.ProductService;
 import com.kh.kmanager.po.product.model.vo.Product;
 
 @Controller
@@ -25,31 +27,107 @@ public class NSJ_ProductController {
 	@Autowired
 	NSJ_ProductService productService;
 
+	/**
+	 * po 전체 상품 조회 메소드 -성진
+	 * 
+	 * @return
+	 */
 	// po상품 메인화면 띄워주기
 	@RequestMapping("show.pro")
-	public String showProduct() {
+	public String showProduct(Product p, Model model) {
+
+		ArrayList<Product> list = productService.showProduct(p);
 
 		// WEB-INF/views/po/poProduct/
-
+		model.addAttribute("list", list);
 		return "po/poProduct/poProductManageMain";
 	}
 
 	/**
-	 * po 상품 등록 메인 창으로 이동 -성진
-	 * 
+	 * po 상세 상품 조회
 	 * @return
 	 */
-	@RequestMapping("insertEnroll.pro")
-	public String insertEnrollForm() {
-
-		return "po/poProduct/poProductInsert";
+	@RequestMapping("detail.pro")
+	public ModelAndView detailProduct(int productNo, ModelAndView mv) {
+		
+		Product p = productService.detailProduct(productNo);
+		System.out.println(p);
+		
+		mv.addObject("p",p).setViewName("po/poProduct/poProductDetailview");
+		
+		return mv;
 	}
 
 	/**
-	 * po 쿠폰 등록 창으로 이동 -성진
+	 * po 상품 수정 메소드 -성진
 	 * 
-	 * @return
+	 * @return //
 	 */
+	@RequestMapping("update.pro")
+	public String updateProduct(Product p, List<MultipartFile> reupfile, HttpSession session, Model model) {
+
+		String path = session.getServletContext().getRealPath("/resources/uploadFiles/");
+
+		// 새로넘어온 첨부파일이 있는 경우 => 기존 넘어온 첨부파일을 삭제
+		int c = 0;
+		// 기존 첨부파일이 있었을 경우 => 기존첨부파일을 찾아서 삭제
+		for (MultipartFile f : reupfile) {
+			if (f.getOriginalFilename() != null) {
+				// 수정 파일명 만들기
+				String originFileName = f.getOriginalFilename();// 원본 파일 명
+
+				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+
+				String ext = originFileName.substring(originFileName.lastIndexOf("."));
+
+				String saveFileName = String.format("%s%s", currentTime, ext);
+
+				try {
+					if (c == 0) {
+						session.getServletContext().getRealPath(p.getAttachment1());
+						new File(path).delete();
+						p.setAttachment2(saveFileName);
+						f.transferTo(new File(path, saveFileName));
+						if (c == 1) {
+
+						session.getServletContext().getRealPath(p.getAttachment1());
+						new File(path).delete();
+						f.transferTo(new File(path, saveFileName));
+
+						} else if (c == 2) {
+
+						session.getServletContext().getRealPath(p.getAttachment1());
+						new File(path).delete();
+						f.transferTo(new File(path, saveFileName));
+						p.setAttachment3(saveFileName);
+
+						} else {
+						session.getServletContext().getRealPath(p.getAttachment1());
+						new File(path).delete();
+						f.transferTo(new File(path, saveFileName));
+						p.setAttachment4(saveFileName);
+						}
+
+					}
+					c++;
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
+		int result = productService.updateProduct(p);
+		if (result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 상품정보가 수정되었습니다.");
+
+		}
+		return "redirect:/detail.pro";
+	}
+
 	@RequestMapping("poInsert.co")
 	public String poInsertCoupon() {
 
@@ -58,102 +136,70 @@ public class NSJ_ProductController {
 
 	/**
 	 * po 상품 등록 메소드 -성진
+	 * 
 	 * @return
-	 */		
+	 */
 	@RequestMapping("insert.pro")
-	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session, ModelAndView mv)
-	throws Exception{
-			
-		 List<MultipartFile> upfiles = request.getFiles("upfile"); //파일name 담기
-		 
-		 String path = request.getSession().getServletContext().getRealPath("resources/uploadFiles"); //실제 경로 알아내기
-		    
-		    
-		 String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		    
-	     for (MultipartFile f : upfiles) {
-	    
-	    	 String originFileName = f.getOriginalFilename();// 원본 파일 명
-	    	 String ext = originFileName.substring(originFileName.lastIndexOf("."));
-	         String saveFileName = String.format("%s%s", currentTime, ext);//수정파일명 만들기
-	        
-	         try {
-	        	 // 파일생성 하기
-	             f.transferTo(new File(path, saveFileName));
-	             p.setAttachment1(saveFileName);//Product에 담아주기
-	         } catch (Exception e) {
-	             e.printStackTrace();
-	         }
-	         System.out.println(p);
-	         int result = productService.insertProduct(p); //Service단으로 보내기
-	         System.out.println(result);
-	         if(result>0) {
-	         	 session.setAttribute("alertMst", "사진이 업로드 되었습니다.");
-	         	 mv.setViewName("redirect:/insertEnroll.pro");
-	         }
-	         else {
-	        	
-	         }
-	       
-	   }
-		    
-		// 파일 1개 첨부일 때 코드		    
-//	    String originFileName = upfile2.getOriginalFilename();// 원본 파일 명
-//    	String ext = originFileName.substring(originFileName.lastIndexOf("."));
-//        String saveFileName = String.format("%s%s", currentTime, ext);//수정파일명 만들기
-//        
-//        try {
-//        	// 파일생성 하기
-//        	upfile2.transferTo(new File(path, saveFileName));
-//            p.setAttachment1(saveFileName);//Product에 담아주기
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        
-//        int result = productService.insertProduct(p); //Service단으로 보내기
-//        System.out.println(result);
-//        if(result>0) {
-//        	session.setAttribute("alertMst", "사진이 업로드 되었습니다.");
-//        	mv.setViewName("redirect:/insertEnroll.pro");
-//        }
-//        else {
-//        	
-//        }
-       
-		   
-		    
-		 return mv;
-	}
-	
-	public String attachment(MultipartFile upfile, HttpSession session) {
+	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
+			ModelAndView mv) throws Exception {
 
-		// 파일명 수정 작업 후 서버에 업로드 시키기
-		// 예) "flower.png" => "2022112210405012345.png"
-		// 1. 원본파일명 뽑아오기
-		String originName = upfile.getOriginalFilename(); // "flower.png"
+		List<MultipartFile> upfiles = request.getFiles("upfile"); // 파일name 담기
+		String path = session.getServletContext().getRealPath("/resources/uploadFiles/"); // 실제 경로 알아내기
 
-		// 2. 시간 형식을 문자열로 뽑아내기
-		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // "20221122104050"
+		System.out.println(upfiles);
+		int c = 0;
+		for (MultipartFile f : upfiles) {
+			if (!f.getOriginalFilename().equals("")) {
+				// System.out.println(f.getOriginalFilename());
 
-		// 3. 뒤에 붙을 5자리 랜덤값 뽑기
-		int ranNum = (int) (Math.random() * 90000) + 10000; // 5자리 랜덤값
+				String originFileName = f.getOriginalFilename();// 원본 파일 명
+				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+				String ext = originFileName.substring(originFileName.lastIndexOf("."));
+				String saveFileName = String.format("%s%s", currentTime, ext);// 수정파일명 만들기
 
-		// 4. 원본파일로부터 확장자만 뽑기
-		String ext = originName.substring(originName.lastIndexOf(".")); // ".png"
+				try {
+					// 파일생성 하기
+					f.transferTo(new File(path, saveFileName));
 
-		// 5. 모두 이어 붙이기
-		String attachment = (currentTime + ranNum + ext);
+					if (c == 0) {
+						p.setAttachment1(saveFileName); // Product에 담아주기
+					} else if (c == 1) {
+						p.setAttachment2(saveFileName); // Product에 담아주기
+					} else if (c == 2) {
+						p.setAttachment3(saveFileName); // Product에 담아주기
+					} else {
+						p.setAttachment4(saveFileName); // Product에 담아주기
+					}
 
-		// 6. 업로드 하고자 하는 서버의 물리적인 실제 경로 알아내기
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
-		// 7. 경로와 수정파일명을 합체 후 파일을 업로드해주기
-		try {
-			((org.springframework.web.multipart.MultipartFile) upfile).transferTo(new File(savePath + attachment));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
+				c++;
+			}
 		}
-		return attachment;
+		int result = productService.insertProduct(p); // Service단으로 보내기
+		System.out.println(p);
+		System.out.println(result);
+
+		if (result > 0) {
+			session.setAttribute("alertMsg", "사진이 업로드 되었습니다.");
+			mv.setViewName("redirect:/insertEnroll.pro");
+		} else {
+
+		}
+		return mv;
 	}
+
+	@RequestMapping("insertEnroll.pro")
+	public String insertEnrollForm() {
+
+		return "po/poProduct/poProductInsert";
+	}
+	/**
+	 * po 쿠폰 등록 창으로 이동 -성진
+	 * 
+	 * @return
+	 */
 
 }
