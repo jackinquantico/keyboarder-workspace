@@ -42,7 +42,7 @@
 
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
-	<form method="post" action="">
+	<form method="post" action="insert.iq">
     <div class="container">
       <table class="table table-hover">
         <tbody>
