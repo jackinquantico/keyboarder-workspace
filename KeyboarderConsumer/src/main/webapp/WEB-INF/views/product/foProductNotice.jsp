@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,19 +14,14 @@
 	
 	<style>
         div{
-            /* border: 1px solid red; */
+            /* border: 1px solid red;*/
             box-sizing: border-box;
         }
 
         #fo-full-main{
             width: 1200px;
-            height: 1200px;
+            height: 1000px;
             margin: auto;
-        }
-
-        #fo-header{
-            width: 100%;
-            height: 20%;
         }
 
         #fo-product-body{
@@ -42,23 +38,23 @@
 
         .fo-product-all{
             width: 24.5%;
-            height: 320px;
+            height: 365px;
             display: inline-block;
             margin-bottom: 10px;
-            border-radius: 30px;
+            border-radius: 20px;
             border: 2px solid #ffad00;
         }
 
         .fo-product-img{
-            width: 100%;
-            height: 140px;
+            width: 90%;
+            height: 130px;
             border-radius: 30px;
-            background-color: #ffad00;
+            margin-top: 3%;
         }
 
         .fo-product-name{
             width: 100%;
-            height: 53px;
+            height: 80px;
         }
 
         .fo-product-price{
@@ -102,85 +98,44 @@
 
 	<div id="fo-full-main">
 
-        <div id="fo-header"></div>
-
         <div id="fo-product-body">
             <div id="fo-product-main">
                 
-                    <div class="fo-product-all" align="center">
-                        <form>
-                            <div class="fo-product-img">
-                                <img src="" style="background-size: cover; width: 100%; height: 100%;">
-                            </div>
-                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">상품 제목 넣어버리기</div>
-                            <div class="fo-product-price">상품 가격 넣어버리기</div>
-                            <div class="fo-product-coupon">
-                            	<select>
-                            		<option>쿠폰이름들어감</option>
-                            		<option>쿠폰이름들어감</option>
-                            	</select>
-                            </div>
-                            <div class="fo-buy-button" align="center" style="padding: 9px; margin: 0px;">
-                                <button type="submit" id="buy-btn" class="btn">
-                                   	 구매하기
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="fo-product-all" align="center">
-                        <form>
-                            <div class="fo-product-img"></div>
-                            <div class="fo-product-name">상품 제목 넣어버리기</div>
-                            <div class="fo-product-price">상품 가격 넣어버리기</div>
-                            <div class="fo-product-coupon">
-                            	<select>
-                            		<option>쿠폰이름들어감</option>
-                            		<option>쿠폰이름들어감</option>
-                            	</select>
-                            </div>
-                            <div class="fo-buy-button" align="center">
-                                <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
-                                   	 구매하기
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="fo-product-all" align="center">
-                        <form>
-                            <div class="fo-product-img"></div>
-                            <div class="fo-product-name">상품 제목 넣어버리기</div>
-                            <div class="fo-product-price">상품 가격 넣어버리기</div>
-                            <div class="fo-product-coupon">
-                            	<select>
-                            		<option>쿠폰이름들어감</option>
-                            		<option>쿠폰이름들어감</option>
-                            	</select>
-                            </div>
-                            <div class="fo-buy-button" align="center">
-                                <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
-                                   	 구매하기
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="fo-product-all" align="center">
-                        <form>
-                            <div class="fo-product-img"></div>
-                            <div class="fo-product-name">상품 제목 넣어버리기</div>
-                            <div class="fo-product-price">상품 가격 넣어버리기</div>
-                            <div class="fo-product-coupon">
-                            	<select>
-                            		<option>쿠폰이름들어감</option>
-                            		<option>쿠폰이름들어감</option>
-                            	</select>
-                            </div>
-                            <div class="fo-buy-button" align="center">
-                                <button type="submit" class="btn btn-outline-info" style="width: 100px; height: 40px;">
-                                   	 구매하기
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                	<c:forEach var="p" items="${ proList }">
+	                    <div class="fo-product-all" align="center">
+	                        <form action="purchase.fo" method="post" id="request">
+	                        	<input type="hidden" name="paymentNo" id="imp_uid">
+								<input type="hidden" name="orderNo" id="merchant_uid">
+								<input type="hidden" name="productNo" id="product_name">
+								<input type="hidden" name="amount" id="amount">
+								<input type="hidden" name="conNo" id="buyer_name">
+								<input type="hidden" name="couponPrice" id="couponPrice" value="3000">
+	                            <div class="fo-product-img">
+	                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfMjEg%2FMDAxNjU4MTY2ODUyMDk2.rYbdL6xRUcVwKXgw3ixjv1y9DpL715DNDoH7iZC4_Wog.FsdShZZI_8nZ8Nz3y50G7fCp4PzSFzzpIa1NRRZhsu4g.JPEG.khj221100%2FIMG_1269.JPG&type=sc960_832" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+	                            </div>
+	                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
+	                            	${ p.productName }
+	                            </div>
+	                            <div class="fo-product-price" style="padding: 12px; margin: 0px;">
+	                            	${ p.price }
+	                            </div>
+	                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
+	                            	<select>
+	                            		<option align="center">쿠폰 선택</option>
+	                            		<option>쿠폰이름들어감</option>
+	                            		<option>쿠폰이름들어감</option>
+	                            	</select>
+	                            </div>
+	                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
+	                                <button type="submit" id="buy-btn" class="btn">
+	                                   	 구매하기
+	                                </button>
+	                            </div>
+	                        </form>
+	                    </div>
+                    </c:forEach>
+                    
+                    <%--
                     <div class="fo-product-all" align="center">
                         <form action="purchase.fo" method="post" id="request">
                         	<input type="hidden" name="paymentNo" id="imp_uid">
@@ -205,27 +160,53 @@
                             </div>
                         </form>
                     </div>
+                     --%>
                     
                     <!-- 페이징 처리 -->
-		            <div style="padding: 30px 50px; margin: 0px;">
+		            <div style="padding: 15px 50px; margin: 0px;">
 			            <nav aria-label="Page navigation example">
 						  <ul class="pagination" style="justify-content: center;">
-						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Previous" id="page-btn">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    <li class="page-item"><a class="page-link" href="#" id="page-btn">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#" id="page-btn">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#" id="page-btn">3</a></li>
-						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Next" id="page-btn">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
+						  	<c:choose>
+						  		<c:when test="${ pi.currentPage eq 1 }">
+								    <li class="page-item disabled">
+								      <a class="page-link" href="#" aria-label="Previous" id="page-btn">
+								        <span aria-hidden="true">&laquo;</span>
+								      </a>
+								    </li>						  		
+						  		</c:when>
+						  		<c:otherwise>
+						  			<li class="page-item">
+								      <a class="page-link" href="foProductNotice.order?cpage=${ pi.currentPage - 1 }" aria-label="Previous" id="page-btn">
+								        <span aria-hidden="true">&laquo;</span>
+								      </a>
+								    </li>
+						  		</c:otherwise>
+						  	</c:choose>
+						    
+						    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						    	<li class="page-item"><a class="page-link" href="foProductNotice.order?cpage=${ p }" id="page-btn">${ p }</a></li>
+						    </c:forEach>
+						    
+						    <c:choose>
+                				<c:when test="${ pi.currentPage eq pi.maxPage }">
+								    <li class="page-item disabled">
+								      <a class="page-link" href="#" aria-label="Next" id="page-btn">
+								        <span aria-hidden="true">&raquo;</span>
+								      </a>
+								    </li>
+						    	</c:when>
+						    	<c:otherwise>
+						    		<li class="page-item">
+								      <a class="page-link" href="foProductNotice.order?cpage=${ pi.currentPage + 1 }" aria-label="Next" id="page-btn">
+								        <span aria-hidden="true">&raquo;</span>
+								      </a>
+								    </li>
+						    	</c:otherwise>
+						    </c:choose>
 						  </ul>
 						</nav>
 					</div>
+					<!-- 여기까지가 페이징 처리 구문 -->
                 
             </div>
             

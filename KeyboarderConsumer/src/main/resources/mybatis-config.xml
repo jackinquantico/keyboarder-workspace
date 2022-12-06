@@ -11,6 +11,7 @@
 		<typeAlias type="com.kh.keyboarder.member.model.vo.Member"  alias="member"/>
 		<typeAlias type="com.kh.keyboarder.order.model.vo.Order"  alias="order"/>
 		<typeAlias type="com.kh.keyboarder.product.model.vo.Product"  alias="product"/>
+		<typeAlias type="com.kh.keyboarder.product.model.vo.JKW_Coupon"  alias="coupon"/>
 	</typeAliases>
 	
 	<mappers>

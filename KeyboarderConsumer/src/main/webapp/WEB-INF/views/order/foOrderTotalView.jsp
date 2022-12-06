@@ -13,7 +13,7 @@
         }
 
         .order-all-main{
-            width: 1000px;
+            width: 1200px;
             height: 1000px;
             margin: auto;
         }
@@ -70,8 +70,8 @@
                 </div>
                 
                 <div id="delivery-button" align="center">
-                    <button type="submit" style="margin-top: 10px; width: 20%;">
-                        	검색하기
+                    <button type="submit" class="btn btn-outline-secondary" style="margin-top: 10px; width: 20%;">
+                    	검색하기
                     </button>
                 </div>
             </form>
