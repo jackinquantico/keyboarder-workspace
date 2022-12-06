@@ -10,10 +10,18 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<!-- bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 헤더와 사이드바 로그인한 계정에 맞는걸로 if문 설정해야함 -->
-	<jsp:include page="boheader.jsp" />
-
-	<jsp:include page="bosidebar.jsp" />
+	<!-- 로그인세션의 계정 검사해서 헤더와 사이드바 로그인한 계정에 맞는걸로 조건 설정 -->
+	<c:choose>
+		<c:when test="${ loginUser.sellerId eq 'admin' }">
+			<jsp:include page="boheader.jsp" />
+			<jsp:include page="bosidebar.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="poheader.jsp" />
+			<jsp:include page="posidebar.jsp" />
+		</c:otherwise>
+	</c:choose>
+	
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
@@ -31,10 +39,12 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<!-- bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 관리자일 경우에만 글쓰기 보이게끔 if문 설정해야함 -->
-			<div id="writeNotice">
-				<a href="noticeEnrollForm.bo"><button id="writeNotice_btn">글쓰기</button></a>
-			</div>
+			<!-- 로그인세션의 계정 검사해서 관리자(BO) 일 경우에만 글쓰기 보이게끔 조건 설정 -->
+			<c:if test="${ loginUser.sellerId eq 'admin' }">
+				<div id="writeNotice">
+					<a href="noticeEnrollForm.bo"><button id="writeNotice_btn">글쓰기</button></a>
+				</div>
+			</c:if>
 
 			<br>
 
@@ -94,8 +104,12 @@
 		$(function() {
 			$("#noticeList_table>tbody>tr").click(function() {
 
-				// bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 로그인한 계정에 맞는걸로 if문(url주소 bo or po) 설정해야함
-				location.href = "noticeDetail.bo?nno=" + $(this).children().eq(0).text();
+				// 로그인세션의 계정 검사해서 로그인한 계정에 맞는걸로 url주소(bo 또는 po) 요청 설정
+				if("${ loginUser.sellerId }" == 'admin') {
+					location.href = "noticeDetail.bo?nno=" + $(this).children().eq(0).text();
+				} else {
+					location.href = "noticeDetail.po?nno=" + $(this).children().eq(0).text();
+				}
 			});
 		});
 	</script>

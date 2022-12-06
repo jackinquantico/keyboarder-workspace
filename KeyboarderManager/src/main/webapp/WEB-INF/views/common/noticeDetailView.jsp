@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,18 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<!-- bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 헤더와 사이드바 로그인한 계정에 맞는걸로 if문 설정해야함 -->
-	<jsp:include page="boheader.jsp" />
-
-	<jsp:include page="bosidebar.jsp" />
+	<!-- 로그인세션의 계정 검사해서 헤더와 사이드바 로그인한 계정에 맞는걸로 조건 설정 -->
+	<c:choose>
+		<c:when test="${ loginUser.sellerId eq 'admin' }">
+			<jsp:include page="boheader.jsp" />
+			<jsp:include page="bosidebar.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="poheader.jsp" />
+			<jsp:include page="posidebar.jsp" />
+		</c:otherwise>
+	</c:choose>
+	
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
@@ -43,11 +52,13 @@
 			</div>
 			<hr>
 			<!-- bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 관리자일 경우에만 수정,삭제 버튼 보이게끔 if문 설정해야함 -->
-			<div id="noticeBtns">
-				<button id="update_btn" onclick="noticeFormSubmit(1);">수정하기</button>&nbsp;&nbsp;&nbsp;
-				<button id="delete_btn" onclick="noticeFormSubmit(2);">삭제하기</button>
-			</div>
-			<hr>
+			<c:if test="${ loginUser.sellerId eq 'admin' }">
+				<div id="noticeBtns">
+					<button id="update_btn" onclick="noticeFormSubmit(1);">수정하기</button>&nbsp;&nbsp;&nbsp;
+					<button id="delete_btn" onclick="noticeFormSubmit(2);">삭제하기</button>
+				</div>
+				<hr>
+			</c:if>
 
 			<form id="noticeForm" action="" method="post">
 				<input type="hidden" name="nno" value="${ n.noticeNo }">
@@ -62,7 +73,10 @@
 			if(num == 1) {
 				$("#noticeForm").attr("action", "noticeUpdateForm.bo").submit();
 			} else {
-				$("#noticeForm").attr("action", "noticeDelete.bo").submit();
+				
+				if(confirm("해당 공지사항을 정말 삭제하시겠습니까?")){
+					$("#noticeForm").attr("action", "noticeDelete.bo").submit();
+				}
 			}
 		}
 	</script>

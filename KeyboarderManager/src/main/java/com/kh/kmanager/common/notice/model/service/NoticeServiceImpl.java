@@ -47,7 +47,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int deleteNotice(int noticeNo) {
-		return 0;
+		return noticeDao.deleteNotice(sqlSession, noticeNo);
 	}
 
 	@Override
