@@ -25,6 +25,7 @@
 }
 #contentTable td {
 	height: 50px;
+	padding: 10px;
 }
 
 </style>
@@ -47,7 +48,7 @@
       </div><!-- /.col -->
 	<div id="btnarea">
 		<button onclick="storeUpdate(2);" class="btn btn-secondary">탈퇴처리</button>
-		<button onclick="storeUpdate(1);" class="btn btn-secondary" id="updateBtn">수정하기</button>
+		<button onclick="storeUpdate(1);" class="btn btn-outline-secondary" id="updateBtn">수정하기</button>
 	</div>
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -61,7 +62,8 @@
 	<form action="" method="post" id="storeInfo">
 	<table id="contentTable">
 		<tr>
-			<td colspan="2">사업자 정보
+			<td colspan="2">
+				<h5>사업자 정보</h5>
 				<input type="hidden" name="sellerNo" value="${ s.sellerNo }">
 			</td>
 		</tr>
@@ -157,7 +159,7 @@
 	      
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
 	        <button type="button" class="btn btn-secondary" onclick="resign();">탈퇴처리</button>
 	      </div>
 	      
