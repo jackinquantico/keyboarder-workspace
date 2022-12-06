@@ -50,8 +50,7 @@ public class CWS_MemberController {
 		Member loginUser = memberService.loginMember(m);
 		if(loginUser == null) {
 			
-			// 도대체 에러메세지 왜 안뜨는지 모르겠네..일단 패스
-			mv.addObject("errorMsg", "로그인 실패");
+			mv.addObject("alertMsg", "로그인 실패");
 			
 			mv.setViewName("common/loginError");
 			
