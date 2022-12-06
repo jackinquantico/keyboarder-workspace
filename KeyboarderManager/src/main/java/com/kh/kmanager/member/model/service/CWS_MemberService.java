@@ -12,4 +12,13 @@ public interface CWS_MemberService {
 	
 	// 아이디 중복체크
 	int idCheck(String checkId);
+	
+	// 아이디 찾기
+	String findId(String corpNo);
+	
+	// 비밀번호 초기화폼 불러오기
+	Member initializePwdForm(Member user);
+	
+	// 비밀번호 초기화
+	int initializePwd(Member user);
 }

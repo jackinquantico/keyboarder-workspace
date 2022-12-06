@@ -47,7 +47,7 @@
     <!-- 로그아웃 버튼 -->
     <ul class="navbar-nav ml-auto" style="float:right;">
     	<li class="nav-item d-none d-sm-inline-block">
-    		<a href="#" class="nav-link">Logout</a>
+    		<a href="logout.me" class="nav-link">Logout</a>
     	</li>
     </ul>
   </nav>

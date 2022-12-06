@@ -22,5 +22,17 @@ public class CWS_MemberDao {
 	
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("member-mapper.idCheck", checkId);
-	}	
+	}
+	
+	public String findId(SqlSessionTemplate sqlSession, String corpNo) {
+		return sqlSession.selectOne("member-mapper.findId", corpNo);
+	}
+	
+	public Member initializePwdForm(SqlSessionTemplate sqlSession, Member user) {
+		return sqlSession.selectOne("member-mapper.initializePwdForm", user);
+	}
+	
+	public int initializePwd(SqlSessionTemplate sqlSession, Member user) {
+		return sqlSession.update("member-mapper.initializePwd", user);
+	}
 }

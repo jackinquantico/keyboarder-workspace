@@ -34,6 +34,24 @@ public class CWS_MemberServiceImpl implements CWS_MemberService  {
 		return 0;
 	}
 
+	@Override
+	public String findId(String corpNo) {
+		String sellerId = memberDao.findId(sqlSession, corpNo);
+		return sellerId;
+	}
+
+	@Override
+	public Member initializePwdForm(Member user) {
+		Member seller = memberDao.initializePwdForm(sqlSession, user);
+		return seller;
+	}
+
+	@Override
+	public int initializePwd(Member user) {
+		int result = memberDao.initializePwd(sqlSession, user);
+		return result;
+	}
+
 	
 	
 }

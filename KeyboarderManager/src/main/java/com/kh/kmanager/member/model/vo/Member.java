@@ -30,5 +30,12 @@ public class Member {
 	private String identifyStatus; // 판매업체 인증여부
 	private String logoAttachment; // 판매업체 로고
 	
+	public Member(String sellerId, String corpNo, String sellerPwd) {
+		super();
+		this.sellerId = sellerId;
+		this.corpNo = corpNo;
+		this.sellerPwd = sellerPwd;
+	}	
+	
 	
 }
