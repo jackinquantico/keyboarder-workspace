@@ -13,7 +13,7 @@ public interface NoticeService {
 	
 	// 공지사항 상세 조회 서비스 + 조회수 증가 (조회수 증가는 PO가 조회할때만)
 	int increaseCount(int noticeNo);
-	Notice selectNoticeDetail(int noticeNo);
+	Notice selectNotice(int noticeNo);
 	
 	// 공지사항 작성 서비스 (BO 만 가능)
 	int insertNotice(Notice n);

@@ -29,15 +29,15 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<form id="noticeUpdateForm" method="post" action="">
-			
+			<form id="noticeUpdateForm" method="post" action="noticeUpdate.bo">
+				<input type="hidden" value="${ n.noticeNo }" name="noticeNo">
 				<hr>
 				<div id="noticeTitle">
-					<input type="text" id="title" value="XX번째 공지사항입니다." required>
+					<input type="text" id="title" value="${ n.noticeTitle }" name="noticeTitle" required>
 				</div>
 				<hr>
 				<div id="noticeContent">
-					<textarea id="content" rows="10" style="resize:none;" required>XX번째 공지사항입니다. 요거슨 공지사항 내용영역</textarea>
+					<textarea id="content" rows="10" style="resize:none;" name="noticeContent" required>${ n.noticeContent }</textarea>
 				</div>
 				<hr>
 				<div id="noticeBtns">

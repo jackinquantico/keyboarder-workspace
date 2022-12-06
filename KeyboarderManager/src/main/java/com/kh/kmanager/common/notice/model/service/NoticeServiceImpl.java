@@ -22,29 +22,26 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	@Override
 	public int selectListCount() {
-		
 		return noticeDao.selectListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
-		
 		return noticeDao.selectNoticeList(sqlSession, pi);
 	}
 
 	@Override
 	public int increaseCount(int noticeNo) {
-		return 0;
+		return noticeDao.increaseCount(sqlSession, noticeNo);
 	}
 
 	@Override
-	public Notice selectNoticeDetail(int noticeNo) {
-		return null;
+	public Notice selectNotice(int noticeNo) {
+		return noticeDao.selectNotice(sqlSession, noticeNo);
 	}
 
 	@Override
 	public int insertNotice(Notice n) {
-		
 		return noticeDao.insertNotice(sqlSession, n);
 	}
 
@@ -55,7 +52,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int updateNotice(Notice n) {
-		return 0;
+		return noticeDao.updateNotice(sqlSession, n);
 	}
 
 }

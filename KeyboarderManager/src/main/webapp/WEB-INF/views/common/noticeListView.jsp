@@ -95,7 +95,7 @@
 			$("#noticeList_table>tbody>tr").click(function() {
 
 				// bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 로그인한 계정에 맞는걸로 if문(url주소 bo or po) 설정해야함
-				location.href = "noticeDetail.bo";
+				location.href = "noticeDetail.bo?nno=" + $(this).children().eq(0).text();
 			});
 		});
 	</script>

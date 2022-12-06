@@ -33,15 +33,13 @@
 			
 			<hr>
 			<div id="noticeTitle">
-				<input type="text" id="title" value="XX번째 공지사항입니다." readonly style="width:85%;">
+				<input type="text" id="title" value="${ n.noticeTitle }" readonly style="width:85%;">
 				<input type="text" id="writer" value="관리자">
-				<input type="text" id="writeDate" value="2022.11.28">
+				<input type="text" id="writeDate" value="${ n.writeDate }">
 			</div>
 			<hr>
 			<div id="noticeContent">
-				<textarea id="content" rows="10" style="resize:none;" readonly>XX번째 공지사항입니다.
-요거슨
-공지사항 내용영역</textarea>
+				<textarea id="content" rows="10" style="resize:none;" readonly>${ n.noticeContent }</textarea>
 			</div>
 			<hr>
 			<!-- bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 관리자일 경우에만 수정,삭제 버튼 보이게끔 if문 설정해야함 -->
@@ -52,7 +50,7 @@
 			<hr>
 
 			<form id="noticeForm" action="" method="post">
-				<input type="hidden" nmae="nno" value="">
+				<input type="hidden" name="nno" value="${ n.noticeNo }">
 			</form>
 
 		</div>

@@ -58,9 +58,30 @@ public class NoticeController {
 	 * @return : BO 공지사항 상세조회 페이지 이동
 	 */
 	@RequestMapping("noticeDetail.bo")
-	public String boSelectNotice() {
+	public ModelAndView boSelectNotice(int nno, ModelAndView mv, HttpSession session) {
 		
-		return "common/noticeDetailView";
+		// 해당 공지사항 조회수 증가 먼저 실행
+		// BO 에서 공지사항 조회 시에는 예외적으로 조회수 증가되지 않게끔
+		// => 로그인 기능 완성 후 BO/PO 별 기능 분리 후 해당내용 적용예정
+		int result = noticeService.increaseCount(nno);
+		
+		if(result > 0) { // 조회수 증가 성공 시
+			
+			// 공지사항 상세조회 실행
+			Notice n = noticeService.selectNotice(nno);
+			
+			mv.addObject("n", n).setViewName("common/noticeDetailView");
+		}
+		else { // 조회수 증가 실패 시
+			
+			// 에러페이지로 포워딩?? => 아직 에러페이지 jsp파일 없음
+			// 해당부분은 추후 회의해서 결정하는걸로 / 에러페이지 방식으로 진행하면 에러메세지 객체를 어떤방식(session, ModelAndView)으로 보낼지? 
+			// 우선 session scope 에 alert 로 오류메시지 전달 후 공지사항 리스트 페이지로 포워딩
+			session.setAttribute("alertMsg", "공지사항 상세조회 실패");
+			mv.setViewName("redirect:/noticeList.bo");
+		}
+		
+		return mv;
 	}
 	
 	/**
@@ -68,9 +89,32 @@ public class NoticeController {
 	 * @return : BO 공지사항 수정 페이지 이동
 	 */
 	@RequestMapping("noticeUpdateForm.bo")
-	public String boUpdateFormNotice() {
+	public String boUpdateFormNotice(int nno, Model model) {
+		
+		// 공지사항 수정페이지 포워딩 전에 수정할 공지사항의 정보 조회 (기존의 상세보기 서비스 재활용)
+		Notice n = noticeService.selectNotice(nno);
+		
+		model.addAttribute("n", n);
 		
 		return "common/boNoticeUpdateForm";
+	}
+	
+	
+	@RequestMapping("noticeUpdate.bo")
+	public String boUpdateNotice(Notice n, HttpSession session) {
+		
+		int result = noticeService.updateNotice(n);
+		
+		if(result > 0) { // 공지사항 수정 성공 시
+			
+			session.setAttribute("alertMsg", "공지사항 수정 완료");
+		}
+		else { // 공지사항 수정 실패 시
+			
+			session.setAttribute("alertMsg", "공지사항 수정 실패");
+		}
+		
+		return "redirect:/noticeDetail.bo?nno=" + n.getNoticeNo();
 	}
 	
 	/**
