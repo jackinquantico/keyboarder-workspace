@@ -8,8 +8,8 @@
 </head>
 <body>
 	<script>
-		alert("이메일 인중 후 다시 시도해주세요.")
-		location.href="login.me";
+		alert("이메일 인증 후 다시 시도해주세요.")
+		location.href="/keyboarder";
 	</script>
 </body>
 </html>
