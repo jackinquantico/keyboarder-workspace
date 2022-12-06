@@ -12,6 +12,7 @@
 		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Withdraw" alias="withdraw" />
 		<typeAlias type="com.kh.kmanager.po.settlement.model.vo.Settlement" alias="settlement" />
 		<typeAlias type="com.kh.kmanager.common.notice.model.vo.Notice" alias="notice" />
+		<typeAlias type="com.kh.kmanager.bo.graph.model.vo.SalesGraph" alias="salesGraph" />
 	</typeAliases>
 	
 	<mappers>
@@ -19,6 +20,7 @@
 		<mapper resource="/mappers/po-mapper.xml" />
 		<mapper resource="/mappers/settlement-mapper.xml" />
 		<mapper resource="/mappers/notice-mapper.xml" />
+		<mapper resource="/mappers/graph-mapper.xml" />
 	</mappers>
 
 </configuration>

@@ -28,7 +28,7 @@ public class SettlementController {
 		
 		// 총 잔액, 정산확정금액, 정산예정금액, 송금예정잔액, 출금가능금액 필요
 		// SELLER_NO 필요함 => 임시로 하드코딩
-		Settlement s = settlementService.selectKmoneySettlement(10000);
+		Settlement s = settlementService.selectKmoneySettlement(10001);
 		
 		model.addAttribute("s", s);
 		

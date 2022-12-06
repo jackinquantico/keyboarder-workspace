@@ -137,7 +137,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="salesStatics.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 매출 통계</p>
                 </a>
