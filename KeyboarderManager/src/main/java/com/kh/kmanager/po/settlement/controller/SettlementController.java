@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.settlement.model.service.SettlementService;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
@@ -24,11 +25,13 @@ public class SettlementController {
 	 * @return
 	 */
 	@RequestMapping("kmoney.po")
-	public String kmoneyMain(Model model) {
+	public String kmoneyMain(Model model, HttpSession session) {
 		
 		// 총 잔액, 정산확정금액, 정산예정금액, 송금예정잔액, 출금가능금액 필요
-		// SELLER_NO 필요함 => 임시로 하드코딩
-		Settlement s = settlementService.selectKmoneySettlement(10001);
+		// SELLER_NO 필요함 => session에서 뽑아온 값으로 변경
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		
+		Settlement s = settlementService.selectKmoneySettlement(sellerNo);
 		
 		model.addAttribute("s", s);
 		
@@ -40,9 +43,12 @@ public class SettlementController {
 	 * @return
 	 */
 	@RequestMapping("kmoneylist.po")
-	public String kmoneyWithdraw(Withdraw w, Model model) {
+	public String kmoneyWithdraw(Withdraw w, Model model, HttpSession session) {
 		
-		// 기간별 검색 : startDate, endDate		
+		// 기간별 검색 : startDate, endDate
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		w.setSellerNo(sellerNo);
+		
 		// 업체명, 출금요청일, 출금요청금액, 출금계좌번호, 예금주, 처리결과 필요
 		ArrayList<Withdraw> list = settlementService.selectWithdrawRequestList(w);
 		
@@ -69,14 +75,14 @@ public class SettlementController {
 	@RequestMapping("withdraw.po")
 	public String withdrawRequest(HttpSession session, Withdraw w) {
 		
-		// 판매자식별키, 출금요청금액, 출금계좌번호, 예금주
-		// 로그인 세션으로부터 식별키 뽑아와야 하지만 일단 하드코딩
+		// 판매자식별키, 출금요청금액, 출금계좌번호, 예금주	
+		// w 에 로그인세션으로부터 얻어온 값 담아둠
 		int result = settlementService.insertWithdraw(w);
 		
 		if (result > 0) {			
 		
-			// 출금가능금액에서 출금요청금액을 뺀 나머지 출력해야함 **
-			// 송금예정잔액에 출금요청금액 더한 값 출력해야함 **
+			// 출금가능금액에서 출금요청금액을 뺀 나머지 출력해야함 - 완료
+			// 송금예정잔액에 출금요청금액 더한 값 출력해야함 - 완료
 			
 			session.setAttribute("alertMsg", "K-MONEY는 현금성 으로 사용하실 수 있으며 고객님의 은행 계좌로 현금 출금을 신청 후 송금될 예정입니다. 현금 지급은 요청일 기준 익일 지급됩니다. (영업일 기준)");
 		

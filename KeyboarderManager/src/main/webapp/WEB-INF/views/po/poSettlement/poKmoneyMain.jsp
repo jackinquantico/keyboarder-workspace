@@ -128,17 +128,17 @@ input[name=startDate] {
 						출금 가능 금액 <span style="float:right;"><span id="allMoney">${ s.ableBalance }</span>원</span>
 					</div>
 					<h5 style="margin-top: 20px;">출금신청</h5>
-					<div  style="margin-bottom: 10px;">
+					<div style="margin-bottom: 10px;">
 						ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" name="withdrawMoney" required>원 &nbsp;&nbsp;&nbsp; 
 						<button type="button" class="btn btn-outline-secondary" onclick="selectAllMoney();">전액출금</button> 
 						<button type="button" class="btn btn-outline-secondary" onclick="selectHundred();">100만원</button>
 						<button type="button" class="btn btn-outline-secondary" onclick="selectTen();">10만원</button><br>
 					</div>
-					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : 0000-000-000000 </span> | <span id="accountOwner"> 예금주 : 키보더(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
+					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : ${ loginUser.accountNo } </span> | <span id="accountOwner"> 예금주 : ${ loginUser.sellerName }(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
 					<!-- 임시로 하드코딩 -->
-					<input type="hidden" name="sellerNo" value="10000">
-					<input type="hidden" name="accountNo" value="0000-000-000000">
-					<input type="hidden" name="repName" value="홍길동">
+					<input type="hidden" name="sellerNo" value="${ loginUser.sellerNo }">
+					<input type="hidden" name="accountNo" value="${ loginUser.accountNo }">
+					<input type="hidden" name="repName" value="${ loginUser.repName }">
 				</form>
 			</td>
 		</tr>
@@ -146,8 +146,6 @@ input[name=startDate] {
 			<td>
 				<form action="kmoneylist.po" method="get">
 					<!-- 임시로 하드코딩 -->
-					<input type="hidden" name="sellerNo" value="10000">
-					<input type="hidden" name="withdrawMoney" value="0">
 					출금신청내역 <br>
 					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2" name="startDate" required> ~ <input type="date" class="form-control col-lg-2" style="display:inline;" name="endDate" required> <br>
 					<br>
