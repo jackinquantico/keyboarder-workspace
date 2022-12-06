@@ -16,7 +16,7 @@
 }
 #moneyTable {
 	text-align: center;
-	height: 100px;
+	height: 130px;
 }
 #moneyTable thead {
 	height: 50px;
@@ -34,7 +34,7 @@
 }
 #withdrawAccount {
 	margin-left: 100px;
-	margin-right: 30px;
+	margin-right: 60px;
 }
 #accountOwner { margin-left: 10px; }
 button {
@@ -55,6 +55,9 @@ button {
 }
 input[name=startDate] {
 	margin-left: 115px;
+}
+#listTable {
+	height: 500px;
 }
 </style>
 </head>
@@ -81,7 +84,7 @@ input[name=startDate] {
 </div>
 
 <div class="content">
-	<div class=card>
+	<div class="card">
 	<table class="table-bordered" id="moneyTable">
 		<thead>
 			<tr>
@@ -116,7 +119,7 @@ input[name=startDate] {
 </div>
 
 <div class="content">
-	<div class=card>
+	<div class="card">
 	<table class="table-bordered" id="listTable">
 		<tr>
 			<td>
@@ -124,11 +127,13 @@ input[name=startDate] {
 					<div id="ableMoney">
 						출금 가능 금액 <span style="float:right;"><span id="allMoney">${ s.ableBalance }</span>원</span>
 					</div>
-					출금신청 <br>
-					ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" name="withdrawMoney" required>원 &nbsp;&nbsp;&nbsp; 
-					<button type="button" class="btn btn-outline-secondary" onclick="selectAllMoney();">전액출금</button> 
-					<button type="button" class="btn btn-outline-secondary" onclick="selectHundred();">100만원</button>
-					<button type="button" class="btn btn-outline-secondary" onclick="selectTen();">10만원</button><br>
+					<h5 style="margin-top: 20px;">출금신청</h5>
+					<div  style="margin-bottom: 10px;">
+						ㄴ 출금요청금액 <input type="number" class="form-control col-lg-2" id="withdrawMoney" name="withdrawMoney" required>원 &nbsp;&nbsp;&nbsp; 
+						<button type="button" class="btn btn-outline-secondary" onclick="selectAllMoney();">전액출금</button> 
+						<button type="button" class="btn btn-outline-secondary" onclick="selectHundred();">100만원</button>
+						<button type="button" class="btn btn-outline-secondary" onclick="selectTen();">10만원</button><br>
+					</div>
 					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : 0000-000-000000 </span> | <span id="accountOwner"> 예금주 : 키보더(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
 					<!-- 임시로 하드코딩 -->
 					<input type="hidden" name="sellerNo" value="10000">
@@ -139,7 +144,10 @@ input[name=startDate] {
 		</tr>
 		<tr>
 			<td>
-				<form action="kmoneyWithdraw.po" method="get">
+				<form action="kmoneylist.po" method="get">
+					<!-- 임시로 하드코딩 -->
+					<input type="hidden" name="sellerNo" value="10000">
+					<input type="hidden" name="withdrawMoney" value="0">
 					출금신청내역 <br>
 					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2" name="startDate" required> ~ <input type="date" class="form-control col-lg-2" style="display:inline;" name="endDate" required> <br>
 					<br>
@@ -147,8 +155,6 @@ input[name=startDate] {
 						<button type="submit" class="btn btn-secondary">검색</button>
 						<button type="reset" class="btn btn-secondary">초기화</button>
 					</div>
-					<!-- 임시로 하드코딩 -->
-					<input type="hidden" name="sellerNo" value="10000">
 				</form>
 			</td>
 		</tr>

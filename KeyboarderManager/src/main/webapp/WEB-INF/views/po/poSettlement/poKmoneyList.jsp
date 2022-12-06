@@ -12,7 +12,7 @@
 }
 .card {
 	width: 95%;
-	height: 800px;
+	height: 750px;
 	margin: auto;
 	overflow: auto;
 }

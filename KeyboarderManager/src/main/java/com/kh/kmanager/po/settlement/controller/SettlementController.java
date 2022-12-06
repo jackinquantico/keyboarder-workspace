@@ -39,7 +39,7 @@ public class SettlementController {
 	 * K-Money 출금신청내역 페이지 - 채영
 	 * @return
 	 */
-	@RequestMapping("kmoneyWithdraw.po")
+	@RequestMapping("kmoneylist.po")
 	public String kmoneyWithdraw(Withdraw w, Model model) {
 		
 		// 기간별 검색 : startDate, endDate		
