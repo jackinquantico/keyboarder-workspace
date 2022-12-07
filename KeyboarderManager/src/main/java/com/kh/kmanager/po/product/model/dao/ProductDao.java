@@ -40,5 +40,16 @@ public class ProductDao {
 		
 		return sqlSession.update("poMapper.deleteProduct",productNo);
 	}
+
+	/*
+	 * public Product countProduct(SqlSessionTemplate sqlSession, String sellerNo) {
+	 * 
+	 * return sqlSession.selectOne("poMapper.countProduct",sellerNo);
+	 * 
+	 * }
+	 */
+	public ArrayList<Product> selectProduct(SqlSessionTemplate sqlSession, String productName) {
+		return (ArrayList)sqlSession.selectList("poMapper.selectProduct",productName);
+	}
 }
 

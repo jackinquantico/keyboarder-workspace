@@ -57,6 +57,24 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 		
 		return productDao.deleteProduct(sqlSession,productNo);
 	}
+
+	/*
+	 * public Product countProduct(String sellerNo) {
+	 * 
+	 * return productDao.countProduct(sqlSession,sellerNo); }
+	 */
+
+	@Override
+	public ArrayList<Product>selectProduct (String productName) {
+		
+		return productDao.selectProduct(sqlSession,productName);
+	}
+
+	@Override
+	public Product countProduct(int sellerNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

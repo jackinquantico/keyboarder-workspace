@@ -28,6 +28,8 @@ public class Product {
 	private int couponNo;
 	private String couponName;
 	private String productStatus;
+	private int soldOut;
+	private int onSale;
 	
 
 }

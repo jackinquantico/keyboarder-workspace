@@ -12,7 +12,8 @@
 		<result column="ATTACHMENT2" property="attachment2" />
 		<result column="ATTACHMENT3" property="attachment3" />
 		<result column="ATTACHMENT4" property="attachment4" />
-		
+		<result column="SOLDOUT" property="soldOut" />
+		<result column="ONSALE" property="onSale" />
 	</resultMap>
 	
 	<!-- 이미지업로드 -->
@@ -98,12 +99,33 @@
 					
 					<update id="deleteProduct" parameterType="_int">
 						UPDATE PRODUCT
-						
-						<if test="productStatus==1"></if>
 						SET PRODUCT_STATUS = 0
-					
 						WHERE PRODUCT_NO = #{productNo}
 					</update>
+					
+					
+					<!-- <select id ="countProduct" parameterType="product">
+					SELECT onsale.PRODUCT_NO as ONSALE,  
+					soldout.PRODUCT_NO as SOLDOUT
+					FROM (SELECT COUNT(*) PRODUCT_NO 
+					FROM PRODUCT WHERE SELLER_NO= #{sellerNo} AND PRODUCT_STATUS=1) onsale,
+        			(SELECT COUNT(*)  PRODUCT_NO FROM PRODUCT WHERE SELLER_NO= #{sellerNo}
+        			AND PRODUCT_STATUS=0) soldout
+					
+					</select>
+					 -->
+				
+					<select id="selectProduct" parameterType="product" resultMap="ProductResultSet">
+							   SELECT 
+							   PRODUCT_NO,
+							   PRODUCT_NAME,
+							   PRICE,
+							   PRODUCT_STATUS,
+						       ATTACHMENT1
+						       FROM PRODUCT
+						       WHERE PRODUCT_NAME LIKE '%' || #{productName} || '%' 
+						       
+						</select>
 					
 			</mapper>
 

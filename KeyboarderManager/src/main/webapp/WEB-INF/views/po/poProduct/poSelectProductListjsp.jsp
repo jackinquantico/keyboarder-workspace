@@ -54,11 +54,12 @@
     <jsp:include page="../../common/posidebar.jsp" />
     
   <div class="content-wrapper">
+  
     <form id="showProduct" method="post" action="select.pro">
     <!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
-<%--     <input type="hidden" name="sellerNo" value="${p.sellerNo}">
-    <input type="hidden" name="productNo" value="${p.productNo}">  
-    <input type="hidden" name="productName" value="${p.productName}">  --%>
+   <input type="hidden" name="sellerNo" value="10000">
+    <input type="hidden" name="productNo" value="${p.productNo}">
+    <input type="hidden" name="productName" value="${p.productName}"> 
  
           <br>
  
@@ -102,12 +103,12 @@
             <div id="productSearch"  class="card">
                 <table width="100%">
                    <tr>
-                      <td width="5%" align="right">${p.productName}</td>
-                      <td width="85%"><input type="text" class="form-control" name="productName" value="${p.productName}">
+                      <td width="5%" align="right"></td>
+                      <td width="85%"><input type="text" class="form-control" name="productName" value="${p.productame}">
                       </td>
                       <td width="10%">
                          <button type="submit" class="btn btn-secondary" style="width: 80%;" 
-                       >검색</button>
+                         >검색</button>
                       </td>
                    </tr>
                 </table>
@@ -139,7 +140,7 @@
 	                            src="resources/uploadFiles/${ p.attachment1}"
 	                            alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
 	                             <div><p>품절</p></div>
-	                            <div><p>${p.productName }</p></div>
+	                            <div><p>${p.productName}</p></div>
 	                            <div><p>${p.price}</p></div>
 	                            </div>
                             </c:if>

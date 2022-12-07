@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,14 +54,13 @@ public class NSJ_ProductController {
 	public ModelAndView detailProduct(int productNo, ModelAndView mv) {
 
 		Product p = productService.detailProduct(productNo);
-		System.out.println(p);
+		
 
 		mv.addObject("p", p).setViewName("po/poProduct/poProductUpdate");
 
 		return mv;
 	}
 
-	
 	/**
 	 * po 상품 수정 메소드 -성진
 	 * 
@@ -72,7 +73,7 @@ public class NSJ_ProductController {
 		int c = 0;
 		// 기존 첨부파일이 있었을 경우 => 기존첨부파일을 찾아서 삭제
 		for (MultipartFile f : reupfile) {
-			if(!f.getOriginalFilename().equals("")) {
+			if (!f.getOriginalFilename().equals("")) {
 				// 수정 파일명 만들기
 				String path = session.getServletContext().getRealPath("/resources/uploadFiles/");
 				String originFileName = f.getOriginalFilename();// 원본 파일 명
@@ -82,57 +83,51 @@ public class NSJ_ProductController {
 
 				try {
 					if (c == 0) {
-						if(p.getAttachment1()!=null)
-						session.getServletContext().getRealPath(p.getAttachment1());
+						if (p.getAttachment1() != null)
+							session.getServletContext().getRealPath(p.getAttachment1());
 						new File(path).delete();
 						f.transferTo(new File(path, saveFileName));
 						p.setAttachment1(saveFileName);
-					}
-						else if (c == 1) {
-							if(p.getAttachment2()!=null)
+					} else if (c == 1) {
+						if (p.getAttachment2() != null)
 							session.getServletContext().getRealPath(p.getAttachment2());
-							new File(path).delete();
-							f.transferTo(new File(path, saveFileName));
-							p.setAttachment2(saveFileName);
+						new File(path).delete();
+						f.transferTo(new File(path, saveFileName));
+						p.setAttachment2(saveFileName);
 
-						} else if (c == 2) {
-							if(p.getAttachment3()!=null)
+					} else if (c == 2) {
+						if (p.getAttachment3() != null)
 							session.getServletContext().getRealPath(p.getAttachment3());
-							new File(path).delete();
-							f.transferTo(new File(path, saveFileName));
-							p.setAttachment3(saveFileName);
+						new File(path).delete();
+						f.transferTo(new File(path, saveFileName));
+						p.setAttachment3(saveFileName);
 
-						} else {
-							if(p.getAttachment4()!=null)
+					} else {
+						if (p.getAttachment4() != null)
 							session.getServletContext().getRealPath(p.getAttachment4());
-							new File(path).delete();
-							f.transferTo(new File(path, saveFileName));
-							p.setAttachment4(saveFileName);
+						new File(path).delete();
+						f.transferTo(new File(path, saveFileName));
+						p.setAttachment4(saveFileName);
 
-						}
-						c++;
 					}
-				
+					c++;
+				}
 
 				catch (Exception e) {
 					e.printStackTrace();
 				}
 
-				
 			}
 		}
-			int result = productService.updateProduct(p);
-			
-			System.out.println(result);
-			if (result > 0) {
-				session.setAttribute("alertMsg", "성공적으로 상품정보가 수정되었습니다.");
+		int result = productService.updateProduct(p);
 
-			}
-			
-			return "redirect:/show.pro";
+		System.out.println(result);
+		if (result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 상품정보가 수정되었습니다.");
 		}
-		
-	
+
+		return "redirect:/show.pro";
+	}
 
 	/**
 	 * po 상품 등록 메소드 -성진
@@ -188,25 +183,26 @@ public class NSJ_ProductController {
 		}
 		return mv;
 	}
-	
+
 	/**
 	 * po 상품 삭제 메소드
 	 * 
 	 * @return //
-	 */@RequestMapping("delete.pro")
+	 */
+	@RequestMapping("delete.pro")
 	public String deleteProduct(int productNo, HttpSession session, Model model) {
-		 
-		 int result = productService.deleteProduct(productNo);
-			
-			if(result > 0) { 
-				session.setAttribute("alertMsg", "성공적으로 상품이 비공개처리되었습니다.");
-				
-			}else {
-				session.setAttribute("alertMsg", "상품 비공개에 실패했습니다.");
-			}
-			return "redirect:/show.pro";
-	 }
-	 
+
+		int result = productService.deleteProduct(productNo);
+
+		if (result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 상품이 비공개처리되었습니다.");
+
+		} else {
+			session.setAttribute("alertMsg", "상품 비공개에 실패했습니다.");
+		}
+		return "redirect:/show.pro";
+	}
+
 	@RequestMapping("insertEnroll.pro")
 	public String insertEnrollForm() {
 
@@ -214,14 +210,36 @@ public class NSJ_ProductController {
 	}
 
 	/**
-	 * po 쿠폰 등록 창으로 이동 -성진
+	 * 판매중인 상품의 수를 세는 메소드
 	 * 
 	 * @return
 	 */
-	@RequestMapping("poInsert.co")
-	public String poInsertCoupon() {
-
-		return "po/poCoupon/poInsertCoupon";
-	}
+	/*
+	 * @RequestMapping("count.pro") public ModelAndView countProduct(int sellerNo,
+	 * ModelAndView mv) {
+	 * 
+	 * Product p = productService.countProduct(sellerNo); System.out.println(p);
+	 * 
+	 * mv.addObject("p", p).setViewName("po/poProduct/poProductManageMain");
+	 * 
+	 * return mv; }
+	 */
+		@RequestMapping("select.pro")
+		public String selectProduct(Product p,Model model,String productName) {
+			
+		ArrayList<Product> list = productService.selectProduct(productName);
+		
+		if(productName==null) {
+			list=productService.showProduct(p);
+		}else {
+			list = productService.selectProduct(productName);
+		}
+			
+		model.addAttribute("list", list);
+		
+		return "po/poProduct/poProductManageMain";
+		 
+		
+		}
 
 }

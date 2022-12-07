@@ -28,6 +28,12 @@ public interface NSJ_ProductService {
 	//상품 검색(select)
 	Product searchProduct(String ProductName);
 
+	//판매상품숫자 세기(select)
+	Product countProduct(int sellerNo);
+
+	//상품 이름 검색(select)
+	ArrayList<Product> selectProduct(String productName);
+
 	
 
 	
