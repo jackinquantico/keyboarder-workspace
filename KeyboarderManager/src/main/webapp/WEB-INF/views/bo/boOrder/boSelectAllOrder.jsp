@@ -60,7 +60,7 @@
 
 			<div id="allOrder_result">
 				<div id="result_div">
-					<div id="result_count">주문건 XX</div>
+					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">
 						<button>엑셀 다운로드</button>
 					</div>
