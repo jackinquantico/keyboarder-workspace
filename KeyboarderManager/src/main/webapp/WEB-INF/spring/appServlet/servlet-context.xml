@@ -23,6 +23,36 @@
 	
 	<context:component-scan base-package="com.kh.kmanager" />
 	
-	
+	<interceptors>
+		<interceptor>
+			<!-- path : 요청 url 매핑값 -> url 매핑값 개수만큼 mapping 태그 추가 -->
+			<!-- 메인페이지 -->
+			<mapping path="/pomain" />
+			<mapping path="/bomain" />
+			
+			<!-- BO - 매출통계관련 페이지 -->
+			<mapping path="/salesStatics.bo" />
+			<mapping path="/mainBarGraph.bo" />
+			
+			<!-- BO - 입점업체관리 관련 페이지 -->
+			<mapping path="/store.bo" />
+			<mapping path="/storeDetail.bo" />
+			<mapping path="/updateStore.bo" />
+			<mapping path="/deleteStore.bo" />
+			<mapping path="/identify.bo" />
+			<mapping path="/updateAccount.bo" />
+			
+			<!-- PO - K-money 잔액관리 페이지 -->
+			<mapping path="/kmoney.po" />
+			<mapping path="/kmoneylist.po" />
+			<mapping path="/withdraw.po" />
+			<mapping path="/mainSettlement.po" />
+			
+			
+			<!-- beans:bean : 어느 타입의 객체를 어느 이름으로 생성할지 bean을 등록 -->
+			<!-- class : 등록할 풀 클래스명, id : 객체명 -->
+			<beans:bean class="com.kh.kmanager.common.interceptor.LoginInterceptor" id="loginInterceptor" />
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
