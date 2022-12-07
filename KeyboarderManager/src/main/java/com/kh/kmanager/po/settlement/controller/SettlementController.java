@@ -89,7 +89,7 @@ public class SettlementController {
 			session.setAttribute("alertMsg", "K-MONEY는 현금성 으로 사용하실 수 있으며 고객님의 은행 계좌로 현금 출금을 신청 후 송금될 예정입니다. 현금 지급은 요청일 기준 익일 지급됩니다. (영업일 기준)");
 		
 		} else {
-			session.setAttribute("alertMsg", "출금 요청 실패");
+			session.setAttribute("alertMsg", "K-MONEY 출금 요청에 실패했습니다.");
 		}
 		
 		return "redirect:/kmoney.po";

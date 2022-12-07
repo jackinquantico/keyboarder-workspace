@@ -56,10 +56,10 @@ public class StoreController {
 		int result = storeService.updateStore(s);
 		
 		if (result > 0) {
-			session.setAttribute("alertMsg", "정보 변경 성공");
+			session.setAttribute("alertMsg", "입점업체 정보를 성공적으로 변경했습니다.");
 			return "redirect:/storeDetail.bo?sellerNo=" + s.getSellerNo();
 		} else {
-			session.setAttribute("alertMsg", "정보 변경 실패");
+			session.setAttribute("alertMsg", "입점업체 정보 변경에 실패했습니다.");
 			return "redirect:/store.bo";
 		}		
 	}
@@ -75,10 +75,10 @@ public class StoreController {
 		int result = storeService.deleteStore(s);
 		
 		if (result > 0) {
-			session.setAttribute("alertMsg", "탈퇴 처리 성공");
+			session.setAttribute("alertMsg", "입점업체 탈퇴 처리가 성공적으로 완료되었습니다.");
 			return "redirect:/store.bo";
 		} else {
-			session.setAttribute("alertMsg", "탈퇴 처리 실패");
+			session.setAttribute("alertMsg", "입점업체 탈퇴 처리에 실패했습니다.");
 			return "redirect:/storeDetail.bo?sellerNo=" + s.getSellerNo();
 		}		
 	}
@@ -94,9 +94,9 @@ public class StoreController {
 		int result = storeService.identifyStore(s);
 		
 		if (result > 0) {
-			session.setAttribute("alertMsg", "승인 성공");
+			session.setAttribute("alertMsg", "입점업체를 성공적으로 승인했습니다.");
 		} else {
-			session.setAttribute("alertMsg", "승인 실패");
+			session.setAttribute("alertMsg", "입점업체 승인에 실패했습니다.");
 		}
 		
 		return "redirect:/store.bo";
@@ -113,9 +113,9 @@ public class StoreController {
 		int result = storeService.updateStoreAccount(s);
 		
 		if (result > 0) {
-			session.setAttribute("alertMsg", "계좌변경 성공");
+			session.setAttribute("alertMsg", "입점업체 계좌를 성공적으로 변경했습니다.");
 		} else {
-			session.setAttribute("alertMsg", "계좌변경 실패");
+			session.setAttribute("alertMsg", "입점업체 계좌변경에 실패했습니다.");
 		}
 		
 		return "redirect:/store.bo";
