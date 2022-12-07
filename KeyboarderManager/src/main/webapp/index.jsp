@@ -20,11 +20,20 @@
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
-	<div class="card" style="width:20%; margin: auto; margin-top: 300px;">		
-		<a href="bomain" class="btn btn-secondary">bo 메인으로 가기</a> <br>
-		<a href="pomain" class="btn btn-secondary">po 메인으로 가기</a> <br>
-		<a href="webapp/WEB-INF/common/login" class="btn btn-secondary">로그인 화면으로 가기</a>
-	</div>
+	<c:choose>
+		<c:when test="${ loginUser.sellerId eq 'admin' }">
+			<jsp:forward page="WEB-INF/views/common/bomain.jsp" />
+		</c:when>
+		
+		<c:when test="${ empty loginUser }">
+			<jsp:forward page="WEB-INF/views/common/login.jsp" />
+		</c:when>
+		
+		<c:otherwise>
+			<jsp:forward page="WEB-INF/views/common/pomain.jsp" />
+		</c:otherwise>
+	</c:choose>
+	
 
 </body>
 </html>

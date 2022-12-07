@@ -77,7 +77,7 @@ public class CWS_MemberController {
 		session.invalidate();
 		
 		// 다시 로그인페이지로
-		return "../../login";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("forgotId.me")
