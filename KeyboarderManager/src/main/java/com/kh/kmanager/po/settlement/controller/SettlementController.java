@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.settlement.model.service.SettlementService;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
@@ -93,4 +95,18 @@ public class SettlementController {
 		return "redirect:/kmoney.po";
 	}
 	
+	/**
+	 * Po 메인페이지의 정산현황 조회용 - 채영
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="mainSettlement.po", produces="application/json; charset=UTF-8")
+	public String mainSettlement(HttpSession session) {
+		
+		// 해당 로그인 유저의 정산 내역 조회
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		Settlement s = settlementService.selectKmoneySettlement(sellerNo);
+		
+		return new Gson().toJson(s);
+	}
 }

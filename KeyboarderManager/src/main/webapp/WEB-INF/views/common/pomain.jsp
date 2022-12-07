@@ -31,7 +31,7 @@
 }
 
 #mid-status {
-	height: 300px;
+	height: 250px;
 	margin: 50px;
 	padding: 20px;
 }
@@ -49,7 +49,7 @@
 }
 
 #btm-status {
-	height: 350px;
+	height: 300px;
 	width: 94%;
 	margin: auto;
 }
@@ -109,7 +109,7 @@
 						<td>0</td>
 						<td>0</td>
 						<td>0</td>
-						<td>0</td>
+						<td class="confirmSettlement"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -132,19 +132,19 @@
 				<tbody>
 					<tr>
 						<td width="40%">정산예정</td>
-						<td width="10%" class="align-right">0</td>
+						<td width="10%" class="align-right preSettlement">0</td>
 						<td width="40%">판매중 상품</td>
 						<td width="10%" class="align-right">0</td>
 					</tr>
 					<tr>
 						<td>정산확정</td>
-						<td class="align-right">0</td>
+						<td class="align-right confirmSettlement">0</td>
 						<td>판매가능 상품수</td>
 						<td class="align-right">0</td>
 					</tr>
 					<tr>
-						<td>취소요청</td>
-						<td class="align-right">0</td>
+						<td>출금가능</td>
+						<td class="align-right ableBalance">0</td>
 						<td></td>
 						<td class="align-right"></td>
 					</tr>
@@ -180,7 +180,7 @@
 					</tr>
 					<tr>
 						<td>결제취소내역</td>
-						<td class="align-right">0000000000000000123123</td>
+						<td class="align-right">0</td>
 					</tr>
 				</tbody>
 			</table>
@@ -225,6 +225,29 @@
 	</div> <!-- /.content -->
 
 </div> <!-- /.content-wrapper -->
+
+<script>
+function selectSettlement() {
+	$.ajax({
+		url: "mainSettlement.po",
+		success: function(data) {
+			$(".confirmSettlement").text(data.confirmSettlement);
+			$(".preSettlement").text(data.preSettlement);
+			$(".ableBalance").text(data.ableBalance);
+		},
+		error: function() {
+			console.log("ajax 통신실패");
+		}
+	});
+}
+
+$(function() {
+	selectSettlement();
+});
+setInterval(function() {
+	selectSettlement();
+}, 60000);
+</script>
 
 </body>
 </html>
