@@ -51,7 +51,7 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<h1 class="m-0" style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품
-                       수정하기</h1>
+                                    상세 조회</h1>
 				</div>
 			</div>
 			<!-- /.row -->
@@ -60,14 +60,16 @@
 	</div>
 	
 	<div class="content">
-	<div id="contentarea" class="card">
-	<form id="updateForm" method="post" action="update.pro" enctype="multipart/form-data">
+		<div id="contentarea" class="card">
+		<form id="postForm" method="post" action="" enctype="multipart/form-data">
 	<input type="hidden" name="sellerNo" value="10000">
     <input type="hidden" name="productNo" value="${p.productNo}">
+   
+   
 	<div id="buttonarea">
-		<button type="submit" class="btn btn-secondary">수정하기</button>
-		<button type="button" class="btn btn-secondary">삭제하기</button>
-	</div>
+		<button type="button"  class="btn btn-secondary" onclick="postFormSubmit(1);">수정하기</button>
+		<button type="button"  class="btn btn-secondary"onclick="postFormSubmit(2);">삭제하기</button>
+		</div>
                  <table id="product_img_list" style="height:500px;">
                      
                  <tr>
@@ -77,12 +79,11 @@
                           src="resources/uploadFiles/${ p.attachment1}"
                           alt="..." style="width: 500px; height:500px;"/>
                           <label for="attachNo">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							사진 선택하기 </label> 
+							</label> 
 							<c:if test="${not empty p.attachment1}">
 							<input type="file" id="file1" name="reupfile" onchange="addImg();"/>
 							<input type="hidden" name="attachment1" value="${p.attachment1 }">
-						</c:if>		
+						</c:if>	
                  	</td>
                   <td colspan="6" style="height: 250px; width:60%">
                   		<div style="height: 30%;">
@@ -90,7 +91,7 @@
                   			상품가격: <input type="text" style="width:400px; border:none;" name="price" value="${p.price}">
                   		</div>
                   		<div style="height: 70%;">상품설명
-                  		<textarea style="resize: none; width: 100%; height: 170px; border:none;" name="description" >${p.description}</textarea></div>	
+                  		<textarea style="resize: none; width: 100%; height: 170px; border:none;" name="description" required>${p.description}</textarea></div>	
                   </td>
                  </tr>
 				<tr id="subpic">
@@ -100,9 +101,6 @@
                        <img class="card-img-top" id="img2"
                            src="resources/uploadFiles/${p.attachment2}"
                            alt="..." style="width: 250px; height: 250px;" />
-                           <label for="attachNo">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							사진 선택하기 </label> 
 							<c:if test="${not empty p.attachment2}">
 							<input type="file" id="file2" name="reupfile" onchange="addImg();"/>
 							<input type="hidden" name="attachment2" value="${p.attachment2 }">
@@ -115,9 +113,6 @@
                        <img class="card-img-top" id="img3"
                            src="resources/uploadFiles/${ p.attachment3}"
                            alt="..." style="width: 250px; height: 250px;"/> 
-                           <label for="attachNo">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							사진 선택하기 </label> 
 							<c:if test="${not empty p.attachment3}">
 							<input type="file" id="file3" name="reupfile" onchange="addImg();"/>
 							<input type="hidden" name="attachment3" value="${p.attachment3 }">
@@ -130,9 +125,6 @@
                        <img class="card-img-top" id="img4"
                            src="resources/uploadFiles/${ p.attachment4}"
                            alt="..." style="width: 250px; height: 250px;"/>
-                           <label for="attachNo">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							사진 선택하기 </label> 
 							<c:if test="${not empty p.attachment4}">
 							<input type="file" id="file4" name="reupfile" onchange="addImg();"/>
 							<input type="hidden" name="attachment4" value="${p.attachment4 }">
@@ -167,6 +159,15 @@
     		        }
     		        reader.readAsDataURL(input.files[0]);
     		    }
+    		}
+    		
+    		function postFormSubmit(num){
+    			if(num ==1){
+    				$("#postForm").attr("action","update.pro").submit();
+    				
+    			}else{
+    				$("#postForm").attr("action","delete.pro").submit();
+    			}
     		}
           
              </script>

@@ -6,7 +6,7 @@
 		<result column="PRODUCT_NO" property="productNo" />
 		<result column="PRODUCT_NAME" property="productName" />
 		<result column="PRICE" property="price" />
-		<result column="PRODUCT_STATUS" property="productStatus" />
+		<result column="PRODUCT_STATUS" property="productStatus"/>
 		<result column="DESCRIPTION" property="description" />
 		<result column="ATTACHMENT1" property="attachment1" />
 		<result column="ATTACHMENT2" property="attachment2" />
@@ -69,6 +69,7 @@
 							   PRODUCT_NAME,
 							   PRICE,
 							   DESCRIPTION,
+							   PRODUCT_STATUS,
 							   ATTACHMENT1,
 							   ATTACHMENT2,
 							   ATTACHMENT3,
@@ -86,7 +87,7 @@
 						PRODUCT_NAME=#{productName},
 						PRICE=#{price},
 						DESCRIPTION=#{description},
-						<if test='attachment1!=null  and !attachment1.equalsIgnoreCase("null")'>ATTACHMENT1=#{attachment1},</if>
+						ATTACHMENT1=#{attachment1},
 						<if test='attachment2!=null  and !attachment2.equalsIgnoreCase("null")'>ATTACHMENT2=#{attachment2},</if>
 						<if test='attachment3!=null  and !attachment3.equalsIgnoreCase("null")'>ATTACHMENT3=#{attachment3},</if>
 						<if test='attachment4!=null  and !attachment4.equalsIgnoreCase("null")'>ATTACHMENT4=#{attachment4}</if>
@@ -94,7 +95,16 @@
 						WHERE PRODUCT_NO = #{productNo}
 						</update>
 					
-
+					
+					<update id="deleteProduct" parameterType="_int">
+						UPDATE PRODUCT
+						
+						<if test="productStatus==1"></if>
+						SET PRODUCT_STATUS = 0
+					
+						WHERE PRODUCT_NO = #{productNo}
+					</update>
+					
 			</mapper>
 
 

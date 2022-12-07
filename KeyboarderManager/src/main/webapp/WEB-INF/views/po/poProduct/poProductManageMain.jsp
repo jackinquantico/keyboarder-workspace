@@ -117,17 +117,35 @@
              
                 <div id="productList_1" class=" px-2 px-lg-1 mt-5" style="margin: 0px 20px;">
                     <div id="productone">
+                 
 						<c:forEach var="p" items="${ list }">
-                        <div id="pro" align="center">
-                            <div style="height: 250px" >
-                            <img class="card-img-top"
-                            src="resources/uploadFiles/${ p.attachment1}"
-                            alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
-                            </div>
-                            <div><p>${p.productName }</p></div>
-                            <div><p>${p.price}</p></div>
-                        </div>
+						 	<c:if test="${ p.productStatus eq 1 }">
+                       			<div id="pro" align="center">
+                            	<div style="height: 250px">
+                            	<img class="card-img-top"
+                            	src="resources/uploadFiles/${ p.attachment1}"
+                            	alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
+                            	</div>
+                           		<div><p>판매중</p></div>
+                           		<div><p>${p.productName}</p></div>
+                            	<div><p>${p.price}</p></div>
+                            	</div>
+                            </c:if>
+                            <c:if test="${ p.productStatus eq 0 }">
+								<div id="pro" align="center">
+	                            <img class="card-img-top"
+	                            src="resources/uploadFiles/${ p.attachment1}"
+	                            alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
+	                             <div><p>품절</p></div>
+	                            <div><p>${p.productName }</p></div>
+	                            <div><p>${p.price}</p></div>
+	                            </div>
+                            </c:if>
 					 </c:forEach>
+				
+                        </div>
+					<div>
+					
                     </div>
                 </div>   
           </div>

@@ -54,21 +54,12 @@ public class NSJ_ProductController {
 		Product p = productService.detailProduct(productNo);
 		System.out.println(p);
 
-		mv.addObject("p", p).setViewName("po/poProduct/poProductDetailview");
+		mv.addObject("p", p).setViewName("po/poProduct/poProductUpdate");
 
 		return mv;
 	}
 
-	@RequestMapping("updateForm.pro")
-	public String updateForm(int productNo, Model model) {
-
-		Product p = productService.detailProduct(productNo);
-		model.addAttribute("p", p);
-
-		return "po/poProduct/poProductUpdate";
-
-	}
-
+	
 	/**
 	 * po 상품 수정 메소드 -성진
 	 * 
@@ -131,7 +122,7 @@ public class NSJ_ProductController {
 			}
 		}
 			int result = productService.updateProduct(p);
-			System.out.println(p);
+			
 			System.out.println(result);
 			if (result > 0) {
 				session.setAttribute("alertMsg", "성공적으로 상품정보가 수정되었습니다.");
@@ -197,7 +188,25 @@ public class NSJ_ProductController {
 		}
 		return mv;
 	}
-
+	
+	/**
+	 * po 상품 삭제 메소드
+	 * 
+	 * @return //
+	 */@RequestMapping("delete.pro")
+	public String deleteProduct(int productNo, HttpSession session, Model model) {
+		 
+		 int result = productService.deleteProduct(productNo);
+			
+			if(result > 0) { 
+				session.setAttribute("alertMsg", "성공적으로 상품이 비공개처리되었습니다.");
+				
+			}else {
+				session.setAttribute("alertMsg", "상품 비공개에 실패했습니다.");
+			}
+			return "redirect:/show.pro";
+	 }
+	 
 	@RequestMapping("insertEnroll.pro")
 	public String insertEnrollForm() {
 

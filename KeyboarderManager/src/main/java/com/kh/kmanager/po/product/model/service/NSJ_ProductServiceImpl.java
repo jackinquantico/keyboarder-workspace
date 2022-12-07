@@ -54,8 +54,8 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 
 	@Override
 	public int deleteProduct(int productNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return productDao.deleteProduct(sqlSession,productNo);
 	}
 	
 	
