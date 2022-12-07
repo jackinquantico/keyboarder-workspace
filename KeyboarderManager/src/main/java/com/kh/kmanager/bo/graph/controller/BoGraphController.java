@@ -55,11 +55,13 @@ public class BoGraphController {
 		return "bo/boGraph/boSalesGraphMain";
 	}
 	
+	/**
+	 * bo 메인페이지 상단 매출 그래프 - 채영
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="mainBarGraph.bo", produces="application/json; charset=UTF-8")
 	public String test() {
-		
-		// System.out.println("???"); // 잘찍혔음!!
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date()); // 오늘 날짜
@@ -74,12 +76,9 @@ public class BoGraphController {
 		ArrayList<SalesGraph> tlist = graphService.selectSalesGraph(thisMonth);
 		ArrayList<SalesGraph> llist = graphService.selectSalesGraph(lastMonth);
 		
-		
 		Map<String, ArrayList<SalesGraph>> map = new HashMap<String, ArrayList<SalesGraph>>();
 		map.put("tlist", tlist);
 		map.put("llist", llist);
-		
-		// return new Gson().toJson(tlist); // 요청은 들어왔으나 응답이 안돌아가는 상황임 (ajax complete 도 호출안됬음)
 		
 		return new Gson().toJson(map);
 	}

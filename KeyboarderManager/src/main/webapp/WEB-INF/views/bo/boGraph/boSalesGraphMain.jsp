@@ -32,7 +32,7 @@
 	<div class="card" style="width: 95%; margin:auto; padding: 15px;">
 		<div class="graphBox">
 
-		<canvas id="barCanvas" width="500" height="230"></canvas>
+		<canvas id="barCanvas" width="500" height="730"></canvas>
 		
 		</div>
 	</div>
@@ -114,6 +114,8 @@ const myChart = new Chart(ctx, {
         }]
     },
     options: {
+    	maintainAspectRatio: false,
+    	aspectRatio: 1,
         scales: {
             y: {
                 beginAtZero: true
