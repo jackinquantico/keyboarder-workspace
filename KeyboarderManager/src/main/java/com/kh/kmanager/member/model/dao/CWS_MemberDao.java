@@ -16,9 +16,6 @@ public class CWS_MemberDao {
 		}
 
 	}
-	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.insert("member-mapper.insertMember", m);
-	}
 	
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("member-mapper.idCheck", checkId);
@@ -35,4 +32,19 @@ public class CWS_MemberDao {
 	public int initializePwd(SqlSessionTemplate sqlSession, Member user) {
 		return sqlSession.update("member-mapper.initializePwd", user);
 	}
+
+	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("member-mapper.insertMember", m);
+	}
+	
+	public int updateMailKey(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("member-mapper.updateMailKey", m);
+	}
+	public  int updateMailAuth(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("member-mapper.updateMailAuth", m);
+	}
+	public  int emailAuthFail(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("member-mapper.emailAuthFail", id);
+	}
+	
 }

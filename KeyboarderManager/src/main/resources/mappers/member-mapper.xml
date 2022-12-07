@@ -16,7 +16,8 @@
 		<result column="JOIN_DATE" property="joinDate" />
 		<result column="LOCATION" property="location" />
 		<result column="SELLER_STATUS" property="sellerStatus" />
-		<result column="IDENTIFY_STATUS" property="identifyStatus" />
+		<result column="MAIL_AUTH" property="mailAuth" />
+		<result column="MAIL_KEY" property="mailKey" />
 		<result column="LOGO_ATTACHMENT" property="logoAttachment" />
 	</resultMap>
 	
@@ -60,26 +61,66 @@
 	</update>
 	
 	<insert id="insertMember" parameterType="member">
-		INSERT INTO CONSUMER(CON_NO
-															, CON_NAME
-															, CON_ID
-															, CON_PWD
-															, ADDRESS
-															, CON_PHONE
-															, CON_EMAIL)
-									        VALUES( SEQ_CON_NO.NEXTVAL
-									        				, #{conName}
-									        				, #{conId}
-									        				, #{conPwd}
-									        				, #{address}
-									        				, #{conPhone}
-									        				, #{conEmail})
+		INSERT INTO SELLER(SELLER_NO
+						 , SELLER_NAME
+						 , REP_NAME
+						 , SELLER_ID
+						 , SELLER_PWD
+						 , SELLER_EMAIL
+						 , SELLER_PHONE
+						 , CORP_NO
+						 , ACCOUNT_NO
+						 , JOIN_DATE
+						 , LOCATION
+						 , SELLER_STATUS
+						 , MAIL_AUTH
+						 , MAIL_KEY
+						 , LOGO_ATTACHMENT)
+				   VALUES (SEQ_SELLER_NO.NEXTVAL
+				   		 , #{sellerName}
+				   		 , #{repName}
+				   		 , #{sellerId}
+				   		 , #{sellerPwd}
+				   		 , #{sellerEmail}
+				   		 , #{sellerPhone}
+				   		 , #{corpNo}
+				   		 , #{accountNo}
+				   		 , DEFAULT
+				   		 , #{location}
+				   		 , DEFAULT
+				   		 , 0
+				   		 , 'NULL'
+				   		 , #{logoAttachment})
 	</insert>
+	
+	<!-- 회원가입 시 이메일 인증을 위한 랜덤번호 저장 -->
+	<update id="updateMailKey" parameterType="member">
+		UPDATE SELLER 
+			SET MAIL_KEY = #{mailKey} 
+			WHERE SELLER_EMAIL = #{sellerEmail} 
+					AND SELLER_ID = #{sellerId}
+	</update>
+	
+	<!--  메일 인증 mail_auth 기본값 0에서 1로 변경하여 로그인 허용 -->
+	<update id="updateMailAuth" parameterType="member">
+		UPDATE SELLER
+			SET MAIL_AUTH='1'
+			WHERE SELLER_EMAIL = #{sellerEmail} 
+				AND MAIL_KEY = #{mailKey}
+	</update>
+	
+	<!-- 이메일 인증을 안했을 경우 0반환, 로그인시 이메일인증여부 체크 -->
+	<select id="emailAuthFail" parameterType="String" resultType="_int">
+		SELECT COUNT(*)
+		FROM SELLER
+		WHERE SELLER_ID = #{sellerId}
+			AND MAIL_AUTH = '1'
+	</select>	
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
-		FROM CONSUMER
-		WHERE CON_ID = #{conId}
+		FROM SELLER
+		WHERE SELLER_ID = #{checkId}
 	</select>
 
 </mapper>

@@ -142,7 +142,7 @@
                 <div id="findAndJoin">
               		<a href="forgotId.me">아이디찾기</a>&nbsp;|
                     <a href="forgotPwd.me">비밀번호찾기</a>&nbsp;|
-                    <a href="enrollForm.me">회원가입</a>
+                    <a href="poEnroll1.me">회원가입</a>
                 </div>
             </div>
 

@@ -8,7 +8,7 @@ public interface CWS_MemberService {
 	Member loginMember(Member m);
 	
 	// 회원가입
-	int insertMember(Member m);
+	int insertMember(Member m) throws Exception;
 	
 	// 아이디 중복체크
 	int idCheck(String checkId);
@@ -21,4 +21,10 @@ public interface CWS_MemberService {
 	
 	// 비밀번호 초기화
 	int initializePwd(Member user);
+	
+	// 이메일 인증
+	int updateMailKey(Member m);
+	int updateMailAuth(Member m);
+	int emailAuthFail(String sellerId);
+
 }

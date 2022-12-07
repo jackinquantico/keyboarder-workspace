@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +17,9 @@ import com.kh.kmanager.member.model.vo.Member;
 @Controller
 public class CWS_MemberController {
 
+	private final String EMAIL_CONFIRM_VIEW = "sign/emailConfirm";
+	
+	
 	@Autowired
 	private CWS_MemberService memberService;
 	
@@ -30,7 +32,8 @@ public class CWS_MemberController {
 	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m, 
 								    ModelAndView mv, 
-								    HttpSession session, 
+								    HttpSession session,
+								    String sellerId,
 								    String saveId, 
 								    HttpServletResponse response) {
 		
@@ -48,25 +51,49 @@ public class CWS_MemberController {
 		}		
 		
 		Member loginUser = memberService.loginMember(m);
-		if(loginUser == null) {
+		if(loginUser == null) { // 아이디나 비밀번호가 일치하지 않을때
 			
 			mv.addObject("alertMsg", "로그인 실패");
 			
 			mv.setViewName("common/loginError");
 			
-		} else {
+		} else { // 아이디, 비밀번호가 일치할 때
 			
-			mv.addObject("alertMsg", "로그인 성공");
+
 			
-			session.setAttribute("loginUser", loginUser);
-			
-			if(loginUser.getSellerId().equals("admin")) {
+			if(loginUser.getSellerId().equals("admin")) { // 관리자로 로그인 했을때
+				
+				mv.addObject("alertMsg", "로그인 성공");
+				
+				session.setAttribute("loginUser", loginUser);
 				mv.setViewName("common/bomain");
-			} else {
-				mv.setViewName("common/pomain");
+				
+			} else { // 판매자로 로그인 했을때
+				
+				if(loginUser.getMailAuth() != 1) { // 이메일이 인증되지 않았을 때
+					
+					session.invalidate();
+					mv.setViewName("common/emailAuthFail");
+					
+				} else { // 이메일 인증됬을 때
+					
+					mv.addObject("alertMsg", "로그인 성공");
+					
+					session.setAttribute("loginUser", loginUser);
+					mv.setViewName("common/pomain");	
+				}
+				
 			}
 			
 		}
+		
+		
+		// 이메일 인증했는지 확인
+		if(!loginUser.getSellerId().equals("admin")) {
+			
+
+		}
+
 		return mv;
 	}
 	
@@ -138,25 +165,50 @@ public class CWS_MemberController {
 			return "common/errorPage";
 			
 		}
-		
-		
+				
 	}
 	
-	@RequestMapping("enroll.me")
-	public String enrollForm() {
-		return "member/memberEnrollForm1";
+	@RequestMapping("poEnroll1.me")
+	public String enrollForm1() {
+		return "common/poEnroll_1";
+	}
+	
+	@RequestMapping("poEnroll2.me")
+	public String enrollForm2() {
+		return "common/poEnroll_2";
+	}
+	
+	@RequestMapping("poEnrollForm.me")
+	public String enrollForm2(HttpSession session, String corpNo) {
+		
+		session.setAttribute("corpNo", corpNo);
+		
+		return "common/poEnrollForm";
+		
 	}
 	
 	@RequestMapping("insert.me")
-	public String insertMember(Member m , Model model, HttpSession session) {
+	public String insertMember(Member m , Model model, HttpSession session) throws Exception {
 	
+		Member newSeller = new Member(m.getSellerName()
+								    , m.getRepName()
+								    , m.getSellerId()
+								    , m.getSellerPwd()
+								    , m.getSellerEmail()
+								    , m.getSellerPhone()
+								    , m.getCorpNo()
+								    , m.getAccountNo()
+								    , m.getLocation()
+								    , m.getLogoAttachment());
+		
 		int result = memberService.insertMember(m);
+		
 		if(result>0) {
 			session.setAttribute("alertMsg", "회원가입에 성공하였습니다. 이메일 인증 후 로그인 해주세요.");
-			return "redirect:/";
+			return "common/poEnroll_done";
 		} else {
 			model.addAttribute("errorMsg", "회원가입에 실패했습니다.");
-			return "redirect:/";
+			return "common/errorPage";
 		}
 	}
 	
