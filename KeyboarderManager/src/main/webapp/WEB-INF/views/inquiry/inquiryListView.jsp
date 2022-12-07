@@ -36,6 +36,8 @@
         #pagingArea ul li a{
             color:black;
         }
+        
+        #pagingArea {width:fit-content; margin:auto;}
     </style>
 
 </head>
@@ -43,7 +45,14 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
+<c:choose>
+	<c:when test="${ loginUser.sellerId eq 'admin' }">
+		<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
+	</c:otherwise>
+</c:choose>
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
@@ -63,6 +72,9 @@
 <div class="content">
 	<div class="inquiry">
         <div class="inquiryList">
+        <c:if test="${ loginUser.sellerId ne 'admin'}">
+        	<button type="button" class="btn btn-dark" id="erollbtn" onclick="location.href='enrollForm.iq'">글작성</button>        
+        </c:if>
         <table id="iqList" class="table table-bordered" style="text-align: center;">
             <thead>
                 <tr>
@@ -72,7 +84,7 @@
                     <th width="20%">작성일</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color : white;">
                 	<c:choose>
                 		<c:when test="${ empty list }">
                 			<tr>

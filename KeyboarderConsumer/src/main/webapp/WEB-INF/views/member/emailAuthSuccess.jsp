@@ -9,7 +9,7 @@
 <body>
 	<script>
 		alert("이메일 인증이 완료되었습니다. \n 로그인 후 이용해주세요.")
-		location.href="/foHeader";
+		location.href="/keyboarder";
 	</script>
 </body>
 </html>

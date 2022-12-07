@@ -53,8 +53,8 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 					"<h1>Keyboar-der 메일인증 </h1>" +
 					"<br>Keyboar-der가입을 환영합니다." +
 					"<br>아래 [이메일 인증 확인] 을 눌러주신 후 Keyboar-der를 이용해주시길 바랍니다." +
-					"<br><a href='http://localhost:8888/member/emailAuthSuccess?email="+m.getConEmail() +
-					"&mail_key=" +mail_key+"'target='_blank'>이메일 인증 확인</a>");
+					"<br><a href='http://localhost:8888/keyboarder/registerEmail?conEmail="+m.getConEmail() +
+					"&mailKey=" +mail_key+"'target='_blank'>이메일 인증 확인</a>");
 		sendMail.setFrom("KeyboarderOfficial@gmail.com", "(주)키보더");
 		sendMail.setTo(m.getConEmail());
 		sendMail.send();

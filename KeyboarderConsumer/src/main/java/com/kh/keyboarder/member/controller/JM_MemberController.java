@@ -25,19 +25,19 @@ public class JM_MemberController {
 	private JM_MemberService memberService;
 	
 	@RequestMapping("login.me")
-	public String loginMember(Member m, ModelAndView mv, HttpSession session, String id, String saveId, HttpServletResponse response) {
-		Member loginUser = memberService.loginMember(m);
-		if(loginUser == null) {
-			mv.addObject("errorMsg", "로그인에 실패하였습니다.");
-		} else {
-			session.setAttribute("loginUser", loginUser);
-			mv.setViewName("redirect:/");
-		}
+	public String loginMember(Member m, HttpSession session, String id, String saveId, HttpServletResponse response) {
 		// 이메일 인증했는지 확인
-		if(memberService.emailAuthFail(id)!= 1) {
+		if(memberService.emailAuthFail(m.getConId()) == 1) {
 			return "member/emailAuthFail";
+		} else {
+			Member loginUser = memberService.loginMember(m);
+			if(loginUser == null) {
+				session.setAttribute("errorMsg", "로그인에 실패하였습니다.");
+			} else {
+				session.setAttribute("loginUser", loginUser);
+			}
+			return "redirect:/";
 		}
-		return "redirect:/";
 	}
 	
 	@RequestMapping("logout.me")

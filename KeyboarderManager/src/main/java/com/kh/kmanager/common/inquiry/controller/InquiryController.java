@@ -35,12 +35,12 @@ public class InquiryController {
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
-		return "inquiry/poInquiryListView";
+		return "inquiry/inquiryListView";
 	}
 	
 	@RequestMapping("enrollForm.iq")
 	public String enrollForm() {
-		return "inquiry/poInquiryEnrollForm";
+		return "inquiry/inquiryEnrollForm";
 	}
 	
 	@RequestMapping("insert.iq")
@@ -60,7 +60,7 @@ public class InquiryController {
 	@RequestMapping("detail.iq")
 	public ModelAndView selectInquiry(int ino, ModelAndView mv) {
 		Inquiry i = inquiryService.selectInquiry(ino);
-		mv.addObject("i", i).setViewName("inquiry/poInquiryDetailView");
+		mv.addObject("i", i).setViewName("inquiry/inquiryDetailView");
 		return mv;
 	}
 	
