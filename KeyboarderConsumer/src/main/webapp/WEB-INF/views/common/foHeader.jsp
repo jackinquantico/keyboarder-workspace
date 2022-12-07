@@ -27,10 +27,11 @@
             width: 1200px;
             height: 100px;
             margin: auto; 
+            margin-top: 30px;
         }
 
         #fo-header-logo{
-            width: 20%;
+            width: 30%;
             height: 100%;
             display: inline-block;
             margin-left: 5%;
@@ -83,7 +84,9 @@
 
 	<div class="fo-header-full">
             <div id="fo-header-logo">
-                <a href="index.jsp"><img src="" style="background-size: cover; width: 100%; height: 100%;"></a>
+                <a href="foProductNotice.pro">
+                	<img src="resources/fo_upfiles/keyboarder_logo.png" style="background-size: cover; width: 100%; height: 100%;">
+                </a>
             </div>
             <div id="fo-header-login">
                 <c:choose>
@@ -91,19 +94,19 @@
                         <!-- 로그인전 -->
                         <div id="order-button" align="center"></div>
                         <div id="login-button" align="center">
-                            <a href="termsForm.me"><button type="button" class="btn btn-secondary">회원가입</button></a>
+                            <a href="termsForm.me"><button type="button" class="btn btn-primary">회원가입</button></a>
                         </div>
                         <div id="logout-button">
-                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-secondary">로그인</button></a>
+                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-primary">로그인</button></a>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div id="order-button" align="center">
-                            <a href="foTotalView.order"><button type="button" class="btn btn-secondary">주문내역조회</button></a>
+                            <a href="foTotalView.order"><button type="button" class="btn btn-primary">주문내역조회</button></a>
                         </div>
                         <div id="login-button" align="center">${ loginUser.conName } 님 </div>
                         <div id="logout-button">
-                            <button type="button" class="btn btn-secondary" onclick="location.href='logout.me'">로그아웃</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='logout.me'">로그아웃</button>
                         </div>
                     </c:otherwise>
                 </c:choose>
@@ -126,7 +129,7 @@
                         <input type="text" class="form-control mb-2 mr-sm-2" placeholder="아이디" id="userId" name="conId" value="" required>
                         <input type="password" class="form-control mb-2 mr-sm-2" placeholder="비밀번호" id="userPwd" name="conPwd" required>
                         <br>
-                        <button type="submit" class="btn btn-secondary" style="width:266px;">로그인</button>
+                        <button type="submit" class="btn btn-primary" style="width:266px;">로그인</button>
                         <br><br>
                         <c:choose>
                             <c:when test="${ not empty cookie.saveId}">

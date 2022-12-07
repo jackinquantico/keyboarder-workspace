@@ -15,14 +15,14 @@ import lombok.ToString;
 @ToString
 public class JKW_Coupon {
 
-	private String CouponNo; 
-	private String CouponName;
-	private int CouponPrice;
-	private Date CreateDate;
-	private Date UseDate;
-	private Date DueDate;
-	private String CouponStmt;
+	private String couponNo; 
+	private String couponName;
+	private int couponPrice;
+	private Date createDate;
+	private Date yseDate;
+	private Date dueDate;
+	private String couponStmt;
 	private int sellerNo;
-	private int ProductNo;
+	private int productNo;
 	
 }

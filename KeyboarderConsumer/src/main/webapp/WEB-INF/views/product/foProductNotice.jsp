@@ -20,29 +20,32 @@
 
         #fo-full-main{
             width: 1200px;
-            height: 1000px;
+            height: 1200px;
             margin: auto;
         }
 
         #fo-product-body{
             width: 100%;
-            height: 900px;
+            height: 1030px;
+            border: 2px solid black;
+            border-radius: 30px;
+            margin-top: 40px;
         }
 
         #fo-product-main{
             width: 80%;
             height: 750px;
             margin: auto;
-            margin-top: 80px;
+            margin-top: 60px;
         }
 
         .fo-product-all{
             width: 24.5%;
-            height: 365px;
+            height: 410px;
             display: inline-block;
             margin-bottom: 10px;
             border-radius: 20px;
-            border: 2px solid #ffad00;
+            border: 2px solid black;
         }
 
         .fo-product-img{
@@ -54,7 +57,7 @@
 
         .fo-product-name{
             width: 100%;
-            height: 80px;
+            height: 100px;
         }
 
         .fo-product-price{
@@ -68,23 +71,22 @@
         }
         
         .page-item{
-        	border: 2px solid #ffad00;
-        	background-color: #ffad00;
-        	color: #ffad00;
+        	border: 2px solid black;
+        	background-color: black;
+        	color: black;
         }
         
         #page-btn{
-        	color: #ffad00;
+        	color: black;
         }
         
         #buy-btn{
-        	width: 100px;
+        	width: 120px;
         	height: 40px; 
-        	border: 2px solid #ffad00;
         }
         
         #buy-btn:hover{
-        	background-color: #ffad00;
+        	opacity: 0.9;
         	cursor: pointer;
         	color: white;
         }
@@ -102,38 +104,42 @@
             <div id="fo-product-main">
                 
                 	<c:forEach var="p" items="${ proList }">
-	                    <div class="fo-product-all" align="center">
-	                        <form action="purchase.fo" method="post" id="request">
-	                        	<input type="hidden" name="paymentNo" id="imp_uid">
-								<input type="hidden" name="orderNo" id="merchant_uid">
-								<input type="hidden" name="productNo" id="product_name">
-								<input type="hidden" name="amount" id="amount">
-								<input type="hidden" name="conNo" id="buyer_name">
-								<input type="hidden" name="couponPrice" id="couponPrice" value="3000">
-	                            <div class="fo-product-img">
-	                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfMjEg%2FMDAxNjU4MTY2ODUyMDk2.rYbdL6xRUcVwKXgw3ixjv1y9DpL715DNDoH7iZC4_Wog.FsdShZZI_8nZ8Nz3y50G7fCp4PzSFzzpIa1NRRZhsu4g.JPEG.khj221100%2FIMG_1269.JPG&type=sc960_832" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
-	                            </div>
-	                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
-	                            	${ p.productName }
-	                            </div>
-	                            <div class="fo-product-price" style="padding: 12px; margin: 0px;">
-	                            	${ p.price }
-	                            </div>
-	                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
-	                            	<select>
-	                            		<option align="center">쿠폰 선택</option>
-	                            		<option>쿠폰이름들어감</option>
-	                            		<option>쿠폰이름들어감</option>
-	                            	</select>
-	                            </div>
-	                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
-	                                <button type="submit" id="buy-btn" class="btn">
-	                                   	 구매하기
-	                                </button>
-	                            </div>
-	                        </form>
-	                    </div>
-                    </c:forEach>
+                		<%--<c:forEach var="keyc" items="${ keyCouponList }">
+                			<c:forEach var="stoc" items="${ stoCouponList }"> --%>
+			                    <div class="fo-product-all" align="center">
+			                        <form action="purchase.fo" method="post" id="request">
+			                        	<input type="hidden" name="paymentNo" id="imp_uid">
+										<input type="hidden" name="orderNo" id="merchant_uid">
+										<input type="hidden" name="productNo" id="product_name">
+										<input type="hidden" name="amount" id="amount">
+										<input type="hidden" name="conNo" id="buyer_name">
+										<input type="hidden" name="couponPrice" id="couponPrice" value="3000">
+			                            <div class="fo-product-img">
+			                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfMjEg%2FMDAxNjU4MTY2ODUyMDk2.rYbdL6xRUcVwKXgw3ixjv1y9DpL715DNDoH7iZC4_Wog.FsdShZZI_8nZ8Nz3y50G7fCp4PzSFzzpIa1NRRZhsu4g.JPEG.khj221100%2FIMG_1269.JPG&type=sc960_832" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+			                            </div>
+			                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
+			                            	${ p.productName }
+			                            </div>
+			                            <div class="fo-product-price" style="padding: 12px; margin: 0px;">
+			                            	${ p.price }
+			                            </div>
+			                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
+			                            	<select class="form-select">
+			                            		<option align="center">쿠폰 선택</option>
+			                            		<option name=""><%--${ keyc.couponName } --%></option>
+			                            		<option name=""><%--${ stoc.couponName } --%></option>
+			                            	</select>
+			                            </div>
+			                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
+			                                <button type="submit" id="buy-btn" class="btn btn-primary" style="padding: 9px; margin: 0px;">
+			                                   	 구매하기
+			                                </button>
+			                            </div>
+			                        </form>
+			                    </div>
+	                    	</c:forEach>
+	                    <%--</c:forEach>
+                    </c:forEach>  --%>
                     
                     <%--
                     <div class="fo-product-all" align="center">
@@ -163,7 +169,7 @@
                      --%>
                     
                     <!-- 페이징 처리 -->
-		            <div style="padding: 15px 50px; margin: 0px;">
+		            <div style="padding: 40px 50px; margin: 0px;">
 			            <nav aria-label="Page navigation example">
 						  <ul class="pagination" style="justify-content: center;">
 						  	<c:choose>
@@ -176,7 +182,7 @@
 						  		</c:when>
 						  		<c:otherwise>
 						  			<li class="page-item">
-								      <a class="page-link" href="foProductNotice.order?cpage=${ pi.currentPage - 1 }" aria-label="Previous" id="page-btn">
+								      <a class="page-link" href="foProductNotice.pro?cpage=${ pi.currentPage - 1 }" aria-label="Previous" id="page-btn">
 								        <span aria-hidden="true">&laquo;</span>
 								      </a>
 								    </li>
@@ -184,7 +190,7 @@
 						  	</c:choose>
 						    
 						    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-						    	<li class="page-item"><a class="page-link" href="foProductNotice.order?cpage=${ p }" id="page-btn">${ p }</a></li>
+						    	<li class="page-item"><a class="page-link" href="foProductNotice.pro?cpage=${ p }" id="page-btn">${ p }</a></li>
 						    </c:forEach>
 						    
 						    <c:choose>
@@ -197,7 +203,7 @@
 						    	</c:when>
 						    	<c:otherwise>
 						    		<li class="page-item">
-								      <a class="page-link" href="foProductNotice.order?cpage=${ pi.currentPage + 1 }" aria-label="Next" id="page-btn">
+								      <a class="page-link" href="foProductNotice.pro?cpage=${ pi.currentPage + 1 }" aria-label="Next" id="page-btn">
 								        <span aria-hidden="true">&raquo;</span>
 								      </a>
 								    </li>

@@ -20,4 +20,6 @@ public class Order {
 	private String orderStatus; // 구매 상태
 	private int productNo; // 상품키
 	private int conNo; // 고객번호
+	private String productAttachment; // 상품사진
+	private String productName; // 상품명
 }

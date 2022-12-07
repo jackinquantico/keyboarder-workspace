@@ -25,8 +25,8 @@ public class JKW_ProductController {
 		
 		int listCount = JKW_ProductService.selectListCount();
 		
-		int pageLimit = 8;
-		int boardLimit = 5;
+		int pageLimit = 5;
+		int boardLimit = 8;
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		

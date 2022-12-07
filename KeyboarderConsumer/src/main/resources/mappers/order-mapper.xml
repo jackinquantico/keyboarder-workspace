@@ -10,7 +10,73 @@
 		<result column="ORDER_STATUS" property="orderStatus" />
 		<result column="PRODUCT_NO" property="productNo" />
 		<result column="CON_NO" property="conNo" />
+		<result column="ATTACHMENT1" property="productAttachment" />
+		<result column="PRODUCT_NAME" property="productName" />
 	</resultMap>
 	
+	<select id="foTotalViewList" parameterType="_int" resultMap="orderResultSet">
+		SELECT ORDER_NO
+		     , TO_CHAR(ORDER_DATE, 'YY-MM-DD') "ORDER_DATE"
+		     , ORDER_PRICE
+		     , ORDER_STATUS
+		     , ORD.PRODUCT_NO
+		     , PRODUCT_NAME
+		     , ATTACHMENT1
+		FROM ORDERS ORD
+		JOIN PRODUCT PRO ON (PRO.PRODUCT_NO = ORD.PRODUCT_NO)
+		WHERE CON_NO = #{conNo}
+		ORDER BY ORDER_DATE DESC
+	</select>
+	
+	<!-- 
+	SELECT ORDER_NO
+	     , ORDER_DATE
+	     , ORDER_STATUS
+	     , PRODUCT_NAME
+	     , PRICE
+	     , COUPON_PRICE
+	     , COUPON_PRICE
+	     , CON_NAME
+	     , CON_PHONE
+	     , ADDRESS
+	     , SELLER_NAME
+	FROM ORDER ORD
+	JOIN PRODUCT PRO ON (PRO.PRODUCT_NO = ORD.PRODUCT_NO)
+	JOIN SELLER SEL ON (PRO.PRODUCT_NO = SEL.PRODUCT_NO)
+	JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
+	 -->
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

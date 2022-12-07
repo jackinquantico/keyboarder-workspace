@@ -16,9 +16,9 @@
 	</resultMap>
 	
 	<resultMap id="couponResultSet" type="coupon">
-		<result column="COUPON_NO" property="CouponNo" />
-		<result column="COUPON_NAME" property="CouponName" />
-		<result column="COUPON_PRICE" property="CouponPrice" />
+		<result column="COUPON_NO" property="couponNo" />
+		<result column="COUPON_NAME" property="couponName" />
+		<result column="COUPON_PRICE" property="couponPrice" />
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -32,7 +32,7 @@
 		     , PRODUCT_NAME
 		     , PRICE
 		     , ATTACHMENT1
-		FROM PRODUCT
+ㄴ		FROM PRODUCT
 		WHERE PRODUCT_STATUS = 1
 		ORDER BY PRODUCT_NO DESC
 	</select>
@@ -51,6 +51,20 @@
 		FROM COUPON_STORE
 	</select>
 	
+	<!-- 
+	쿠폰이름 조회 테이블, 더미 받으면 확인 필요!!
+		SELECT PRO.PRODUCT_NO
+		     , PRODUCT_NAME
+		     , PRICE
+		     , ATTACHMENT1
+		     , KEYC.COUPON_NAME
+		     , STOC.COUPON_NAME
+		FROM PRODUCT PRO
+		JOIN COUPON_KEYBOARDER KEYC ON(PRO.PRODUCT_NO = KEYC.PRODUCT_NO)
+		JOIN COUPON_STORE STOC ON(PRO.PRODUCT_NO = STOC.PRODUCT_NO)
+		WHERE PRODUCT_STATUS = 1
+		ORDER BY PRODUCT_NO DESC
+	 -->
 	
 	
 </mapper>

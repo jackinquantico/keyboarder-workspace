@@ -8,7 +8,7 @@
 
 	<style>
         div{
-            border: 1px solid red;
+            /* border: 1px solid red; */
             box-sizing: border-box;
         }
 
@@ -50,9 +50,9 @@
            	<div id="fo-product-main">
                
                 <img src="https://proguide.co.kr/wp-content/uploads/2021/04/1-3-scaled.jpg"
-                	 style="background-size: cover; width: 100%; height: 100%; position : relative;">
+                	 style="background-size: cover; width: 100%; height: 100%; position : relative; border-radius: 50px;">
                 <a href="foProductNotice.pro">
-                	<button type="button" class="btn btn btn-success" id="btn">
+                	<button type="button" class="btn btn-primary" id="btn">
                 		키보드 구매페이지 이동
                 	</button>
                 </a>
