@@ -17,7 +17,7 @@ public class ProductDao {
 
 	public static int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 		
-		return sqlSession.insert("poMapper.updateProduct",p);
+		return sqlSession.update("poMapper.updateProduct",p);
 		
 	}
 

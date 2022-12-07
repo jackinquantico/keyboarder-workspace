@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,65 +8,50 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.content {
-	
+
+#title_sub {
+	font-size: 13px;
+	margin-left: 8px;
 }
 
-#productCount, #productSearch, #productList {
+#product_img_list{
+    border-collapse: collapse;
+    width: 100%;
+    margin:auto;
+}
+#buttonarea{
+	width: 95%;
+}
+#buttonarea button{
+	float: right;
+	margin:5px;
+	margin-bottom:20px;
+}
+#contentarea {
 	width: 95%;
 	margin: auto;
+	padding: 20px;
 }
 
-#productCount {
-	padding-top: 30px;
-	height: 400px;
-	border: 1px solid black;
-}
 
-#productCount table td {
-	text-align: center;
-}
 
-#productSearch {
-	height: 100px;
-	border: 1px solid black;
-	padding-top: 30px;
-}
-
-#productList {
-	height: 300px;
-	border: 1px solid black;
-}
-#title_sub{
-font-size:13px;
-margin-left:8px;
-}
-#productPic {
-	border:1px solid black;
-	width:95%; 
-	margin:auto;
-}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
 
-<jsp:include page="../../common/header.jsp" />
+	<jsp:include page="../../common/header.jsp" />
 
-<jsp:include page="../../common/posidebar.jsp" />
+	<jsp:include page="../../common/posidebar.jsp" />
 
-<div class="content-wrapper">
-
-	<form id="updateProduct" method="post" action="update.pro">
-
+	<div class="content-wrapper">
 	<br>
-
 	<!-- 콘텐츠 영역 제목 -->
 	<div class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0" style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품등록/수정</h1>
-					<button type="submit" style="float:right;">등록하기</button>
+					<h1 class="m-0" style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품
+                       수정하기</h1>
 				</div>
 			</div>
 			<!-- /.row -->
@@ -74,79 +60,120 @@ margin-left:8px;
 	</div>
 	
 	<div class="content">
-		
-		<div id="productPic">
-		
-			<br>
-			<h4 style="margin-left: 20px;">상품이미지 *(600x600)<span id="title_sub">대표이미지 1장은 필수 등록 요건 입니다.</span></h4>
-			
-			<hr>
-			<div class="col">
-			
-				<div class="container px-4 px-lg-1 mt-1"  style="margin: 20px; padding-top: 20px;">
-					<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-6 justify-content-left">
+	<div id="contentarea" class="card">
+	<form id="updateForm" method="post" action="update.pro" enctype="multipart/form-data">
+	<input type="hidden" name="sellerNo" value="10000">
+    <input type="hidden" name="productNo" value="${p.productNo}">
+	<div id="buttonarea">
+		<button type="submit" class="btn btn-secondary">수정하기</button>
+		<button type="button" class="btn btn-secondary">삭제하기</button>
+	</div>
+                 <table id="product_img_list" style="height:500px;">
+                     
+                 <tr>
+                  <td rowspan="2" style="width:40%;">
+                      <!-- Product image-->
+                      <img class="card-img-top" id="img1"
+                          src="resources/uploadFiles/${ p.attachment1}"
+                          alt="..." style="width: 500px; height:500px;"/>
+                          <label for="attachNo">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							사진 선택하기 </label> 
+							<c:if test="${not empty p.attachment1}">
+							<input type="file" id="file1" name="reupfile" onchange="addImg();"/>
+							<input type="hidden" name="attachment1" value="${p.attachment1 }">
+						</c:if>		
+                 	</td>
+                  <td colspan="6" style="height: 250px; width:60%">
+                  		<div style="height: 30%;">
+                  			상품명 : <input type="text" style="width:700px; border:none;" name="productName" value="${p.productName}"><br><Br>
+                  			상품가격: <input type="text" style="width:400px; border:none;" name="price" value="${p.price}">
+                  		</div>
+                  		<div style="height: 70%;">상품설명
+                  		<textarea style="resize: none; width: 100%; height: 170px; border:none;" name="description" >${p.description}</textarea></div>	
+                  </td>
+                 </tr>
+				<tr id="subpic">
+                 <td>
+                  <div id="sub_items">
+                       <!-- Product image-->
+                       <img class="card-img-top" id="img2"
+                           src="resources/uploadFiles/${p.attachment2}"
+                           alt="..." style="width: 250px; height: 250px;" />
+                           <label for="attachNo">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							사진 선택하기 </label> 
+							<c:if test="${not empty p.attachment2}">
+							<input type="file" id="file2" name="reupfile" onchange="addImg();"/>
+							<input type="hidden" name="attachment2" value="${p.attachment2 }">
+						</c:if>		
+                  </div> 
+                 </td>
+                 <td>
+                  <div id="sub_items">
+                       <!-- Product image-->
+                       <img class="card-img-top" id="img3"
+                           src="resources/uploadFiles/${ p.attachment3}"
+                           alt="..." style="width: 250px; height: 250px;"/> 
+                           <label for="attachNo">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							사진 선택하기 </label> 
+							<c:if test="${not empty p.attachment3}">
+							<input type="file" id="file3" name="reupfile" onchange="addImg();"/>
+							<input type="hidden" name="attachment3" value="${p.attachment3 }">
+                           </c:if>		
+                  </div>
+                 </td>
+                 <td>
+                  <div id="sub_items">
+                       <!-- Product image-->
+                       <img class="card-img-top" id="img4"
+                           src="resources/uploadFiles/${ p.attachment4}"
+                           alt="..." style="width: 250px; height: 250px;"/>
+                           <label for="attachNo">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							사진 선택하기 </label> 
+							<c:if test="${not empty p.attachment4}">
+							<input type="file" id="file4" name="reupfile" onchange="addImg();"/>
+							<input type="hidden" name="attachment4" value="${p.attachment4 }">
+                           </c:if>	
+                  </div>
+                 </td>
+                 <td colspan="3">
+                 </td>
+             	</tr>
+             </table>
+             <script>
+  
+             
+         	$('#file1').change(function(){
+    		    setImageFromFile(this,'#img1');
+    		});
+    		$('#file2').change(function(){
+    		    setImageFromFile(this,'#img2');
+    		});
+    		$('#file3').change(function(){
+    		    setImageFromFile(this,'#img3');
+    		});
+    		$('#file4').change(function(){
+    		    setImageFromFile(this,'#img4');
+    		});
 
-						<!-- 상품 한 개 단위 -->
-						<div class="col mb-10">
-							<div align="left">대표이미지</div>
-							<div class="card h-20">
-								<!-- Product image-->
-								<img class="card-img-top"
-									src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-									alt="..." />
-							</div>
-						</div>
-						
-						<!-- 상품 한 개 단위 -->
-						<div class="col mb-10">
-							<div align="left">대표이미지</div>
-							<div class="card h-20">
-								<!-- Product image-->
-								<img class="card-img-top"
-									src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-									alt="..." />
-							</div>
-						</div>
-						
-						<!-- 상품 한 개 단위 -->
-						<div class="col mb-10">
-							<div align="left">대표이미지</div>
-							<div class="card h-20">
-								<!-- Product image-->
-								<img class="card-img-top"
-									src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-									alt="..." />
-							</div>
-						</div>
-						
-						<!-- 상품 한 개 단위 -->
-						<div class="col mb-10">
-							<div align="left">대표이미지</div>
-							<div class="card h-20">
-								<!-- Product image-->
-								<img class="card-img-top"
-									src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
-									alt="..." />
-							</div>
-						</div>
-					
-					</div>
-				</div> <!-- /.container -->
-				
-			</div> <!-- /.col -->
-			
-		</div>
-			
-		<br>
-
-		<div id="productList">
-			<!-- 판매상품설명 작성란 -->
-		</div> <!-- /#productList -->
+    		function setImageFromFile(input, expression) {
+    		    if (input.files && input.files[0]) {
+    		        var reader = new FileReader();
+    		        reader.onload = function (e) {
+    		            $(expression).attr('src', e.target.result);
+    		        }
+    		        reader.readAsDataURL(input.files[0]);
+    		    }
+    		}
+          
+             </script>
+		</form>
 		
-	</div> <!-- content -->
-		
-	</form>
-
-</div><!-- content-wrapper -->
+		</div> <!-- /#contentarea -->
+	</div>
+</div>
 </body>
 </html>

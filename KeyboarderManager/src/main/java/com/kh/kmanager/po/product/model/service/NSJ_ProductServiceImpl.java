@@ -26,15 +26,13 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 		return productDao.insertProduct(sqlSession, p);
 	}
 
-	@Override
 	public int updateProduct(Product p) {
 		// TODO Auto-generated method stub
-		return ProductDao.updateProduct(sqlSession,p);
+		return productDao.updateProduct(sqlSession, p);
 	}
 
 	@Override
 	public ArrayList<Product> showProduct(Product p) {
-		// TODO Auto-generated method stub
 		return productDao.showProduct(sqlSession,p);
 	}
 

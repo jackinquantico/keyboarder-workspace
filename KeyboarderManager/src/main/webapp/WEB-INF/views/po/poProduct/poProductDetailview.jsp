@@ -24,6 +24,8 @@
 }
 #buttonarea button{
 	float: right;
+	margin:5px;
+	margin-bottom:20px;
 }
 #contentarea {
 	width: 95%;
@@ -39,7 +41,7 @@
 	<jsp:include page="../../common/posidebar.jsp" />
 
 	<div class="content-wrapper">
-
+	<br>
 	<!-- 콘텐츠 영역 제목 -->
 	<div class="content-header">
 		<div class="container-fluid">
@@ -54,17 +56,14 @@
 		<!-- /.container-fluid -->
 	</div>
 	
-	<div id="buttonarea">
-		<button type="submit" class=" btn btn-secondary">수정하기</button>
-		<button type="submit" class="btn btn-secondary">삭제하기</button>
-	</div>
 
 	<div class="content">
 		<div id="contentarea" class="card">
-            <form style="width:100%;" id="detailProduct" method="get" action="detail.pro?productNo=${p.productNo }">
+            <form id ="postForm" method="post" action="updateForm.pro">
             <!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
     <input type="hidden" name="sellerNo" value="10000">
-   
+    <input type="hidden" name="productNo" value="${p.productNo}">
+   <button type="submit" class=" btn btn-secondary" onclick="productUpdate(1);">수정하기</button>
       
                  <table id="product_img_list" style="height:500px;">
                      
@@ -78,10 +77,11 @@
                   <td colspan="6" style="height: 250px; width:60%">
                   		<div style="height: 30%;">
                   			상품명 : <input type="text" style="width:700px; border:none;" value="${p.productName}"><br><Br>
+                  			
                   			상품가격: <input type="text" style="width:400px; border:none;"value="${p.price}">
                   		</div>
                   		<div style="height: 70%;">상품설명
-                  		<textarea style="resize: none; width: 100%; height: 170px; border:none;" value="${p.description}"></textarea></div>	
+                  		<textarea style="resize: none; width: 100%; height: 170px; border:none;" required>${p.description}</textarea></div>	
                   </td>
                  </tr>
 				<tr id="subpic">
@@ -113,6 +113,7 @@
                  </td>
              	</tr>
              </table>
+
 		</form>
 		
 		</div> <!-- /#contentarea -->

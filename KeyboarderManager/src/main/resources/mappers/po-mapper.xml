@@ -80,23 +80,20 @@
 						
 						
 						<!-- 상품정보수정 -->
-						<update id ="updateProduct" parameterType="product">
+						<update id ="updateProduct" parameterType="_int">
 						UPDATE PRODUCT
-							SET PRODUCT_NAME=#{productName},
-							SET PRICE=#{price},
-							SET DESCRIPTION=#{description},
-							SET ATTACHMENT1=#{attachment1},
-							SET ATTACHMENT2=#{attachment2},
-							SET ATTACHMENT3=#{attachment3},
-							SET ATTACHMENT4=#{attachment4}
+						<set>
+						PRODUCT_NAME=#{productName},
+						PRICE=#{price},
+						DESCRIPTION=#{description},
+						<if test='attachment1!=null  and !attachment1.equalsIgnoreCase("null")'>ATTACHMENT1=#{attachment1},</if>
+						<if test='attachment2!=null  and !attachment2.equalsIgnoreCase("null")'>ATTACHMENT2=#{attachment2},</if>
+						<if test='attachment3!=null  and !attachment3.equalsIgnoreCase("null")'>ATTACHMENT3=#{attachment3},</if>
+						<if test='attachment4!=null  and !attachment4.equalsIgnoreCase("null")'>ATTACHMENT4=#{attachment4}</if>
+						</set>
 						WHERE PRODUCT_NO = #{productNo}
-						
 						</update>
-						
-						
 					
-				
-
 
 			</mapper>
 
