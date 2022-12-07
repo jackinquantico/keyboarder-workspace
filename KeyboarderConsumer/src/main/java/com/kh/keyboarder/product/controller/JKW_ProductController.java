@@ -33,20 +33,20 @@ public class JKW_ProductController {
 		ArrayList<Product> proList = JKW_ProductService.selectList(pi);
 					
 		// PO 판매자 쿠폰 전체 조회
-		// ArrayList<JKW_Coupon> stoCouList = JKW_ProductService.stoCouponList();
+		ArrayList<JKW_Coupon> stoCouponList = JKW_ProductService.stoCouponList();
 		
 		// BO 관리자 쿠폰 전체 조회
-		ArrayList<JKW_Coupon> keyCouList = JKW_ProductService.keyCouponList();
+		ArrayList<JKW_Coupon> keyCouponList = JKW_ProductService.keyCouponList();
 		
-		// System.out.println("sto : " + stoCouList);
-		System.out.println("key : " + keyCouList);
+		System.out.println("sto : " + stoCouponList);
+		System.out.println("key : " + keyCouponList);
 		System.out.println("pi : " + pi);
 		System.out.println("proList : " + proList);
 
 		model.addAttribute("pi", pi);
 		model.addAttribute("proList", proList);
-		// model.addAttribute("stoCouList", stoCouList);
-		model.addAttribute("keyCouList", keyCouList);
+		model.addAttribute("stoCouponList", stoCouponList);
+		model.addAttribute("keyCouponList", keyCouponList);
 		
 		return "product/foProductNotice";
 	}

@@ -16,12 +16,9 @@
 	</resultMap>
 	
 	<resultMap id="couponResultSet" type="coupon">
-		<result column="COUPON_NO" property="keyCouponNo" />
-		<result column="COUPON_NAME" property="keyCouponName" />
-		<result column="COUPON_PRICE" property="keyCouponPrice" />
-		<!-- <result column="STO_COUPON_NO" property="stoCouponNo" />
-		<result column="STO_COUPON_NAME" property="stoCouponName" />
-		<result column="STO_COUPON_PRICE" property="stoCouponPrice" /> -->
+		<result column="COUPON_NO" property="CouponNo" />
+		<result column="COUPON_NAME" property="CouponName" />
+		<result column="COUPON_PRICE" property="CouponPrice" />
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -40,22 +37,22 @@
 		ORDER BY PRODUCT_NO DESC
 	</select>
 	
-	<!-- 
-	<select id="stoCouponList" resultMap="couponResultSet">
-		SELECT STO.COUPON_NO "STO_COUPON_NO"
-		     , STO.COUPON_NAME "STO_COUPON_NAME"
-		     , STO.COUPON_PRICE "STO_COUPON_PRICE"
-		FROM COUPON_STORE STO
-	</select>
-	 -->
-	
 	<select id="keyCouponList" resultMap="couponResultSet">
 		SELECT COUPON_NO 
 		     , COUPON_NAME
 		     , COUPON_PRICE
 		FROM COUPON_KEYBOARDER
 	</select>
-
+	
+	<select id="stoCouponList" resultMap="couponResultSet">
+		SELECT COUPON_NO
+		     , COUPON_NAME
+		     , COUPON_PRICE
+		FROM COUPON_STORE
+	</select>
+	
+	
+	
 </mapper>
 
 

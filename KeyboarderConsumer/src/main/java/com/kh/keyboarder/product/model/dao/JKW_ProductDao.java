@@ -27,12 +27,11 @@ public class JKW_ProductDao {
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectList", null, rowBounds);
 	}
-	/*
+
 	public ArrayList<JKW_Coupon> stoCouponList(SqlSessionTemplate sqlSession){
 		
 		return (ArrayList)sqlSession.selectList("productMapper.stoCouponList");
 	}
-	*/
 	
 	public ArrayList<JKW_Coupon> keyCouponList(SqlSessionTemplate sqlSession){
 		

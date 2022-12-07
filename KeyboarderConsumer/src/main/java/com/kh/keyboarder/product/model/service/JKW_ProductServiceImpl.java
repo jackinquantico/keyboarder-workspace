@@ -32,13 +32,11 @@ public class JKW_ProductServiceImpl implements JKW_ProductService {
 		return JKW_ProductDao.selectList(sqlSession, pi);
 	}
 
-	/*
 	@Override
 	public ArrayList<JKW_Coupon> stoCouponList() {
 		
 		return JKW_ProductDao.stoCouponList(sqlSession);
 	}
-	*/
 
 	@Override
 	public ArrayList<JKW_Coupon> keyCouponList() {

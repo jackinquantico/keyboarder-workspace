@@ -77,7 +77,7 @@
 	    }
     </style>
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css">
 </head>
 <body>
 
@@ -91,19 +91,19 @@
                         <!-- 로그인전 -->
                         <div id="order-button" align="center"></div>
                         <div id="login-button" align="center">
-                            <a href="termsForm.me"><button type="button" class="btn btn-outline-success">회원가입</button></a>
+                            <a href="termsForm.me"><button type="button" class="btn btn-secondary">회원가입</button></a>
                         </div>
                         <div id="logout-button">
-                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-outline-dark">로그인</button></a>
+                            <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-secondary">로그인</button></a>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div id="order-button" align="center">
-                            <a href="foTotalView.order"><button type="button" class="btn btn-outline-secondary">주문내역조회</button></a>
+                            <a href="foTotalView.order"><button type="button" class="btn btn-secondary">주문내역조회</button></a>
                         </div>
                         <div id="login-button" align="center">${ loginUser.conName } 님 </div>
                         <div id="logout-button">
-                            <button type="button" class="btn btn-outline-dark" onclick="location.href='logout.me'">로그아웃</button>
+                            <button type="button" class="btn btn-secondary" onclick="location.href='logout.me'">로그아웃</button>
                         </div>
                     </c:otherwise>
                 </c:choose>
@@ -126,7 +126,7 @@
                         <input type="text" class="form-control mb-2 mr-sm-2" placeholder="아이디" id="userId" name="conId" value="" required>
                         <input type="password" class="form-control mb-2 mr-sm-2" placeholder="비밀번호" id="userPwd" name="conPwd" required>
                         <br>
-                        <button type="submit" class="btn btn-dark" style="width:266px;">로그인</button>
+                        <button type="submit" class="btn btn-secondary" style="width:266px;">로그인</button>
                         <br><br>
                         <c:choose>
                             <c:when test="${ not empty cookie.saveId}">
