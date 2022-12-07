@@ -57,7 +57,7 @@
 	<!--  메일 인증 mail_auth 기본값 0에서 1로 변경하여 로그인 허용 -->
 	<update id="updateMailAuth" parameterType="member">
 		UPDATE CONSUMER
-			SET MAIL_AUTH=1
+			SET MAIL_AUTH='1'
 			WHERE CON_EMAIL = #{conEmail} 
 				AND MAIL_KEY = #{mailKey}
 	</update>
@@ -67,6 +67,6 @@
 		SELECT COUNT(*)
 		FROM CONSUMER
 		WHERE CON_ID = #{conId}
-			AND MAIL_AUTH = 1
+			AND MAIL_AUTH = '1'
 	</select>
 </mapper>

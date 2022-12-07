@@ -18,7 +18,7 @@
     <a href="/kmanager/pomain" class="brand-link">
       <!-- <i class="ion-android-person fas fa-fw"></i> -->
       <img src="resources/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">${ loginUser.sellerName }</span>
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
     <!-- Sidebar -->
@@ -210,7 +210,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="list.iq" class="nav-link">
               <i class="nav-icon fas fa-solid fa-comment-dots"></i>
               <p>1:1 문의</p>
             </a>

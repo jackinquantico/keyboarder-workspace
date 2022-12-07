@@ -54,7 +54,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
+<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
@@ -124,19 +124,56 @@
                   </colgroup>
                   <tbody>
                   	<tr>
-                  		<c:choose>
-	                  		<c:when test="${empty rList }">
-	                  			<td><textarea id="replyContent" style="resize:none;" disabled readonly>아직 답변이 작성되지 않았습니다. 조금만 기다려주세요.</textarea></td>
-	                  		</c:when>
-	                  		<c:otherwise>
-	                  			 <td><textarea id="replyContent" style="resize:none;" disabled readonly></textarea></td>    
-	                  		</c:otherwise>
-                  		</c:choose>
-                      </tr>
+                  		<td><textarea id="replyContent" style="resize:none;" disabled readonly></textarea></td>    
+                    </tr>
                   </tbody>
               </table>
           </div>
-          <script>
+          <div>
+          <h4>답변작성</h4>
+          <div>
+              <table id="replyInsert"
+              class="table table-bordered tbl_Form">
+                  <caption></caption>
+                  <colgroup>
+                      <col width="250px" />
+                      <col />
+                  </colgroup>
+                  <thead>
+                      <tr>
+                          <th colspan="2" width="90%">
+                              <textarea class="form-control" name="recontent" id="recontent" cols="55" rows="2" style="resize:none; width:100%; margin-top:10px;" onkeypress="onChange();" maxlength="1000"></textarea>
+                              <div id="count" style=" width: 100%; text-align: right;">
+                                  <span>0</span> /1000
+                              </div>
+                          </th>
+                          <th style="vertical-align:middle"><button class="btn btn-dark" style="background-color:black;" onclick="addReply();">등록하기</button></th>
+                      </tr>
+                  </thead>
+              </table>
+
+              <script>
+                  $(function() {
+                      $('#recontent').keyup(function () {		
+                          $("#count>span").text($(this).val().length);  			
+                      });
+                  });
+
+                  function onChange() {
+                      var key = window.event.keyCode;
+                      // enter키 처리
+                      if (key === 13) {
+                          document.getElementById("recontent").value = document.getElementById("recontent").value + "";
+                          return false;
+                      }
+                      else {
+                          return true;
+                      }
+                  }
+              </script>
+              </div>
+          </div>
+<script>
           	$(function() {
           		selectReplyList();
           	});
@@ -156,6 +193,29 @@
           				console.log("댓글리스트 조회용 ajax통신실패!");
           			}
           		});
+          	}
+          	
+          	function addReply() {
+          		if($("#recontent").val().trim.length != 0) {
+          			$.ajax({
+          				url : "rinsert.iq",
+          				data : {
+          					inquiryNo : "${i.inquiryNo}",
+          					inquiryReply : "${i.inquiryReply}"
+          				},
+          				success : function(result) {
+          					if(result == "success") {
+          						selectReplyList();
+          						$("#recontent").val();
+          					}
+          				},
+          				error : function() {
+          					console.log("댓글 작성용 ajax 통신실패!");
+          				}
+          			});
+          		} else {
+          			alertify.alert("댓글작성 실패", " 댓글작성 후 등록을 요청해주세요.");
+          		}	
           	}
           </script>
       </div>

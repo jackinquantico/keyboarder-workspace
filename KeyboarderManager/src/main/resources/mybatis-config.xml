@@ -14,7 +14,7 @@
 		<typeAlias type="com.kh.kmanager.common.notice.model.vo.Notice" alias="notice" />
 		<typeAlias type="com.kh.kmanager.bo.graph.model.vo.SalesGraph" alias="salesGraph" />
 		<typeAlias type="com.kh.kmanager.member.model.vo.Member" alias="member" />
-		<typeAlias type="com.kh.kmanager.bo.order.model.vo.Order" alias="order" />
+		<typeAlias type="com.kh.kmanager.common.inquiry.model.vo.Inquiry" alias="inquiry" />
 	</typeAliases>
 	
 	<mappers>
@@ -24,7 +24,7 @@
 		<mapper resource="/mappers/notice-mapper.xml" />
 		<mapper resource="/mappers/graph-mapper.xml" />
 		<mapper resource="/mappers/member-mapper.xml" />
-		<mapper resource="/mappers/order-mapper.xml" />
+		<mapper resource="mappers/inquiry-mapper.xml" />
 	</mappers>
 
 </configuration>

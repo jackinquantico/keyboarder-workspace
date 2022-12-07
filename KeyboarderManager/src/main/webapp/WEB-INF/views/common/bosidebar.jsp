@@ -18,7 +18,7 @@
     <a href="/kmanager/bomain" class="brand-link">
       <!-- <i class="ion-android-person fas fa-fw"></i> -->
       <img src="resources/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">관리자</span>
+      <span class="brand-text font-weight-light">BO 관리자</span>
     </a>
 
     <!-- Sidebar -->
@@ -56,7 +56,7 @@
             <!-- 하위 메뉴 -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="allOrderList.bo" class="nav-link">
+                <a href="viewAllOrder.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 주문내역 조회</p>
                 </a>
@@ -172,7 +172,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
+                <a href="listIq" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>1:1 문의 관리</p>
                 </a>

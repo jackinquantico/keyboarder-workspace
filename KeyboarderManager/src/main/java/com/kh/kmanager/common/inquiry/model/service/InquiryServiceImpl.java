@@ -2,51 +2,51 @@ package com.kh.kmanager.common.inquiry.model.service;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kh.kmanager.common.inquiry.model.dao.InquiryDao;
 import com.kh.kmanager.common.inquiry.model.vo.Inquiry;
 import com.kh.kmanager.common.model.vo.PageInfo;
 
+@Service
 public class InquiryServiceImpl implements InquiryService{
+	
+	@Autowired
+	private InquiryDao inquiryDao;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return inquiryDao.selectListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Inquiry> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int increaseCount(int inquiryNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return inquiryDao.selectList(sqlSession, pi);
 	}
 
 	@Override
 	public Inquiry selectInquiry(int inquiryNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return inquiryDao.selectInquiry(sqlSession, inquiryNo);
 	}
 
 	@Override
 	public int insertInquiry(Inquiry i) {
-		// TODO Auto-generated method stub
-		return 0;
+		return inquiryDao.insertInquiry(sqlSession, i);
 	}
 
 	@Override
 	public ArrayList<Inquiry> selectReplyList(int inquiryNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return inquiryDao.selectReplyList(sqlSession, inquiryNo);
 	}
 
 	@Override
 	public int insertReply(Inquiry r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return inquiryDao.insertReply(sqlSession, r);
 	}
 
 }

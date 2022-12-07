@@ -20,5 +20,6 @@ public class Inquiry {
 	private String inquiryReply;
 	private Date replyDate;
 	private int sellerNo;
+	private String sellerName;
 	
 }

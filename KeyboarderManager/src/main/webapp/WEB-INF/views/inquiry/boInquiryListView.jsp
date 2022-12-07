@@ -43,7 +43,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
+<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
@@ -63,9 +63,6 @@
 <div class="content">
 	<div class="inquiry">
         <div class="inquiryList">
-        <c:if test="${not empty loginUser }">
-        	<button type="button" class="btn btn-dark" id="erollbtn" onclick="location.href='enrollForm.iq'">글작성</button>        
-        </c:if>
         <table id="iqList" class="table table-bordered" style="text-align: center;">
             <thead>
                 <tr>

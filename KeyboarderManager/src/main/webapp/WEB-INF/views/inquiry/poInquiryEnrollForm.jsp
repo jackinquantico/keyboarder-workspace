@@ -47,10 +47,10 @@
       <table class="table table-hover">
         <tbody>
           <tr>
-            <td><input type="text" class="form-control" placeholder="글 제목" name="contentTitle" maxlength="40"></td>
+            <td><input type="text" class="form-control" placeholder="글 제목" name="inquiryName" maxlength="40"></td>
           </tr>
           <tr>
-            <td><textarea id="contentText" type="text" class="form-control" placeholder="글 내용을 작성하세요" name="contentDetail" onkeypress="onChange();" maxlength="1000" style="height: 400px; resize: none;"></textarea></td>
+            <td><textarea id="contentText" type="text" class="form-control" placeholder="글 내용을 작성하세요" name="inquiryContent" onkeypress="onChange();" maxlength="1000" style="height: 400px; resize: none;"></textarea></td>
           </tr>
         </tbody>
       </table>

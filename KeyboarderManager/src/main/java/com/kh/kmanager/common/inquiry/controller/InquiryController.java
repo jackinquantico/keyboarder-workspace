@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.kmanager.common.inquiry.model.service.InquiryService;
 import com.kh.kmanager.common.inquiry.model.vo.Inquiry;
 import com.kh.kmanager.common.model.vo.PageInfo;
 import com.kh.kmanager.common.template.Pagination;
+import com.kh.kmanager.member.model.vo.Member;
 
+@Controller
 public class InquiryController {
 	@Autowired
 	private InquiryService inquiryService;
@@ -30,11 +35,18 @@ public class InquiryController {
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
-		return "inquiry/poinquiryEnroll";
+		return "inquiry/poInquiryListView";
+	}
+	
+	@RequestMapping("enrollForm.iq")
+	public String enrollForm() {
+		return "inquiry/poInquiryEnrollForm";
 	}
 	
 	@RequestMapping("insert.iq")
 	public ModelAndView insertInquiry(Inquiry i , HttpSession session, ModelAndView mv) {
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		i.setSellerNo(sellerNo);
 		int result = inquiryService.insertInquiry(i);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 문의사항이 등록되었습니다.");
@@ -47,13 +59,23 @@ public class InquiryController {
 	
 	@RequestMapping("detail.iq")
 	public ModelAndView selectInquiry(int ino, ModelAndView mv) {
-		int result = inquiryService.increaseCount(ino);
-		if(result>0) {
-			Inquiry i = inquiryService.selectInquiry(ino);
-			mv.addObject("i", i).setViewName("inquiry/poInquiryDetailView");
-		} else {
-			mv.addObject("errorMsg", "게시글 상세조회에 실패하였습니다.").setViewName("common/errorPage");
-		}
+		Inquiry i = inquiryService.selectInquiry(ino);
+		mv.addObject("i", i).setViewName("inquiry/poInquiryDetailView");
 		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="rlist.iq", produces="application/json; charset=UTF-8")
+	public String ajaxSelectReplyList(int ino) {
+		ArrayList<Inquiry> list = inquiryService.selectReplyList(ino);
+		return new Gson().toJson(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="rinsert.iq", produces="text/html; charset=UTF-8")
+	public String ajaxInsertReply(Inquiry r) {
+		int result = inquiryService.insertReply(r);
+		return (result>0) ?  "success" : "fail";
+	}
+	
 }
