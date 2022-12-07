@@ -9,7 +9,7 @@
 <style>
 #listarea {
 	width: 95%;
-	height: 850px;
+	height: 750px;
 	margin: auto;
 	overflow: auto;
 }
@@ -32,7 +32,7 @@
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/boheader.jsp" />
 
 <jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
 
