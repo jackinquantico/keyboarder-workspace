@@ -83,7 +83,7 @@
         <div id="text2">
             아이디 또는 비밀번호가 일치하지 않습니다.
         </div>
-        <a href="login.jsp"><div id="text3">로그인 페이지로 이동</div></a>
+        <a href="index.jsp"><div id="text3">로그인 페이지로 이동</div></a>
     </div>
 
 	<c:if test="${ not empty alertMsg }">
