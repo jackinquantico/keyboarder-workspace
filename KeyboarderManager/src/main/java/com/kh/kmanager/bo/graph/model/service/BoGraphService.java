@@ -6,6 +6,9 @@ import com.kh.kmanager.bo.graph.model.vo.SalesGraph;
 
 public interface BoGraphService {
 
-	// 매출통계 조회용
-	ArrayList<SalesGraph> selectsaleSalesGraph(int month);
+	// 월별 매출통계 조회용
+	ArrayList<SalesGraph> selectSalesGraph(int month);
+	
+	// 전체 월 평균 매출 통계 조회용
+	ArrayList<SalesGraph> selectAvgSalesGraph();
 }

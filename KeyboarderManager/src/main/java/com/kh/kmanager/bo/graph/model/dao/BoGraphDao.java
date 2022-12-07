@@ -10,8 +10,12 @@ import com.kh.kmanager.bo.graph.model.vo.SalesGraph;
 @Repository
 public class BoGraphDao {
 
-	public ArrayList<SalesGraph> selectsaleSalesGraph(SqlSessionTemplate sqlSession, int month) {
-		return (ArrayList)sqlSession.selectList("graphMapper.selectsaleSalesGraph", month);
+	public ArrayList<SalesGraph> selectSalesGraph(SqlSessionTemplate sqlSession, int month) {
+		return (ArrayList)sqlSession.selectList("graphMapper.selectSalesGraph", month);
+	}
+
+	public ArrayList<SalesGraph> selectAvgSalesGraph(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("graphMapper.selectAvgSalesGraph");
 	}
 
 	

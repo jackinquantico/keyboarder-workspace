@@ -17,7 +17,10 @@
 	padding: 20px;
 	margin: 50px;
 }
-#top-content { height: 470px; }
+#top-content { 
+	height: 400px; 
+	padding-bottom: 0px !important; 
+}
 #btm-content { 
 	height: 350px; 
 	padding-bottom: 20px;
@@ -72,10 +75,10 @@
 		<div id="top-content" class="card">
 			<div class="card-header">
 				전체 매출 통계
-				<a href="" class="atag">전체보기</a>
+				<a href="salesStatics.bo" class="atag">전체보기</a>
 			</div>
-			<div class="card-body" style="width:100%; height: 90%;">
-				<canvas id="sales-chart" height="100%" style="display: block; width: 100%;" class="chartjs-render-monitor"></canvas>
+			<div class="card-body graphBox" style="width:100%; height: 400px;">
+				<canvas id="barCanvas" height="60"></canvas>
 			</div>
 		</div>
 		
@@ -131,7 +134,108 @@
 	
 	</div> <!-- /.content -->
 
+
+
 </div> <!-- /.content-wrapper -->
+
+<script>
+function barChart() {
+	
+	$.ajax({
+		url: "mainBarGraph.bo",
+		success: function(map) {			
+			
+			console.log(map.tlist);
+			
+			// var tlist = data.map.tlist;
+			// var llist = data.map.llist;
+			// console.log(tlist);
+			// console.log(llist);
+			
+			const ctx = document.getElementById('barCanvas').getContext('2d');
+			
+			const myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        labels: [map.tlist[0].sellerName
+			        	   , map.tlist[1].sellerName
+			        	   , map.tlist[2].sellerName
+			        	   , map.tlist[3].sellerName
+			        	   , map.tlist[4].sellerName ],
+			        datasets: [{
+			        	type: 'bar',
+			            label: '당월 입점업체별 매출',
+			            data: [map.tlist[0].settleDept
+			                 , map.tlist[1].settleDept
+			                 , map.tlist[2].settleDept
+			                 , map.tlist[3].settleDept
+			                 , map.tlist[4].settleDept],
+			            backgroundColor: [
+			            	'rgba(13, 110, 253, 0.2)',
+			            	'rgba(54, 162, 235, 0.2)',
+			            	'rgba(255, 206, 86, 0.2)',
+			            	'rgba(75, 192, 192, 0.2)',
+			            	'rgba(153, 102, 255, 0.2)'
+			            ],
+			            borderColor: [
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(54, 162, 235, 1)',
+			            	'rgba(255, 206, 86, 1)',
+			            	'rgba(75, 192, 192, 1)',
+			            	'rgba(153, 102, 255, 1)'
+			            ],
+			            borderWidth: 1,
+			            order: 3
+			        }, {
+			        	type: 'bar',
+			        	label: '전월 입점업체별 매출',
+			        	data: [map.llist[0].settleDept
+				             , map.llist[1].settleDept
+				             , map.llist[2].settleDept
+				             , map.llist[3].settleDept
+				             , map.llist[4].settleDept],
+				        backgroundColor: [
+				        	'rgba(0, 0, 0, 0.1)', 
+				       		'rgba(0, 0, 0, 0.1)', 
+				       		'rgba(0, 0, 0, 0.1)', 
+				       		'rgba(0, 0, 0, 0.1)',
+				       		'rgba(0, 0, 0, 0.1)',
+				        ],
+				        borderColor: [
+				        	'rgba(0, 0, 0, 0.8)',
+				       		'rgba(0, 0, 0, 0.8)',
+				       		'rgba(0, 0, 0, 0.8)',
+				        	'rgba(0, 0, 0, 0.8)',
+				        	'rgba(0, 0, 0, 0.8)',
+				        ],
+				        order: 2
+			        }]			    	
+			    }, options: {
+			    	maintainAspectRatio: false,
+			    	aspectRatio: 1,
+			        scales: {
+			            y: {
+			                beginAtZero: true
+			        		}
+		        	}
+				}
+			});
+		},
+		error: function() {
+			console.log("에이작스 통신실패");
+		}
+	});
+}
+
+$(function() {
+	barChart();
+});
+
+setInterval(function() {
+	barChart();
+}, 60000); // 1분 단위로 계속 갱신
+</script>
+
 
 </body>
 </html>

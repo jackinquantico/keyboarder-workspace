@@ -7,7 +7,7 @@
 		<result column="SETTLE_DEPT" property="settleDept" />
 	</resultMap>
 
-	<select id="selectsaleSalesGraph" parameterType="_int" resultMap="salesGraphResultSet">
+	<select id="selectSalesGraph" parameterType="_int" resultMap="salesGraphResultSet">
 		SELECT SUM(SETTLE_DEPT) AS "SETTLE_DEPT"
 			 , SELLER_NAME AS "SELLER_NAME"
 		FROM (
@@ -20,6 +20,23 @@
 		WHERE SETTLE_DATE = #{month}
 		GROUP BY SETTLE_DATE, SELLER_NAME
 		ORDER BY SETTLE_DATE, SELLER_NAME
+	</select>
+	
+	<select id="selectAvgSalesGraph" resultMap="salesGraphResultSet">
+		SELECT AVG(SETTLE_DEPT) AS "SETTLE_DEPT"
+             , SELLER_NAME AS "SELLER_NAME"
+		FROM (SELECT SUM(SETTLE_DEPT) SETTLE_DEPT
+                   , SELLER_NAME
+                   , SETTLE_DATE
+		      FROM (SELECT SETTLE_DEPT
+                         , SELLER_NO
+                         , EXTRACT(MONTH FROM SETTLE_DATE) SETTLE_DATE
+                         , SELLER_NAME
+	                FROM SETTLEMENT
+	                JOIN SELLER USING (SELLER_NO)) 
+	                GROUP BY SELLER_NAME, SETTLE_DATE)
+		GROUP BY SELLER_NAME
+		ORDER BY SELLER_NAME
 	</select>
 
 </mapper>

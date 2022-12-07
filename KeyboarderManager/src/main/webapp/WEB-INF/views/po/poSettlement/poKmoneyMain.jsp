@@ -123,7 +123,7 @@ input[name=startDate] {
 	<table class="table-bordered" id="listTable">
 		<tr>
 			<td>
-				<form action="withdraw.po" method="get">
+				<form action="withdraw.po" method="post">
 					<div id="ableMoney">
 						출금 가능 금액 <span style="float:right;"><span id="allMoney">${ s.ableBalance }</span>원</span>
 					</div>
@@ -135,7 +135,6 @@ input[name=startDate] {
 						<button type="button" class="btn btn-outline-secondary" onclick="selectTen();">10만원</button><br>
 					</div>
 					ㄴ 출금계좌정보 <span id="withdrawAccount">계좌번호 : ${ loginUser.accountNo } </span> | <span id="accountOwner"> 예금주 : ${ loginUser.sellerName }(주)</span> <button class="btn btn-secondary" style="float:right;">출금요청</button>
-					<!-- 임시로 하드코딩 -->
 					<input type="hidden" name="sellerNo" value="${ loginUser.sellerNo }">
 					<input type="hidden" name="accountNo" value="${ loginUser.accountNo }">
 					<input type="hidden" name="repName" value="${ loginUser.repName }">
@@ -145,7 +144,6 @@ input[name=startDate] {
 		<tr>
 			<td>
 				<form action="kmoneylist.po" method="get">
-					<!-- 임시로 하드코딩 -->
 					출금신청내역 <br>
 					ㄴ 출금요청일 <input type="date" class="form-control col-lg-2" name="startDate" required> ~ <input type="date" class="form-control col-lg-2" style="display:inline;" name="endDate" required> <br>
 					<br>

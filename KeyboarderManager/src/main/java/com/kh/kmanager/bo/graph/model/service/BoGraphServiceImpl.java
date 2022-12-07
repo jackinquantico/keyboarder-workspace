@@ -18,9 +18,21 @@ public class BoGraphServiceImpl implements BoGraphService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	/**
+	 * 월별 매출통계 조회용 - 채영
+	 * @param month : 조회하고 싶은 달
+	 */
 	@Override
-	public ArrayList<SalesGraph> selectsaleSalesGraph(int month) {
-		return graphDao.selectsaleSalesGraph(sqlSession, month);
+	public ArrayList<SalesGraph> selectSalesGraph(int month) {
+		return graphDao.selectSalesGraph(sqlSession, month);
+	}
+
+	/**
+	 * 전체 월 평균 매출 통계 조회용 - 채영
+	 */
+	@Override
+	public ArrayList<SalesGraph> selectAvgSalesGraph() {
+		return graphDao.selectAvgSalesGraph(sqlSession);
 	}
 
 }

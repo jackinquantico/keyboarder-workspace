@@ -40,47 +40,6 @@
 <script>
 const ctx = document.getElementById('barCanvas').getContext('2d');
 
-/* const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["${ llist[0].sellerName } 9'", "${ tlist[0].sellerName } 10'"
-        	   , "${ llist[1].sellerName } 9'", "${ tlist[1].sellerName } 10'"
-        	   , "${ llist[2].sellerName } 9'", "${ tlist[2].sellerName } 10'" 
-        	   , "${ llist[3].sellerName } 9'", "${ tlist[3].sellerName } 10'" 
-        	   , "${ llist[4].sellerName } 9'", "${ tlist[4].sellerName } 10'" ],
-        datasets: [{
-        	type: 'bar',
-            label: '전월/당월 입점업체별 매출',
-            data: [${ llist[0].settleDept }, ${ tlist[0].settleDept }
-                 , ${ llist[1].settleDept }, ${ tlist[1].settleDept }
-                 , ${ llist[2].settleDept }, ${ tlist[2].settleDept }
-                 , ${ llist[3].settleDept }, ${ tlist[3].settleDept }
-                 , ${ llist[4].settleDept }, ${ tlist[4].settleDept }],
-            backgroundColor: [
-            	'rgba(0, 0, 0, 0.1)', 'rgba(13, 110, 253, 0.2)',
-            	'rgba(0, 0, 0, 0.1)', 'rgba(54, 162, 235, 0.2)',
-            	'rgba(0, 0, 0, 0.1)', 'rgba(255, 206, 86, 0.2)',
-            	'rgba(0, 0, 0, 0.1)', 'rgba(75, 192, 192, 0.2)',
-            	'rgba(0, 0, 0, 0.1)', 'rgba(153, 102, 255, 0.2)'
-            ],
-            borderColor: [
-            	'rgba(0, 0, 0, 0.8)', 'rgba(13, 110, 253, 1)',
-            	'rgba(0, 0, 0, 0.8)', 'rgba(54, 162, 235, 1)',
-            	'rgba(0, 0, 0, 0.8)', 'rgba(255, 206, 86, 1)',
-            	'rgba(0, 0, 0, 0.8)', 'rgba(75, 192, 192, 1)',
-            	'rgba(0, 0, 0, 0.8)', 'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-}); */
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -112,7 +71,7 @@ const myChart = new Chart(ctx, {
             	'rgba(153, 102, 255, 1)'
             ],
             borderWidth: 1,
-            order: 2
+            order: 3
         }, {
         	type: 'bar',
         	label: '전월 입점업체별 매출',
@@ -135,7 +94,23 @@ const myChart = new Chart(ctx, {
 	        	'rgba(0, 0, 0, 0.8)',
 	        	'rgba(0, 0, 0, 0.8)',
 	        ],
-	        order: 1
+	        order: 2
+        }, {
+        	type: 'line',
+            label: '월 평균 매출',
+            data: [${ alist[0].settleDept }
+                 , ${ alist[1].settleDept }
+                 , ${ alist[2].settleDept }
+                 , ${ alist[3].settleDept }
+                 , ${ alist[4].settleDept }],
+            backgroundColor: [
+            	'rgba(13, 110, 253, 0)'
+            ],
+            borderColor: [
+            	'rgba(13, 110, 253, 1)'
+            ],
+            borderWidth: 1,
+            order: 1
         }]
     },
     options: {
