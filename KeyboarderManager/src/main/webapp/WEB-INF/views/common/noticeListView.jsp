@@ -79,12 +79,27 @@
 						<button disabled>&lt;</button>&nbsp;
 					</c:when>
 					<c:otherwise>
-						<button>&lt;</button>&nbsp;
+						<c:choose>
+							<c:when test="${ loginUser.sellerId eq 'admin' }">
+								<button onclick="location.href='noticeList.bo?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+							</c:when>
+							<c:otherwise>
+								<button onclick="location.href='noticeList.po?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+							</c:otherwise>
+						</c:choose>
+					
 					</c:otherwise>
 				</c:choose>
 				
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<button>${ p }</button>&nbsp;
+					<c:choose>
+						<c:when test="${ loginUser.sellerId eq 'admin' }">
+							<button onclick="location.href='noticeList.bo?cpage=${ p }'">${ p }</button>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<button onclick="location.href='noticeList.po?cpage=${ p }'">${ p }</button>&nbsp;
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 				
 				<c:choose>
@@ -92,7 +107,14 @@
 						<button disabled>&gt;</button>
 					</c:when>
 					<c:otherwise>
-						<button>&gt;</button>
+						<c:choose>
+							<c:when test="${ loginUser.sellerId eq 'admin' }">
+								<button onclick="location.href='noticeList.bo?cpage=${ pi.currentPage + 1}'">&gt;</button>
+							</c:when>
+							<c:otherwise>
+								<button onclick="location.href='noticeList.po?cpage=${ pi.currentPage + 1}'">&gt;</button>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 				</c:choose>
 			</div>
