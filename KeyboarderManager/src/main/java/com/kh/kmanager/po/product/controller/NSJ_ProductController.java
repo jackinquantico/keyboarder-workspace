@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,8 +22,6 @@ import com.google.gson.Gson;
 import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.product.model.service.NSJ_ProductService;
 import com.kh.kmanager.po.product.model.vo.Product;
-
-import oracle.net.aso.p;
 
 @Controller
 public class NSJ_ProductController {
@@ -41,7 +39,7 @@ public class NSJ_ProductController {
 	public String showProduct(Model model, Product p, HttpSession session) {
 		
 		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
-		
+		p.setSellerNo(sellerNo);
 		ArrayList<Product> list = productService.showProduct(sellerNo);
 		
 

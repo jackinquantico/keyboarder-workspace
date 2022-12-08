@@ -61,6 +61,7 @@
 							   PRODUCT_STATUS,
 						       ATTACHMENT1
 							   FROM PRODUCT
+							   WHERE SELLER_NO=#{sellerNo}
 						</select>
 						
 						<!-- 이미지 상세조회 -->
@@ -129,12 +130,20 @@
 				       
 					</select>
 					
-	<select id="getProductName" parameterType="_int" resultMap="ProductResultSet">
-		SELECT PRODUCT_NO
-			 , PRODUCT_NAME
-		FROM PRODUCT
-		WHERE SELLER_NO = #{sellerNo}
-		AND PRODUCT_STATUS = 1
-	</select>					
+					<update id="changeProduct" parameterType="_int">
+						UPDATE PRODUCT
+						SET PRODUCT_STATUS = 1
+						WHERE PRODUCT_NO = #{productNo}
+					</update>
 					
-</mapper>
+					
+									
+					<select id="getProductName" parameterType="_int" resultMap="ProductResultSet">
+						SELECT PRODUCT_NO
+							 , PRODUCT_NAME
+						FROM PRODUCT
+						WHERE SELLER_NO = #{sellerNo}
+						AND PRODUCT_STATUS = 1
+					</select>					
+					
+				</mapper>

@@ -15,12 +15,11 @@ public class ProductDao {
 		return (ArrayList)sqleSession.selectList("poMapper.showProduct", sellerNo);
 		
 	}
-
-	/*	
+	
+		public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.update("poMapper.updateProduct",p);
 		
-	}
-	*/
+}
 
 	public static int productCouponInsert(SqlSessionTemplate sqlSession, Product p) {
 		

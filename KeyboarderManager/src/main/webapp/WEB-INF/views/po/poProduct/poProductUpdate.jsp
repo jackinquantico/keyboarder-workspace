@@ -75,7 +75,7 @@
 	<c:if test="${p.productStatus eq 1 }">
 		<div id="buttonarea">
 		<button type="button"  class="btn btn-secondary" onclick="postFormSubmit(1);">수정하기</button>
-		<button type="button"  class="btn btn-secondary"onclick= "postFormSubmit(2);">삭제하기</button>
+		<button type="button"  class="btn btn-secondary" onclick= "postFormSubmit(2);">삭제하기</button>
 		</div>
 		</c:if>
 		
