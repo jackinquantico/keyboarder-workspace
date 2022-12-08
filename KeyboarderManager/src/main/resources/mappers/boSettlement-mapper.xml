@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="boSettlement-mapper">
+
+	<resultMap id="sellerResultSet" type="cws_settlement">
+		<result column="SELLER_NO" property="sellerNo" />
+		<result column="SELLER_NAME" property="sellerName" />
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="ORDER_PRICE" property="orderPrice" />
+		<result column="SETTLE_DATE" property="settleDate" />
+		<result column="COMMITION" property="commition" />
+		<result column="SETTLE_DEPT" property="settleDept" />
+		<result column="TAX_AMOUNT" property="taxAmount" />
+		<result column="SUPPLY_VALUE" property="supplyValue" />
+		<result column="PAYMENT_NO" property="paymentNo" />
+	</resultMap>
+
+	<select id="selectSeller" resultMap="sellerResultSet">
+		SELECT SELLER_NAME
+		FROM SELLER
+	</select>
+
+	<select id="selectSellerCommition" resultMap="sellerResultSet">
+		SELECT SELLER_NO
+		     , SELLER_NAME
+		     , ORDER_NO
+		     , ORDER_PRICE
+		     , SETTLE_DATE
+		     , COMMITION
+		     , SETTLE_DEPT
+		     , TAX_AMOUNT
+		     , SUPPLY_VALUE
+		     , PAYMENT_NO
+		FROM SETTLEMENT
+		JOIN SELLER USING (SELLER_NO)
+		JOIN ORDERS USING (ORDER_NO)
+	</select>
+
+	
+</mapper>
+
+
+
+
+
+

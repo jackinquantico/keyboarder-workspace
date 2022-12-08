@@ -56,7 +56,7 @@
             <!-- 하위 메뉴 -->
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="viewAllOrder.bo" class="nav-link">
+                <a href="allOrderList.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 주문내역 조회</p>
                 </a>
@@ -114,7 +114,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="commitionSales.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>수수료 매출 조회</p>
                 </a>

@@ -42,6 +42,10 @@
 			<mapping path="/identify.bo" />
 			<mapping path="/updateAccount.bo" />
 			
+			<!--  BO - 정산관리 관련 페이지 -->
+			<mapping path="/commitionSales.bo" />
+			<mapping path="/storeSettlement.bo" />
+			
 			<!-- PO - K-money 잔액관리 페이지 -->
 			<mapping path="/kmoney.po" />
 			<mapping path="/kmoneylist.po" />

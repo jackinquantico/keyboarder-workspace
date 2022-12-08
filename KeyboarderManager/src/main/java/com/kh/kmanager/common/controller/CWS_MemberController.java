@@ -242,7 +242,6 @@ public class CWS_MemberController {
 	@GetMapping("/registerEmail")
 	public String eamilConfirm(Member m) throws Exception{
 		memberService.updateMailAuth(m);
-		System.out.println(m);
 		return "/common/emailAuthSuccess";
 	}
 	
