@@ -151,6 +151,7 @@
                     <div class="modal-footer" id="infofind" style="font-size :13px;">
                         <a href="#">아이디찾기</a>&nbsp;|&nbsp;
                         <a href="#">비밀번호찾기</a>&nbsp;|&nbsp;
+                        
                         <a href="termsForm.me">회원가입</a>
                     </div>
                 </form>

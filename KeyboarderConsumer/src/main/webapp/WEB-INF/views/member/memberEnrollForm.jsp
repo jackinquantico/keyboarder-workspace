@@ -50,7 +50,7 @@
 
 <body>
 	<div id="header">
-        <h1>KEYBOAR-DER</h1>
+        <h1>&nbsp;&nbsp;KEYBOAR-DER</h1>
     <hr>
     </div>
     <br><br>
@@ -73,7 +73,7 @@
                     <tr>
                         <th width="130px"> 아이디 *</th>
                         <td colspan="3"><input type="text" class="form-control" id="memId" name="conId" minlength="7" maxlength="20" placeholder="띄어쓰기 없는 영문,숫자 7~20자" required ></td>
-                        <td width="130px" align="center"><button type="button" id="checkbutton" style="width:106px;" class="btn btn-dark" onclick="idCheck();">중복체크</button></td>
+                        <td width="140px" align="center"><button type="button" id="checkbutton" style="width:130px; height:40px; font-size: 85%; margin-left:10px;" class="btn btn-dark" onclick="idCheck();">아이디 중복체크</button></td>
                     </tr>
                     <tr>
                         <th> 비밀번호 *</th>
@@ -103,6 +103,7 @@
                                     <option value="hanmail.net">hanmail.net</option>
                                     <option value="nate.com">nate.com</option>
                             </select>
+                            <td align="center"><button type="button" id="checkbutton" style="width:130px; height:40px; font-size: 85%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">이메일 중복체크</button></td>
                             <input type="hidden" name="conEmail" id="conEmail" value="">
                         </td>
                     </tr>
