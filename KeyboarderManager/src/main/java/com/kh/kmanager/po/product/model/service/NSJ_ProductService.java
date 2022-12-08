@@ -19,7 +19,7 @@ public interface NSJ_ProductService {
 	
 	//상품 전체 조회(select)
 	
-	ArrayList<Product> showProduct(Product p);
+	ArrayList<Product> showProduct(int sellerNo);
 	
 	//상품 상세 조회 (select)
 	
@@ -32,7 +32,10 @@ public interface NSJ_ProductService {
 	Product countProduct(int sellerNo);
 
 	//상품 이름 검색(select)
-	ArrayList<Product> selectProduct(String productName);
+	ArrayList<Product> selectProduct(Product p);
+
+	//상품을 재공개 해주는 메소드
+	int changeProduct(int productNo);
 
 	
 

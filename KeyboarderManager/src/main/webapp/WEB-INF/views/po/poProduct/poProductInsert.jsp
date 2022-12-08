@@ -73,8 +73,8 @@ height:150px;
 	<form id="insertEnrollForm" method="post" action="insert.pro"
 		enctype="multipart/form-data">
 
-		<!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
-		<input type="hidden" name="sellerNo" value="10000">
+		
+		<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
 		<div class="content-wrapper">
 
 			<br>

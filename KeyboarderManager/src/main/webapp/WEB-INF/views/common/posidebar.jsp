@@ -95,7 +95,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="insert.sco" class="nav-link">
               <i class="nav-icon fas  fa-gift"></i>
               <p>쿠폰 관리
                 <i class="fas fa-angle-left right"></i>
@@ -103,7 +103,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="insert.sco" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>쿠폰 등록</p>
                 </a>

@@ -10,8 +10,8 @@ import com.kh.kmanager.po.product.model.vo.Product;
 @Repository
 public class ProductDao {
 	
-	public ArrayList<Product> showProduct(SqlSessionTemplate sqleSession, Product p) {
-		return (ArrayList)sqleSession.selectList("poMapper.showProduct",p);
+	public ArrayList<Product> showProduct(SqlSessionTemplate sqleSession,int sellerNo) {
+		return (ArrayList)sqleSession.selectList("poMapper.showProduct", sellerNo);
 		
 	}
 
@@ -41,15 +41,20 @@ public class ProductDao {
 		return sqlSession.update("poMapper.deleteProduct",productNo);
 	}
 
-	/*
-	 * public Product countProduct(SqlSessionTemplate sqlSession, String sellerNo) {
-	 * 
-	 * return sqlSession.selectOne("poMapper.countProduct",sellerNo);
-	 * 
-	 * }
-	 */
-	public ArrayList<Product> selectProduct(SqlSessionTemplate sqlSession, String productName) {
-		return (ArrayList)sqlSession.selectList("poMapper.selectProduct",productName);
+	
+	  public Product countProduct(SqlSessionTemplate sqlSession, int sellerNo) {
+	  
+	  return sqlSession.selectOne("poMapper.countProduct",sellerNo);
+	  
+	  }
+	 
+	public ArrayList<Product> selectProduct(SqlSessionTemplate sqlSession,Product p) {
+		return (ArrayList)sqlSession.selectList("poMapper.selectProduct",p);
+	}
+
+	public int changeProduct(SqlSessionTemplate sqlSession, int productNo) {
+		
+		return sqlSession.update("poMapper.changeProduct",productNo);
 	}
 }
 

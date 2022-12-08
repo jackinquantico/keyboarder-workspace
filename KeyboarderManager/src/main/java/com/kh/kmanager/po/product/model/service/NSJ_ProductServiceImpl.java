@@ -32,8 +32,8 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 	}
 
 	@Override
-	public ArrayList<Product> showProduct(Product p) {
-		return productDao.showProduct(sqlSession,p);
+	public ArrayList<Product> showProduct(int sellerNo) {
+		return productDao.showProduct(sqlSession, sellerNo);
 	}
 
 	@Override
@@ -58,23 +58,26 @@ public class NSJ_ProductServiceImpl implements NSJ_ProductService{
 		return productDao.deleteProduct(sqlSession,productNo);
 	}
 
-	/*
-	 * public Product countProduct(String sellerNo) {
-	 * 
-	 * return productDao.countProduct(sqlSession,sellerNo); }
-	 */
+	@Override
+	  public Product countProduct(int sellerNo) {
+  
+	  return productDao.countProduct(sqlSession,sellerNo); 
+	  }
+	
 
 	@Override
-	public ArrayList<Product>selectProduct (String productName) {
+	public ArrayList<Product>selectProduct (Product p) {
 		
-		return productDao.selectProduct(sqlSession,productName);
+		return productDao.selectProduct(sqlSession,p);
 	}
 
 	@Override
-	public Product countProduct(int sellerNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public int changeProduct(int productNo) {
+		
+		return productDao.changeProduct(sqlSession,productNo);
 	}
+
+
 	
 	
 	

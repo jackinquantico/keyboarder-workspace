@@ -41,6 +41,7 @@
       <!-- 홈버튼 -->
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/kmanager/pomain" class="nav-link">Home</a>
+        <input type="hidden" name="sellerNo" value="10001">
       </li>
     </ul>
     

@@ -27,7 +27,7 @@ public class Product {
 	private int sellerNo;
 	private int couponNo;
 	private String couponName;
-	private String productStatus;
+	private int productStatus;
 	private int soldOut;
 	private int onSale;
 	

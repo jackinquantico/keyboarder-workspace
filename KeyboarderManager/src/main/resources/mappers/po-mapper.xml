@@ -104,28 +104,30 @@
 					</update>
 					
 					
-					<!-- <select id ="countProduct" parameterType="product">
+					<select id ="countProduct" parameterType="product">
+					
 					SELECT onsale.PRODUCT_NO as ONSALE,  
 					soldout.PRODUCT_NO as SOLDOUT
 					FROM (SELECT COUNT(*) PRODUCT_NO 
-					FROM PRODUCT WHERE SELLER_NO= #{sellerNo} AND PRODUCT_STATUS=1) onsale,
-        			(SELECT COUNT(*)  PRODUCT_NO FROM PRODUCT WHERE SELLER_NO= #{sellerNo}
+					FROM PRODUCT WHERE SELLER_NO= #{sellerNo}
+					AND PRODUCT_STATUS=1) onsale, (SELECT COUNT(*) PRODUCT_NO FROM PRODUCT
+					WHERE SELLER_NO= #{sellerNo}
         			AND PRODUCT_STATUS=0) soldout
 					
 					</select>
-					 -->
-				
+					
+		
 					<select id="selectProduct" parameterType="product" resultMap="ProductResultSet">
-							   SELECT 
-							   PRODUCT_NO,
-							   PRODUCT_NAME,
-							   PRICE,
-							   PRODUCT_STATUS,
-						       ATTACHMENT1
-						       FROM PRODUCT
-						       WHERE PRODUCT_NAME LIKE '%' || #{productName} || '%' 
-						       
-						</select>
+					   SELECT 
+					   PRODUCT_NO,
+					   PRODUCT_NAME,
+					   PRICE,
+					   PRODUCT_STATUS,
+				       ATTACHMENT1
+				       FROM PRODUCT
+				       WHERE PRODUCT_NAME LIKE '%' || #{productName} || '%' 
+				       
+					</select>
 					
 			</mapper>
 

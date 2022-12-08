@@ -1,7 +1,6 @@
 package com.kh.kmanager.po.product.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,15 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.product.model.service.NSJ_ProductService;
-import com.kh.kmanager.po.product.model.service.ProductService;
 import com.kh.kmanager.po.product.model.vo.Product;
+
+import oracle.net.aso.p;
 
 @Controller
 public class NSJ_ProductController {
@@ -36,17 +37,21 @@ public class NSJ_ProductController {
 	 */
 	// po상품 메인화면 띄워주기
 	@RequestMapping("show.pro")
-	public String showProduct(Product p, Model model) {
-
-		ArrayList<Product> list = productService.showProduct(p);
+	public String showProduct(Model model, Product p, HttpSession session) {
+		
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		
+		ArrayList<Product> list = productService.showProduct(sellerNo);
+		
 
 		// WEB-INF/views/po/poProduct/
+		
 		model.addAttribute("list", list);
 		return "po/poProduct/poProductManageMain";
 	}
 
 	/**
-	 * po 상세 상품 조회
+	 * po 상세 상품 조회-성진
 	 * 
 	 * @return
 	 */
@@ -54,7 +59,6 @@ public class NSJ_ProductController {
 	public ModelAndView detailProduct(int productNo, ModelAndView mv) {
 
 		Product p = productService.detailProduct(productNo);
-		
 
 		mv.addObject("p", p).setViewName("po/poProduct/poProductUpdate");
 
@@ -185,7 +189,7 @@ public class NSJ_ProductController {
 	}
 
 	/**
-	 * po 상품 삭제 메소드
+	 * po 상품 삭제 메소드-성진
 	 * 
 	 * @return //
 	 */
@@ -210,36 +214,62 @@ public class NSJ_ProductController {
 	}
 
 	/**
-	 * 판매중인 상품의 수를 세는 메소드
+	 * 판매중인 상품의 수를 세는 메소드-성진
 	 * 
 	 * @return
 	 */
-	/*
-	 * @RequestMapping("count.pro") public ModelAndView countProduct(int sellerNo,
-	 * ModelAndView mv) {
-	 * 
-	 * Product p = productService.countProduct(sellerNo); System.out.println(p);
-	 * 
-	 * mv.addObject("p", p).setViewName("po/poProduct/poProductManageMain");
-	 * 
-	 * return mv; }
-	 */
-		@RequestMapping("select.pro")
-		public String selectProduct(Product p,Model model,String productName) {
-			
-		ArrayList<Product> list = productService.selectProduct(productName);
-		
-		if(productName==null) {
-			list=productService.showProduct(p);
-		}else {
-			list = productService.selectProduct(productName);
-		}
-			
-		model.addAttribute("list", list);
-		
-		return "po/poProduct/poProductManageMain";
+	  @ResponseBody
+	  @RequestMapping(value="count.pro", produces="application/json; charset=UTF-8") 
+	  public String countProduct(Model model,int sellerNo) {
+	  
+		  Product p = productService.countProduct(sellerNo); 
+		  
+		   return new Gson().toJson(p);
+	  }
 		 
+	/**
+	 * 상품이름으로 검색하는 메소드-성진
+	 * 
+	 * @return
+	 */
+	@RequestMapping("select.pro")
+	public String selectProduct(Product p, Model model, String productName,HttpSession session) {
+		System.out.println(productName);
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		p.setSellerNo(sellerNo);
+		ArrayList<Product> list = null;
 		
+		if (productName.equals("")) {
+			list = productService.showProduct(sellerNo);
+		} else {
+			list = productService.selectProduct(p);
 		}
 
+		model.addAttribute("list", list);
+
+		return "po/poProduct/poProductManageMain";
+
+	}
+	
+	 
+	/**
+	 * 상품을 다시 공개처리 해주는 메소드-성진
+	 * 
+	 * @return
+	 */@RequestMapping("change.pro")
+	public String changeelectProduct (int productNo, HttpSession session, Model model) {
+		
+		
+		 int result= productService.changeProduct(productNo);
+		 
+		 if (result > 0) {
+				session.setAttribute("alertMsg", "성공적으로 상품이 공개처리되었습니다.");
+
+			} else {
+				session.setAttribute("alertMsg", "상품 공개에 실패했습니다.");
+			}
+			return "redirect:/show.pro";
+	}
 }
+
+

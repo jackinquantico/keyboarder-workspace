@@ -55,13 +55,10 @@
     
   <div class="content-wrapper">
     <form id="showProduct" method="post" action="select.pro">
-    <!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
-<%--     <input type="hidden" name="sellerNo" value="${p.sellerNo}">
-    <input type="hidden" name="productNo" value="${p.productNo}">  
-    <input type="hidden" name="productName" value="${p.productName}">  --%>
+    
  
           <br>
- 
+ 			
           <!-- 콘텐츠 영역 제목 -->
           <div class="content-header">
              <div class="container-fluid">
@@ -78,21 +75,23 @@
  
           <div class="content">
  
+
             <div id="productCount" class="card">
                 <table width="100%">
                    <tr>
-                      <td>아이콘</td>
+                      <td><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
                       <td>전체</td>
-                      <td>1,234</td>
-                      <td>아이콘</td>
-                      <td></td>
-                      <td>${p.onSale}</td>
-                      <td>아이콘</td>
-                      <td></td>
-                      <td>1,234</td>
-                      <td>아이콘</td>
+                      <td><div id="all"></div></td>
+                      <td><img src="resources/uploadFiles/shop.png" style="width:35px; hieght:35px;"></td>
+                      <td>판매중</td>
+                      <td><div id="onsale"></div></td>
+                      <td><img src="resources/uploadFiles/minus.png" style="width:35px; hieght:35px;"></td>
+                      <td>품절</td>
+                      <td><div id="soldout"></div></td>
+                      <td><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
                       <td>판매중지</td>
-                      <td>${p.soldOut}</td>
+                      <td></td>
+                      <td><div id="noSale"></div></td>
                    </tr>
                 </table>
             </div>
@@ -103,7 +102,7 @@
                 <table width="100%">
                    <tr>
                       <td width="5%" align="right">${p.productName}</td>
-                      <td width="85%"><input type="text" class="form-control" name="productName" value="${p.productName}">
+                      <td width="85%"><input type="text" class="form-control" name="productName">
                       </td>
                       <td width="10%">
                          <button type="submit" class="btn btn-secondary" style="width: 80%;" 
@@ -130,9 +129,11 @@
                             	</div>
                            		<div><p>판매중</p></div>
                            		<div><p>${p.productName}</p></div>
-                            	<div><p>${p.price}</p></div>
+                            	<div>${p.price}</div>
                             	</div>
                             </c:if>
+                            
+                            
                             <c:if test="${ p.productStatus eq 0 }">
 								<div id="pro" align="center">
 	                            <img class="card-img-top"
@@ -140,7 +141,7 @@
 	                            alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
 	                             <div><p>품절</p></div>
 	                            <div><p>${p.productName }</p></div>
-	                            <div><p>${p.price}</p></div>
+	                            <div>${p.price}</div>
 	                            </div>
                             </c:if>
 					 </c:forEach>
@@ -152,6 +153,29 @@
                 </div>   
           </div>
        </div>
+       
+       <script> //카운트 조회용
+       $(function() {
+    	   console.log	("${loginUser.sellerNo}")
+    	  $.ajax({
+    		  url : "count.pro",
+    		  data : {sellerNo :"${loginUser.sellerNo }"
+    			  	 
+    	  },
+    		  success : function(result) {
+    			  var soldOut = Number(result.soldOut);
+    			  var onSale = Number(result.onSale);
+    			  $("#all").text(soldOut+onSale);
+    			  $("#onsale").text(result.onSale);
+    			  $("#soldout").text(result.soldOut);
+    			  $("#noSale").text(result.soldOut);
+    		  },
+    		  error : function() {
+    			  console.log("카운트 조회용 ajax 요청 실패!");
+    		  }
+    	  }); 
+       });
+       </script>
        
        <!-- content -->
     </form>

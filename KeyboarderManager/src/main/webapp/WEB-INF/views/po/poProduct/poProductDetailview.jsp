@@ -61,7 +61,7 @@
 		<div id="contentarea" class="card">
             <form id ="postForm" method="post" action="updateForm.pro">
             <!-- 판매자 정보 넘겨야 함 : 임시로  하드코딩 -->
-    <input type="hidden" name="sellerNo" value="10000">
+
     <input type="hidden" name="productNo" value="${p.productNo}">
    <button type="submit" class=" btn btn-secondary" onclick="productUpdate(1);">수정하기</button>
       

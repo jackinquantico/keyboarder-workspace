@@ -62,14 +62,23 @@
 	<div class="content">
 		<div id="contentarea" class="card">
 		<form id="postForm" method="post" action="" enctype="multipart/form-data">
-	<input type="hidden" name="sellerNo" value="10000">
+	
     <input type="hidden" name="productNo" value="${p.productNo}">
-   
-   
+  <input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
+   <c:if test="${p.productStatus eq 0 }">
 	<div id="buttonarea">
 		<button type="button"  class="btn btn-secondary" onclick="postFormSubmit(1);">수정하기</button>
-		<button type="button"  class="btn btn-secondary"onclick="postFormSubmit(2);">삭제하기</button>
+		<button type="button"  class="btn btn-secondary"onclick="postFormSubmit(3);">공개하기</button>
 		</div>
+		</c:if>
+		
+	<c:if test="${p.productStatus eq 1 }">
+		<div id="buttonarea">
+		<button type="button"  class="btn btn-secondary" onclick="postFormSubmit(1);">수정하기</button>
+		<button type="button"  class="btn btn-secondary"onclick= "postFormSubmit(2);">삭제하기</button>
+		</div>
+		</c:if>
+		
                  <table id="product_img_list" style="height:500px;">
                      
                  <tr>
@@ -165,8 +174,10 @@
     			if(num ==1){
     				$("#postForm").attr("action","update.pro").submit();
     				
-    			}else{
+    			}else if(num==2){
     				$("#postForm").attr("action","delete.pro").submit();
+    			}else{
+    				$("#postForm").attr("action","change.pro").submit();
     			}
     		}
           
