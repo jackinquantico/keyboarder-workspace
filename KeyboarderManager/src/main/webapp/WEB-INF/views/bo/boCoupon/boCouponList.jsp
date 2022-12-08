@@ -74,7 +74,7 @@ input[type=date] {
         <tr>
            <td width="10%">발급대상 *</td>
            <td>
-           		<input type="radio">&nbsp;전체 &nbsp;
+           		<input type="radio" checked>&nbsp;전체 &nbsp;
            </td>
         </tr>
    		<tr>

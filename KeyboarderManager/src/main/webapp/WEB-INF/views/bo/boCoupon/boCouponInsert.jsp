@@ -79,8 +79,8 @@ select[name=productNo] {
 			<tr>
 			    <td>쿠폰 유효기간 *</td>
 			    <td>
-			    	<label class="form-check-label"><input type="radio" name="setDate" checked>기간설정</label>
-		        	<label class="form-check-label"><input type="radio" name="setDate">발급일기준 설정</label>
+			    	<label class="form-check-label"><input type="radio" id="setDate" name="setDate" checked>기간설정</label>
+		        	<label class="form-check-label"><input type="radio" id="setToday" name="setDate">발급일기준 설정</label>
 		        </td>
 			</tr>
 			<tr>
@@ -153,9 +153,19 @@ $(function() {
 				console.log("ajax 통신 실패");
 			}
 		});
-	
 	});
 	
+	$("#setToday").change(function() {
+		const date = new Date();
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, "0");
+		const day = String(date.getDate()).padStart(2, "0");
+		$("input[name=createDate]").val(year+"-"+month+"-"+day);
+	});
+	
+	$("#setDate").change(function() {
+		$("input[name=createDate]").val("");
+	});
 });
 </script>
 
