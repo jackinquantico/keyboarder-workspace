@@ -22,6 +22,11 @@ public class BoCouponServiceImpl implements BoCouponService {
 	public ArrayList<BoCoupon> selectCouponList(BoCoupon bc) {
 		return couponDao.selectCouponList(sqlSession, bc);
 	}
+
+	@Override
+	public int insertCoupon(BoCoupon bc) {
+		return couponDao.insertCoupon(sqlSession, bc);
+	}
 	
 
 }

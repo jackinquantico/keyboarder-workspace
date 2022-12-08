@@ -42,5 +42,20 @@
 		</choose>
 		ORDER BY COUPON_NO DESC
 	</select>
+	
+	<insert id="insertCoupon" parameterType="boCoupon">
+		INSERT INTO COUPON_KEYBOARDER (COUPON_NO
+		                             , COUPON_NAME
+		                             , COUPON_PRICE
+		                             , CREATE_DATE
+		                             , DUE_DATE
+		                             , PRODUCT_NO)                             
+		VALUES('K'||SEQ_COUPON_KEYBOARDER_NO.NEXTVAL
+		     , #{couponName}
+		     , #{couponPrice}
+		     , #{createDate}
+		     , #{dueDate}
+		     , #{productNo})
+	</insert>
 
 </mapper>

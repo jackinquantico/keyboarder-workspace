@@ -79,7 +79,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="couponInsert.bo" class="nav-link">
+                <a href="registCoupon.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>쿠폰 등록</p>
                 </a>

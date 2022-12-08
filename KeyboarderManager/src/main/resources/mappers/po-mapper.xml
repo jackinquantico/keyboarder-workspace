@@ -129,7 +129,15 @@
 				       
 					</select>
 					
-			</mapper>
+	<select id="getProductName" parameterType="_int" resultMap="ProductResultSet">
+		SELECT PRODUCT_NO
+			 , PRODUCT_NAME
+		FROM PRODUCT
+		WHERE SELLER_NO = #{sellerNo}
+		AND PRODUCT_STATUS = 1
+	</select>					
+					
+</mapper>
 
 
 
