@@ -80,9 +80,10 @@
         <img src="resources/images/error.jpg">
         <div id="text1">비밀번호 초기화 실패</div>
         <div id="text2">
-            아이디 또는 사업자 등록번호가 일치하지 않습니다.
+            아이디 또는 사업자 등록번호가 일치하지 않거나, <br>
+            이메일 인증이 되어있지 않은 판매자입니다.
         </div>
-        <a href="login.jsp"><div id="text3">로그인 페이지로 이동</div></a>
+        <a href="loginPage.me"><div id="text3">로그인 페이지로 이동</div></a>
     </div>
 
 </body>

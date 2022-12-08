@@ -45,6 +45,7 @@
 		SELECT SELLER_ID
 		FROM SELLER
 		WHERE CORP_NO = #{corpNo}
+	      AND MAIL_AUTH = '1'
 	</select>
 	
 	<select id="initializePwdForm" parameterType="member" resultMap="memberResultSet">
@@ -52,6 +53,7 @@
 		FROM SELLER
 		WHERE SELLER_ID = #{sellerId}
 		  AND CORP_NO = #{corpNo}
+		  AND MAIL_AUTH = '1'
 	</select>
 	
 	<update id="initializePwd" parameterType="member">

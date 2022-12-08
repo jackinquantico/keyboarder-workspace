@@ -119,7 +119,7 @@
                 <hr>
                 <form id="login_form" action="login.me" method="post">
                     <input type="text" id="userId" name="sellerId" placeholder="아이디를 입력하세요" value="${ cookie.saveId.value }" required>                 
-                    <input type="password" name="sellerPwd" placeholder="비밀번호를 입력하세요" required>                   
+                    <input type="password" name="sellerPwd" maxlength="20" placeholder="비밀번호를 입력하세요" required>                   
                     <input type="submit" value="로그인">
                     <br>
                     <c:choose>
