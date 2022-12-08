@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+import org.springframework.web.bind.annotation.RequestMethod;
+>>>>>>> Stashed changes
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -135,6 +138,7 @@ public class NSJ_ProductController {
 
 	/**
 	 * po 상품 등록 메소드 -성진
+<<<<<<< Updated upstream
 	 * 
 	 * @return
 	 */
@@ -186,6 +190,63 @@ public class NSJ_ProductController {
 
 		}
 		return mv;
+=======
+	 */
+
+	@RequestMapping("insert.pro")
+	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
+			ModelAndView mv) throws Exception {
+
+		List<MultipartFile> upfiles = request.getFiles("upfile");
+
+		String path = request.getSession().getServletContext().getRealPath("/resources/uploadFiles/");
+
+		File fileDir = new File(path);
+
+		if (!fileDir.exists()) {
+			fileDir.mkdirs();
+		}
+
+		long time = System.currentTimeMillis();
+
+		for (MultipartFile f : upfiles) {
+
+			String originFileName = f.getOriginalFilename(); // 원본 파일 명
+			String saveFileName = String.format("%d_%s", time, originFileName);
+
+			try {
+				// 파일생성
+				f.transferTo(new File(path, saveFileName));
+				p.setAttachment1(saveFileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println(p);
+			int result = productService.insertProduct(p);
+			System.out.println(result);
+			if (result > 0) {
+				session.setAttribute("alertMsg", "성공적으로 사진이 업로드 되었습니다.");
+
+				mv.setViewName("redirect:/show.pro");
+			} else { // 실패 => 에러페이지로 포워딩
+
+				// mv.addObject("errorMsg", "게시글 작성 실패");
+				// mv.setViewName("common/errorPage");
+
+				// addObject 메소드의 반환형은 ModelAndView 타입임
+				// => 다음과 같이 메소드 체이닝도 가능하다.
+				mv.addObject("errorMsg", "게시글 작성 실패").setViewName("common/errorPage");
+			}
+
+		}
+		return mv;
+	}
+
+	
+	@RequestMapping("detail.pro")
+	public String detailProduct() {
+		return "po/poProduct/poProductDetailview";
+>>>>>>> Stashed changes
 	}
 
 	/**

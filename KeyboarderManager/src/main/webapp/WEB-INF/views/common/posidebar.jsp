@@ -47,7 +47,7 @@
         
           <!-- 하위 메뉴 있는 메뉴 -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="show.pro" class="nav-link">
               <i class="nav-icon fa-solid fa-bag-shopping"></i>
               <p>상품 관리
                 <i class="fas fa-angle-left right"></i>

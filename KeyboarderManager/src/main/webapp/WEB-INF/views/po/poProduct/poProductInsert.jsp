@@ -215,6 +215,7 @@ height:150px;
 			<!-- content -->
 		</div>
 		
+<<<<<<< Updated upstream
 		<!-- <script>
 		 function addImg(){
 			
@@ -271,6 +272,8 @@ height:150px;
 		
 		
 		
+=======
+>>>>>>> Stashed changes
 		
 		
 	</form>

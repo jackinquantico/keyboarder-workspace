@@ -17,6 +17,7 @@
 	</resultMap>
 	
 	<!-- 이미지업로드 -->
+<<<<<<< Updated upstream
 
 	<insert id="insertProduct" parameterType="product">
 		INSERT INTO PRODUCT(PRODUCT_NO
@@ -39,6 +40,7 @@
 				   		 , #{price}
 				   		 , #{description}
 				   		 , #{attachment1}
+<<<<<<< Updated upstream
 				   		  <if test='attachment2!=null  and !attachment2.equalsIgnoreCase("null")'>
 				   		 	, #{attachment2}
 				   		 </if>
@@ -138,6 +140,7 @@
 	</select>					
 					
 </mapper>
+>>>>>>> Stashed changes
 
 
 
