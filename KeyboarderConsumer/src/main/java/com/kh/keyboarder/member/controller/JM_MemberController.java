@@ -24,6 +24,7 @@ public class JM_MemberController {
 	@Autowired
 	private JM_MemberService memberService;
 	
+	// 로그인
 	@RequestMapping("login.me")
 	public String loginMember(Member m, HttpSession session, String id, String saveId, HttpServletResponse response) {
 		// 이메일 인증했는지 확인
@@ -40,6 +41,7 @@ public class JM_MemberController {
 		}
 	}
 	
+	// 로그아웃
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
 		
@@ -48,10 +50,15 @@ public class JM_MemberController {
 		return "redirect:/";
 	}
 	
+	/**
+	 * 회원가입시 약관동의 - 장미
+	 * @return
+	 */
 	@RequestMapping("termsForm.me")
 	public String termsForm() {
 		return "member/memberTermsForm";
 	}
+	
 	
 	@RequestMapping("enroll.me")
 	public String enrollForm() {
@@ -73,14 +80,19 @@ public class JM_MemberController {
 		}
 	}
 	
-	// 이메일인증확인
+	/**
+	 * 이메일 인증 확인 - 장미
+	 * @param m
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("/registerEmail")
 	public String eamilConfirm(Member m) throws Exception{
 		memberService.updateMailAuth(m);
 		return "/member/emailAuthSuccess";
 	}
 	
-	//아이디중복체크
+	// 아이디 중복확인
 	@ResponseBody
 	@RequestMapping(value="idCheck.me", produces="text/html; charset=UTF-8")
 	public String idCheck(String checkId) {
@@ -89,7 +101,7 @@ public class JM_MemberController {
 	}
 	
 	/**
-	 * 아이디찾기 
+	 * 아이디찾기 - 장미
 	 */
 	@RequestMapping(value="findIdForm")
 	public String findIdForm() throws Exception {

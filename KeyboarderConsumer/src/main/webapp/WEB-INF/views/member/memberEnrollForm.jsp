@@ -185,6 +185,13 @@
                 </script>
                 
                 <script>
+                	function emailCheck() {
+                		// 이메일 중복체크 전 유효성검사 
+                		var email_id = document.getElementById("email_id");
+                	} // 하다말았음 여기서부터 시작하기~
+                </script>
+                
+                <script>
                     function sample6_execDaumPostcode() {
                         new daum.Postcode({
                             oncomplete: function(data) {

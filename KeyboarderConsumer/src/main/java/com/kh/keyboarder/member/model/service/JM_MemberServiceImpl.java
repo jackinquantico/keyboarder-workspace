@@ -24,7 +24,7 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	JavaMailSender mailSender;
 
 	/**
-	 * 로그인
+	 * 로그인 -장미
 	 */
 	@Override
 	public Member loginMember(Member m) {
@@ -33,7 +33,7 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	}
 
 	/**
-	 * 회원가입+이메일인증메일전송
+	 * 회원가입+이메일인증메일전송  -장미
 	 */
 	@Override
 	public int insertMember(Member m) throws Exception {
@@ -63,7 +63,7 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	}
 	
 	/**
-	 * 이메일인증
+	 * 이메일인증  -장미
 	 */
 	@Override
 	public int updateMailKey(Member m) {
@@ -81,7 +81,7 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	}
 	
 	/**
-	 * 아이디중복체크
+	 * 아이디중복체크  -장미
 	 */
 	@Override
 	public int idCheck(String checkId) {
