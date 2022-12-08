@@ -15,6 +15,7 @@
 		<typeAlias type="com.kh.kmanager.bo.graph.model.vo.SalesGraph" alias="salesGraph" />
 		<typeAlias type="com.kh.kmanager.member.model.vo.Member" alias="member" />
 		<typeAlias type="com.kh.kmanager.common.inquiry.model.vo.Inquiry" alias="inquiry" />
+		<typeAlias type="com.kh.kmanager.bo.coupon.model.vo.BoCoupon" alias="boCoupon" />
 	</typeAliases>
 	
 	<mappers>
@@ -24,7 +25,8 @@
 		<mapper resource="/mappers/notice-mapper.xml" />
 		<mapper resource="/mappers/graph-mapper.xml" />
 		<mapper resource="/mappers/member-mapper.xml" />
-		<mapper resource="mappers/inquiry-mapper.xml" />
+		<mapper resource="/mappers/inquiry-mapper.xml" />
+		<mapper resource="/mappers/boCoupon-mapper.xml" />
 	</mappers>
 
 </configuration>

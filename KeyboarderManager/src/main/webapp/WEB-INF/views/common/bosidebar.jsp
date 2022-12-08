@@ -73,15 +73,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="coupon.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>쿠폰 등록</p>
+                  <p>쿠폰 전체 조회</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="couponInsert.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>쿠폰 조회/수정</p>
+                  <p>쿠폰 등록</p>
                 </a>
               </li>
               <li class="nav-item">
