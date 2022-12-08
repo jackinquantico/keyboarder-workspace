@@ -82,6 +82,13 @@
 </head>
 <body>
 
+	<c:if test="${ not empty alertMsg }">
+		<script>
+			alert("${ alertMsg }");
+		</script>
+		<c:remove var="alertMsg" scope="session" />
+   </c:if>
+
 	<div class="fo-header-full">
             <div id="fo-header-logo">
                 <a href="foProductNotice.pro">

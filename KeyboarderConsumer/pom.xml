@@ -217,6 +217,7 @@
 		    <version>2.10</version>
 		</dependency>
 		
+		<!-- 결제 관련 api -->
 		<dependency>
 		    <groupId>com.github.iamport</groupId>
 		    <artifactId>iamport-rest-client-java</artifactId>

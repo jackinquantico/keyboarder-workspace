@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.keyboarder.member.model.vo.Member;
 import com.kh.keyboarder.order.model.service.PGDataService;
 import com.kh.keyboarder.order.model.vo.PGData;
 
@@ -19,7 +20,10 @@ public class PGDataController {
 		
 	
 	@RequestMapping("purchase.fo")
-	public String requestPay(PGData pgd) {
+	public String requestPay(PGData pgd,HttpSession session) {
+		
+		int conNo = ((Member)session.getAttribute("loginUser")).getConNo();
+		pgd.setConNo(conNo);
 		
 		int amount = Integer.parseInt(pgd.getAmount()); // 실결제금액
 		pgd.setOrderPrice(amount + pgd.getCouponPrice()); // 주문금액
@@ -34,11 +38,11 @@ public class PGDataController {
 		int result = service.insertOrder(pgd);
 		
 		if (result > 0) {
-			System.out.println("성공");
-			return "redirect:/";
+			session.setAttribute("alertMsg", "결제 완료");
+			return "redirect:/foProductNotice.pro";
 		} else {
-			System.out.println("실패");
-			return "redirect:/";
+			session.setAttribute("alertMsg", "결제 실패");
+			return "redirect:/foProductNotice.pro";
 		}
 	}
 	
@@ -57,10 +61,10 @@ public class PGDataController {
 		
 		if (result > 0) {
 			session.setAttribute("alertMsg", "결제 취소 완료");
-			return "redirect:/";
+			return "redirect:/foProductNotice.pro";
 		} else {
 			session.setAttribute("alertMsg", "결제 취소 실패");
-			return "redirect:/";
+			return "redirect:/foProductNotice.pro";
 		}
 	}
 }

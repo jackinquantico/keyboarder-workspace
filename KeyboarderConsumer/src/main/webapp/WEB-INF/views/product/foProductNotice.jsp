@@ -107,13 +107,12 @@
                 		<%--<c:forEach var="keyc" items="${ keyCouponList }">
                 			<c:forEach var="stoc" items="${ stoCouponList }"> --%>
 			                    <div class="fo-product-all" align="center">
-			                        <form action="purchase.fo" method="post" id="request">
-			                        	<input type="hidden" name="paymentNo" id="imp_uid">
-										<input type="hidden" name="orderNo" id="merchant_uid">
-										<input type="hidden" name="productNo" id="product_name">
-										<input type="hidden" name="amount" id="amount">
-										<input type="hidden" name="conNo" id="buyer_name">
-										<input type="hidden" name="couponPrice" id="couponPrice" value="3000">
+			                        <form action="purchase.fo" method="post" class="request">
+			                        	<input type="hidden" name="paymentNo" class="imp_uid">
+										<input type="hidden" name="orderNo" class="merchant_uid">
+										<input type="hidden" name="productNo" class="product_name" value="${ p.productNo }">
+										<input type="hidden" name="amount" class="amount">
+										<input type="hidden" name="couponPrice" class="couponPrice" value="3000">
 			                            <div class="fo-product-img">
 			                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfMjEg%2FMDAxNjU4MTY2ODUyMDk2.rYbdL6xRUcVwKXgw3ixjv1y9DpL715DNDoH7iZC4_Wog.FsdShZZI_8nZ8Nz3y50G7fCp4PzSFzzpIa1NRRZhsu4g.JPEG.khj221100%2FIMG_1269.JPG&type=sc960_832" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
 			                            </div>
@@ -124,14 +123,14 @@
 			                            	${ p.price }
 			                            </div>
 			                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
-			                            	<select class="form-select">
-			                            		<option align="center">쿠폰 선택</option>
-			                            		<option name=""><%--${ keyc.couponName } --%></option>
+			                            	<select class="form-select couponSelect">
+			                            		<option align="center" disabled>쿠폰 선택</option>
+			                            		<option name="" value="1000" selected>1000<%--${ keyc.couponName } --%></option>
 			                            		<option name=""><%--${ stoc.couponName } --%></option>
 			                            	</select>
 			                            </div>
 			                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
-			                                <button type="submit" id="buy-btn" class="btn btn-primary" style="padding: 9px; margin: 0px;">
+			                                <button type="button" class="buy-btn" class="btn btn-primary" onclick="requestPay(this);" style="padding: 9px; margin: 0px;">
 			                                   	 구매하기
 			                                </button>
 			                            </div>
@@ -235,39 +234,54 @@
 			}
 			return orderNum;
 		}
-	
-		var amount = 4000 - $("#couponPrice").val() + 2500;
-	
+		
 		var IMP = window.IMP; // 생략 가능
     	IMP.init("imp80773741"); // 예: imp00000000
 		
-    	function requestPay() {
-    	      // IMP.request_pay(param, callback) 결제창 호출
-    	      IMP.request_pay({ // param
-    	          pg: "html5_inicis.INIpayTest",
-    	          pay_method: "card",
-    	          merchant_uid: createOrderNum(),
-    	          name: 120031,
-    	          amount: amount,
-    	          buyer_email: "user01@gmail.com",
-    	          buyer_name: 1001,
-    	          buyer_tel: "010-4242-4242",
-    	          buyer_addr: "서울특별시 강남구 신사동"
-    	      }, function (rsp) { // callback
-    	          if (rsp.success) {
-    	        	  
-    	              $("#imp_uid").val(rsp.imp_uid);
-    	              $("#merchant_uid").val(rsp.merchant_uid);
-    	              $("#product_name").val(rsp.name);
-    	              $("#amount").val(rsp.paid_amount);
-    	              $("#buyer_name").val(rsp.buyer_name);
-    	              $("#request").submit();
-    	                  	        	  
-    	          } else {
-    	        	  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-    	          }
-    	     });
-    	 }
+    	function requestPay(btn) {
+    		
+    		var $productName = $(btn).parent().siblings(".fo-product-name").text().trim(); // 상품명
+			var $productPrice = Number($(btn).parent().siblings(".fo-product-price").text()); // 상품가격
+			var $couponPrice = $(btn).parent().siblings(".fo-product-coupon").children(".couponSelect").val();
+			
+			// console.log($productName);
+			
+			var amount = $productPrice
+							- $couponPrice
+							+ 2500; // 상품 가격 - 쿠폰금액 + 배송비
+			
+			var $form = $(btn).parent().parent();
+			// console.log($form);
+			
+			
+    	    // IMP.request_pay(param, callback) 결제창 호출
+  	    	IMP.request_pay({ // param
+  	            pg: "html5_inicis.INIpayTest",
+  	            pay_method: "card",
+  	            merchant_uid: createOrderNum(),
+  	            name: $productName, // 상품명
+  	            amount: amount, // 가격
+  	            buyer_email: "${ loginUser.conEmail }",
+  	            buyer_name: "${ loginUser.conNo }",
+  	            buyer_tel: "${ loginUser.conPhone }",
+  	            buyer_addr: "${ loginUser.address }"
+  	        }, function (rsp) { // callback
+  	            if (rsp.success) {
+  	        	 
+	  	            $(btn).parent().siblings().eq(0).val(rsp.imp_uid);
+	  	            $(btn).parent().siblings().eq(1).val(rsp.merchant_uid);
+	  	            // $(btn).parent().siblings().eq(2).val(rsp.name);
+	  	            $(btn).parent().siblings().eq(3).val(rsp.paid_amount);
+	  	            // $(btn).parent().siblings().eq(4).val(rsp.buyer_name);
+	  	            $(btn).parent().parent().submit();
+	  	            
+  	                  	        	  
+  	          } else {
+  	        	    alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+  	          }
+  	       });
+      	 
+    	}
 		
 		function refundPay() {
 			
