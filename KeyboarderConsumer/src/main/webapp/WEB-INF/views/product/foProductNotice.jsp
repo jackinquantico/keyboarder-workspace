@@ -123,9 +123,9 @@
 			                            	${ p.price }
 			                            </div>
 			                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
-			                            	<select class="form-select couponSelect">
+			                            	<select class="form-select couponSelect" name="couponPrice">
 			                            		<option align="center" disabled>쿠폰 선택</option>
-			                            		<option name="" value="1000" selected>1000<%--${ keyc.couponName } --%></option>
+			                            		<option name="" value="" selected><%--${ keyc.couponName } --%></option>
 			                            		<option name=""><%--${ stoc.couponName } --%></option>
 			                            	</select>
 			                            </div>
