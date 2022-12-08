@@ -139,6 +139,7 @@
                         <input type="text" id="corpNo" name="corpNo" minlength="12" maxlength="12" placeholder=" - 포함 12자 입력" required>
                         <button type="button" id="nextStep" class="disabledBtn">아이디 찾기</button>
                         <div id="checkResult" style="font-size:0.8em; display:none;"></div>
+                        <div id="testResult"></div>
                     </div>                
                 </div>       
             </form>
@@ -216,6 +217,7 @@
 					
 					if(result != '') {
 	                    $("#result").text("회원님의 아이디는 " + result + " 입니다.");
+	                    $("#testResult").text("실험용 ㄱㄱ");
 					} else {
 						$("#result").text("해당 사업자 등록번호로 등록된 아이디가 없습니다.");
 					}

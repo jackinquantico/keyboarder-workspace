@@ -146,12 +146,13 @@
                         <div id="origin">
                             새로운 비밀번호 :&nbsp;&nbsp;&nbsp;
                             <input type="password" id="newPwd" name="newPwd" minlength="12" maxlength="20" placeholder="영문,숫자,특수문자 12~20자" required>
-                            <div id="checkResult1" style="font-size:0.8em; display:none;"></div>   
+                            <div id="checkResult1" style="font-size:0.8em; display:none;"></div>
                         </div>                    
                         <div id="check">
                             비밀번호 확인 :&nbsp;&nbsp;&nbsp; 
                             <input type="password" id="newPwdCheck" name="newPwdCheck" minlength="12" maxlength="20" placeholder="영문,숫자,특수문자 12~20자" required>
-                            <div id="checkResult2" style="font-size:0.8em; display:none;"></div>                         
+                            <div id="checkResult2" style="font-size:0.8em; display:none;"></div>
+                                                     
                         </div>
                         
                     </div>                
@@ -226,8 +227,7 @@
                                     
                             // 초록색 메세지 출력
                             $("#checkResult2").show();
-                            $("#checkResult2").css("color", "green").text("새로운 비밀번호와 일치합니다.");
-
+                            $("#checkResult2").css("color", "green").text("새로운 비밀번호와 일치합니다.");							
 
                             // 버튼 활성화
                             $("#initializePwd").removeAttr("disabled");

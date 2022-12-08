@@ -90,14 +90,14 @@
             <div id="login_text2">-DER 판매자매니저</div> 
         </div>
         <hr>
-        <img src="enrollcheck.jpg">
+        <img src="resources/images/enrollcheck.jpg">
         <div id="text1">회원가입 완료</div>
         <div id="text2">
-            관리자님 (아이디) 의 회원가입이 <br>
+            판매자님 (아이디) 의 회원가입이 <br>
             성공적으로 완료되었습니다. <br>
             이메일 인증 후 로그인해주세요.
         </div>
-        <a href=""><div id="text3">로그인 페이지로 이동</div></a>
+        <a href="loginPage.me"><div id="text3">로그인 페이지로 이동</div></a>
         <div id="text4">
             회원가입 내역 확인 및 수정은 마이페이지>회원정보수정에서 가능합니다.
         </div>

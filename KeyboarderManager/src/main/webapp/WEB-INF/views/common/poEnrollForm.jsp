@@ -90,7 +90,7 @@
         <br>
 
         <div id="enroll-form" align="center">
-            <form id="signup-form" action="insert.me" method="post">
+            <form id="signup-form" action="insert.me" method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
                         <th width="130px"> 아이디 *</th>
@@ -112,7 +112,7 @@
                     </tr>
                     <tr>
                         <th> 대표자명 *</th>
-                        <td  colspan="3"><input type="text" class="form-control" id="repName" name="repName" minlength="2" maxlength="6" placeholder="띄어쓰기없는 한글 2~6자" required></td>
+                        <td  colspan="3"><input type="text" class="form-control" id="repName" name="repName" minlength="2" maxlength="10" placeholder="띄어쓰기없는 한글 2~6자" required></td>
                     </tr>
                     <tr>
                         <th> 전화번호 *</th>
@@ -154,7 +154,11 @@
                     </tr>                    
                     <tr>
                         <th> 로고 </th>
-                        <td  colspan="3"><input type="text" class="form-control" id="logo" name="logo" minlength="2" maxlength="6" placeholder="" required><input type="file"></td>
+                        <td  colspan="3">
+                        	<img src="resources/images/basicLogo.png" id="logoPreview" width="250"> <br>
+                        	<input type="file" id="logoFile" name="logoFile"><br>
+                        	<input type="button" id="resetFile" name="resetFile" value="초기화">
+                        </td>
                     </tr>                    
                 </table>
 
@@ -290,7 +294,7 @@
                     }
                     
                     // 대표자명 검사 2~6자리 한글만 들어갈수 있게
-                    regExp = /^[가-힣]{2,6}$/;
+                    regExp = /^[가-힣]{2,10}$/;
                     if(!regExp.test(ceoName.value)) {
                         alert("한글로 된 2~6자리 이름을 입력해주세요.");
                         ceoName.select(); // 재입력 유도
@@ -329,11 +333,51 @@
                 // 주소, 이메일 값 합쳐서 한번에 넘기기
                 $(function() {
                     $("#enroll-btn").click(function() {
-                        var address = "" + $("#sample6_postcode").val() + $("#sample6_address").val() + $("#sample6_detailAddress").val();
+                        var address = $("#sample6_postcode").val() + " " + $("#sample6_address").val() + $("#sample6_detailAddress").val();
                         $("#location").val(address);
                     });
                 });
             </script>
+                       
+            <script>
+	            $("#logoFile").on("change", function(event) { // 로고 파일 업로드 시 미리보기
+	
+	                var file = event.target.files[0];
+	
+	                var reader = new FileReader(); 
+	                reader.onload = function(e) {
+	
+	                    $("#logoPreview").attr("src", e.target.result);
+	                }
+	
+	                reader.readAsDataURL(file);
+	                
+	   	     	    // 확장자가 이미지 파일인지 확인
+		            function isImageFile(file) {
+
+		              	  var ext = file.name.split(".").pop().toLowerCase(); // 파일명에서 확장자를 가져온다. 
+
+		             	  return ($.inArray(ext, ["jpg", "jpeg", "gif", "png"]) === -1) ? false : true;
+		           	 }
+	   	     	    
+		            // 파일의 최대 사이즈 확인
+		            function isOverSize(file) {
+
+		            	  var maxSize = 3 * 1024 * 1024; // 3MB로 제한 
+
+		            	  return (file.size > maxSize) ? true : false;
+		            }
+	            });
+            
+				$("#resetFile").click(function() {
+					
+					$("#logoPreview").attr("src", "");
+					$("#logoFile").val("");
+					
+				});
+	            
+            </script>
+            
         </div>
         <br>
     </div>

@@ -113,8 +113,8 @@
 	<select id="emailAuthFail" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
 		FROM SELLER
-		WHERE SELLER_ID = #{sellerId}
-			AND MAIL_AUTH = '1'
+		WHERE SELLER_ID = #{id}
+			AND MAIL_AUTH = '0'
 	</select>	
 	
 	<select id="idCheck" parameterType="string" resultType="_int">

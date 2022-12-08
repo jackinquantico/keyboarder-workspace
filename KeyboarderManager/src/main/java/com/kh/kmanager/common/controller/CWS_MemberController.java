@@ -1,5 +1,8 @@
 package com.kh.kmanager.common.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.kmanager.member.model.service.CWS_MemberService;
@@ -26,7 +32,7 @@ public class CWS_MemberController {
 	@RequestMapping("loginPage.me")
 	public String loginPage() {
 		
-		return "../../login";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("login.me")
@@ -80,6 +86,7 @@ public class CWS_MemberController {
 					mv.addObject("alertMsg", "로그인 성공");
 					
 					session.setAttribute("loginUser", loginUser);
+					session.setAttribute("sellerNo", loginUser.getSellerNo());
 					mv.setViewName("common/pomain");	
 				}
 				
@@ -88,11 +95,6 @@ public class CWS_MemberController {
 		}
 		
 		
-		// 이메일 인증했는지 확인
-		if(!loginUser.getSellerId().equals("admin")) {
-			
-
-		}
 
 		return mv;
 	}
@@ -187,9 +189,34 @@ public class CWS_MemberController {
 		
 	}
 	
-	@RequestMapping("insert.me")
-	public String insertMember(Member m , Model model, HttpSession session) throws Exception {
-	
+	@RequestMapping(value="insert.me", method=RequestMethod.POST)
+	public String insertMember(Member m, MultipartFile logoFile, Model model, HttpSession session) throws Exception {
+
+		if(!logoFile.getOriginalFilename().equals("")) {
+			
+			// 파일명 수정 작업 후 서버에 업로드 시키기
+			// 예) "flower.png" => "2022112210405012345.png"
+			// 1. 원본파일명 뽑아오기
+			String originName = logoFile.getOriginalFilename(); // "flower.png"
+			
+			// 2. 원본파일로부터 확장자만 뽑기
+			String ext = originName.substring(originName.lastIndexOf(".")); // ".png"
+			
+			// 3. 모두 이어 붙이기
+			String changeName = m.getSellerId() + "Logo" + ext;
+			
+			// 4. 업로드 하고자 하는 서버의 물리적인 실제 경로 알아내기
+			String savePath = session.getServletContext().getRealPath("/resources/images/");
+			
+			// 5. 경로와 수정파일명을 합체 후 파일을 업로드해주기
+			try {
+				logoFile.transferTo(new File(savePath + changeName));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}		
+			m.setLogoAttachment(changeName);
+		} 
+
 		Member newSeller = new Member(m.getSellerName()
 								    , m.getRepName()
 								    , m.getSellerId()
@@ -201,15 +228,22 @@ public class CWS_MemberController {
 								    , m.getLocation()
 								    , m.getLogoAttachment());
 		
-		int result = memberService.insertMember(m);
+		int result = memberService.insertMember(newSeller);
 		
 		if(result>0) {
-			session.setAttribute("alertMsg", "회원가입에 성공하였습니다. 이메일 인증 후 로그인 해주세요.");
 			return "common/poEnroll_done";
 		} else {
 			model.addAttribute("errorMsg", "회원가입에 실패했습니다.");
 			return "common/errorPage";
 		}
+	}
+	
+	// 이메일인증확인
+	@GetMapping("/registerEmail")
+	public String eamilConfirm(Member m) throws Exception{
+		memberService.updateMailAuth(m);
+		System.out.println(m);
+		return "/common/emailAuthSuccess";
 	}
 	
 	//아이디중복체크
@@ -219,4 +253,5 @@ public class CWS_MemberController {
 		int count = memberService.idCheck(checkId);
 		return(count>0)? "NNNNN" : "NNNNY";
 	}
+	
 }

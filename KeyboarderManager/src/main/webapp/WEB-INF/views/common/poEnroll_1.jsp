@@ -123,7 +123,7 @@
             </div>
             <div id="text3">
                 <div id="text3_1">
-                    <img src="../../../resources/images/check.jpg">국내 사업자 판매 가입
+                    <img src="resources/images/check.jpg">국내 사업자 판매 가입
                 </div>
                 <div id="text3_2">
                     사업자 등록이 있으신 분이라면<br>
