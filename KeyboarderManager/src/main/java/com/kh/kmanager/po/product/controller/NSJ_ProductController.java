@@ -13,9 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-=======
 import org.springframework.web.bind.annotation.RequestMethod;
->>>>>>> Stashed changes
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -136,12 +134,13 @@ public class NSJ_ProductController {
 		return "redirect:/show.pro";
 	}
 
+	
 	/**
 	 * po 상품 등록 메소드 -성진
-<<<<<<< Updated upstream
 	 * 
 	 * @return
 	 */
+	/*
 	@RequestMapping("insert.pro")
 	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
 			ModelAndView mv) throws Exception {
@@ -190,8 +189,7 @@ public class NSJ_ProductController {
 
 		}
 		return mv;
-=======
-	 */
+	}*/
 
 	@RequestMapping("insert.pro")
 	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
@@ -242,12 +240,12 @@ public class NSJ_ProductController {
 		return mv;
 	}
 
-	
+	/*
 	@RequestMapping("detail.pro")
 	public String detailProduct() {
 		return "po/poProduct/poProductDetailview";
->>>>>>> Stashed changes
 	}
+	*/
 
 	/**
 	 * po 상품 삭제 메소드-성진

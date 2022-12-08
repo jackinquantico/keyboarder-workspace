@@ -16,10 +16,11 @@ public class ProductDao {
 		
 	}
 
-		
+	/*	
 		return sqlSession.update("poMapper.updateProduct",p);
 		
 	}
+	*/
 
 	public static int productCouponInsert(SqlSessionTemplate sqlSession, Product p) {
 		
