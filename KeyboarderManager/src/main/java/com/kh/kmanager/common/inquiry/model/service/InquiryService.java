@@ -18,6 +18,6 @@ public interface InquiryService {
 	// 문의글 작성
 	int insertInquiry(Inquiry i);
 	
-	ArrayList<Inquiry> selectReplyList(int inquiryNo); // 답변조회
+	Inquiry selectReplyList(int inquiryNo); // 답변조회
 	int insertReply(Inquiry r); // 답변작성(관리자만)
 }

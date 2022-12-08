@@ -31,8 +31,8 @@ public class InquiryDao {
 		return sqlSession.selectOne("inquiryMapper.selectInquiry", inquiryNo);
 	}
 	
-	public ArrayList<Inquiry> selectReplyList(SqlSessionTemplate sqlSession, int inquiryNo) {
-		return (ArrayList)sqlSession.selectList("inquiryMapper.selectReplyList", inquiryNo);
+	public Inquiry selectReplyList(SqlSessionTemplate sqlSession, int inquiryNo) {
+		return sqlSession.selectOne("inquiryMapper.selectReplyList", inquiryNo);
 	}
 	
 	public int insertReply(SqlSessionTemplate sqlSession, Inquiry r) {

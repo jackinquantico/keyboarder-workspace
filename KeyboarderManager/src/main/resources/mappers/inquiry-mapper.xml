@@ -50,13 +50,12 @@
 	
 	<select id="selectReplyList" parameterType="_int" resultMap="inquiryResultSet">
 		SELECT INQUIRY_REPLY
-				      , TO_CHAR(REPLY_DATE, 'YYYY-MM-DD') AS "REPLY_DATE"
 		FROM INQUIRY
 		WHERE INQUIRY_NO = #{inquiryNo}
 	</select>
 	
 	<insert id="insertReply" parameterType="inquiry">
-		INSERT INTO INQUIRY (INQUIRY_REPLY)
-						VALUES(#{inquiryReply})
+		UPDATE  INQUIRY SET INQUIRY_REPLY = #{inquiryReply}
+		WHERE INQUIRY_NO = #{inquiryNo}
 	</insert>
 </mapper>

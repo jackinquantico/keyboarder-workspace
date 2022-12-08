@@ -40,7 +40,7 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 
 	@Override
-	public ArrayList<Inquiry> selectReplyList(int inquiryNo) {
+	public Inquiry selectReplyList(int inquiryNo) {
 		return inquiryDao.selectReplyList(sqlSession, inquiryNo);
 	}
 

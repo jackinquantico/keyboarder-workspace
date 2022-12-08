@@ -24,6 +24,12 @@ public class InquiryController {
 	@Autowired
 	private InquiryService inquiryService;
 	
+	/**
+	 * 1:1 문의내역 리스트 조회 - 장미
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("list.iq")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int listCount = inquiryService.selectListCount();
@@ -38,6 +44,10 @@ public class InquiryController {
 		return "inquiry/inquiryListView";
 	}
 	
+	/**
+	 * 1:1 문의 작성하기
+	 * @return
+	 */
 	@RequestMapping("enrollForm.iq")
 	public String enrollForm() {
 		return "inquiry/inquiryEnrollForm";
@@ -57,6 +67,12 @@ public class InquiryController {
 		return mv;
 	}
 	
+	/**
+	 * 1:1 문의내역 상세보기
+	 * @param ino
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("detail.iq")
 	public ModelAndView selectInquiry(int ino, ModelAndView mv) {
 		Inquiry i = inquiryService.selectInquiry(ino);
@@ -64,16 +80,27 @@ public class InquiryController {
 		return mv;
 	}
 	
+	/**
+	 * 1:1 문의내역 답변리스트
+	 * @param ino
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="rlist.iq", produces="application/json; charset=UTF-8")
 	public String ajaxSelectReplyList(int ino) {
-		ArrayList<Inquiry> list = inquiryService.selectReplyList(ino);
-		return new Gson().toJson(list);
+		Inquiry i = inquiryService.selectReplyList(ino);
+		return new Gson().toJson(i);
 	}
 	
+	/**
+	 * 1:1 문의내역 답변작성하기 (관리자만)
+	 * @param r
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="rinsert.iq", produces="text/html; charset=UTF-8")
 	public String ajaxInsertReply(Inquiry r) {
+		//System.out.println(r);
 		int result = inquiryService.insertReply(r);
 		return (result>0) ?  "success" : "fail";
 	}

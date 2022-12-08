@@ -20,11 +20,12 @@
     
 	<style>
         .inquiry{
-            width:1500px;
+            width:90%;
+            margin: auto;
         }
 
         .inquiryList {
-        width : 1300px;
+        width : 100%x;
         margin: auto;
         margin-top: 30px;
         }

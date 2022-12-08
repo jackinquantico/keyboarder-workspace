@@ -20,9 +20,9 @@
 
 	#inquiryDetail { 
 		width:90%;
-		margin: auto;
-		height: 800px;
+		height: 600px;
 		overflow-y: scroll;
+		margin: auto;
 	}
 	
 	 #inquiryDetailContent_1 {
@@ -53,7 +53,7 @@
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
 
 <jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
 
@@ -113,54 +113,94 @@
                             </tr>
                         </tbody>
                     </table>
-                    <h4>답변내용</h4>
-                    <div id="inquiryReplyContent" style="margin-top:20px;">
-                        <table id="replyArea"
-                            class="table table-bordered tbl_Form">
-                            <caption></caption>
-                            <colgroup>
-                                <col width="250px" />
-                                <col />
-                            </colgroup>
-                            <tbody>
-                                <tr>
-                                    <c:choose>
-                                        <c:when test="${empty rList }">
-                                            <td><textarea id="replyContent" style="resize:none;" disabled readonly>아직 답변이 작성되지 않았습니다. 조금만 기다려주세요.</textarea></td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td><textarea id="replyContent" style="resize:none;" disabled readonly></textarea></td>    
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                     
-                    <c:if test="${loginUser.sellerId eq 'admin' }">
-                        <h4>답변작성</h4>
-                        <div>
-                            <table id="replyInsert"
-                            class="table table-bordered tbl_Form">
-                                <caption></caption>
-                                <colgroup>
-                                    <col width="250px" />
-                                    <col />
-                                </colgroup>
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" width="90%">
-                                            <textarea class="form-control" name="recontent" id="recontent" cols="55" rows="2" style="resize:none; width:100%; margin-top:10px;" onkeypress="onChange();" maxlength="1000"></textarea>
-                                            <div id="count" style=" width: 100%; text-align: right;">
-                                                <span>0</span> /1000
-                                            </div>
-                                        </th>
-                                        <th style="vertical-align:middle; "><button class="btn btn-dark" style="background-color:black; width:90%; margin-left:6px;" onclick="addReply();">등록하기</button></th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </c:if>
+                    <c:choose>
+                        <c:when  test="${loginUser.sellerId eq 'admin' }">
+                            <c:choose>
+                                <c:when test="${ i.inquiryReply ne '답변대기' }">
+                                    <h4>답변내용</h4>
+                                        <div id="inquiryReplyContent" style="margin-top:20px;">
+                                            <table id="replyArea"
+                                                class="table table-bordered tbl_Form">
+                                                <caption></caption>
+                                                <colgroup>
+                                                    <col width="250px" />
+                                                    <col />
+                                                </colgroup>
+                                                <tbody>
+                                                    <tr>
+                                                        <td id="replyContent1">${ i.inquiryReply }</td>   
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <h4>답변작성</h4>
+                                    <div>
+                                        <table id="replyInsert"
+                                                class="table table-bordered tbl_Form">
+                                            <caption></caption>
+                                            <colgroup>
+                                                <col width="250px" />
+                                                <col />
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2" width="90%">
+                                                        <textarea class="form-control" name="recontent" id="recontent" cols="55" rows="2" style="resize:none; width:100%; margin-top:10px;" onkeypress="onChange();" maxlength="1000"></textarea>
+                                                        <div id="count" style=" width: 100%; text-align: right;">
+                                                            <span>0</span> /1000
+                                                        </div>
+                                                    </th>
+                                                    <th style="vertical-align:middle; "><button class="btn btn-dark" style="background-color:black; width:90%; height:35px; margin-left:5px; font-size:60%;" onclick="addReply();">등록하기</button></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${ i.inquiryReply eq '답변대기' }">
+                                    <h4>답변내용</h4>
+                                    <div id="inquiryReplyContent" style="margin-top:20px;">
+                                        <table id="replyArea"
+                                            class="table table-bordered tbl_Form">
+                                            <caption></caption>
+                                            <colgroup>
+                                                <col width="250px" />
+                                                <col />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <td><textarea id="replyContent" style="resize:none;" disabled readonly>아직 답변이 작성되지 않았습니다. 조금만 기다려주세요.</textarea></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <h4>답변내용</h4>
+                                    <div id="inquiryReplyContent" style="margin-top:20px;">
+                                        <table id="replyArea"
+                                            class="table table-bordered tbl_Form">
+                                            <caption></caption>
+                                            <colgroup>
+                                                <col width="250px" />
+                                                <col />
+                                            </colgroup>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                    
                     <script>
                         $(function() {
                             $('#recontent').keyup(function () {		
@@ -182,21 +222,20 @@
                     </script>
                 </div>
             </div>
-            <script>
-            $(function() {
-                selectReplyList();
-            });
+            </div>
+        </div>
+    </div> <!-- /.content -->
+</div> <!-- /.content-wrapper -->
+<script>
+
             function selectReplyList() {
                 $.ajax({
                     url:"rlist.iq",
-                    data : {ino:${ i.inquiryNo}},
+                    data : {ino:${ i.inquiryNo }},
                     success : function(result) {
-                        var resultStr = "";
-                        for(var i=0; i<result.length;, i++) {}
-                        reulstStr += "<tr>"
-                                            + "<td>" + result[i].replyContent + "</td>"
-                                            +"</tr>";
-                        $("replyArea>tbody>textarea").html(resultStr);		
+                    	console.log(result.inquiryReply);
+                        $("#replyContent1").text(result.inquiryReply);
+                        $("#replyArea tbody").html("<tr><td>" + result.inquiryReply +"</td></tr>");
                     },
                     error : function() {
                         console.log("댓글리스트 조회용 ajax통신실패!");
@@ -205,31 +244,31 @@
             }
             
             function addReply() {
-          		if($("#recontent").val().trim.length != 0) {
-          			$.ajax({
-          				url : "rinsert.iq",
-          				data : {
-          					inquiryNo : "${i.inquiryNo}",
-          					inquiryReply : "${i.inquiryReply}"
-          				},
-          				success : function(result) {
-          					if(result == "success") {
-          						selectReplyList();
-          						$("#recontent").val();
-          					}
-          				},
-          				error : function() {
-          					console.log("댓글 작성용 ajax 통신실패!");
-          				}
-          			});
-          		} else {
-          			alertify.alert("댓글작성 실패", " 댓글작성 후 등록을 요청해주세요.");
-          		}	
-          	}
+            	console.log($("#recontent").val());
+                if($("#recontent").val().trim().length != 0) {
+                    $.ajax({
+                        url : "rinsert.iq",
+                        data : {
+                            inquiryNo : ${i.inquiryNo},
+                            inquiryReply : $("#recontent").val()
+                        },
+                        success : function(result) {
+                            if(result == "success") {
+                                selectReplyList();
+                                $("#recontent").val("");
+                            }
+                        },
+                        error : function() {
+                            console.log("댓글 작성용 ajax 통신실패!");
+                        }
+                    });
+                } else {
+                	alert("댓글작성 실패", " 댓글작성 후 등록을 요청해주세요.");
+                }	
+            }
+            $(function() {
+                selectReplyList();
+            });
             </script>
-            </div>
-        </div>
-    </div> <!-- /.content -->
-</div> <!-- /.content-wrapper -->
 </body>
 </html>

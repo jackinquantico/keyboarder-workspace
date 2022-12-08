@@ -88,4 +88,11 @@ public class JM_MemberController {
 		return(count>0)? "NNNNN" : "NNNNY";
 	}
 	
+	/**
+	 * 아이디찾기 
+	 */
+	@RequestMapping(value="findIdForm")
+	public String findIdForm() throws Exception {
+		return "/member/findIdForm";
+	}
 }
