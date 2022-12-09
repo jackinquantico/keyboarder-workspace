@@ -98,6 +98,29 @@
 			border-radius : 5px;
 			margin-left : 30px;		
 		}
+		
+		#result_div {
+			height : 60px;
+		}
+		 
+		
+		#result_div>div {
+			float : left;
+		}
+		
+		#result_btn {
+			margin-left : 743px;
+		}
+		
+		#result_co
+		#table_div {
+			text-align : center;
+		} 
+		
+		#result_count, #result_count_content {
+			display : inline;
+		}
+				
 	</style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -123,7 +146,7 @@
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
 		
-			<form id="searchSettlementForm">
+			<form id="searchSettlementForm" action="searchSettlement.bo">
 				<hr>
 					<div id="searchConditions">
 						<div id="searchCondition1">입점사</div>
@@ -139,7 +162,7 @@
 						<div id="searchCondition3">정산년월</div>
 						<div class='v-line' id="v-line3"></div>
 						<div id="searchCondition4">
-							<input type="month" name="monthIn">
+							<input type="month" id="settleDate" name="searchSettlementDate">
 						</div>
 					</div>
 					<hr id="line1">					
@@ -155,13 +178,14 @@
 			<hr>
 			<div id="allOrder_result">
 				<div id="result_div">
-					<div id="result_count">주문건&nbsp;&nbsp;</div>
+					<div style="font-size : 18px;">지불내역&nbsp;&nbsp;</div>
+					<div id="result_count" style="font-size : 18px;">총<div id="result_count_content" style="color:red;"> <c:out value="${ list.size() }"/></div> 건</div>
 					<div id="result_btn">
 						<button>엑셀 다운로드</button>
 					</div>
 				</div>
 				<div id="table_div">
-					<table id="result_table" border="1">
+					<table id="result_table" border="1" width="1000px;">
 						<thead>
 							<td width="%">협력사번호</td>
 							<td width="%">협력사명</td>
@@ -178,7 +202,7 @@
 							<td width="%">매출액</td>
 						</thead>
 						<tbody>
-							<c:forEach var="sl1" items="${ sellerList }" >
+							<c:forEach var="sl1" items="${ list }" >
 								<tr>
 									<td>${ sl1.sellerNo }</td>
 									<td>${ sl1.sellerName }</td>
@@ -186,7 +210,7 @@
 									<td>${ sl1.orderPrice }</td>
 									<td>쿠폰필요</td>
 									<td>${ sl1.billPublishAmount }</td>
-									<td>(${ sl1.sales }</td>
+									<td>${ sl1.sales }</td>
 								</tr>							
 							</c:forEach>
 						</tbody>
@@ -197,7 +221,20 @@
 	
 	</div> <!-- /.content-wrapper -->
 
-
+<script>
+	$(function() {
+		
+		var date = new Date();
+		
+		String(date);
+		
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		
+		document.getElementById("settleDate").value = year + "-" + month;
+		
+	});
+</script>
 
 </body>
 </html>

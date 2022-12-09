@@ -26,7 +26,6 @@ public class CWS_SettlementServiceImpl implements CWS_SettlementService {
 		
 		return sellerList;
 	}
-
 	
 	@Override
 	public ArrayList<CWS_Settlement> selectSellerCommition() {
@@ -34,6 +33,14 @@ public class CWS_SettlementServiceImpl implements CWS_SettlementService {
 		ArrayList<CWS_Settlement> list = settlementDao.selectSellerCommition(sqlSession); 
 		
 		return list;
+	}
+
+	@Override
+	public ArrayList<CWS_Settlement> searchSellerCommition() {
+		
+		// ArrayList<CWS_Settlement> list = settlementDao.searchSellerCommition(sqlSession);
+		
+		// return list;
 	}
 
 

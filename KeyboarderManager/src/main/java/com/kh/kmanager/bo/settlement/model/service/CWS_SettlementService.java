@@ -13,5 +13,6 @@ public interface CWS_SettlementService {
 	// 수수료 매출 조회(전체)
 	ArrayList<CWS_Settlement> selectSellerCommition();
 	
-	
+	// 입점업체 검색
+	ArrayList<CWS_Settlement> searchSellerCommition();
 }

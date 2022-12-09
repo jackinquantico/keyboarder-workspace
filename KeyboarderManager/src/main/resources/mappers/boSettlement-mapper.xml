@@ -36,6 +36,23 @@
 		JOIN ORDERS USING (ORDER_NO)
 	</select>
 
+	<select id="searchSellerCommition" parameterType="cws_settlement" resultMap="sellerResultSet">
+		SELECT SELLER_NO
+		     , SELLER_NAME
+		     , ORDER_NO
+		     , ORDER_PRICE
+		     , SETTLE_DATE
+		     , COMMITION
+		     , SETTLE_DEPT
+		     , TAX_AMOUNT
+		     , SUPPLY_VALUE
+		     , PAYMENT_NO
+		FROM SETTLEMENT
+		JOIN SELLER USING (SELLER_NO)
+		JOIN ORDERS USING (ORDER_NO)
+	    WHERE SELLER_NAME = #{sellerName}
+	      AND SETTLE_DATE = #{settleDate}	
+	</select>
 	
 </mapper>
 

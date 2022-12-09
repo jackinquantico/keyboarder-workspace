@@ -32,6 +32,12 @@ public class CWS_Settlement {
 		super();
 		this.sellerName = sellerName;
 	}
+
+	public CWS_Settlement(String sellerName, Date settleDate) {
+		super();
+		this.sellerName = sellerName;
+		this.settleDate = settleDate;
+	}
 		
 	
 }
