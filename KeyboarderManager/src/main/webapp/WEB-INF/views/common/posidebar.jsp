@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,16 @@
     <!-- Brand Logo --> <!-- 로그인 계정 로고, 상호명 -->
     <a href="/kmanager/pomain" class="brand-link">
       <!-- <i class="ion-android-person fas fa-fw"></i> -->
-      <img src="resources/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <c:choose>
+      	<c:when test="${ empty loginUser.logoAttachment }">
+	      <img src="resources/images/defaultLogo.png" class="brand-image img-circle elevation-3" style="opacity: 1; margin-right: 15px;">
+      	</c:when>
+      	<c:otherwise>
+      		<!-- 
+      		<img src="${ loginUser.logoAttachment }" class="brand-image img-circle elevation-3" style="opacity: .8">
+      		 -->
+      	</c:otherwise>
+      </c:choose>
       <span class="brand-text font-weight-light">${ loginUser.sellerName }</span>
     </a>
 
