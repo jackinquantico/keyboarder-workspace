@@ -22,4 +22,9 @@ public class BoCoupon {
 	private String productName;
 	private String startDate; // 검색 기간 시작일
 	private String endDate; // 검색 기간 종료일
+	
+	private int orderPrice;
+	private String orderNo;
+	private String paymentBill;
+	
 }

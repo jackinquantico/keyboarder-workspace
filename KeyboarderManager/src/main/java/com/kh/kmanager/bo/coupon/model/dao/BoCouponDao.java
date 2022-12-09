@@ -18,4 +18,8 @@ public class BoCouponDao {
 		return sqlSession.insert("boCouponMapper.insertCoupon", bc);
 	}
 
+	public ArrayList<BoCoupon> usedCouponList(SqlSessionTemplate sqlSession, BoCoupon bc) {
+		return (ArrayList)sqlSession.selectList("boCouponMapper.usedCouponList", bc);
+	}
+
 }

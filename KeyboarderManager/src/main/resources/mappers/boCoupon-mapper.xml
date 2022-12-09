@@ -11,6 +11,10 @@
 		<result column="COUPON_STMT" property="couponStmt" />
 		<result column="PRODUCT_NO" property="productNo" />
 		<result column="PRODUCT_NAME" property="productName" />
+		<result column="ORDER_DATE" property="useDate" />
+		<result column="ORDER_PRICE" property="orderPrice" />
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="PAYMENT_BILL" property="paymentBill" />
 	</resultMap>
 
 	<select id="selectCouponList" parameterType="boCoupon" resultMap="boCouponResultMap">
@@ -57,5 +61,26 @@
 		     , #{dueDate}
 		     , #{productNo})
 	</insert>
+	
+	<select id="usedCouponList" parameterType="boCoupon" resultMap="boCouponResultMap">
+		SELECT U.ORDER_NO
+            , U.COUPON_NO
+            , COUPON_NAME
+            , PRODUCT_NO
+            , PRODUCT_NAME
+            , TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') AS "ORDER_DATE"
+            , ORDER_PRICE
+            , COUPON_PRICE
+            , PAYMENT_BILL
+		FROM KEYBOARDER_USE U
+		JOIN ORDERS O ON (U.ORDER_NO = O.ORDER_NO)
+		JOIN COUPON_KEYBOARDER K ON (K.COUPON_NO = U.COUPON_NO)
+		JOIN PRODUCT PR ON (PR.PRODUCT_NO = K.PRODUCT_NO)
+		JOIN PAYMENT P ON (P.ORDER_NO = O.ORDER_NO)
+		<if test="startDate != null">
+			WHERE ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		ORDER BY ORDER_DATE DESC
+	</select>
 
 </mapper>

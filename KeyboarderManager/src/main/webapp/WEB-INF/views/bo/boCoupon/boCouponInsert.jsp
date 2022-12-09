@@ -93,7 +93,7 @@ select[name=productNo] {
 				<td>쿠폰 발행범위 *</td>
 				<td>
 					<select name="sellerNo" id="sellerNo" class="form-control col-lg-2 select" required>
-						<option disabled selected>스토어명</option>
+						<option disabled selected value="0">스토어명</option>
 						
 						<c:forEach var="s" items="${ slist }">
 							<option value="${ s.sellerNo }">${ s.sellerName }</option>
@@ -101,12 +101,12 @@ select[name=productNo] {
 					</select>
 					&nbsp;&nbsp;
 					<select name="productNo" id="productNo" class="form-control select" required>
-						
+						<option disabled selected value="0">상품명</option>
 					</select>
 				</td>
 			</tr>
 	   	 </table>
-	   	 <button type="submit" style="float:right;" class="btn btn-secondary">쿠폰 등록</button><br><br>
+	   	 <button type="submit" id="submitBtn" style="float:right;" class="btn btn-secondary">쿠폰 등록</button><br><br>
 	     <hr style="clear:both">
 	     <br>
 	     <h5>* 쿠폰 등록 설정</h5>
@@ -155,6 +155,10 @@ $(function() {
 		});
 	});
 	
+	$("#productNo").change(function() {
+		$("#submitBtn").attr("disabled", false);
+	});
+	
 	$("#setToday").change(function() {
 		const date = new Date();
 		const year = date.getFullYear();
@@ -166,6 +170,14 @@ $(function() {
 	$("#setDate").change(function() {
 		$("input[name=createDate]").val("");
 	});
+	
+	if ($("#sellerNo option:selected").val() == 0) {
+		$("#submitBtn").attr("disabled", true);
+		if ($("#productNo option:selected").val() == 0) {
+			$("#submitBtn").attr("disabled", true);
+		}
+	} 
+	
 });
 </script>
 

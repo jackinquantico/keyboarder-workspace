@@ -14,7 +14,7 @@
 #searchArea { padding: 30px; }
 #searchArea table { width: 100%; }
 #listArea {
-	height: 470px;
+	height: 600px;
 	overflow: auto;
 }
 td{
@@ -29,6 +29,7 @@ padding-top:20px;
 #listTable td {
 	text-align: center;
 	height: 50px;
+	padding-top: 5px;
 }
 #listTable thead th {
 	background-color: gray;
@@ -37,6 +38,9 @@ padding-top:20px;
 	position: sticky;
 	top: 0;
 	height: 50px;
+}
+#listTable tbody {
+	margin-top: 25px;
 }
 input[type=date] {
 	display: inline-block;
@@ -77,16 +81,6 @@ input[type=date] {
            		<input type="radio" checked>&nbsp;전체 &nbsp;
            </td>
         </tr>
-   		<tr>
-	        <td>쿠폰상태 *&nbsp;</td>
-	        <td>
-	        	<select class="form-control" id="select">
-	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="1">사용가능</option>
-	            	<option value="2">만료</option>
-	        	</select>
-	        </td>
-	    </tr>
    		<tr>
 	        <td>발행일 기준 기간 검색</td>
 	        <td>
@@ -137,6 +131,9 @@ function loadList() {
 	
 	$.ajax({
 		url: "loadCoupon.bo",
+		data: {
+			couponStmt : "N"
+		},
 		success: function(result) {
 			
 			var resultStr = "";
@@ -164,75 +161,36 @@ function loadList() {
 }
 
 function searchCoupon() {
-	
-	if ($("#select option:selected").val() == 1) {
-		
-		$.ajax({
-			url: "ableCoupon.bo",
-			data: {
-				startDate: $("#startDate").val(),
-				endDate: $("#endDate").val()
-			},
-			success: function(result) {
-				
-				var resultStr = "";
-				
-				// 조회된 arraylist 반복문돌려서 출력
-				for (var i=0; i<result.length; i++) {
-					resultStr += "<tr>"
-									+ "<td>" + result[i].couponNo + "</td>"
-									+ "<td>" + result[i].couponName + "</td>"
-									+ "<td>키보더쿠폰</td>"
-									+ "<td>" + result[i].couponPrice + "</td>"
-									+ "<td>" + result[i].productName + "</td>"
-									+ "<td>" + result[i].couponStmt + "</td>"
-									+ "<td>" + result[i].createDate + "</td>"
-									+ "<td>" + result[i].dueDate + "</td>"
-							   + "</tr>";
-				}
-				
-				$("#couponList").html(resultStr);
-			},
-			error: function() {
-				console.log("ableCoupon 실패");
-			}
-		});
-		
-	} else if ($("#select option:selected").val() == 2) {
 
-		$.ajax({
-			url: "expireCoupon.bo",
-			data: {
-				startDate: $("#startDate").val(),
-				endDate: $("#endDate").val()
-			},
-			success: function(result) {
-				var resultStr = "";
-				
-				// 조회된 arraylist 반복문돌려서 출력
-				for (var i=0; i<result.length; i++) {
-					resultStr += "<tr>"
-									+ "<td>" + result[i].couponNo + "</td>"
-									+ "<td>" + result[i].couponName + "</td>"
-									+ "<td>키보더쿠폰</td>"
-									+ "<td>" + result[i].couponPrice + "</td>"
-									+ "<td>" + result[i].productName + "</td>"
-									+ "<td>" + result[i].couponStmt + "</td>"
-									+ "<td>" + result[i].createDate + "</td>"
-									+ "<td>" + result[i].dueDate + "</td>"
-							   + "</tr>";
-				}
-				
-				$("#couponList").html(resultStr);
-			},
-			error: function() {
-				console.log("expireCoupon 실패");
+	$.ajax({
+		url: "expireCoupon.bo",
+		data: {
+			startDate: $("#startDate").val(),
+			endDate: $("#endDate").val()
+		},
+		success: function(result) {
+			var resultStr = "";
+			
+			// 조회된 arraylist 반복문돌려서 출력
+			for (var i=0; i<result.length; i++) {
+				resultStr += "<tr>"
+								+ "<td>" + result[i].couponNo + "</td>"
+								+ "<td>" + result[i].couponName + "</td>"
+								+ "<td>키보더쿠폰</td>"
+								+ "<td>" + result[i].couponPrice + "</td>"
+								+ "<td>" + result[i].productName + "</td>"
+								+ "<td>" + result[i].couponStmt + "</td>"
+								+ "<td>" + result[i].createDate + "</td>"
+								+ "<td>" + result[i].dueDate + "</td>"
+						   + "</tr>";
 			}
-		});
-	} else {
-		
-		loadList();
-	}
+			
+			$("#couponList").html(resultStr);
+		},
+		error: function() {
+			console.log("expireCoupon 실패");
+		}
+	});
 }
 
 $(function() {

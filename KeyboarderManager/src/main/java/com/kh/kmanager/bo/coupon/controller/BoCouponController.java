@@ -49,6 +49,11 @@ public class BoCouponController {
 		return "bo/boCoupon/boCouponInsert";
 	}
 	
+	/**
+	 * 
+	 * @param bc
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="loadCoupon.bo", produces="application/json; charset=UTF-8")
 	public String loadCoupon(BoCoupon bc) {
@@ -58,7 +63,11 @@ public class BoCouponController {
 		return new Gson().toJson(list);
 	}
 	
-	
+	/**
+	 * 사용 가능 쿠폰 리스트 조회 ajax - 채영
+	 * @param bc : 검색 기간
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="ableCoupon.bo", produces="application/json; charset=UTF-8")
 	public String ableCoupon(BoCoupon bc) {
@@ -71,6 +80,11 @@ public class BoCouponController {
 		return new Gson().toJson(list);
 	}
 	
+	/**
+	 * 사용 만료 쿠폰 리스트 조회 ajax - 채영
+	 * @param bc : 검색 기간
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="expireCoupon.bo", produces="application/json; charset=UTF-8")
 	public String expireCoupon(BoCoupon bc) {
@@ -83,6 +97,11 @@ public class BoCouponController {
 		return new Gson().toJson(list);
 	}
 	
+	/**
+	 * 쿠폰 신규 등록 - 채영
+	 * @param bc : 등록할 쿠폰명, 유효기간, 상품번호 등 쿠폰 정보
+	 * @return
+	 */
 	@RequestMapping("insertCoupon.bo")
 	public String insertCoupon(BoCoupon bc, HttpSession session) {
 				
@@ -95,5 +114,52 @@ public class BoCouponController {
 		}
 		
 		return "redirect:/coupon.bo";
+	}
+	
+	/**
+	 * 쿠폰 사용내역 조회 - 채영
+	 * @param bc : 사용일 기준 검색 기간
+	 * @return
+	 */
+	@RequestMapping("usedCoupon.bo")
+	public String usedCouponList(Model model, BoCoupon bc) {
+		
+		ArrayList<BoCoupon> clist = couponService.usedCouponList(bc);
+		
+		model.addAttribute("clist", clist);
+		
+		return "bo/boCoupon/boCouponUsedList";
+	}
+	
+	/**
+	 * 쿠폰 사용내역 검색 - 채영
+	 * @param bc : 사용일 기준 검색 기간
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="searchUsedCoupon.bo", produces="application/json; charset=UTF-8")
+	public String searchUsedCouponList(BoCoupon bc) {
+		
+		ArrayList<BoCoupon> clist = couponService.usedCouponList(bc);
+		return new Gson().toJson(clist);
+	}
+	
+	/**
+	 * 사용 가능 쿠폰 전체 조회 페이지 - 채영
+	 * @return
+	 */
+	@RequestMapping("couponAble.bo")
+	public String ableCouponList() {
+		
+		return "bo/boCoupon/boAbleCouponList";
+	}
+	
+	/**
+	 * 사용 만료 쿠폰 전체 조회 페이지 - 채영
+	 * @return
+	 */
+	@RequestMapping("couponExpire.bo")
+	public String expireCouponList() {
+		return "bo/boCoupon/boExpireCouponList";
 	}
 }

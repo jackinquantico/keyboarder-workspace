@@ -11,4 +11,6 @@ public interface BoCouponService {
 
 	// 쿠폰 등록용
 	int insertCoupon(BoCoupon bc);
+	
+	ArrayList<BoCoupon> usedCouponList(BoCoupon bc);
 }
