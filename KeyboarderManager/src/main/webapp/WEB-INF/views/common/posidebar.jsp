@@ -113,7 +113,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="insert.sco" class="nav-link">
+                <a href="mainCoupon.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>쿠폰 등록</p>
                 </a>

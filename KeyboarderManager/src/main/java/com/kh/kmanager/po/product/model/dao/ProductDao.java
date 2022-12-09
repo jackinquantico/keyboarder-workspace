@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kmanager.bo.store.model.vo.Store;
+import com.kh.kmanager.po.coupon.model.vo.Coupon;
 import com.kh.kmanager.po.product.model.vo.Product;
 
 @Repository
@@ -65,5 +66,6 @@ public class ProductDao {
 	public ArrayList<Product> getProductName(SqlSessionTemplate sqlSession, int sellerNo) {
 		return (ArrayList)sqlSession.selectList("poMapper.getProductName", sellerNo);
 	}
+
 }
 

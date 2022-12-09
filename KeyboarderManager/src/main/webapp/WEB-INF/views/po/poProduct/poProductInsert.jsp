@@ -75,6 +75,7 @@ height:150px;
 
 		
 		<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
+		
 		<div class="content-wrapper">
 
 			<br>

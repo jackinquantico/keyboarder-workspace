@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,37 +43,39 @@ padding-top:20px;
 			<div class="content">
 			<h3>쿠폰등록</h3>
 
-	<form id="insertStcoupone" action="insert.sco" method="post">
+	<form id="MainStcoupon" action="insertCoupon.po" method="post">
+	<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
+	<input type="hidden" name="productNo" value="${p.productNo }">
+	
 	    <fieldset>
 	        <table>
 	    	<tr>
 	    	<td>쿠폰명*</td>
-	    	<td ><input type="text" style="width:500px;"></td>
+	    	<td ><input type="text" style="width:500px;" name="couponName"></td>
 	    </tr>
 	
 	    	<tr>
 	        <td>쿠폰종류*</td>
-	        <td><input type="radio" name="coupon">&nbsp;3000원 &nbsp;
-	        <input type="radio" name="5000">&nbsp;5000원 &nbsp;
-	        <input type="radio" name="10000">10000원 &nbsp;</td>
+	        <td><input type="radio" name="couponPrice" value="3000">&nbsp;3000원 &nbsp;
+	        <input type="radio" name="couponPrice" value="5000">&nbsp;5000원 &nbsp;
+	        <input type="radio" name="couponPrice" value="10000">10000원 &nbsp;</td>
 	        
 		</tr>
 	<tr>
-	    <td>쿠폰 발행기간*&nbsp;</td>
-	    <td><input type="date">~<input type="date"></td>
+	    <td>쿠폰 유효기간*&nbsp;</td>
+	    <td><input type="date" name="createDate">~<input type="date" name="dueDate"></td>
 		</tr>
-	<tr>
-	    <td>쿠폰 유효기간*</td>
-	    <td><input type="radio">기간설정
-	        <input type="radio"> 발급일기준 설정</td>
-		</tr>
-	<tr>
-	    <th></th>    
-	    <td><input type="date">~<input type="date"></td>    
-		</tr>
+
 		<tr>
 		<td>쿠폰 발행범위*</td>
-		<td><input type="radio">스토어 상품 전체</td>
+			<td>
+			<select name ="productNo" required id="productNo">
+				<option selected value="">상품선택</option>
+				<c:forEach var="p" items="${list}">
+					<option value="${p.productNo}">${p.productName}</option>
+				</c:forEach>
+			</select>
+			</td>
 		<td></td>
 	</tr>
 	   	 </table>
@@ -84,7 +87,7 @@ padding-top:20px;
 	    * 쿠폰 등록시 주의사항<br>    
 	        쿠폰 종류는 파트너사 할인쿠폰과 오픈마켓 쿠폰 중복 적용이 불가능하며 오픈마켓 정책상 모든 상품전체에 쿠폰이 적용되나, 한 상품당 하나의 쿠폰만 사용 가능합니다.<br>
 	        유효기간이 지난 쿠폰도 쿠폰 목록에서 조회가능합니다.
-	        </h6>
+	      </h6>
 	    </fieldset>
 	    </form> 
 		

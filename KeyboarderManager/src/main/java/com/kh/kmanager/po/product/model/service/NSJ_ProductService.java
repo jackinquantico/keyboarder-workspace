@@ -36,6 +36,8 @@ public interface NSJ_ProductService {
 
 	//상품을 재공개 해주는 메소드
 	int changeProduct(int productNo);
+	
+	
 
 	
 

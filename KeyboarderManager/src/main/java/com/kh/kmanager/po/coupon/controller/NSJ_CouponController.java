@@ -1,24 +1,79 @@
 package com.kh.kmanager.po.coupon.controller;
 
-import org.springframework.stereotype.Controller;
 
+
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.kmanager.member.model.vo.Member;
+import com.kh.kmanager.po.coupon.model.service.CouponService;
+import com.kh.kmanager.po.product.model.service.ProductService;
+import com.kh.kmanager.po.product.model.vo.Product;
+
+
+
+
+
 
 
 @Controller
 public class NSJ_CouponController {
+@Autowired
+private CouponService couponService;
 
-
+	
 
 /**
- * po 쿠폰 등록하는 화면 으로 이동
+ * po 쿠폰 등록하는 화면 으로 이동-성진
  * 
  * @return
  */
-@RequestMapping("insert.sco")
-public String insertStcoupon() {
-		return "po/poCoupon/PoCouponInsert";
+@RequestMapping("mainCoupon.po")
+public String prodcutListforCoupon(Model model, HttpSession session) {	
+	int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+	ArrayList<Product>list= couponService.prodcutListforCoupon(sellerNo);
+	
+		if(list!=null) {
+			model.addAttribute("list",list);
+			
+		}
+		return "/po/poCoupon/PoCouponInsert";
+		
 	}
-
 }
+
+
+/**
+ * po 쿠폰 등록하는 메소드-성진
+ * 
+ * @return
+ */
+//@RequestMapping("insertCoupon.po")
+//public String insertCoupon(Coupon c, String productName, HttpSession session) {
+//	int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+//	
+// HashMap map = new HashMap();
+// map.put("couponName", c.getCou~());
+//	
+//	if (result>0) {
+//		session.setAttribute("alertMsg", "쿠폰 등록에 성공했습니다.");
+//	} else {
+//		session.setAttribute("alertMsg", "쿠폰 등록에 실패했습니다.");
+//	}
+//	
+//	return "redirect:/mainCoupon.po";
+//
+//	}
+//
+//}
+
+
 
