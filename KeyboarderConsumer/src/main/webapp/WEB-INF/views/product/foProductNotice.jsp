@@ -22,37 +22,54 @@
             width: 1200px;
             height: 1200px;
             margin: auto;
+            /* border: 2px solid black; */
         }
 
         #fo-product-body{
             width: 100%;
-            height: 1030px;
-            border: 2px solid black;
-            border-radius: 30px;
+            height: 1070px;
+            /* border: 2px solid black; */
+            padding-top: 20px;
+            /* background-color: #efefef; */
+            /* border-radius: 30px; */
+            margin: auto;
             margin-top: 40px;
+        }
+        #fo-product-header {
+        	width: 100%;
+        	height: 600px;
+        	margin-bottom: 60px;
         }
 
         #fo-product-main{
-            width: 80%;
-            height: 750px;
+            width: 85%;
+            height: 800px;
+            align: center;
             margin: auto;
             margin-top: 60px;
         }
+        .card {
+        	float: left;
+        }
 
         .fo-product-all{
-            width: 24.5%;
+            width: 220px;
             height: 410px;
             display: inline-block;
-            margin-bottom: 10px;
-            border-radius: 20px;
-            border: 2px solid black;
+            /* margin-bottom: 10px; */
+            /* border-radius: 15px; */
+            /* border: 2px solid black; */
+            background-color: white;
+        	margin-left: 60px;
+        	margin-bottom: 60px;
+        	padding-bottom: 20px;
         }
 
         .fo-product-img{
-            width: 90%;
-            height: 130px;
-            border-radius: 30px;
-            margin-top: 3%;
+            width: 200px;
+            height: 200px;
+            /* border-radius: 5px; */
+            margin-top: 5%;
         }
 
         .fo-product-name{
@@ -71,8 +88,8 @@
         }
         
         .page-item{
-        	border: 2px solid black;
-        	background-color: black;
+        	border: 2px solid #efefef;
+        	/* background-color: black; */
         	color: black;
         }
         
@@ -101,12 +118,17 @@
 	<div id="fo-full-main">
 
         <div id="fo-product-body">
-            <div id="fo-product-main">
+        	<div id="fo-product-header">
+        		<img src="https://img.topket.co.kr/files/0/logitech_%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC_%EB%8C%80%EB%B0%B0%EB%84%88_v4.jpg"
+        			 width="100%" height="100%" />
+        	</div>
+        
+            <div id="fo-product-main container">
                 
                 	<c:forEach var="p" items="${ proList }">
                 		<%--<c:forEach var="keyc" items="${ keyCouponList }">
                 			<c:forEach var="stoc" items="${ stoCouponList }"> --%>
-			                    <div class="fo-product-all" align="center">
+			                    <div class="card fo-product-all" align="center">
 			                        <form action="purchase.fo" method="post" class="request">
 			                        	<input type="hidden" name="paymentNo" class="imp_uid">
 										<input type="hidden" name="orderNo" class="merchant_uid">
@@ -114,7 +136,7 @@
 										<input type="hidden" name="amount" class="amount">
 										<input type="hidden" name="couponPrice" class="couponPrice" value="3000">
 			                            <div class="fo-product-img">
-			                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfMjEg%2FMDAxNjU4MTY2ODUyMDk2.rYbdL6xRUcVwKXgw3ixjv1y9DpL715DNDoH7iZC4_Wog.FsdShZZI_8nZ8Nz3y50G7fCp4PzSFzzpIa1NRRZhsu4g.JPEG.khj221100%2FIMG_1269.JPG&type=sc960_832" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+			                                <img src="https://img.topket.co.kr/files/0/g913TKL_700X700.jpg" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
 			                            </div>
 			                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
 			                            	${ p.productName }
@@ -147,7 +169,7 @@
 			                                </button>
 			                            </div>
 			                        </form>
-			                    </div>
+			                    </div> <!-- /.fo-product-all -->
 	                    	</c:forEach>
 	                    <%--</c:forEach>
                     </c:forEach>  --%>
@@ -178,6 +200,8 @@
                         </form>
                     </div>
                      --%>
+                     
+                     <br clear="both">
                     
                     <!-- 페이징 처리 -->
 		            <div style="padding: 40px 50px; margin: 0px;">
@@ -230,6 +254,7 @@
             
         </div>
     </div>
+
 
 	<script>
 		
