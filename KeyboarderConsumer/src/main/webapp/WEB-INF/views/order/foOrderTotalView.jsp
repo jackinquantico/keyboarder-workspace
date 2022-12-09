@@ -83,7 +83,6 @@
         <br><br>
         <hr style="background-color : black; height: 5px;">
         <br><br clear="both">
-        <%--
         <!-- form 태그 추가로 인해 %에서 px로 변경 필요 -->
         <c:if test="${ not empty orderList }">
         	<c:forEach var="ord" items="${ orderList }">
@@ -105,7 +104,7 @@
 		                </div>
 		                <div class="order-product-name-price" style="float: left; width: 40%; height: 200px;">
 		                    <div style="width: 100%; height: 100px; font-size: 17px; padding-top: 20px;" align="center">
-		                        <a href="foDetailView.order">
+		                        <a href="foDetailView.order?ordNo=${ ord.orderNo }">
 		                        	${ ord.productName }
 		                        </a>
 		                    </div>
@@ -114,37 +113,41 @@
 		                    </div>
 		                </div>
 		                <div class="order-product-delivery-status" style="float: left; width: 15%; height: 200px;">
-		                	<c:if test="${ ord.orderStatus eq 1 }">
+		                <c:choose>
+		                	<c:when test="${ ord.orderStatus eq 1 }">
 			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
 			                        	배송중
 			                    </div>
-		                    </c:if>
-		                    <c:if test="${ ord.orderStatus eq 2 }">
+		                    </c:when>
+		                    <c:when test="${ ord.orderStatus eq 2 }">
 			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
 			                        	배송완료
 			                    </div>
-		                    </c:if>
-		                    <c:if test="${ ord.orderStatus eq 3 }">
+		                    </c:when>
+		                    <c:when test="${ ord.orderStatus eq 3 }">
 			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
 			                        	구매확정
 			                    </div>
-		                    </c:if>
-		                    <c:if test="${ ord.orderStatus eq 4 }">
+		                    </c:when>
+		                    <c:when test="${ ord.orderStatus eq 4 }">
 			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
 			                        	환불
 			                    </div>
-		                    </c:if>
+		                    </c:when>
+		                </c:choose>
 		                    <hr>
 		                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 50px;" align="center">
-		                        <button type="button" class="btn btn-outline-warning">환불요청</button>
+		                        <button type="button" class="btn btn-primary">환불요청</button>
 		                    </div>
 		                </div>
 		            </form>
 		        </div>
+		        
+		        <br>
         	</c:forEach>
         </c:if>
-         --%>
         
+        <%--
         <div class="order-product-main">
             <form>
                 <div class="order-product-date" style="float: left; width: 15%; height: 200px;">
@@ -163,7 +166,7 @@
                 </div>
                 <div class="order-product-name-price" style="float: left; width: 40%; height: 200px;">
                     <div style="width: 100%; height: 100px; font-size: 17px; padding-top: 30px;" align="center">
-                        <a href="foDetailView.order"> <%-- ?ordNo=${ ord.orderNo }  --%>
+                        <a href="foDetailView.order"> <%-- ?ordNo=${ ord.orderNo }  --%><%--
                         	닌자87PRO 풀윤활 RGB 저소음 스위치 기계식 커스텀키보드 퍼플B퍼플레빗 Durock T1
                         </a>
                     </div>
@@ -182,22 +185,24 @@
                 </div>
             </form>
         </div>
+          --%>
         
         <br>
         
     </div>
     
-    
+    <%--
     <script>
     	function selectOrderDate(){
     		
     		$.ajax({
     			url : "selectDate.order",
-    			data : 
+   			data : 
     			
     		});
     	}
     </script>
+     --%>
     
     
 

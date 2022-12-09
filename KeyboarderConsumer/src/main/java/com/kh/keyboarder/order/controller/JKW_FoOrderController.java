@@ -22,7 +22,6 @@ public class JKW_FoOrderController {
 	@RequestMapping("foTotalView.order")
 	public String foTotalView(Model model, HttpSession session) {
 		
-		/*
 		Member m = (Member)session.getAttribute("loginUser");
 		
 		int conNo = m.getConNo();
@@ -30,7 +29,6 @@ public class JKW_FoOrderController {
 		ArrayList<Order> orderList = JKW_OrderService.foTotalViewList(conNo);
 		
 		model.addAttribute("orderList", orderList);	
-		*/	
 		
 		return "order/foOrderTotalView";
 	}
@@ -38,11 +36,9 @@ public class JKW_FoOrderController {
 	@RequestMapping("foDetailView.order")
 	public String foDetailView(Model model, String ordNo) {
 		
-		/*
 		Order orderDetailList = JKW_OrderService.foDetailViewList(ordNo);
 		
 		model.addAttribute("orderDetailList", orderDetailList);
-		*/		
 		
 		return "order/foOrderDetailView";
 	}

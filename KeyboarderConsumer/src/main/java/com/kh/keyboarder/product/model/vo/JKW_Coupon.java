@@ -23,6 +23,5 @@ public class JKW_Coupon {
 	private Date dueDate;
 	private String couponStmt;
 	private int sellerNo;
-	private int productNo;
-	
+	private int productNo;	
 }

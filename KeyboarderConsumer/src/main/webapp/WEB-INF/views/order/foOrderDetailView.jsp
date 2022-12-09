@@ -74,6 +74,7 @@
         <br>
         <hr style="background-color: black; height: 5px;">
         <br clear="both">
+        <%--
         <!-- form 태그 추가로 인해 %에서 px로 변경 필요 -->
         <div class="order-product-main">
             <form>
@@ -165,8 +166,8 @@
                	 최종결제금액 = 상품가격 - 쿠폰가격 + 배송비
             </div>
         </div>
+         --%>
 
-		<%--
 		<div class="order-product-main">
             <form>
                 <div class="order-product-date" style="float: left; width: 15%; height: 200px;">
@@ -322,7 +323,6 @@
             	</c:otherwise>
             </c:choose>
         </div>
-         --%>
     </div>    
 
 </body>

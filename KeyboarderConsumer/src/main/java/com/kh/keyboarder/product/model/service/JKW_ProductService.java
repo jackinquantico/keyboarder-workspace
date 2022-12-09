@@ -15,7 +15,4 @@ public interface JKW_ProductService {
 	// 게시글 리스트 조회
 	ArrayList<Product> selectList(PageInfo pi);
 	
-	ArrayList<JKW_Coupon> stoCouponList();
-	
-	ArrayList<JKW_Coupon> keyCouponList();
 }
