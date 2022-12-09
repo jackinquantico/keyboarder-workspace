@@ -31,23 +31,27 @@
         }
 
         #fo-header-logo{
-            width: 30%;
-            height: 100%;
+        	float: left;
+        	padding-top: 45px;
+            width: 40%;
             display: inline-block;
-            margin-left: 5%;
         }
 
         #fo-header-login{
+        	padding-top: 20px; 
             width: 40%;
-            height: 100%;
             display: inline-block;
             float: right;
         }
+        
+        #fo-header-login div {
+            float: right;
+        	display: inline-block;
+        }
 
         #login-button{
-            width: 40%;
+            width: 30%;
             height: 100%;
-            float: left;
             font-size: 20px;
             line-height: 95px;
         }
@@ -55,7 +59,6 @@
         #order-button{
             width: 35%;
             height: 100%;
-            float: left;
             font-size: 17px;
             line-height: 95px;
         }
@@ -63,7 +66,6 @@
         #logout-button{
             width: 25%;
             height: 100%;
-            float: left;
             line-height: 95px;
             text-align: center;
         }
@@ -99,21 +101,21 @@
                 <c:choose>
                     <c:when test="${ empty loginUser }">
                         <!-- 로그인전 -->
-                        <div id="order-button" align="center"></div>
-                        <div id="login-button" align="center">
-                            <a href="termsForm.me"><button type="button" class="btn btn-primary">회원가입</button></a>
-                        </div>
+                        <!-- <div id="order-button" align="center"></div> -->
                         <div id="logout-button">
                             <a data-toggle="modal" data-target="#loginModal"><button type="button" class="btn btn-primary">로그인</button></a>
                         </div>
+                        <div id="login-button" align="center">
+                            <a href="termsForm.me"><button type="button" class="btn btn-primary">회원가입</button></a>
+                        </div>
                     </c:when>
                     <c:otherwise>
-                        <div id="order-button" align="center">
-                            <a href="foTotalView.order"><button type="button" class="btn btn-primary">주문내역조회</button></a>
-                        </div>
-                        <div id="login-button" align="center">${ loginUser.conName } 님 </div>
                         <div id="logout-button">
                             <button type="button" class="btn btn-primary" onclick="location.href='logout.me'">로그아웃</button>
+                        </div>
+                        <div id="login-button" align="center">${ loginUser.conName } 님 </div>
+                        <div id="order-button" align="center">
+                            <a href="foTotalView.order"><button type="button" class="btn btn-primary">주문내역조회</button></a>
                         </div>
                     </c:otherwise>
                 </c:choose>

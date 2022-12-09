@@ -24,17 +24,18 @@
         }
 
         #fo-product-main{
-            width: 80%;
+            width: 100%;
             height: 750px;
             margin: auto;
             margin-top: 80px;
         }
         
         #btn{
+        	height: 70px;
         	font-size: 30px;
         	position: absolute;
-        	top: 70%;
-        	left: 53%;
+        	top: 100%;
+        	left: 42%;
         }
 
     </style>
@@ -48,15 +49,13 @@
 
        	<div id="fo-product-body">
            	<div id="fo-product-main">
-               
-                <img src="https://proguide.co.kr/wp-content/uploads/2021/04/1-3-scaled.jpg"
-                	 style="background-size: cover; width: 100%; height: 100%; position : relative; border-radius: 50px;">
+                <img src="resources/images/mainEvent.jpg"
+                	 style="background-size: cover; width: 100%; height: 100%; position : relative;">
                 <a href="foProductNotice.pro">
                 	<button type="button" class="btn btn-primary" id="btn">
                 		키보드 구매페이지 이동
                 	</button>
                 </a>
-               
            	</div>
            
            
