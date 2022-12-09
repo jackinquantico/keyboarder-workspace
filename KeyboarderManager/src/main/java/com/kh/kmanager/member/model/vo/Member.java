@@ -27,6 +27,7 @@ public class Member {
 	private Date joinDate; // 판매업체 가입일
 	private String location; // 판매업체 본사주소
 	private String sellerStatus; // 판매업체 가입상태
+	private String identifyStatus; // 가입승인여부
 	private int mailAuth; // 판매업체 이메일 인증여부
 	private String mailKey; // 판매업체 이메일 인증 키
 	private String logoAttachment; // 판매업체 로고

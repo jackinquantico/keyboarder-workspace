@@ -16,6 +16,7 @@
 		<result column="JOIN_DATE" property="joinDate" />
 		<result column="LOCATION" property="location" />
 		<result column="SELLER_STATUS" property="sellerStatus" />
+		<result column="IDENTIFY_STATUS" property="identifyStatus" />
 		<result column="MAIL_AUTH" property="mailAuth" />
 		<result column="MAIL_KEY" property="mailKey" />
 		<result column="LOGO_ATTACHMENT" property="logoAttachment" />
@@ -75,6 +76,7 @@
 						 , JOIN_DATE
 						 , LOCATION
 						 , SELLER_STATUS
+						 , IDENTIFY_STATUS
 						 , MAIL_AUTH
 						 , MAIL_KEY
 						 , LOGO_ATTACHMENT)
@@ -89,6 +91,7 @@
 				   		 , #{accountNo}
 				   		 , DEFAULT
 				   		 , #{location}
+				   		 , DEFAULT
 				   		 , DEFAULT
 				   		 , 0
 				   		 , 'NULL'
