@@ -83,13 +83,13 @@
                       <td>전체</td>
                       <td><div id="all"></div></td>
                       <td><img src="resources/uploadFiles/shop.png" style="width:35px; hieght:35px;"></td>
-                      <td></td>
+                      <td>판매중</td>
                       <td><div id="onsale">${p.onSale}</div></td>
                       <td><img src="resources/uploadFiles/minus.png" style="width:35px; hieght:35px;"></td>
-                      <td></td>
+                      <td>품절</td>
                       <td><div id="soldout">${p.soldOut}</div></td>
                       <td><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
-                      <td></td>
+                      <td>판매종료</td>
                       <td></td>
                       <td><div id="noSale">${p.soldOut}</div></td>
                    </tr>
@@ -156,7 +156,7 @@
        
        <script> //카운트 조회용
        $(function() {
-    	   console.log	("${loginUser.sellerNo}")
+    	   console.log	("${loginUser.sellerNo}");
     	  $.ajax({
     		  url : "count.pro",
     		  data : {sellerNo :"${loginUser.sellerNo }"

@@ -278,9 +278,9 @@ public class NSJ_ProductController {
 	  @ResponseBody
 	  @RequestMapping(value="count.pro", produces="application/json; charset=UTF-8") 
 	  public String countProduct(Model model,int sellerNo) {
-	  
-		  Product p = productService.countProduct(sellerNo); 
 		  
+		  Product p = productService.countProduct(sellerNo); 
+		  System.out.println(p);
 		   return new Gson().toJson(p);
 	  }
 		 

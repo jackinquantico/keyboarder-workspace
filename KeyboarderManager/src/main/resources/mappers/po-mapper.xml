@@ -105,7 +105,8 @@
 					</update>
 					
 					
-					<select id ="countProduct" parameterType="product">
+					<select id ="countProduct" parameterType="product" resultMap="ProductResultSet">
+					
 					
 					SELECT onsale.PRODUCT_NO as ONSALE,  
 					soldout.PRODUCT_NO as SOLDOUT
