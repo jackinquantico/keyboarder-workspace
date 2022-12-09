@@ -14,26 +14,6 @@
 		<result column="PRODUCT_NAME" property="productName" />
 	</resultMap>
 	
-	
-	
-	
-	
-	
-	
-	<!-- <select id="prodcutListforCoupon" resultMap="poCouponResultMap">
-			
-		SELECT *
-		FROM PRODUCT P
-		LEFT JOIN SELLER S ON
-		P.SELLER_NO=S.SELLER_NO
-		WHERE P.SELLER_NO=${seller_No}
-		
-	</select>
-	
-	
-	 -->
-	
-	
 	<insert id ="insertCoupon" parameterType="poCoupon">
 	
 	INSERT INTO COUPON_STORE(COUPON_NO,
@@ -41,16 +21,13 @@
 							 COUPON_PRICE,
 							 CREATE_DATE,
 							 DUE_DATE,
-							 COUPON_STMT,
-							 SELLER_NO,
 							 PRODUCT_NO)
 VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
 		#{couponName},
 		#{couponPrice},
 		#{createDate},
-		#{due_date},
-		#{seller_no},
-		#{product_no})							 
+		#{dueDate},
+		#{productNo})							 
 	</insert>
 	</mapper>
 	

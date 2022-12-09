@@ -11,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.coupon.model.service.CouponService;
-import com.kh.kmanager.po.product.model.service.ProductService;
+import com.kh.kmanager.po.coupon.model.vo.Coupon;
+
 import com.kh.kmanager.po.product.model.vo.Product;
 
 
@@ -38,17 +39,18 @@ private CouponService couponService;
  */
 @RequestMapping("mainCoupon.po")
 public String prodcutListforCoupon(Model model, HttpSession session) {	
+	
 	int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
 	ArrayList<Product>list= couponService.prodcutListforCoupon(sellerNo);
 	
 		if(list!=null) {
 			model.addAttribute("list",list);
-			
 		}
 		return "/po/poCoupon/PoCouponInsert";
 		
 	}
-}
+
+
 
 
 /**
@@ -56,24 +58,19 @@ public String prodcutListforCoupon(Model model, HttpSession session) {
  * 
  * @return
  */
-//@RequestMapping("insertCoupon.po")
-//public String insertCoupon(Coupon c, String productName, HttpSession session) {
-//	int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
-//	
-// HashMap map = new HashMap();
-// map.put("couponName", c.getCou~());
-//	
-//	if (result>0) {
-//		session.setAttribute("alertMsg", "쿠폰 등록에 성공했습니다.");
-//	} else {
-//		session.setAttribute("alertMsg", "쿠폰 등록에 실패했습니다.");
-//	}
-//	
-//	return "redirect:/mainCoupon.po";
-//
-//	}
-//
-//}
-
-
+  @RequestMapping("insertCoupon.po") 
+ public String insertCoupon(Coupon c, HttpSession session) { 
+		
+		int result = couponService.insertCoupon(c);
+		
+		if (result > 0) {
+			session.setAttribute("alertMsg", "쿠폰 등록에 성공했습니다.");
+		} else {
+			session.setAttribute("alertMsg", "쿠폰 등록에 실패했습니다.");
+		}
+		
+		return "redirect:/mainCoupon.po";
+	}
+}
+	
 

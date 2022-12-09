@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>ÄíÆù µî·Ï</title>
+  <meta charset="UTF-8">
+<title>ì¿ í°</title>
 </head>
 <style>
 td{
@@ -28,7 +28,7 @@ padding-top:20px;
 		<div class="content-wrapper">
 
 			<br>
-			<!-- ÄíÆùµî·Ï -->
+			<!-- ì¿ í°ë“±ë¡-->
 			<div class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
@@ -41,36 +41,36 @@ padding-top:20px;
 			</div>
 
 			<div class="content">
-			<h3>ÄíÆùµî·Ï</h3>
+			<h3>ì¿ í°ë“±ë¡</h3>
 
 	<form id="MainStcoupon" action="insertCoupon.po" method="post">
 	<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
-	<input type="hidden" name="productNo" value="${p.productNo }">
+	
 	
 	    <fieldset>
 	        <table>
 	    	<tr>
-	    	<td>ÄíÆù¸í*</td>
+	    	<td>ì¿ í°ëª…*</td>
 	    	<td ><input type="text" style="width:500px;" name="couponName"></td>
 	    </tr>
 	
 	    	<tr>
-	        <td>ÄíÆùÁ¾·ù*</td>
-	        <td><input type="radio" name="couponPrice" value="3000">&nbsp;3000¿ø &nbsp;
-	        <input type="radio" name="couponPrice" value="5000">&nbsp;5000¿ø &nbsp;
-	        <input type="radio" name="couponPrice" value="10000">10000¿ø &nbsp;</td>
+	        <td>ì¿ í°ì¢…ë¥˜*</td>
+	        <td><input type="radio" name="couponPrice" value="3000">&nbsp;3000ì›&nbsp;
+	        <input type="radio" name="couponPrice" value="5000">&nbsp;5000ì›&nbsp;
+	        <input type="radio" name="couponPrice" value="10000">10000ì› &nbsp;</td>
 	        
 		</tr>
 	<tr>
-	    <td>ÄíÆù À¯È¿±â°£*&nbsp;</td>
+	    <td>ì¿ í° ìœ íš¨ê¸°ê°„*&nbsp;</td>
 	    <td><input type="date" name="createDate">~<input type="date" name="dueDate"></td>
 		</tr>
 
 		<tr>
-		<td>ÄíÆù ¹ßÇà¹üÀ§*</td>
+		<td>ì¿ í° ë°œí–‰ìƒí’ˆ*</td>
 			<td>
 			<select name ="productNo" required id="productNo">
-				<option selected value="">»óÇ°¼±ÅÃ</option>
+				<option selected value="">ìƒí’ˆì„ íƒ</option>
 				<c:forEach var="p" items="${list}">
 					<option value="${p.productNo}">${p.productName}</option>
 				</c:forEach>
@@ -79,15 +79,17 @@ padding-top:20px;
 		<td></td>
 	</tr>
 	   	 </table>
-	   	 <button style="float:right;">µî·Ï</button><br><br>
+	   	 <button style="float:right;" class="btn btn-secondary">ë“±ë¡</button><br><br>
 	    <hr style="clear:both">
-	    <h6>* ÄíÆù µî·Ï ¼³Á¤<br>
-	        ÆÄÆ®³Ê»ç ÇÒÀÎÄíÆù ¼³Á¤ ½Ã 100% ºÎ´ãÀ¸·Î ÇÒÀÎÀÌ Àû¿ëµË´Ï´Ù. ÇöÀç ÆäÀÌÁö¿¡¼­ Á÷Á¢ ¼³Á¤ÇÑ ÇÒÀÎ¾×¿¡ ´ëÇØ¼­´Â KEYBOAR-DER °¡ ºÎ´ãÇÏÁö ¾Ê½À´Ï´Ù.<br>
-	    KEY-BORDER ÄíÆù »ç¿ë½Ã, ÄíÆù±Ý¾×¸¸Å­ ÆÇ¸ÅÀÚ ¼ö¼ö·á¿¡¼­ Â÷°¨µË´Ï´Ù. (Á¤»ê ¸Å´º¾ó Âü°í)<br><br>   
-	    * ÄíÆù µî·Ï½Ã ÁÖÀÇ»çÇ×<br>    
-	        ÄíÆù Á¾·ù´Â ÆÄÆ®³Ê»ç ÇÒÀÎÄíÆù°ú ¿ÀÇÂ¸¶ÄÏ ÄíÆù Áßº¹ Àû¿ëÀÌ ºÒ°¡´ÉÇÏ¸ç ¿ÀÇÂ¸¶ÄÏ Á¤Ã¥»ó ¸ðµç »óÇ°ÀüÃ¼¿¡ ÄíÆùÀÌ Àû¿ëµÇ³ª, ÇÑ »óÇ°´ç ÇÏ³ªÀÇ ÄíÆù¸¸ »ç¿ë °¡´ÉÇÕ´Ï´Ù.<br>
-	        À¯È¿±â°£ÀÌ Áö³­ ÄíÆùµµ ÄíÆù ¸ñ·Ï¿¡¼­ Á¶È¸°¡´ÉÇÕ´Ï´Ù.
-	      </h6>
+	    <h6>* ì¿ í° ë“±ë¡ ì„¤ì •<br>
+	       íŒŒíŠ¸ë„ˆì‚¬ í• ì¸ì¿ í° ì„¤ì • ì‹œ 100% ë¶€ë‹´ìœ¼ë¡œ í• ì¸ì´ ì ìš©ë©ë‹ˆë‹¤. í˜„ìž¬ íŽ˜ì´ì§€ì—ì„œ ì§ì ‘ ì„¤ì •í•œ í• ì¸ì•¡ì— ëŒ€í•´ì„œëŠ” KEYBOAR-DER ê°€ ë¶€ë‹´í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.<br>
+        KEY-BORDER ì¿ í° ì‚¬ìš©ì‹œ, ì¿ í°ê¸ˆì•¡ë§Œí¼ íŒë§¤ìž ìˆ˜ìˆ˜ë£Œì—ì„œ ì°¨ê°ë©ë‹ˆë‹¤. (ì •ì‚° ë§¤ë‰´ì–¼ ì°¸ê³ )<br><br>
+        
+        * ì¿ í° ë“±ë¡ì‹œ ì£¼ì˜ì‚¬í•­<br>
+        
+        ì¿ í° ì¢…ë¥˜ëŠ” íŒŒíŠ¸ë„ˆì‚¬ í• ì¸ì¿ í°ê³¼ ì˜¤í”ˆë§ˆì¼“ ì¿ í° ì¤‘ë³µ ì ìš©ì´ ë¶ˆê°€ëŠ¥í•˜ë©° ì˜¤í”ˆë§ˆì¼“ ì •ì±…ìƒ ëª¨ë“  ìƒí’ˆì „ì²´ì— ì¿ í°ì´ ì ìš©ë˜ë‚˜, í•œ ìƒí’ˆë‹¹ í•˜ë‚˜ì˜ ì¿ í°ë§Œ ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.<br>
+        ìœ íš¨ê¸°ê°„ì´ ì§€ë‚œ ì¿ í°ë„ ì¿ í° ëª©ë¡ì—ì„œ ì¡°íšŒê°€ëŠ¥í•©ë‹ˆë‹¤.
+        </h6>
 	    </fieldset>
 	    </form> 
 		
