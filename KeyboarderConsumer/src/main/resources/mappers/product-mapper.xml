@@ -13,6 +13,14 @@
 		<result column="ATTACHMENT4" property="attachment4" />
 		<result column="PRODUCT_STATUS" property="productStatus" />
 		<result column="SELLER_NO" property="sellerNo" />
+		<result column="S_COUPON_NO" property="stoCouponNo" />
+		<result column="K_COUPON_NO" property="keyCouponNo" />
+		<result column="S_COUPON_NAME" property="stoCouponName" />
+		<result column="K_COUPON_NAME" property="keyCouponName" />
+		<result column="S_COUPON_PRICE" property="stoCouponPrice" />
+		<result column="K_COUPON_PRICE" property="keyCouponPrice" />
+		<result column="S_PRODUCT_NO" property="stoProductNo" />
+		<result column="K_PRODUCT_NO" property="keyProductNo" />
 	</resultMap>
 	
 	<resultMap id="couponResultSet" type="coupon">
@@ -28,13 +36,22 @@
 	</select>
 	
 	<select id="selectList" resultMap="productResultSet">
-		SELECT PRODUCT_NO
-		     , PRODUCT_NAME
-		     , PRICE
-		     , ATTACHMENT1
-ㄴ		FROM PRODUCT
-		WHERE PRODUCT_STATUS = 1
-		ORDER BY PRODUCT_NO DESC
+		SELECT P.PRODUCT_NO
+             , PRODUCT_NAME
+             , PRICE
+             , ATTACHMENT1
+             , S.COUPON_NO AS "S_COUPON_NO"
+             , K.COUPON_NO AS "K_COUPON_NO"
+             , S.COUPON_NAME AS "S_COUPON_NAME"
+             , K.COUPON_NAME AS "K_COUPON_NAME"
+             , S.COUPON_PRICE AS "S_COUPON_PRICE"
+             , K.COUPON_PRICE AS "K_COUPON_PRICE"
+             , S.PRODUCT_NO AS "S_PRODUCT_NO"
+             , K.PRODUCT_NO AS "K_PRODUCT_NO"
+		FROM PRODUCT P
+		LEFT JOIN COUPON_STORE S ON (P.PRODUCT_NO = S.PRODUCT_NO)
+		LEFT JOIN COUPON_KEYBOARDER K ON (P.PRODUCT_NO = K.PRODUCT_NO)
+		ORDER BY P.PRODUCT_NO DESC
 	</select>
 	
 	<select id="keyCouponList" resultMap="couponResultSet">
@@ -64,8 +81,31 @@
 		JOIN COUPON_STORE STOC ON(PRO.PRODUCT_NO = STOC.PRODUCT_NO)
 		WHERE PRODUCT_STATUS = 1
 		ORDER BY PRODUCT_NO DESC
+		
+		SELECT P.PRODUCT_NO
+            , PRODUCT_NAME
+            , PRICE
+            , ATTACHMENT1
+            , S.COUPON_NO "스토어쿠폰NO"
+            , K.COUPON_NO
+            , S.COUPON_NAME
+            , K.COUPON_NAME
+            , S.COUPON_PRICE
+            , K.COUPON_PRICE
+            , S.PRODUCT_NO
+            , K.PRODUCT_NO
+FROM PRODUCT P
+LEFT JOIN COUPON_STORE S ON (P.PRODUCT_NO = S.PRODUCT_NO)
+LEFT JOIN COUPON_KEYBOARDER K ON (P.PRODUCT_NO = K.PRODUCT_NO)
+
+SELECT PRODUCT_NO
+		     , PRODUCT_NAME
+		     , PRICE
+		     , ATTACHMENT1
+ㄴ		FROM PRODUCT
+		WHERE PRODUCT_STATUS = 1
+		ORDER BY PRODUCT_NO DESC
 	 -->
-	
 	
 </mapper>
 

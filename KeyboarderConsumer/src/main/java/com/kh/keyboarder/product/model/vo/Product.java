@@ -23,6 +23,14 @@ public class Product {
 	private String attachment4; // 첨부파일
 	private int productStatus; // 상품공개여부
 	private int sellerNo; // 판매자 식별키
-	private String couponName; // 쿠폰명
+	private String stoCouponNo;
+	private String keyCouponNo;
+	private String stoCouponName;
+	private String keyCouponName;
+	private int stoCouponPrice;
+	private int keyCouponPrice;
+	private int stoProductNo;
+	private int keyProductNo;
+	
 
 }

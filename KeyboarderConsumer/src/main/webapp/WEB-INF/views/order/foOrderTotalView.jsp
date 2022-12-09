@@ -68,27 +68,17 @@
         </div>
         <br>
         <div id="order-date-tracking">
-            <form action="" method="">
-                <div id="delivery-lookup">
-                    <div style="display: inline-block; margin-left: 10%; font-size: 20px; margin-top: 35px; width: 12%;">
-                       	 조회기간
-                    </div>
-                    <select style="width: 200px;">
-                        <option align="center">전체</option>
-                        <option>언제로할까</option>
-                    </select>
-                    <input type="date" style="margin-left: 3%;">
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <input type="date">
-                </div>
-                
-                <div id="delivery-button" align="center">
-                    <button type="submit" class="btn btn-primary" id="date-search" style="margin-top: 10px; width: 20%;">
-                    	검색하기
-                    </button>
-                </div>
-            </form>
+             <div id="delivery-lookup">
+                 <div style="display: inline-block; margin-left: 33%; font-size: 20px; margin-top: 35px; width: 12%;">
+                    	 조회기간
+                 </div>
+                 <input type="month" style="margin-left: 10%;">
+             </div>
+             <div id="delivery-button" align="center">
+                 <button type="submit" class="btn btn-primary" id="date-search" style="margin-top: 10px; width: 20%;" onclick="selectOrderDate">
+                 	검색하기
+                 </button>
+             </div>
         </div>
         <br><br>
         <hr style="background-color : black; height: 5px;">
@@ -173,7 +163,7 @@
                 </div>
                 <div class="order-product-name-price" style="float: left; width: 40%; height: 200px;">
                     <div style="width: 100%; height: 100px; font-size: 17px; padding-top: 30px;" align="center">
-                        <a href="foDetailView.order"> <%-- ?orderNo=${ ord.orderNo }  --%>
+                        <a href="foDetailView.order"> <%-- ?ordNo=${ ord.orderNo }  --%>
                         	닌자87PRO 풀윤활 RGB 저소음 스위치 기계식 커스텀키보드 퍼플B퍼플레빗 Durock T1
                         </a>
                     </div>
@@ -196,6 +186,51 @@
         <br>
         
     </div>
+    
+    
+    <script>
+    	function selectOrderDate(){
+    		
+    		$.ajax({
+    			url : "selectDate.order",
+    			data : 
+    			
+    		});
+    	}
+    </script>
+    
+    
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

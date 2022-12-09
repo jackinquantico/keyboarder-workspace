@@ -7,4 +7,6 @@ import com.kh.keyboarder.order.model.vo.Order;
 public interface JKW_OrderService {
 	
 	ArrayList<Order> foTotalViewList(int conNo);
+	
+	Order foDetailViewList(String ordNo);
 }

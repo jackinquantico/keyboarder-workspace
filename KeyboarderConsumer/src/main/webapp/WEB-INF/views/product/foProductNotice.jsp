@@ -86,7 +86,7 @@
         }
         
         #buy-btn:hover{
-        	opacity: 0.9;
+        	opacity: 0.7;
         	cursor: pointer;
         	color: white;
         }
@@ -124,13 +124,25 @@
 			                            </div>
 			                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
 			                            	<select class="form-select couponSelect" name="couponPrice">
-			                            		<option align="center" disabled>쿠폰 선택</option>
-			                            		<option name="" value="" selected><%--${ keyc.couponName } --%></option>
-			                            		<option name=""><%--${ stoc.couponName } --%></option>
+			                            		<c:choose>
+				                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName ne null }">
+				                            			<option name="" value="" selected>${ p.keyCouponName }</option>
+					                            		<option name="" value="">${ p.stoCouponName }</option>
+				                            		</c:when>
+				                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
+				                            			<option name="" value="" selected>${ p.keyCouponName }</option>
+				                            		</c:when>
+				                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
+				                            			<option name="" value="" selected>${ p.stoCouponName }</option>
+				                            		</c:when>
+				                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
+				                            			<option name="" value="" selected disabled align="center">쿠폰 없음</option>
+				                            		</c:when>
+			                            		</c:choose>
 			                            	</select>
 			                            </div>
 			                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
-			                                <button type="button" class="buy-btn" class="btn btn-primary" onclick="requestPay(this);" style="padding: 9px; margin: 0px;">
+			                                <button type="button" id="buy-btn" class="btn btn-primary" onclick="requestPay(this);" style="padding: 9px; margin: 0px;">
 			                                   	 구매하기
 			                                </button>
 			                            </div>

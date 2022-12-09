@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class Order {
 
-	private int orderNo; // 주문번호
+	private String orderNo; // 주문번호
 	private String orderDate; // 주문일시
 	private int orderPrice; // 주문 금액
 	private String couponYN; // 쿠폰 사용 여부
@@ -22,4 +22,41 @@ public class Order {
 	private int conNo; // 고객번호
 	private String productAttachment; // 상품사진
 	private String productName; // 상품명
+	private int productPrice; // 상품 가격
+	private int keyCouponPrice; // PO 쿠폰 가격
+	private int stoCouponPrice; // BO 쿠폰 가격
+	private String conName; // 구매자 이름
+	private String conPhone; // 구매자 휴대폰 번호
+	private String conAddress; // 구매자 주소
+	private String sellerName; // 판매업체명
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

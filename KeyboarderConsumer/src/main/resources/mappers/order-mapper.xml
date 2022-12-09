@@ -12,6 +12,13 @@
 		<result column="CON_NO" property="conNo" />
 		<result column="ATTACHMENT1" property="productAttachment" />
 		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRICE" property="productPrice" />
+		<result column="COUPON_PRICE" property="keyCouponPrice" />
+		<result column="COUPON_PRICE" property="stoCouponPrice" />
+		<result column="CON_NAME" property="conName" />
+		<result column="CON_PHONE" property="conPhone" />
+		<result column="CON_ADDRESS" property="ADDRESS" />
+		<result column="SELLER_NAME" property="sellerName" />
 	</resultMap>
 	
 	<select id="foTotalViewList" parameterType="_int" resultMap="orderResultSet">
@@ -28,23 +35,32 @@
 		ORDER BY ORDER_DATE DESC
 	</select>
 	
-	<!-- 
-	SELECT ORDER_NO
-	     , ORDER_DATE
-	     , ORDER_STATUS
-	     , PRODUCT_NAME
-	     , PRICE
-	     , COUPON_PRICE
-	     , COUPON_PRICE
-	     , CON_NAME
-	     , CON_PHONE
-	     , ADDRESS
-	     , SELLER_NAME
-	FROM ORDER ORD
-	JOIN PRODUCT PRO ON (PRO.PRODUCT_NO = ORD.PRODUCT_NO)
-	JOIN SELLER SEL ON (PRO.PRODUCT_NO = SEL.PRODUCT_NO)
-	JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
-	 -->
+	<select id="foDetailViewList" parameterType="string" resultMap="orderResultSet">
+		SELECT ORD.ORDER_NO
+		     , TO_CHAR(ORD.ORDER_DATE, 'YYYY-MM-DD') "ORD.ORDER_DATE"
+		     , ORD.ORDER_STATUS
+		     , PRO.PRODUCT_NAME
+		     , PRO.PRICE
+		     , PRO.ATTACHMENT1
+		     , KCOU.COUPON_PRICE
+		     , SCOU.COUPON_PRICE
+		     , CONS.CON_NAME
+		     , CONS.CON_PHONE
+		     , CONS.ADDRESS
+		     , SEL.SELLER_NAME
+		FROM ORDERS ORD
+		JOIN PRODUCT PRO ON (PRO.PRODUCT_NO = ORD.PRODUCT_NO)
+		JOIN SELLER SEL ON (PRO.SELLER_NO = SEL.SELLER_NO)
+		JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
+		JOIN KEYBOARDER_USE KUSE ON (ORD.ORDER_NO = KUSE.ORDER_NO)
+		JOIN STORE_USE SUSE ON(ORD.ORDER_NO = SUSE.ORDER_NO)
+		RIGHT JOIN COUPON_KEYBOARDER KCOU ON (KUSE.COUPON_NO = KCOU.COUPON_NO)
+		LEFT JOIN COUPON_STORE SCOU ON (SUSE.COUPON_NO = SCOU.COUPON_NO)
+		WHERE SUSE.ORDER_NO = #{ordNo}
+		   OR KUSE.ORDER_NO = #{ordNo}
+		   OR SUSE.ORDER_NO IS NULL AND KUSE.ORDER_NO IS NULL
+	</select>
+	
 
 </mapper>
 

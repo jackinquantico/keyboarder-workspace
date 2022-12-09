@@ -36,9 +36,13 @@ public class JKW_FoOrderController {
 	}
 	
 	@RequestMapping("foDetailView.order")
-	public String foDetailView() {
+	public String foDetailView(Model model, String ordNo) {
 		
+		/*
+		Order orderDetailList = JKW_OrderService.foDetailViewList(ordNo);
 		
+		model.addAttribute("orderDetailList", orderDetailList);
+		*/		
 		
 		return "order/foOrderDetailView";
 	}

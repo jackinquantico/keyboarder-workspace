@@ -23,6 +23,12 @@ public class JKW_OrderServiceImpl implements JKW_OrderService {
 		
 		return JKW_OrderDao.foTotalViewList(sqlSession, conNo);
 	}
+
+	@Override
+	public Order foDetailViewList(String ordNo) {
+		
+		return JKW_OrderDao.foDetailViewList(sqlSession, ordNo);
+	}
 	
 	
 
