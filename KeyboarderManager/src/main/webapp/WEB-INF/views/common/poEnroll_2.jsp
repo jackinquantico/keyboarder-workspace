@@ -257,11 +257,12 @@
 	        }
 	    });
     
+	    /*
         $("#corpNoCheck").click(function() {
             
                 var corpNo = document.getElementById("corpNo");
                         
-                // 아이디 정규식 영문자, 숫자로만 총 7 ~ 20자로 이루어지게
+                // 사업자 등록번호 정규식 영문자, 숫자로만 총 7 ~ 20자로 이루어지게
                 var regExp = /^\d{3}-\d{2}-\d{5}$/;
                 if(!regExp.test(corpNo.value)) {
                     alert("올바른 형식의 사업자 등록 번호가 아닙니다.");
@@ -285,6 +286,67 @@
                 }
             }
         );
+	    */
+	    
+        // 사업자 등록 번호 중복 체크 결과 출력 ajax
+        $("#corpNoCheck").click(function() {
+
+        	var corpNo = document.getElementById("corpNo");
+            // 사업자 등록번호 정규식 영문자, 숫자로만 총 7 ~ 20자로 이루어지게
+            var regExp = /^\d{3}-\d{2}-\d{5}$/;
+        	
+            $.ajax({
+                url : "corpNoCheck.me",
+                data : {corpNo : corpNo.value},
+				success : function(result) {
+					
+	                if(!regExp.test(corpNo.value)) { // 양식이 안 맞을때
+	                	
+	                    alert("올바른 형식의 사업자 등록 번호가 아닙니다.");
+
+	                        // 버튼 비활성화
+	                        $("#nextStep").attr("disabled", true);
+	                        $("#nextStep").css('backgroundColor', '#a7a7a7');
+	                        $("#nextStep").addClass("disabledBtn");
+	                        $("#nextStep").removeClass("enabledBtn");
+
+	                    return false;
+	                    
+	                }   else { // 양식은 맞을때
+	                    
+	                	if(result == "NNNNN") { // 중복일 때
+	                		
+		                   	alert("이미 존재하는 사업자 등록 번호입니다.");
+		                    
+	                        // 버튼 비활성화
+	                        $("#nextStep").attr("disabled", true);
+	                        $("#nextStep").css('backgroundColor', '#a7a7a7');
+	                        $("#nextStep").addClass("disabledBtn");
+	                        $("#nextStep").removeClass("enabledBtn");
+	                        
+	                	} else { // 중복이 아닐 때
+	                		
+		                    alert("사업자 등록 번호 인증완료");
+
+		                    // 버튼 활성화
+		                    $("#nextStep").removeAttr("disabled");
+		                    $("#nextStep").css('backgroundColor', '#323232');
+		                    $("#nextStep").addClass("enabledBtn"); // cursor : pointer css를 가진 class 추가
+		                    $("#nextStep").removeClass("disabledBtn"); // cursor : dafault css를 가진 class 삭제
+	                		
+	                	}
+
+	                }
+					
+				},
+				error : function() {
+					console.log("사업자 등록 번호 중복 체크용 ajax 통신 실패")
+				}
+
+            });
+
+        });
+        
     </script>
 
 </body>

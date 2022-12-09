@@ -180,6 +180,14 @@ public class CWS_MemberController {
 		return "common/poEnroll_2";
 	}
 	
+	//아이디중복체크
+	@ResponseBody
+	@RequestMapping(value="corpNoCheck.me", produces="text/html; charset=UTF-8")
+	public String corpNoCheck(String corpNo) {
+		int count = memberService.corpNoCheck(corpNo);
+		return(count>0)? "NNNNN" : "NNNNY";
+	}
+	
 	@RequestMapping("poEnrollForm.me")
 	public String enrollForm2(HttpSession session, String corpNo) {
 		

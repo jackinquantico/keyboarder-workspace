@@ -29,6 +29,12 @@ public class CWS_MemberServiceImpl implements CWS_MemberService  {
 		Member loginUser = memberDao.loginMember(sqlSession, m);
 		return loginUser;
 	}
+	
+	@Override
+	public int corpNoCheck(String corpNo) {
+		int result = memberDao.corpNoCheck(sqlSession, corpNo);
+		return result;
+	}
 
 	@Override
 	public int insertMember(Member m) throws Exception {
@@ -94,6 +100,8 @@ public class CWS_MemberServiceImpl implements CWS_MemberService  {
 	public int emailAuthFail(String sellerId) {
 		return memberDao.emailAuthFail(sqlSession, sellerId);
 	}
+
+
 
 	
 	

@@ -21,6 +21,10 @@ public class CWS_MemberDao {
 		return sqlSession.selectOne("member-mapper.idCheck", checkId);
 	}
 	
+	public int corpNoCheck(SqlSessionTemplate sqlSession, String corpNo) {
+		return sqlSession.selectOne("member-mapper.corpNoCheck", corpNo);
+	}
+	
 	public String findId(SqlSessionTemplate sqlSession, String corpNo) {
 		return sqlSession.selectOne("member-mapper.findId", corpNo);
 	}

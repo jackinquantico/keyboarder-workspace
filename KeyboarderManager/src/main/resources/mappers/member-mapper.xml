@@ -124,5 +124,12 @@
 		FROM SELLER
 		WHERE SELLER_ID = #{checkId}
 	</select>
+	
+	<select id="corpNoCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM SELLER
+		WHERE CORP_NO = #{corpNo}
+	</select>
+	
 
 </mapper>
