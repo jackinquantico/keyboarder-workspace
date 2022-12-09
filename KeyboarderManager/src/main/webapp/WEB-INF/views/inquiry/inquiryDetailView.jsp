@@ -53,9 +53,16 @@
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
-<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
-
-<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
+<c:choose>
+	<c:when test="${ loginUser.sellerId eq 'admin' }">
+		<jsp:include page="/WEB-INF/views/common/boheader.jsp" />
+		<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
+		<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
+	</c:otherwise>
+</c:choose>
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
@@ -233,7 +240,7 @@
                     url:"rlist.iq",
                     data : {ino:${ i.inquiryNo }},
                     success : function(result) {
-                    	console.log(result.inquiryReply);
+                    	//console.log(result.inquiryReply);
                         $("#replyContent1").text(result.inquiryReply);
                         $("#replyArea tbody").html("<tr><td>" + result.inquiryReply +"</td></tr>");
                     },

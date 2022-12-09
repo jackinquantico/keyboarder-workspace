@@ -103,7 +103,7 @@
                                     <option value="hanmail.net">hanmail.net</option>
                                     <option value="nate.com">nate.com</option>
                             </select>
-                            <td align="center"><button type="button" id="checkbutton" style="width:130px; height:40px; font-size: 85%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">이메일 중복체크</button></td>
+                           <!--  <td align="center"><button type="button" id="checkbutton" style="width:130px; height:40px; font-size: 85%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">이메일 중복체크</button></td> -->
                             <input type="hidden" name="conEmail" id="conEmail" value="">
                         </td>
                     </tr>
@@ -184,12 +184,12 @@
                     }
                 </script>
                 
-                <script>
+                <!-- <script>
                 	function emailCheck() {
                 		// 이메일 중복체크 전 유효성검사 
                 		var email_id = document.getElementById("email_id");
                 	} // 하다말았음 여기서부터 시작하기~
-                </script>
+                </script> -->
                 
                 <script>
                     function sample6_execDaumPostcode() {

@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
         #orderConfirmForm {
-            width: 1300px;
+            width: 95%;
             height: 70%;
             margin: auto;
             margin-top: 30px;
@@ -75,36 +75,39 @@
 
         <div id="orderConfirmList">
             <br>
-            <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 70px;">
+            <input type="button" class="btn btn-secondary" value="엑셀다운로드" style="float:right; margin-right: 70px;">
             <br><br><br>
             <table class="table table-bordered" style="margin:auto; margin-bottom: 30px; width:90%; font-size: 13px;">
                 <thead align="center">
                     <tr>
+                    	<th width="10%">주문번호</th>
                         <th width="10%">정산일</th>
                         <th width="10%">상세내역</th>
-                        <th width="10%">판매금액</th>
+                        <th width="10%">상품금액</th>
                         <th width="7%">배송비</th>
                         <th width="10%">총 판매금액</th>
                         <th width="10%">판매수수료</th>
                         <th width="13%">KEYBOAR-DER 쿠폰</th>
                         <th width="10%">입점사 쿠폰</th>
-                        <th width="10%">전체공제금액</th>
                         <th width="10%">정산확정금액</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" align="center"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                <tbody style="background-color : white;">
+                	<c:forEach var="s" items="${ list }">
+                		<tr>
+	                        <td>${ s.orderNo }</td>
+	                        <td>${ s.settleDate }</td>
+	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" align="center"></td>
+	                        <td></td>
+	                        <td>2500원</td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
                     </tr>
+                	</c:forEach>
+                    
                 </tbody>
             </table>
         </div>

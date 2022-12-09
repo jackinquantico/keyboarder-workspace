@@ -29,28 +29,37 @@
         margin: auto;
         margin-top: 30px;
         }
+        
         #erollbtn {
             margin-bottom: 15px;
             float:right;
             background-color : black;
         }
+        
         #pagingArea ul li a{
             color:black;
         }
         
         #pagingArea {width:fit-content; margin:auto;}
+        
+        tbody>tr:hover {
+          background-color : rgba(243, 243, 243, 0.932);
+          font-weight : 600;
+        }
     </style>
 
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
 
 <c:choose>
 	<c:when test="${ loginUser.sellerId eq 'admin' }">
+		<jsp:include page="/WEB-INF/views/common/boheader.jsp" />
 		<jsp:include page="/WEB-INF/views/common/bosidebar.jsp" />
 	</c:when>
 	<c:otherwise>
+		<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
 		<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
 	</c:otherwise>
 </c:choose>
@@ -85,7 +94,7 @@
                     <th width="20%">작성일</th>
                 </tr>
                 </thead>
-                <tbody style="background-color : white;">
+                <tbody style="background-color : white; cursor : pointer;">
                 	<c:choose>
                 		<c:when test="${ empty list }">
                 			<tr>

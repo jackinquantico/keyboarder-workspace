@@ -154,7 +154,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="list.se" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>정산내역 조회</p>
                 </a>

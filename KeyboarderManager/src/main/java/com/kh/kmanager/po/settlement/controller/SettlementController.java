@@ -109,4 +109,13 @@ public class SettlementController {
 		
 		return new Gson().toJson(s);
 	}
+	
+	/**
+	 *	정산내역 전체조회 - 장미 
+	 * @return
+	 */
+	@RequestMapping("list.se")
+	public String selectSettleList() {
+		return "po/poSettlement/poSettlementTotalListView";
+	}
 }
