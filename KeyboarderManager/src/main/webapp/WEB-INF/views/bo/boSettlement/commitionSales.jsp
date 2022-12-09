@@ -152,7 +152,7 @@
 						<div id="searchCondition1">입점사</div>
 						<div class='v-line'></div>
 						<div id="searchCondition2">
-							<select name="seller">
+							<select id="sellerList" name="seller">
 								<c:forEach var="sl" items="${ sellerList }">
 									<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
 								</c:forEach>
@@ -224,6 +224,7 @@
 <script>
 	$(function() {
 		
+		
 		var date = new Date();
 		
 		String(date);
@@ -232,8 +233,26 @@
 		var month = date.getMonth() + 1;
 		
 		document.getElementById("settleDate").value = year + "-" + month;
-		
+
+		/*
+		$("#searchButton").click(function() {
+			
+			var seller = $("#sellerList").val();		
+			var searchSettlementDate = $("#settleDate").val();
+			
+			$.ajax({
+				url : "searchSettlement.bo",
+				data : {seller : seller, searchSettlementDate : searchSettlementDate},
+				success : function(result) {
+					
+				}
+				
+			});
+			
+		});
+		*/
 	});
+
 </script>
 
 </body>
