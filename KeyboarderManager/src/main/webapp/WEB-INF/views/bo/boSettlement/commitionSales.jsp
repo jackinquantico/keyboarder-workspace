@@ -154,7 +154,7 @@
 						<div id="searchCondition2">
 							<select name="seller">
 								<c:forEach var="sl" items="${ sellerList }">
-									<option value="sellerName">${ sl.sellerName }</option> 
+									<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
 								</c:forEach>
 							</select>							
 						</div>

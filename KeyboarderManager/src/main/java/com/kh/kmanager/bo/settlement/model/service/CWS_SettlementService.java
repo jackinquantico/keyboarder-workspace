@@ -14,5 +14,5 @@ public interface CWS_SettlementService {
 	ArrayList<CWS_Settlement> selectSellerCommition();
 	
 	// 입점업체 검색
-	ArrayList<CWS_Settlement> searchSellerCommition();
+	ArrayList<CWS_Settlement> searchSellerCommition(CWS_Settlement searchCondition);
 }

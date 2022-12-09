@@ -1,6 +1,7 @@
 package com.kh.kmanager.bo.settlement.controller;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -25,7 +26,10 @@ public class CWS_SettlementController {
 		ArrayList <Member> sellerList = settlementService.selectSeller();
 		ArrayList <CWS_Settlement> list = settlementService.selectSellerCommition();		
 		
-
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+		};		
+		
 		session.setAttribute("sellerList", sellerList);
 		session.setAttribute("list", list);
 		
@@ -34,15 +38,19 @@ public class CWS_SettlementController {
 	
 	@RequestMapping("searchSettlement.bo")
 	public String searchBoSettlement(HttpSession session, String seller, String searchSettlementDate) {
+
+		String searchDate = searchSettlementDate + "-01";
 		
+		CWS_Settlement searchCondition = new CWS_Settlement(seller, searchDate);
 		
+		ArrayList <CWS_Settlement> list = settlementService.searchSellerCommition(searchCondition);
 		
-		// CWS_Settlement searchCondition = new CWS_Settlement(seller, searchSettlementDate);
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+		};
 		
-		//ArrayList <CWS_Settlement> list = settlementService.searchSellerCommition(seller, searchSettlementDate);
+		session.setAttribute("list", list);
 		
-		//session.setAttribute("list", list);
-		
-		return "redirect:/";
+		return "bo/boSettlement/commitionSales";
 	}
 }

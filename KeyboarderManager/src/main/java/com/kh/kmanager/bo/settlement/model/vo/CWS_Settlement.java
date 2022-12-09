@@ -19,7 +19,7 @@ public class CWS_Settlement {
 	private String sellerName;
 	private String orderNo;
 	private int orderPrice;
-	private Date settleDate;
+	private String settleDate;
 	private int commition;
 	private int settleDept;
 	private int taxAmount;
@@ -33,7 +33,7 @@ public class CWS_Settlement {
 		this.sellerName = sellerName;
 	}
 
-	public CWS_Settlement(String sellerName, Date settleDate) {
+	public CWS_Settlement(String sellerName, String settleDate) {
 		super();
 		this.sellerName = sellerName;
 		this.settleDate = settleDate;

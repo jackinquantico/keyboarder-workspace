@@ -60,9 +60,9 @@ public class CWS_MemberController {
 
 		if(loginUser == null) { // 아이디나 비밀번호가 일치하지 않을때
 			
-			mv.addObject("alertMsg", "로그인 실패");
+			mv.addObject("alertMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			
-			mv.setViewName("common/loginError");
+			mv.setViewName("common/login");
 			
 		} else { // 아이디, 비밀번호가 일치할 때
 			

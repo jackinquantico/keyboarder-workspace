@@ -36,11 +36,11 @@ public class CWS_SettlementServiceImpl implements CWS_SettlementService {
 	}
 
 	@Override
-	public ArrayList<CWS_Settlement> searchSellerCommition() {
+	public ArrayList<CWS_Settlement> searchSellerCommition(CWS_Settlement searchCondition) {
 		
-		// ArrayList<CWS_Settlement> list = settlementDao.searchSellerCommition(sqlSession);
+		ArrayList<CWS_Settlement> list = settlementDao.searchSellerCommition(sqlSession, searchCondition);
 		
-		// return list;
+		return list;
 	}
 
 

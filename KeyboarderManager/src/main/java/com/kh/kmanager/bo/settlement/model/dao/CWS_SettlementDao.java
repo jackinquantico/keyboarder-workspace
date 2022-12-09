@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.kmanager.bo.settlement.model.vo.CWS_Settlement;
 import com.kh.kmanager.member.model.vo.Member;
-import com.kh.kmanager.po.settlement.model.vo.Settlement;
 
 @Repository
 public class CWS_SettlementDao {
@@ -30,6 +29,12 @@ public class CWS_SettlementDao {
 		}
 		
 		return list;
+	}
+	
+	public ArrayList<CWS_Settlement> searchSellerCommition(SqlSessionTemplate sqlSession, CWS_Settlement searchCondition) {
+		
+		return (ArrayList)sqlSession.selectList("boSettlement-mapper.searchSellerCommition", searchCondition);
+		
 	}
 	
 }
