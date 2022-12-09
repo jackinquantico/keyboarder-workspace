@@ -18,7 +18,7 @@
     <a href="/kmanager/bomain" class="brand-link">
       <!-- <i class="ion-android-person fas fa-fw"></i> -->
       <img src="resources/images/defaultLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1; margin-right: 15px;">
-      <span class="brand-text font-weight-light">BO 관리자</span>
+      <span class="brand-text font-weight-light">관리자</span>
     </a>
 
     <!-- Sidebar -->

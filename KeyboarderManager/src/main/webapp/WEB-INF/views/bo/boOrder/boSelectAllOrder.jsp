@@ -32,10 +32,28 @@
 			<div id="selectOption">
 				<table id="option_table">
 					<tr>
+						<th width="10%" style="padding-left: 20px;">조회기간</th>
+						<td width="10%">
+							<select>
+								<option>전체</option>
+								<option></option>
+							</select>
+						</td>
+						<td width="10%">
+							<input type="date">
+						</td>
+						<td width="3px" style="text-align:center">~</td>
+						<td>
+							<input type="date">
+						</td>
+						<td width="10%"></td>
+					</tr>
+					<tr>
 						<th style="padding-left: 20px;">주문번호</th>
-						<td colspan="2">
-							<input type="text" style="width:1200px;" placeholder="주문번호를 입력해주세요">
-							&nbsp;&nbsp;
+						<td colspan="4">
+							<input type="text" style="width:100%" placeholder="주문번호를 입력해주세요">
+						</td>
+						<td>
 							<button id="search_btn">검색</button>
 						</td>
 					</tr>
@@ -47,9 +65,10 @@
 								<option>상품명</option>
 							</select>
 						</td>
+						<td colspan="3">
+							<input type="text" style="width:100%" placeholder="상품명 또는 모델명을 입력해주세요">
+						</td>
 						<td>
-							<input type="text" style="width:1003px;" placeholder="상품명 또는 모델명을 입력해주세요">
-							&nbsp;&nbsp;
 							<button id="search_btn">검색</button>
 						</td>
 					</tr>
@@ -76,7 +95,6 @@
 							<td width="%">입점업체명</td>
 							<td width="%">주문자명</td>
 							<td width="%">주문금액</td>
-							<td width="%">배송비</td>
 							<td width="%">할인금액</td>
 							<td width="%">키보더할인액</td>
 							<td width="%">결제금액</td>
@@ -98,27 +116,9 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -146,27 +146,9 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -194,6 +176,20 @@
 								<td></td>
 								<td></td>
 								<td></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td></td>
 							</tr>
 							<tr>
@@ -210,6 +206,20 @@
 								<td></td>
 								<td></td>
 								<td></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td></td>
 							</tr>
 							<tr>
@@ -226,11 +236,9 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
-								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
