@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.kmanager.member.model.vo.Member" alias="member" />
 		<typeAlias type="com.kh.kmanager.common.inquiry.model.vo.Inquiry" alias="inquiry" />
 		<typeAlias type="com.kh.kmanager.bo.coupon.model.vo.BoCoupon" alias="boCoupon" />
+		<typeAlias type="com.kh.kmanager.bo.settlement.model.vo.CWS_Settlement" alias="cws_settlement" />
 	</typeAliases>
 	
 	<mappers>
@@ -27,6 +28,7 @@
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/inquiry-mapper.xml" />
 		<mapper resource="/mappers/boCoupon-mapper.xml" />
+		<mapper resource="/mappers/boSettlement-mapper.xml" />
 	</mappers>
 	
 
