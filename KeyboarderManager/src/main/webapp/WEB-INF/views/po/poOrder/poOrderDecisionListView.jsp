@@ -16,18 +16,18 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<style>
+ <style>
         #orderConfirmForm {
             width: 90%;
-            height: 550px;
             margin: auto;
             margin-top: 30px;
         }
-        #info{ border : 1px solid rgb(187, 187, 187);}
-        #date{ 
+        #info { border : 1px solid rgb(187, 187, 187);}
+        #date {  
             border : 1px solid; 
             height : 70px;
         }
+        
         #searchbtn {
         	width: 70px;  
         	height: 30px; 
@@ -35,15 +35,15 @@
         	line-height: 1px; 
         	margin-left: 30px;"
         }
-        #orderConfirmList {
-            height : 55%;
+        
+        #decisionList {
+        	height : 55%;
             border: 1px solid;
             margin :auto; 
 	       	margin-bottom: 30px; 
 	       	font-size: 13px;
 	       	overflow-y: scroll;
         }
-      
     </style>
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
@@ -60,7 +60,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;정산내역 전체조회</h1>
+        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;구매확정 내역조회</h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -68,65 +68,57 @@
 
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
+
+</div> <!-- /.content -->
 	<div id="orderConfirmForm">
         <div id="info">
-            <p style="margin-top : 20px; margin-left:20px;">
-                ⦁ &nbsp;&nbsp;정산확정금액은 구매자가 구매확정 후 K-Money 로 전환됩니다. <br>
-                ⦁ &nbsp;&nbsp;지급된 K-Money 는 판매자님의 출금 요청 후 영업일 기준 3일 이내에 입금됩니다.
+            <p style="margin-top : 15px; margin-left:15px;">
+                ⦁ &nbsp;&nbsp;자동 구매확정 : 배송완료 후 7일 후 자동 구매확정됩니다. <br>
+                ⦁ &nbsp;&nbsp;구매확정이 완료되면 K-Money로 지급되며, 관련자료는 [정산관리>정산내역조회] 에서 확인하실 수 있습니다. <br>
+                ⦁ &nbsp;&nbsp;개인정보보호 목적으로 개인정보는 상당 기간 경과 후 블라인드 처리되며, A/S 목적으로 확인이 필요한 경우 고객센터로 문의바랍니다.
             </p>
         </div>
         <br><br>
-        <div id="date">
+       <div id="date">
             <div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
                 <input type="date" style="height: 30px;"> ~ <input type="date" style="height: 30px;">
                 <input type="button" class="btn btn-dark" value="검색" id="searchbtn"  >
             </div>
         </div>
-        <br><br>
-
-        <div id="orderConfirmList" >
-            <br>
-            <input type="button" class="btn btn-secondary" value="엑셀다운로드" style="float:right; margin-right: 30px;">
-            <br><br><br>
+       <br><br>
+       
+        <div id="decisionList">
+        	 <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 30px; margin-top:20px; margin-bottom:20px;">
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
-                    	<th width="10%">주문번호</th>
-                        <th width="10%">정산일</th>
-                        <th width="10%">상세내역</th>
-                        <th width="10%">상품금액</th>
-                        <th width="7%">배송비</th>
-                        <th width="10%">총 판매금액</th>
-                        <th width="10%">판매수수료</th>
-                        <th width="13%">KEYBOAR-DER 쿠폰</th>
-                        <th width="10%">입점사 쿠폰</th>
-                        <th width="10%">정산확정금액</th>
+                        <th>주문번호</th>
+                        <th>구매확정일</th>
+                        <th>K-Money지급일</th>
+                        <th>상품번호</th>
+                        <th>상품명</th>
+                        <th>주문금액</th>
+                        <th>구매자ID</th>
+                        <th>구매자명</th>
                     </tr>
                 </thead>
-                <tbody style="background-color : white;">
-                	<c:forEach var="s" items="${ list }">
-                		<tr>
-	                        <td>${ s.orderNo }</td>
-	                        <td>${ s.settleDate }</td>
-	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" align="center"></td>
-	                        <td></td>
-	                        <td>2500원</td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
+                 <tbody style="background-color : white;">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                	</c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
 	
-
-</div> <!-- /.content -->
-
 </div> <!-- /.content-wrapper -->
 </body>
 </html>

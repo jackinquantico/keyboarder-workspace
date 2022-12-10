@@ -51,8 +51,6 @@
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
-<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
-
 <c:choose>
 	<c:when test="${ loginUser.sellerId eq 'admin' }">
 		<jsp:include page="/WEB-INF/views/common/boheader.jsp" />

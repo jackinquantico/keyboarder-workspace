@@ -16,4 +16,12 @@ public class Po_OrderController {
 		return "po/poOrder/poSelectAllOrder";
 	}
 	
+	/**
+	 * PO주문확정내역조회페이지 - 장미
+	 * @return
+	 */
+	@RequestMapping("decision.po")
+	public String selectDecisionOrder() {
+		return "po/poOrder/poOrderDecisionListView";
+	}
 }

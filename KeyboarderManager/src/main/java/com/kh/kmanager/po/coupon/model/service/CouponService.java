@@ -7,7 +7,6 @@ import java.util.Map;
 import com.kh.kmanager.po.coupon.model.vo.Coupon;
 import com.kh.kmanager.po.product.model.vo.Product;
 
-
 public interface CouponService {
 	
 	//상품리스트를 가져오는 메소드
