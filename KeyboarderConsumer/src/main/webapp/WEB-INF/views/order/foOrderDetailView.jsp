@@ -57,9 +57,11 @@
             font-weight: 300;
         }
         
-        hr{
-        	background-color: red;
+        #refund-btn:hover{
+        	opacity: 0.7;
+        	cursor: pointer;
         }
+        
     </style>
     
 </head>
@@ -195,12 +197,12 @@
                         	상품가격 : ${ orderDetailList.productPrice }원
                     </div>
                     <c:choose>
-	                    <c:when test="${ orderDetailList.keyCouponName ne null }">
+	                    <c:when test="${ orderDetailList.keyCouponPrice ne 0 }">
 		                    <div style="width: 100%; height: 40px; font-size: 17px; padding: 10px 20px; margin: 0px;">
 		                        	쿠폰가격 : ${ orderDetailList.keyCouponPrice }
 		                    </div>
 	                    </c:when>
-	                    <c:when test="${ orderDetailList.stoCouponName ne null }">
+	                    <c:when test="${ orderDetailList.stoCouponPrice ne 0 }">
 		                    <div style="width: 100%; height: 40px; font-size: 17px; padding: 10px 20px; margin: 0px;">
 		                        	쿠폰가격 : ${ orderDetailList.stoCouponPrice }
 		                    </div>
@@ -240,7 +242,7 @@
                     </c:choose>
                     <hr style="width: 80%; margin-left: 15px; background-color: black; height: 2px;">
                     <div style="width: 100%; height: 80px; font-size: 18px; line-height: 60px;" align="center">
-                        <button type="button" class="btn btn-outline-primary">환불요청</button>
+                        <button type="button" class="btn btn-primary" id="refund-btn">환불요청</button>
                     </div>
                 </div>
             </form>
@@ -279,12 +281,12 @@
                     	상품가격 : ${ orderDetailList.productPrice }원
                 </div>
                 <c:choose>
-                	<c:when test="${ orderDetailList.keyCouponName ne null }">
+                	<c:when test="${ orderDetailList.keyCouponPrice ne 0 }">
 		                <div style="width: 100%; height: 49px; font-size: 17px; padding: 7px 50px; margin: 0px;">
 		                    	쿠폰할인 : ${ orderDetailList.keyCouponPrice } 원
 		                </div>
                 	</c:when>
-                	<c:when test="${ orderDetailList.stoCouponName ne null }">
+                	<c:when test="${ orderDetailList.stoCouponPrice ne 0 }">
 		                <div style="width: 100%; height: 49px; font-size: 17px; padding: 7px 50px; margin: 0px;">
 		                    	쿠폰할인 : ${ orderDetailList.stoCouponPrice } 원
 		                </div>
@@ -300,14 +302,14 @@
                 </div>
             </div>
             <c:choose>
-            	<c:when test="${ orderDetailList.keyCouponName ne null }">
+            	<c:when test="${ orderDetailList.keyCouponPrice ne 0 }">
 		            <div style="float: left; width: 60%; height: 200px; padding-top: 60px; padding-left: 35px; font-size: 20px;">
 		                              최종 결제 금액 : ${ orderDetailList.productPrice - orderDetailList.keyCouponPrice + 2500 }원
 		                <br>
 		               	 최종결제금액 = 상품가격 - 쿠폰가격 + 배송비
 		            </div>
             	</c:when>
-            	<c:when test="${ orderDetailList.stoCouponName ne null }">
+            	<c:when test="${ orderDetailList.stoCouponPrice ne 0 }">
 		            <div style="float: left; width: 60%; height: 200px; padding-top: 60px; padding-left: 35px; font-size: 20px;">
 		                              최종 결제 금액 : ${ orderDetailList.productPrice - orderDetailList.stoCouponPrice + 2500 }원
 		                <br>

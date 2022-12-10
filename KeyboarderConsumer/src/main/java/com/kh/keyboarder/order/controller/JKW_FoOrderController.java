@@ -38,6 +38,8 @@ public class JKW_FoOrderController {
 		
 		Order orderDetailList = JKW_OrderService.foDetailViewList(ordNo);
 		
+		System.out.println(orderDetailList);
+		
 		model.addAttribute("orderDetailList", orderDetailList);
 		
 		return "order/foOrderDetailView";

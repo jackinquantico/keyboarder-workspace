@@ -50,9 +50,13 @@
         }
         
         #date-search:hover{
-        	opacity: 0.9;
+        	opacity: 0.7;
         	cursor: pointer;
-        	color: white;
+        }
+        
+        #refund-btn:hover{
+        	opacity: 0.7;
+        	cursor: pointer;
         }
 
     </style>
@@ -137,7 +141,7 @@
 		                </c:choose>
 		                    <hr>
 		                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 50px;" align="center">
-		                        <button type="button" class="btn btn-primary">환불요청</button>
+		                        <button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
 		                    </div>
 		                </div>
 		            </form>
