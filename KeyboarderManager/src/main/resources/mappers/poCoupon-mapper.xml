@@ -24,6 +24,7 @@
 							 CREATE_DATE,
 							 DUE_DATE,
 							 PRODUCT_NO
+							 <!-- , SELLER_NO -->
 							)
 VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
 		#{couponName},
@@ -31,6 +32,7 @@ VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
 		#{createDate},
 		#{dueDate},
 		#{productNo}
+		<!-- , #{sellerNo} -->
 		)							 
 	</insert>
 	
