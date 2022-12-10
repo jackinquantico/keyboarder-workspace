@@ -7,7 +7,14 @@
 		VALUES (#{orderNo}
 			  , DEFAULT
 			  , #{orderPrice}
-			  , NULL
+			  <choose>
+				  <when test="couponPrice eq 0">
+				  , 'N'
+				  </when>
+				  <otherwise>
+				  , 'Y'
+				  </otherwise>
+			  </choose>
 			  , 1
 			  , #{productNo}
 			  , #{conNo}
@@ -27,6 +34,7 @@
 		INSERT INTO SETTLEMENT (SELLER_NO
 							  , ORDER_NO
 							  , COMMITION
+							  , SETTLE_DATE
 							  , SETTLE_DEPT
 							  , TAX_AMOUNT
 							  , SUPPLY_VALUE
@@ -34,6 +42,7 @@
 		VALUES (10000
 			  , #{orderNo}
 			  , #{commition}
+			  , null
 			  , #{settleDept}
 			  , #{taxAmount}
 			  , #{supplyValue}

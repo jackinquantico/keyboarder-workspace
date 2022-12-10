@@ -28,7 +28,19 @@ public class PGDataController {
 		int amount = Integer.parseInt(pgd.getAmount()); // 실결제금액
 		pgd.setOrderPrice(amount + pgd.getCouponPrice()); // 주문금액
 		pgd.setPaymentBill(amount); // 결제금액
-		pgd.setCommition((int)(pgd.getPaymentBill() * 0.15)); // 수수료
+
+		// 쿠폰종류별 수수료 계산
+		int commition = 0;
+		if (pgd.getCouponNo().charAt(0) == 'X') { // 쿠폰 없음
+			commition = (int)(pgd.getPaymentBill() * 0.15);
+		} else if (pgd.getCouponNo().charAt(0) == 'k') { // 스토어 쿠폰
+			commition = (int)(pgd.getPaymentBill() * 0.15);
+		} else { // 키보더 쿠폰
+			commition = (int)(pgd.getPaymentBill() * 0.15) - pgd.getCouponPrice();
+		}
+		
+		pgd.setCommition(commition); // 수수료
+		
 		pgd.setSettleDept(pgd.getPaymentBill() - pgd.getCommition()); // 정산금액
 		pgd.setSupplyValue((int)(pgd.getPaymentBill() / 1.1)); // 공급가액
 		pgd.setTaxAmount(pgd.getPaymentBill() - pgd.getSupplyValue()); // 세액

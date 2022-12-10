@@ -148,20 +148,43 @@
 			                            	<select class="form-select couponSelect" name="couponPrice">
 			                            		<c:choose>
 				                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName ne null }">
-				                            			<option name="" value="" selected>${ p.keyCouponName }</option>
-					                            		<option name="" value="">${ p.stoCouponName }</option>
+				                            			<option value="${ p.keyCouponPrice }" selected>
+				                            				${ p.keyCouponName }
+				                            			</option>
+					                            		<option value="${ p.stoCouponPrice }">
+					                            			${ p.stoCouponName }
+					                            		</option>
 				                            		</c:when>
 				                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
-				                            			<option name="" value="" selected>${ p.keyCouponName }</option>
+				                            			<option value="${ p.keyCouponPrice }" selected>
+				                            				${ p.keyCouponName }
+				                            			</option>
 				                            		</c:when>
 				                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
-				                            			<option name="" value="" selected>${ p.stoCouponName }</option>
+				                            			<option value="${ p.stoCouponPrice }" selected>
+				                            				${ p.stoCouponName }
+				                            			</option>
 				                            		</c:when>
 				                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
-				                            			<option name="" value="" selected disabled align="center">쿠폰 없음</option>
+				                            			<option value="0" selected disabled align="center">
+				                            				쿠폰 없음
+				                            			</option>
 				                            		</c:when>
 			                            		</c:choose>
 			                            	</select>
+			                            		
+			                            	<c:choose>
+			                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
+			                            			<input type="hidden" name="couponNo" value="${ p.keyCouponNo }">
+			                            		</c:when>
+			                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
+			                            			<input type="hidden" name="couponNo" value="${ p.stoCouponNo }">
+			                            		</c:when>
+			                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
+			                            			<input type="hidden" name="couponNo" value="X">
+			                            		</c:when>
+			                            	</c:choose>
+			                            	
 			                            </div>
 			                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
 			                                <button type="button" id="buy-btn" class="btn btn-primary" onclick="requestPay(this);" style="padding: 9px; margin: 0px;">
@@ -280,8 +303,8 @@
     		var $productName = $(btn).parent().siblings(".fo-product-name").text().trim(); // 상품명
 			var $productPrice = Number($(btn).parent().siblings(".fo-product-price").text()); // 상품가격
 			var $couponPrice = $(btn).parent().siblings(".fo-product-coupon").children(".couponSelect").val();
-			
-			// console.log($productName);
+			// var $couponNo = $(btn).parent().siblings(".fo-product-coupon").children("input[name=couponNo]").val();
+			// console.log($couponNo);
 			
 			var amount = $productPrice
 							- $couponPrice
@@ -317,6 +340,7 @@
   	        	    alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
   	          }
   	       });
+			
       	 
     	}
 		

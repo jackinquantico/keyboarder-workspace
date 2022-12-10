@@ -24,4 +24,5 @@ public class PGData {
 	private int settleDept; // 정산금액
 	private int taxAmount; // 세액
 	private int supplyValue; // 공급가액
+	private String couponNo;
 }
