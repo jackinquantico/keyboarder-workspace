@@ -47,8 +47,8 @@ public class NSJ_CouponController {
 	@RequestMapping("insertCoupon.po")
 	public String insertCoupon(Coupon c, HttpSession session) {
 
-		// loginUser 세션으로부터 sellerNo 뽑기
-		// Coupon c에 setter로 sellerNo 세팅
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
 		// => 만약 안 했을 경우 c의 sellerNo 이 0인 상태
 		
 		int result = couponService.insertCoupon(c);
