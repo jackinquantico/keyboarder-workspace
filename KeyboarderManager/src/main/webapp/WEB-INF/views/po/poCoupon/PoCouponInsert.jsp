@@ -8,10 +8,25 @@
 <title>쿠폰</title>
 </head>
 <style>
+#listArea {
+	width: 95%;
+	margin: auto;
+	padding: 40px;
+}
 td{
-padding-left:5px;
-padding-top:20px;
+	padding-left:5px;
+	height: 65px;
+}
 
+input[type=date], #createDate, #dueDate {
+	
+	width: 100%;
+	display: inline-block;
+}
+input[type=radio] { margin-right: 5px; }
+h5, h6 { padding: 5px; }
+select[name=productNo] {
+	width: 33%;
 }
 
 #coupone_list{
@@ -41,17 +56,20 @@ padding-top:20px;
 			</div>
 
 			<div class="content">
-			<h3>쿠폰등록</h3>
-
+			<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.sellerName}&nbsp;쿠폰등록</h3>
+<div id="listArea" class="card">
 	<form id="MainStcoupon" action="insertCoupon.po" method="post">
 	<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
 	
 	
 	    <fieldset>
+			<table>
+				
+
 	        <table>
 	    	<tr>
 	    	<td>쿠폰명*</td>
-	    	<td ><input type="text" style="width:500px;" name="couponName"></td>
+	    	<td ><input type="text" style="width:100%;" name="couponName" class="form-control" ></td>
 	    </tr>
 	
 	    	<tr>
@@ -63,13 +81,13 @@ padding-top:20px;
 		</tr>
 	<tr>
 	    <td>쿠폰 유효기간*&nbsp;</td>
-	    <td><input type="date" name="createDate">~<input type="date" name="dueDate"></td>
+	    <td><input type="date" name="createDate" style="width:100%;"class="form-control col-lg-4">~<input type="date" name="dueDate" style="width:100%;" class="form-control col-lg-4"></td>
 		</tr>
 
 		<tr>
 		<td>쿠폰 발행상품*</td>
 			<td>
-			<select name ="productNo" required id="productNo">
+			<select name ="productNo" required id="productNo" style="width:100%;" class="form-control select">
 				<option selected value="">상품선택</option>
 				<c:forEach var="p" items="${list}">
 					<option value="${p.productNo}">${p.productName}</option>
@@ -79,7 +97,7 @@ padding-top:20px;
 		<td></td>
 	</tr>
 	   	 </table>
-	   	 <button style="float:right;" class="btn btn-secondary">등록</button><br><br>
+	   	 <button style="float:right; margin-right:20px;" class="btn btn-secondary">등록하기</button><br><br>
 	    <hr style="clear:both">
 	    <h6>* 쿠폰 등록 설정<br>
 	       파트너사 할인쿠폰 설정 시 100% 부담으로 할인이 적용됩니다. 현재 페이지에서 직접 설정한 할인액에 대해서는 KEYBOAR-DER 가 부담하지 않습니다.<br>
@@ -92,7 +110,7 @@ padding-top:20px;
         </h6>
 	    </fieldset>
 	    </form> 
-		
+		</div>
 	</div>
 </div>
 <body>

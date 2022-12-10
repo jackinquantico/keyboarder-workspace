@@ -1,6 +1,8 @@
 package com.kh.kmanager.po.coupon.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +32,13 @@ public class CouponServiceImpl implements CouponService{
 		
 		return couponDao.prodcutListforCoupon(sqlSession,sellerNo);
 	}
+	//쿠폰조회
+
+	@Override
+	public ArrayList<Coupon> showAbleCouponList(Coupon c) {
+		return couponDao.showAbleCouponList(sqlSession,c);
+		
+	}
+	
+	
 }

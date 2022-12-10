@@ -131,13 +131,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/sliders.html" class="nav-link">
+                <a href="able.co" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>사용가능 쿠폰 조회</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
+                <a href="able.co" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>쿠폰 사용내역</p>
                 </a>

@@ -9,8 +9,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
-
 public class Coupon {
 	private String couponNo;
 	private String couponName;
@@ -20,6 +18,9 @@ public class Coupon {
 	private String dueDate;
 	private String couponStmt;
 	private int productNo;
+	private int sellerNo;
+	private String fromDate; //기간검색용
+	private String toDate;  //기간검색용
 	
 	
 	

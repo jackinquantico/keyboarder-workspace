@@ -19,4 +19,13 @@ public class CouponDao {
 	public ArrayList<Product> prodcutListforCoupon(SqlSessionTemplate sqlSession, int sellerNo) {
 		return (ArrayList)sqlSession.selectList("poMapper.getProductName",sellerNo);
 	}
+
+
+	public ArrayList<Coupon> showAbleCouponList(SqlSessionTemplate sqlSession, Coupon c ) {
+		
+		return (ArrayList)sqlSession.selectList("poCouponMapper.showAbleCouponList",c);
+	}
+
+
+
 }

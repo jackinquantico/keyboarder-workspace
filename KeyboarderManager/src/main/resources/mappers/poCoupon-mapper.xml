@@ -14,6 +14,8 @@
 		<result column="PRODUCT_NAME" property="productName" />
 	</resultMap>
 	
+	
+	
 	<insert id ="insertCoupon" parameterType="poCoupon">
 	
 	INSERT INTO COUPON_STORE(COUPON_NO,
@@ -21,13 +23,34 @@
 							 COUPON_PRICE,
 							 CREATE_DATE,
 							 DUE_DATE,
-							 PRODUCT_NO)
+							 PRODUCT_NO
+							)
 VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
 		#{couponName},
 		#{couponPrice},
 		#{createDate},
 		#{dueDate},
-		#{productNo})							 
+		#{productNo}
+		)							 
 	</insert>
+	
+	<select id="showAbleCouponList" parameterType="poCoupon" resultMap="poCouponResultMap">
+	
+	 SELECT COUPON_NO as 쿠폰번호,
+            COUPON_NAME as 쿠폰명,
+            COUPON_PRICE as 쿠폰종류,
+            COUPON_PRICE as 할인금액,
+            P.PRODUCT_NAME as 상품명,
+            COUPON_STMT as 쿠폰상태,
+            TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "쿠폰발행일",
+            TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "쿠폰만료일"
+            FROM COUPON_STORE S
+            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
+            WHERE COUPON_STMT='Y'
+            AND S.SELLER_NO=${sellerNo}
+            ORDER BY COUPON_NO DESC
+	</select>
+	
+	
 	</mapper>
 	
