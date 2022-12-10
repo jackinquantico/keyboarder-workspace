@@ -103,7 +103,7 @@
                                     <option value="hanmail.net">hanmail.net</option>
                                     <option value="nate.com">nate.com</option>
                             </select>
-                           <!--  <td align="center"><button type="button" id="checkbutton" style="width:130px; height:40px; font-size: 85%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">이메일 중복체크</button></td> -->
+                            <td align="center"><button type="button" id="checkbutton" style="width:130px; height:40px; font-size: 85%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">이메일 중복체크</button></td>
                             <input type="hidden" name="conEmail" id="conEmail" value="">
                         </td>
                     </tr>
@@ -184,12 +184,56 @@
                     }
                 </script>
                 
-                <!-- <script>
-                	function emailCheck() {
-                		// 이메일 중복체크 전 유효성검사 
-                		var email_id = document.getElementById("email_id");
-                	} // 하다말았음 여기서부터 시작하기~
-                </script> -->
+                <script>
+                    function emailCheck() {
+                        var conEmail = "" + $("#email_id").val() + "@" + $("#domain option:selected").val();
+                        $("#conEmail").val(conEmail);
+
+                        var $conEmail = $("#signup-form input[name=conEmail]");
+                        var $emailId = $("#signup-form input[name=email_id]");
+                        var $domain = $("#signup-form input[name=emailAno]");
+                        // 이메일 정규식 
+                        // 이메일시작은 숫자나 알파벳으로 시작됨
+                        // 이메일 첫째자리 뒤에는 _- 포함할 수 있음.
+                        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+                        if(!regExp.test($("#conEmail").val())) {
+                            alert("유요한 이메일을 입력해주세요.");
+                            $("#conEmail").select(); //재입력유도
+                            return false;
+                        }
+                        else {
+                            $.ajax({
+                                url :"emailCheck.me",
+                                data : {checkEmail : conEmail},
+                                success : function(result) {
+                                    //result 값은 "NNNNN"또는 "NNNNY"가 담겨있음
+                                    if(result==="NNNNN") { // 사용불가
+                                        alert("이미 존재하거나 탈퇴한 회원의 이메일주소입니다.");
+                                        $emailId.focus(); // 재입력유도
+                                    } else{
+                                        if(confirm("사용가능한 이메일입니다. 사용하시겠습니까?")) { //사용하겠다.
+                                            //이메일값 확정 => 다시 수정못하게 readonly 속성 추가
+                                            $emailId.attr("readonly", true);
+                                            $domain.attr("readonly",true);
+
+                                            // 회원가입버튼 활성화
+                                            $("#signup-form button[type=submit]").removeAttr("disabled");
+                                        } else {
+                                            $emailId.focus();
+                                        }
+                                    }
+                                }, 
+                                error : function() {
+                                    console.log("이메일중복체크용 ajax통신실패!");
+                                }
+                            });
+                        }
+                    }
+
+                </script>
+
+
                 
                 <script>
                     function sample6_execDaumPostcode() {
@@ -304,7 +348,7 @@
                 // 주소, 이메일 값 합쳐서 한번에 넘기기
                 $(function() {
                     $("#enroll-btn").click(function() {
-                        var address = "" + $("#sample6_postcode").val() + $("#sample6_address").val() + $("#sample6_detailAddress").val();
+                        var address = "(" + $("#sample6_postcode").val() +")"+ " "+ $("#sample6_address").val() + $("#sample6_detailAddress").val();
                         $("#address").val(address);
                         //console.log($("#address").val);
                         var conEmail = "" + $("#email_id").val() + "@" + $("#domain option:selected").val();

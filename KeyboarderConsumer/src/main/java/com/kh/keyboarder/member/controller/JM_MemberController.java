@@ -100,6 +100,15 @@ public class JM_MemberController {
 		return(count>0)? "NNNNN" : "NNNNY";
 	}
 	
+	// 이메일 중복확인
+	@ResponseBody
+	@RequestMapping(value="emailCheck.me", produces="text/html; charset=UTF-8")
+	public String emailCheck(String checkEmail) {
+		int count = memberService.emailCheck(checkEmail);
+//		System.out.println(count);
+		return(count>0)?  "NNNNN" : "NNNNY";
+	}
+	
 	/**
 	 * 아이디찾기 - 장미
 	 */

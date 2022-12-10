@@ -46,6 +46,12 @@
 		WHERE CON_ID = #{conId}
 	</select>
 	
+	<select id="emailCheck" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM CONSUMER
+		WHERE CON_EMAIL = #{checkEmail}
+	</select>
+	
 	<!-- 회원가입 시 이메일 인증을 위한 랜덤번호 저장 -->
 	<update id="updateMailKey" parameterType="member">
 		UPDATE CONSUMER 

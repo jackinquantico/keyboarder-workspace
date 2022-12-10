@@ -12,6 +12,9 @@ public interface JM_MemberService {
 	// 아이디 중복체크
 	int idCheck(String ckeckId);
 	
+	// 이메일 중복체크
+	int emailCheck(String checkEmail);
+	
 	// 이메일 인증
 	int updateMailKey(Member m);
 	int updateMailAuth(Member m);

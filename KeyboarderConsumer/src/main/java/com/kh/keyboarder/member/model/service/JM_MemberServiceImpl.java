@@ -87,4 +87,12 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	public int idCheck(String checkId) {
 		return memberDao.idCheck(sqlSession, checkId);
 	}
+
+	/**
+	 * 이메일중복체크-장미
+	 */
+	@Override
+	public int emailCheck(String checkEmail) {
+		return memberDao.emailCheck(sqlSession, checkEmail);
+	}
 }
