@@ -48,7 +48,7 @@ input[type=date] {
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<jsp:include page="../../common/header.jsp" />
+	<jsp:include page="../../common/poheader.jsp" />
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
@@ -150,7 +150,7 @@ input[type=date] {
 										
 						}
 						
-						$("#couponList>tbody").html(resultStr);				
+						$("#couponList").html(resultStr);				
 					},
 					
 					error: function() {

@@ -131,7 +131,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="able.co" class="nav-link">
+                <a href="ableCoupon.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>사용가능 쿠폰 조회</p>
                 </a>

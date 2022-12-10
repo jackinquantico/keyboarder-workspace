@@ -69,12 +69,21 @@ public class NSJ_CouponController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="able.co",produces="application/json; charset=UTF-8")
-	 
 	public String showAbleCouponList(Coupon c){
 		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
 		System.out.println(list);
 		
 		return new Gson().toJson(list);
+	}
+	
+	/**
+	 * po 사용가능쿠폰 조회 화면 리턴
+	 * @return
+	 */
+	@RequestMapping("ableCoupon.po")
+	public String showAbleCoupon() {
+		
+		return "po/poCoupon/poCouponList";
 	}
 
 }

@@ -21,7 +21,7 @@ public class Coupon {
 	private int sellerNo;
 	private String fromDate; //기간검색용
 	private String toDate;  //기간검색용
-	
+	private String productName;
 	
 	
 
