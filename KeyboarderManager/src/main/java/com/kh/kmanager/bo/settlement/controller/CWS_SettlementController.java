@@ -30,7 +30,11 @@ public class CWS_SettlementController {
 			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
 		};		
 		
+		String[] sellerListValues = new String[sellerList.size()];
+
+		
 		session.setAttribute("sellerList", sellerList);
+		
 		session.setAttribute("list", list);
 		
 		return "bo/boSettlement/commitionSales";

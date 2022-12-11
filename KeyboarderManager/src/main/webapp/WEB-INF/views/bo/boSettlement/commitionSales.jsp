@@ -150,6 +150,7 @@
 				<hr>
 					<div id="searchConditions">
 						<div id="searchCondition1">입점사</div>
+						<input type="hidden" id="searchSellerName" name="searchSellerName" value="${ list.get(0).getSellerName() }">
 						<div class='v-line'></div>
 						<div id="searchCondition2">
 							<select id="sellerList" name="seller">
@@ -160,6 +161,7 @@
 						</div>
 						<div class='v-line' id="v-line2"></div>
 						<div id="searchCondition3">정산년월</div>
+						<input type="hidden" id="searchSettleDate" name="searchSettleDate" value="${ list.get(0).getSettleDate() }">
 						<div class='v-line' id="v-line3"></div>
 						<div id="searchCondition4">
 							<input type="month" id="settleDate" name="searchSettlementDate">
@@ -184,9 +186,9 @@
 						<button>엑셀 다운로드</button>
 					</div>
 				</div>
-				<div id="table_div">
+				<div id="table_div" style="overflow:scroll; width:1050px; height:500px; text-align:center;">
 					<table id="result_table" border="1" width="1000px;">
-						<thead>
+						<thead style="background-color:darkgray; font-weight:bold;">
 							<td width="%">협력사번호</td>
 							<td width="%">협력사명</td>
 							<td width="%">정산일</td>
@@ -202,16 +204,43 @@
 							<td width="%">매출액</td>
 						</thead>
 						<tbody>
-							<c:forEach var="sl1" items="${ list }" >
-								<tr>
+							<c:forEach var="sl1" items="${ list }" varStatus="status" >
+								<tr id="settlement${status.index}">
 									<td>${ sl1.sellerNo }</td>
 									<td>${ sl1.sellerName }</td>
 									<td>${ sl1.settleDate }</td>
 									<td>${ sl1.orderPrice }</td>
 									<td>쿠폰필요</td>
-									<td>${ sl1.billPublishAmount }</td>
+									<td>
+										<a data-toggle="modal" data-target="#modal${status.index}" style="cursor:pointer;">
+										${ sl1.billPublishAmount }
+										</a>
+									</td>
 									<td>${ sl1.sales }</td>
-								</tr>							
+								</tr>
+								<!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->
+							    <div class="modal fade" id="modal${status.index}">
+							        <div class="modal-dialog modal-sm">
+							            <div class="modal-content">
+							                <!-- Modal Header -->
+							                <div class="modal-header">
+							                    <h4 class="modal-title">KEYBOAR-DER</h4>
+							                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+							                </div>
+							        
+							                <form action="login.me" method="post">
+							                    <!-- Modal body -->
+							                    <div class="modal-body">
+
+							                    </div>
+							                    <!-- Modal footer -->
+							                    <div class="modal-footer" id="infofind" style="font-size :13px;">
+
+							                    </div>
+							                </form>
+							            </div>
+							            </div>
+							        </div>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -225,6 +254,7 @@
 	$(function() {
 		
 		
+		
 		var date = new Date();
 		
 		String(date);
@@ -234,7 +264,19 @@
 		
 		document.getElementById("settleDate").value = year + "-" + month;
 
+		// 검색 결과 입점사명, 조회 기간 기본값으로 설정
 		/*
+		var searchSellerName = document.getElementById("searchSellerName").value;
+		
+		for(var i = 0; i < sellerNameOption.length; i++) {
+			if(searchSellerName $(".nameOption:")) {
+				sellerNameOption[i].selected = true;
+			};
+			
+		};
+		*/
+		
+		/* 나중에 검색기능을 모달로 구현하려할때 작성할 부분ㄴ
 		$("#searchButton").click(function() {
 			
 			var seller = $("#sellerList").val();		
@@ -251,6 +293,12 @@
 			
 		});
 		*/
+		
+		// 초기화버튼
+		$("#resetButton").click(function() {
+			
+			location.href="commitionSales.bo";
+		});
 	});
 
 </script>
