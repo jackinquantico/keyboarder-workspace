@@ -90,7 +90,7 @@ public class NSJ_CouponController {
 		}
 	
 	/**
-	 * 사용 가능 쿠폰 전체 조회 페이지 리턴-
+	 * 사용 가능 쿠폰 전체 조회 페이지 리턴
 	 * @return
 	 */
 	@RequestMapping("ableCoupon.po")
