@@ -78,15 +78,22 @@ public class NSJ_CouponController {
 	}
 	
 	
-	@ResponseBody
-	@RequestMapping(value="SearchAble.co",  produces="application/json; charset=UTF-8")
-	public String ableCouponSearch(Coupon c, HttpSession session) {
+
+	@RequestMapping("SearchAble.co")
+	public String ableCouponSearch(Coupon c, String createDate, HttpSession session, Model model) {
 		
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
+		c.setCreateDate(createDate);
+	
+		System.out.println(c);
+		ArrayList<Coupon> list = couponService.ableCouponSearch(c);
+		System.out.println(list);
+		if(list!=null) {
+			model.addAttribute("list", list);
+		}
+		return "po/poCoupon/poAbleCouponList";
 		
-		c.setCouponStmt("Y");
-		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
-		
-		return new Gson().toJson(list);
 		}
 	
 	/**
@@ -96,7 +103,7 @@ public class NSJ_CouponController {
 	@RequestMapping("ableCoupon.po")
 	public String ableCouponList() {
 		
-		return "po/poCoupon/poAbleCouponList";
+		return "po/poCoupon/poCouponList";
 	}
 	
 		

@@ -57,9 +57,9 @@ select[name=productNo] {
 
 			<div class="content">
 			<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.sellerName}&nbsp;쿠폰등록</h3>
-<div id="listArea" class="card">
-	<form id="MainStcoupon" action="insertCoupon.po" method="post">
-	<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
+		<div id="listArea" class="card">
+		<form id="MainStcoupon" action="insertCoupon.po" method="post">
+		<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
 	
 	
 	    <fieldset>

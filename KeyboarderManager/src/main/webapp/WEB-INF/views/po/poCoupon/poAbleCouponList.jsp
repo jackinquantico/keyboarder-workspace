@@ -52,7 +52,9 @@ input[type=date] {
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
-	
+	<form id="showAbleCouponList" action="SearchAble.co" method="post">
+	<input type="hidden" name="createDate">
+		<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
 
 		<div class="content-wrapper">
 		<br>
@@ -71,7 +73,11 @@ input[type=date] {
 
 			<div class="content">
 			
+			
 			<div id="searchArea" class="card">
+			
+			
+			
 				<table>
 			        <tr>
 			           <td width="10%">발급대상 *</td>
@@ -85,7 +91,7 @@ input[type=date] {
 	       		 <td>
 	        	<select class="form-control" id="select">
 	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="1">사용가능</option>
+	            	<option value="1" selected>사용가능</option>
 	        	</select>
 	        </td>
 	    </tr>
@@ -106,6 +112,9 @@ input[type=date] {
 			
 			<br><br>
 			
+			
+			
+			
 			<div id="listArea" class="card">
 			
 				<table id="listTable" class="table-bordered">
@@ -121,23 +130,41 @@ input[type=date] {
 			               <th width="9%">발급일</th>
 			               <th width="9%" >만료일</th>
 			        	</tr>
+			        	
+			            <tr>
+			            <c:forEach var="c" items="${list}">
+			               <td width="10%">${c.couponNo}</td>
+			               <td width="25%">${c.couponName}</td>
+			               <td width="10%">${c.couponPrice}</td>
+			               <td width="5%" >${c.couponPrice}</td>
+			               <td width="25%">${c.productName}</td>
+			               <td width="7%">${c.couponStmt}</td>
+			               <td width="9%">${c.createDate}</td>
+			               <td width="9%" >${c.dueDate}</td>
+			               </c:forEach>
+			        	</tr>
 			       
 			    	</thead>
 			        <tbody id="couponList">
 			        </tbody>
 				</table>
+			
 			</div><!-- /#listArea -->
 			
 			</div> <!-- /.content -->
 			</div> <!-- /.content-wrapper -->
-			
+		</form>
 			
 			
 			
 			<script>
+			
+			
+			
+			
 			//기간검색
 			function reset() {
-				$("#select option:eq(0)").prop("selected", true);
+				$("#select option:eq(1)").prop("selected", true);
 				$("#fromDate").val("");
 				$("#toDate").val("");
 			}
@@ -187,11 +214,13 @@ input[type=date] {
 					$.ajax({
 						url: "SearchAble.co",
 						data: {
+							sellerNo :${loginUser.sellerNo },
 							fromDate: $("#fromDate").val(),
 							toDate: $("#toDate").val()
 						},
 						success: function(result) {
-							
+						
+							console.log(couponName);
 							var resultStr = "";
 
 							for(var i =0; i<result.length; i++){

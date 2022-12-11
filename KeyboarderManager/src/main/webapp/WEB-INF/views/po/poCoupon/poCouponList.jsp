@@ -53,7 +53,7 @@ input[type=date] {
 	<jsp:include page="../../common/posidebar.jsp" />
 
 	
-
+	
 		<div class="content-wrapper">
 		<br>
 		<!-- 콘텐츠 영역 제목 -->
@@ -81,10 +81,12 @@ input[type=date] {
 			    <tr>
 	        <td>쿠폰상태 *&nbsp;</td>
 	        <td>
+	   			
+	   		
 	        	<select class="form-control" id="select">
 	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="1">사용가능</option>
-	            	<option value="2">만료</option>
+	            	<option value="1" name="couponStmt">사용가능</option>
+	            	<option value="2" name="couponStmt">만료</option>
 	        	</select>
 	        </td>
 	    </tr>
@@ -93,7 +95,8 @@ input[type=date] {
 			   		<tr>
 				        <td>발행일 기준 기간 검색</td>
 				        <td>
-				        	<input type="date" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" class="form-control col-lg-2">
+				        	<input type="date" name="createDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="createDate" class="form-control col-lg-2">
+				        	
 				        </td>  
 			   		</tr>
 				</table>
@@ -126,6 +129,7 @@ input[type=date] {
 			        <tbody id="couponList">
 			        </tbody>
 				</table>
+			
 			</div><!-- /#listArea -->
 			
 			</div> <!-- /.content -->
@@ -137,7 +141,7 @@ input[type=date] {
 			<script>
 			//기간검색
 			function reset() {
-				$("#select option:eq(0)").prop("selected", true);
+				$("#select option:eq(1)").prop("selected", true);
 				$("#fromDate").val("");
 				$("#toDate").val("");
 			}
@@ -187,6 +191,7 @@ input[type=date] {
 					$.ajax({
 						url: "SearchAble.co",
 						data: {
+							sellerNo :"${loginUser.sellerNo }",
 							fromDate: $("#fromDate").val(),
 							toDate: $("#toDate").val()
 						},
@@ -215,11 +220,13 @@ input[type=date] {
 							console.log("ableCoupon 실패");
 						}
 					});
-					
-				
+				}
+			}
+				$(function() {
+					showList();
+				});
 
-			
-			
+					
 			</script>
 			
 			

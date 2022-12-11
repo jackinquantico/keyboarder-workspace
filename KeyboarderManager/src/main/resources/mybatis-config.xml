@@ -18,7 +18,7 @@
 		<typeAlias type="com.kh.kmanager.bo.coupon.model.vo.BoCoupon" alias="boCoupon" />
 		<typeAlias type="com.kh.kmanager.bo.settlement.model.vo.CWS_Settlement" alias="cws_settlement" />
 		<typeAlias type="com.kh.kmanager.bo.order.model.vo.Order" alias="order" />
-		<typeAlias type="com.kh.kmanager.po.coupon.model.vo.Coupon" alias="poCoupon"/>
+		<typeAlias type="com.kh.kmanager.po.coupon.model.vo.Coupon" alias="coupon"/>
 	</typeAliases>
 	
 	<mappers>

@@ -27,6 +27,12 @@ public class CouponDao {
 	}
 
 
+	public ArrayList<Coupon> ableCouponSearch(SqlSessionTemplate sqlSession, Coupon c) {
+		
+		return (ArrayList)sqlSession.selectList("poCouponMapper.ableCouponSearch",c);
+	}
+
+
 	
 
 
