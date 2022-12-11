@@ -52,7 +52,7 @@ input[type=date] {
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
-	
+	<form id="showAbleCouponList" action="SearchAble.co" method="post">
 	
 		<div class="content-wrapper">
 		<br>
@@ -95,7 +95,7 @@ input[type=date] {
 			   		<tr>
 				        <td>발행일 기준 기간 검색</td>
 				        <td>
-				        	<input type="date" name="createDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="createDate" class="form-control col-lg-2">
+				        	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
 				        	
 				        </td>  
 			   		</tr>
@@ -103,7 +103,7 @@ input[type=date] {
 			      
 			    <div align="center"> 
 			        <button type="button" onclick="reset();" class="btn btn-outline-secondary">초기화</button>&nbsp;
-			        <button type="button" onclick="searchCoupon();" class="btn btn-secondary">조회</button>
+			        <button type="submit" onclick="searchCoupon();" class="btn btn-secondary">조회</button>
 			    </div>
 			</div> <!-- /#searchArea -->
 			
@@ -135,7 +135,7 @@ input[type=date] {
 			</div> <!-- /.content -->
 			</div> <!-- /.content-wrapper -->
 			
-			
+			</form>
 			
 			
 			<script>
@@ -184,6 +184,7 @@ input[type=date] {
 				});
 					
 			}
+			/*
 			function searchCoupon() {
 				
 				if ($("#select option:selected").val() == 1) {
@@ -222,6 +223,7 @@ input[type=date] {
 					});
 				}
 			}
+			*/
 				$(function() {
 					showList();
 				});

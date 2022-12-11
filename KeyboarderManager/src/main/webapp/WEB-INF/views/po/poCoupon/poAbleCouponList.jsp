@@ -53,7 +53,7 @@ input[type=date] {
 	<jsp:include page="../../common/posidebar.jsp" />
 
 	<form id="showAbleCouponList" action="SearchAble.co" method="post">
-	<input type="hidden" name="createDate">
+
 		<input type="hidden" name="sellerNo" value="${loginUser.sellerNo}">
 
 		<div class="content-wrapper">
@@ -99,14 +99,14 @@ input[type=date] {
 			   		<tr>
 				        <td>발행일 기준 기간 검색</td>
 				        <td>
-				        	<input type="date" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" class="form-control col-lg-2">
+				        	<input type="date" id="fromDate" name="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
 				        </td>  
 			   		</tr>
 				</table>
 			      
 			    <div align="center"> 
 			        <button type="button" onclick="reset();" class="btn btn-outline-secondary">초기화</button>&nbsp;
-			        <button type="button" onclick="searchCoupon();" class="btn btn-secondary">조회</button>
+			        <button type="submit" onclick="searchCoupon();" class="btn btn-secondary">조회</button>
 			    </div>
 			</div> <!-- /#searchArea -->
 			
@@ -131,8 +131,8 @@ input[type=date] {
 			               <th width="9%" >만료일</th>
 			        	</tr>
 			        	
-			            <tr>
 			            <c:forEach var="c" items="${list}">
+			            <tr>
 			               <td width="10%">${c.couponNo}</td>
 			               <td width="25%">${c.couponName}</td>
 			               <td width="10%">${c.couponPrice}</td>
@@ -141,8 +141,8 @@ input[type=date] {
 			               <td width="7%">${c.couponStmt}</td>
 			               <td width="9%">${c.createDate}</td>
 			               <td width="9%" >${c.dueDate}</td>
-			               </c:forEach>
 			        	</tr>
+			            </c:forEach>
 			       
 			    	</thead>
 			        <tbody id="couponList">
@@ -169,7 +169,7 @@ input[type=date] {
 				$("#toDate").val("");
 			}
 			
-						
+			/*			
 			function showList(){
 				
 				$.ajax({
@@ -209,6 +209,7 @@ input[type=date] {
 				});
 			
 			}
+			
 			function searchCoupon() {
 				
 					$.ajax({
@@ -245,14 +246,14 @@ input[type=date] {
 						}
 					});
 					
-				} 
+				}
+			
 			$(function() {
 				showList();
 			});
 			
-			
+			*/
 			</script>
 			
-			
-			</body>
-	</html>
+	</body>
+</html>

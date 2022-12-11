@@ -84,7 +84,7 @@ public class NSJ_CouponController {
 		
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 		c.setSellerNo(sellerNo);
-		c.setCreateDate(createDate);
+		// c.setCreateDate(createDate);
 	
 		System.out.println(c);
 		ArrayList<Coupon> list = couponService.ableCouponSearch(c);
@@ -94,7 +94,7 @@ public class NSJ_CouponController {
 		}
 		return "po/poCoupon/poAbleCouponList";
 		
-		}
+	}
 	
 	/**
 	 * 사용 가능 쿠폰 전체 조회 페이지 리턴
