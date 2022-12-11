@@ -20,4 +20,13 @@ public interface JM_MemberService {
 	int updateMailAuth(Member m);
 	int emailAuthFail(String id);
 
+	// 아이디 찾기
+	String findId(Member m);
+
+	// 비밀번호변경
+	int changePwd(Member m);
+
+	
+	
+
 }

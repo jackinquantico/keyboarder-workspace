@@ -46,6 +46,7 @@
 		WHERE CON_ID = #{conId}
 	</select>
 	
+	<!-- 이메일 중복체크 -->
 	<select id="emailCheck" parameterType="string" resultType="int">
 		SELECT COUNT(*)
 		FROM CONSUMER
@@ -75,4 +76,22 @@
 		WHERE CON_ID = #{id}
 			AND MAIL_AUTH = '0'
 	</select>
+	
+	<!-- 아이디찾기 쿼리문(메일인증한회원만 찾기가능) -장미 -->
+	<select id="findId" parameterType="member" resultType="String">
+		SELECT CON_ID
+		FROM CONSUMER
+		WHERE CON_EMAIL = #{conEmail}
+			AND CON_NAME = #{conName}
+			AND CON_PHONE = #{conPhone}
+			AND MAIL_AUTH = '1'
+	</select>
+	
+	<!--  비밀번호 변경문 쿼리문 -->
+	<update id="changePwd" parameterType="member">
+		UPDATE CONSUMER
+			SET CON_PWD = #{conPwd}
+			WHERE CON_ID = #{conId}
+			AND MAIL_AUTH = '1'
+	</update>
 </mapper>

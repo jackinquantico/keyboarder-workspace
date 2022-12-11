@@ -9,12 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.kh.keyboarder.member.model.service.JM_MemberService;
+import com.kh.keyboarder.member.model.service.MailService;
 import com.kh.keyboarder.member.model.vo.Member;
 
 @Controller
@@ -23,6 +20,8 @@ public class JM_MemberController {
 	
 	@Autowired
 	private JM_MemberService memberService;
+	@Autowired
+	private MailService mailSerivce;
 	
 	// 로그인
 	@RequestMapping("login.me")
@@ -109,11 +108,46 @@ public class JM_MemberController {
 		return(count>0)?  "NNNNN" : "NNNNY";
 	}
 	
-	/**
-	 * 아이디찾기 - 장미
-	 */
-	@RequestMapping(value="findIdForm")
-	public String findIdForm() throws Exception {
+	// 아이디찾기 페이지이동
+	@RequestMapping(value="findIdForm.me")
+	public String findId() {
 		return "/member/findIdForm";
+	}
+	
+	// 아이디찾기
+	@ResponseBody
+	@RequestMapping(value="findId.me", produces="text/html; charset=UTF-8")
+	public String findId(Member m, HttpSession session) {
+		String conId = memberService.findId(m);
+		return (conId != null) ? conId : "NNNNN";
+	}
+	
+	// 비밀번호찾기 페이지이동
+	@RequestMapping(value="findPwdForm.me")
+	public String findPwd() {
+		return "/member/findPwdForm";
+	}
+	
+	/**
+	 * 비밀번호찾기(변경용) 본인인증 - 장미
+	 * @param email
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="findPwd.me", produces="text/html; charset=UTF-8")
+	public String findPwd(String email) {
+		return mailSerivce.pwdEmail(email);
+	}
+	
+	@RequestMapping("pChange.me")
+	public String changePwd(Member m, HttpSession session, Model model) {
+		int result = memberService.changePwd(m);
+		if(result>0) {
+			session.setAttribute("alertMsg", "성공적으로 비밀번호가 변경되었습니다.");
+			return "redirect:/";
+		} else {
+			model.addAttribute("errorMsg", "비밀번호 변경실패");
+			return "redirect:/";
+		}
 	}
 }

@@ -38,5 +38,15 @@ public class JM_MemberDao {
 	public  int emailAuthFail(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.selectOne("memberMapper.emailAuthFail", id);
 	}
-	
+
+	// 아이디 찾기
+	public String findId(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
+
+	// 비밀번호 변경
+	public int changePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.changePwd", m);
+	}
+
 }

@@ -95,4 +95,22 @@ public class JM_MemberServiceImpl  implements JM_MemberService{
 	public int emailCheck(String checkEmail) {
 		return memberDao.emailCheck(sqlSession, checkEmail);
 	}
+
+	/**
+	 * 아이디 찾기 - 장미
+	 */
+	@Override
+	public String findId(Member m) {
+		return memberDao.findId(sqlSession, m);
+	}
+
+	/**
+	 * 비밀번호변경 - 장미
+	 */
+	@Override
+	public int changePwd(Member m) {
+		return memberDao.changePwd(sqlSession, m);
+	}
+
+	
 }

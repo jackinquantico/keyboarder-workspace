@@ -287,7 +287,7 @@
 
                 <br>
                 <div align="center">
-                    <button type="submit" id="enroll-btn" onclick="return validate();  " disabled>가입하기</button>
+                    <button type="submit" id="enroll-btn" onclick="return validate();" disabled>가입하기</button>
                 </div>
                 <br>
             </form>
