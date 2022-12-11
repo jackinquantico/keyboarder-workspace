@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.kmanager.bo.coupon.model.dao.BoCouponDao;
 import com.kh.kmanager.bo.coupon.model.vo.BoCoupon;
 
+import oracle.net.aso.b;
+
 @Service
 public class BoCouponServiceImpl implements BoCouponService {
 
@@ -31,6 +33,16 @@ public class BoCouponServiceImpl implements BoCouponService {
 	@Override
 	public ArrayList<BoCoupon> usedCouponList(BoCoupon bc) {
 		return couponDao.usedCouponList(sqlSession, bc);
+	}
+
+	@Override
+	public BoCoupon selectCoupon(String cno) {
+		return couponDao.selectCoupon(sqlSession, cno);
+	}
+
+	@Override
+	public int updateCoupon(BoCoupon bc) {
+		return couponDao.updateCoupon(sqlSession, bc);
 	}
 
 }

@@ -22,4 +22,12 @@ public class BoCouponDao {
 		return (ArrayList)sqlSession.selectList("boCouponMapper.usedCouponList", bc);
 	}
 
+	public BoCoupon selectCoupon(SqlSessionTemplate sqlSession, String cno) {
+		return sqlSession.selectOne("boCouponMapper.selectCoupon", cno);
+	}
+
+	public int updateCoupon(SqlSessionTemplate sqlSession, BoCoupon bc) {
+		return sqlSession.update("boCouponMapper.updateCoupon", bc);
+	}
+
 }

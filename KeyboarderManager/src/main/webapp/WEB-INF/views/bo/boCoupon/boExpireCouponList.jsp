@@ -76,7 +76,7 @@ input[type=date] {
 <div id="searchArea" class="card">
 	<table>
         <tr>
-           <td width="10%">발급대상 *</td>
+           <td width="15%">발급대상</td>
            <td>
            		<input type="radio" checked>&nbsp;전체 &nbsp;
            </td>

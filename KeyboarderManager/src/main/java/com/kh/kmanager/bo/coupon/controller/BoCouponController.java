@@ -16,6 +16,8 @@ import com.kh.kmanager.bo.coupon.model.vo.BoCoupon;
 import com.kh.kmanager.bo.store.model.service.StoreService;
 import com.kh.kmanager.bo.store.model.vo.Store;
 
+import oracle.net.aso.b;
+
 @Controller
 public class BoCouponController {
 	
@@ -162,4 +164,36 @@ public class BoCouponController {
 	public String expireCouponList() {
 		return "bo/boCoupon/boExpireCouponList";
 	}
+	
+	/**
+	 * 사용가능쿠폰에 대해서만 수정페이지로 이동 - 채영
+	 * @param cno : 쿠폰식별키
+	 */
+	@RequestMapping("couponDetail.bo")
+	public String detailCoupon(String cno, Model model) {
+		
+		BoCoupon bc = couponService.selectCoupon(cno);
+		
+		model.addAttribute("bc", bc);
+		
+		return "bo/boCoupon/boCouponDetail";
+	}
+	
+	/**
+	 * 사용가능쿠폰에 대해서만 수정 기능 - 채영
+	 */
+	@RequestMapping("updateCoupon.bo")
+	public String updateCoupon(BoCoupon bc, HttpSession session) {
+		
+		int result = couponService.updateCoupon(bc);
+		
+		if (result > 0) {
+			session.setAttribute("alertMsg", "쿠폰 수정에 성공했습니다.");
+		} else {
+			session.setAttribute("alertMsg", "쿠폰 수정에 실패했습니다.");
+		}
+		
+		return "redirect:/coupon.bo";
+	}
+	
 }

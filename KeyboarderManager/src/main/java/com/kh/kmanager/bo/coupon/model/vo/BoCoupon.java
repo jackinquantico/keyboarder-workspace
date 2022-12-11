@@ -26,5 +26,5 @@ public class BoCoupon {
 	private int orderPrice;
 	private String orderNo;
 	private String paymentBill;
-	
+	private String sellerName;
 }

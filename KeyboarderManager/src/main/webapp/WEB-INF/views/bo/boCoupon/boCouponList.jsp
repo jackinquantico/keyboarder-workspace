@@ -18,10 +18,8 @@
 	overflow: auto;
 }
 td{
-padding-left:5px;
-padding-top:20px;
+	padding-left:5px;
 }
-
 #listTable{
     border-collapse: collapse;
     width: 100%;
@@ -43,6 +41,9 @@ input[type=date] {
 }
 #select {
 	width: 34.5%;
+}
+#listArea a {
+	text-decoration: underline;
 }
 </style>
 </head>
@@ -72,7 +73,7 @@ input[type=date] {
 <div id="searchArea" class="card">
 	<table>
         <tr>
-           <td width="10%">발급대상 *</td>
+           <td width="15%">발급대상 *</td>
            <td>
            		<input type="radio" checked>&nbsp;전체 &nbsp;
            </td>
@@ -88,7 +89,7 @@ input[type=date] {
 	        </td>
 	    </tr>
    		<tr>
-	        <td>발행일 기준 기간 검색</td>
+	        <td>발행일 기준 기간 검색 *</td>
 	        <td>
 	        	<input type="date" id="startDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="endDate" class="form-control col-lg-2">
 	        </td>  
@@ -143,8 +144,11 @@ function loadList() {
 			
 			// 조회된 arraylist 반복문돌려서 출력
 			for (var i=0; i<result.length; i++) {
+				
+				if (result[i].couponStmt == '사용가능') {
+					
 				resultStr += "<tr>"
-								+ "<td>" + result[i].couponNo + "</td>"
+								+ "<td>" + '<a href="couponDetail.bo?cno=' + result[i].couponNo + '">' + result[i].couponNo + "</a></td>"
 								+ "<td>" + result[i].couponName + "</td>"
 								+ "<td>키보더쿠폰</td>"
 								+ "<td>" + result[i].couponPrice + "</td>"
@@ -153,6 +157,19 @@ function loadList() {
 								+ "<td>" + result[i].createDate + "</td>"
 								+ "<td>" + result[i].dueDate + "</td>"
 						   + "</tr>";
+				} else {
+					resultStr += "<tr>"
+						+ "<td>" + result[i].couponNo + "</td>"
+						+ "<td>" + result[i].couponName + "</td>"
+						+ "<td>키보더쿠폰</td>"
+						+ "<td>" + result[i].couponPrice + "</td>"
+						+ "<td>" + result[i].productName + "</td>"
+						+ "<td>" + result[i].couponStmt + "</td>"
+						+ "<td>" + result[i].createDate + "</td>"
+						+ "<td>" + result[i].dueDate + "</td>"
+				   + "</tr>";
+				}
+				
 			}
 			
 			$("#couponList").html(resultStr);
@@ -180,7 +197,7 @@ function searchCoupon() {
 				// 조회된 arraylist 반복문돌려서 출력
 				for (var i=0; i<result.length; i++) {
 					resultStr += "<tr>"
-									+ "<td>" + result[i].couponNo + "</td>"
+									+ "<td>" + '<a href="couponDetail.bo?cno=' + result[i].couponNo + '">' + result[i].couponNo + "</a></td>"
 									+ "<td>" + result[i].couponName + "</td>"
 									+ "<td>키보더쿠폰</td>"
 									+ "<td>" + result[i].couponPrice + "</td>"
@@ -235,9 +252,12 @@ function searchCoupon() {
 	}
 }
 
+
 $(function() {
 	loadList();
 });
+
+
 </script>
 
 </body>

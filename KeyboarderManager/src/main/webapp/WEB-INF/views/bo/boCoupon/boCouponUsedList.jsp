@@ -76,13 +76,13 @@ input[type=date] {
 <div id="searchArea" class="card">
 	<table>
         <tr>
-           <td width="10%">발급대상 *</td>
+           <td width="15%">발급대상</td>
            <td>
            		<input type="radio" checked>&nbsp;전체 &nbsp;
            </td>
         </tr>
    		<tr>
-	        <td>사용기간 기준 기간 검색*</td>
+	        <td>사용기간 기준 기간 검색</td>
 	        <td>
 	        	<input type="date" id="startDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="endDate" class="form-control col-lg-2">
 	        </td>  

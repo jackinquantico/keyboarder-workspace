@@ -15,6 +15,7 @@
 		<result column="ORDER_PRICE" property="orderPrice" />
 		<result column="ORDER_NO" property="orderNo" />
 		<result column="PAYMENT_BILL" property="paymentBill" />
+		<result column="SELLER_NAME" property="sellerName" />
 	</resultMap>
 
 	<select id="selectCouponList" parameterType="boCoupon" resultMap="boCouponResultMap">
@@ -82,5 +83,26 @@
 		</if>
 		ORDER BY ORDER_DATE DESC
 	</select>
+	
+	<select id="selectCoupon" parameterType="string" resultMap="boCouponResultMap">
+		SELECT COUPON_NO
+			 , COUPON_NAME
+			 , COUPON_PRICE
+			 , TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE"
+			 , TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
+			 , SELLER_NAME
+		     , PRODUCT_NAME
+		FROM COUPON_KEYBOARDER K
+		JOIN PRODUCT P ON (K.PRODUCT_NO = P.PRODUCT_NO)
+		JOIN SELLER S ON (S.SELLER_NO = P.SELLER_NO)
+		WHERE COUPON_NO = #{couponNo}
+	</select>
+
+	<update id="updateCoupon" parameterType="boCoupon">
+		UPDATE COUPON_KEYBOARDER
+		SET COUPON_NAME = #{couponName}
+		  , COUPON_PRICE = #{couponPrice}
+		WHERE COUPON_NO = #{couponNo}
+	</update>
 
 </mapper>

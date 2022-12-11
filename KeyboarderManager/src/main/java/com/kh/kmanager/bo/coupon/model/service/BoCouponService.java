@@ -13,4 +13,8 @@ public interface BoCouponService {
 	int insertCoupon(BoCoupon bc);
 	
 	ArrayList<BoCoupon> usedCouponList(BoCoupon bc);
+	
+	BoCoupon selectCoupon(String cno);
+	
+	int updateCoupon(BoCoupon bc);
 }
