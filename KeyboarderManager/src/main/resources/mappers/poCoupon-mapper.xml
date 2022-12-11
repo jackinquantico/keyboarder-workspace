@@ -47,8 +47,21 @@ VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
             TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
             FROM COUPON_STORE S
             LEFT JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
-            WHERE COUPON_STMT='Y'
-            AND S.SELLER_NO=#{sellerNo}
+           	WHERE S.SELLER_NO=#{sellerNo}
+            <choose>
+			<when test='couponStmt == "N"'>
+				AND COUPON_STMT = 'N'
+				<if test='fromDate != null'>
+					AND CREATE_DATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+			</when>
+			<when test='couponStmt == "Y"'>
+				AND COUPON_STMT = 'Y'
+				<if test='fromDate != null'>
+					AND CREATE_DATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+			</when>
+		</choose>
             ORDER BY COUPON_NO DESC
 	</select>
 	

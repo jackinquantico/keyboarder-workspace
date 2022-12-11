@@ -35,8 +35,8 @@ public class CouponServiceImpl implements CouponService{
 
 	@Override
 	public ArrayList<Coupon> showAbleCouponList(Coupon c) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return couponDao.showAbleCouponList(sqlSession,c);
 	}
 	
 

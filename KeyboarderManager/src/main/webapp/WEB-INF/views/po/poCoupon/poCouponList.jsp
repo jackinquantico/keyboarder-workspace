@@ -218,9 +218,6 @@ input[type=date] {
 					
 				
 
-			$(function() {
-				showList();
-			});
 			
 			
 			</script>

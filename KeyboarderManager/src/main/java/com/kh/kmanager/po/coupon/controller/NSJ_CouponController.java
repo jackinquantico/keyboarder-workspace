@@ -83,7 +83,7 @@ public class NSJ_CouponController {
 	public String ableCouponSearch(Coupon c, HttpSession session) {
 		
 		
-		
+		c.setCouponStmt("Y");
 		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
 		
 		return new Gson().toJson(list);
