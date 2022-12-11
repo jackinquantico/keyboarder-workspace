@@ -91,7 +91,9 @@
         <c:if test="${ not empty orderList }">
         	<c:forEach var="ord" items="${ orderList }">
 		        <div class="order-product-main">
-		            <form>
+		            <form action="refundPay.fo" method="post">
+		            	<input type="hidden" name="orderNo" value="${ ord.orderNo }">
+		            	<input type="hidden" name="paymentNo" value="${ ord.paymentNo }">
 		                <div class="order-product-date" style="float: left; width: 15%; height: 200px;">
 		                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
 		                        	주문일시
@@ -134,14 +136,27 @@
 			                    </div>
 		                    </c:when>
 		                    <c:when test="${ ord.orderStatus eq 4 }">
-			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+			                    <div class="orderStatus" style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
 			                        	환불
 			                    </div>
 		                    </c:when>
 		                </c:choose>
 		                    <hr>
 		                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 50px;" align="center">
-		                        <button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
+		                    <c:choose>
+			                	<c:when test="${ ord.orderStatus eq 1 }">
+				                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+				                </c:when>
+			                    <c:when test="${ ord.orderStatus eq 2 }">
+				                	<button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+								</c:when>
+			                    <c:when test="${ ord.orderStatus eq 3 }">
+				                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+				                </c:when>
+			                    <c:when test="${ ord.orderStatus eq 4 }">
+				                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+								</c:when>
+		                	</c:choose>
 		                    </div>
 		                </div>
 		            </form>
@@ -208,8 +223,6 @@
     </script>
      --%>
     
-    
-
 </body>
 </html>
 

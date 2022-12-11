@@ -29,6 +29,8 @@ public class Order {
 	private String conPhone; // 구매자 휴대폰 번호
 	private String conAddress; // 구매자 주소
 	private String sellerName; // 판매업체명
+
+	private String paymentNo; // 결제번호
 }
 
 
