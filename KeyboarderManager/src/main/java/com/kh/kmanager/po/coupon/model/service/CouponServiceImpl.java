@@ -32,13 +32,15 @@ public class CouponServiceImpl implements CouponService{
 		
 		return couponDao.prodcutListforCoupon(sqlSession,sellerNo);
 	}
-	//쿠폰조회
 
 	@Override
 	public ArrayList<Coupon> showAbleCouponList(Coupon c) {
-		return couponDao.showAbleCouponList(sqlSession,c);
-		
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+
+	
 	
 	
 }

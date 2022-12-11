@@ -23,7 +23,7 @@ td {
 
 #productCount {
 	padding-top: 30px;
-	height: 400px;
+	height: 420px;
 	border: 1px solid black;
 }
 
@@ -38,7 +38,7 @@ td {
 }
 
 #productList {
-	height: 300px;
+	height: 350px;
 	border: 1px solid black;
 }
 
@@ -186,12 +186,12 @@ height:150px;
 							<tr>
 								<td>판매상품명</td>
 
-								<td width="730px"><input type="text" style="width: 700px;"
+								<td width="730px"><input type="text" style="width: 600px;"
 									placeholder="상품명은 50자까지 등록 가능합니다." id="productName"
 									name="productName" required></td>
 
 								<td>판매가</td>
-								<td><input type="text" style="width: 500px;" id="price"
+								<td><input type="text" style="width: 400px;" id="price"
 									name="price" placeholder=" 원 단위로입력하세요."></td>
 
 							</tr>
@@ -217,32 +217,7 @@ height:150px;
 		</div>
 		
 <<<<<<< Updated upstream
-		<!-- <script>
-		 function addImg(){
-			
-			var file= $('#upfile')[0].files[0];
-			var formData = new FormData();
-			formData.append("file",file);
-			
-			$ajax({
-				url:"insert.pro",
-				type:"post",
-				enctype:'multypart/form-data',
-				processData:false,
-				contentType:false,
-				cache:false,
-				success:function(data){
-					if(data!=null){
-						$("#upfile").val(data);
-					var img=<"img class="card-img-top" id="img1" "src='"data"'>;
-						$("thumbnail").html(img);
-						}
-					}					
-				}
-				}
-			}); 
-		</script> -->
-		
+	
 		<script>
 		
 		$('#file1').change(function(){
@@ -273,8 +248,7 @@ height:150px;
 		
 		
 		
-=======
->>>>>>> Stashed changes
+
 		
 		
 	</form>

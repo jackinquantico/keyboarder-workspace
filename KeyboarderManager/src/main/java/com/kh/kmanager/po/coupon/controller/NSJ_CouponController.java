@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.kmanager.bo.coupon.model.vo.BoCoupon;
 import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.coupon.model.service.CouponService;
 import com.kh.kmanager.po.coupon.model.vo.Coupon;
@@ -63,27 +64,41 @@ public class NSJ_CouponController {
 	}
 
 	/**
-	 * po 사용가능쿠폰 조회하는 메소드 -성진
+	 * po 사용가능쿠폰 전체조회 -성진
 	 * 
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value="able.co",produces="application/json; charset=UTF-8")
 	public String showAbleCouponList(Coupon c){
+	
+		c.setCouponStmt("Y");
 		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
-		System.out.println(list);
-		
 		return new Gson().toJson(list);
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="SearchAble.co",  produces="application/json; charset=UTF-8")
+	public String ableCouponSearch(Coupon c, HttpSession session) {
+		
+		
+		
+		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
+		
+		return new Gson().toJson(list);
+		}
+	
 	/**
-	 * po 사용가능쿠폰 조회 화면 리턴
+	 * 사용 가능 쿠폰 전체 조회 페이지 리턴-
 	 * @return
 	 */
 	@RequestMapping("ableCoupon.po")
-	public String showAbleCoupon() {
+	public String ableCouponList() {
 		
-		return "po/poCoupon/poCouponList";
+		return "po/poCoupon/poAbleCouponList";
+	}
+	
+		
 	}
 
-}

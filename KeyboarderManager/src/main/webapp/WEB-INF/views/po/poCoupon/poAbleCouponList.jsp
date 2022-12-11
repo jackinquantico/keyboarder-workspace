@@ -78,17 +78,17 @@ input[type=date] {
 			           <td>
 			           		<input type="radio" checked>&nbsp;전체 &nbsp;
 			           </td>
-			    <tr>
-	        <td>쿠폰상태 *&nbsp;</td>
-	        <td>
+			        </tr>
+			        
+			        <tr>
+			        <td>쿠폰상태 *&nbsp;</td>
+	       		 <td>
 	        	<select class="form-control" id="select">
 	        		<option value="0" selected>선택 안 함</option>
 	            	<option value="1">사용가능</option>
-	            	<option value="2">만료</option>
 	        	</select>
 	        </td>
 	    </tr>
-   		<tr>
 			   		
 			   		<tr>
 				        <td>발행일 기준 기간 검색</td>
@@ -150,8 +150,10 @@ input[type=date] {
 					url:"able.co",
 					
 					data:{
+						sellerNo :"${loginUser.sellerNo }",
+							couponStmt : "Y"
 						
-						sellerNo :"${loginUser.sellerNo }"
+						
 					},
 				
 					success : function(result) {
@@ -175,15 +177,13 @@ input[type=date] {
 					},
 					
 					error: function() {
-						console.log("loadCoupon 실패");
+						console.log("showList 실패");
 					}
 				});
-					
+			
 			}
 			function searchCoupon() {
 				
-				if ($("#select option:selected").val() == 1) {
-					
 					$.ajax({
 						url: "SearchAble.co",
 						data: {
@@ -216,8 +216,7 @@ input[type=date] {
 						}
 					});
 					
-				
-
+				} 
 			$(function() {
 				showList();
 			});
