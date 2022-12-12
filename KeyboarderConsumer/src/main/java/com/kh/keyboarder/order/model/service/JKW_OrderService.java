@@ -9,4 +9,6 @@ public interface JKW_OrderService {
 	ArrayList<Order> foTotalViewList(int conNo);
 	
 	Order foDetailViewList(String ordNo);
+	
+	ArrayList<Order> foSearchDate(Order order);
 }

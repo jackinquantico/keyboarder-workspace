@@ -25,10 +25,17 @@ public class JKW_OrderServiceImpl implements JKW_OrderService {
 	}
 
 	@Override
+	public ArrayList<Order> foSearchDate(Order order) {
+	
+		return JKW_OrderDao.foSearchDate(sqlSession, order);
+	}
+
+	@Override
 	public Order foDetailViewList(String ordNo) {
 		
 		return JKW_OrderDao.foDetailViewList(sqlSession, ordNo);
 	}
+
 	
 	
 

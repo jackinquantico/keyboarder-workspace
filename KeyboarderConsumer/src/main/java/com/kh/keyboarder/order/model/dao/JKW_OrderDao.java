@@ -15,6 +15,11 @@ public class JKW_OrderDao {
 		return (ArrayList)sqlSession.selectList("orderMapper.foTotalViewList", conNo);
 	}
 	
+	public ArrayList<Order> foSearchDate(SqlSessionTemplate sqlSession, Order order){
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.foSearchDate", order);
+	}
+	
 	public Order foDetailViewList(SqlSessionTemplate sqlSession, String ordNo) {
 		
 		return sqlSession.selectOne("orderMapper.foDetailViewList", ordNo);

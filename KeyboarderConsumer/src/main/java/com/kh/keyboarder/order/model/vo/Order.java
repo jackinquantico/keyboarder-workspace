@@ -1,5 +1,7 @@
 package com.kh.keyboarder.order.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +31,16 @@ public class Order {
 	private String conPhone; // 구매자 휴대폰 번호
 	private String conAddress; // 구매자 주소
 	private String sellerName; // 판매업체명
+	private String searchDate;
 
 	private String paymentNo; // 결제번호
+
+	public Order(int conNo, String searchDate) {
+		super();
+		this.conNo = conNo;
+		this.searchDate = searchDate;
+	}
+	
 }
 
 

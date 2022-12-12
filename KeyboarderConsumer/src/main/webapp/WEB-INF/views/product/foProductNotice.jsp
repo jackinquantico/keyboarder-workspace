@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>KEYBOAR-DER 상품 조회</title>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
@@ -112,117 +112,99 @@
     
 </head>
 <body>
-
+	
+	<!-- 헤더 include 구문 -->
 	<jsp:include page="../common/foHeader.jsp" />
-
+	
+	<!-- 구매페이지 전체를 관리하는 div -->
 	<div id="fo-full-main">
 
+		<!-- 상단 이미지 -->
         <div id="fo-product-body">
         	<div id="fo-product-header">
         		<img src="https://img.topket.co.kr/files/0/logitech_%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC_%EB%8C%80%EB%B0%B0%EB%84%88_v4.jpg"
         			 width="100%" height="100%" />
         	</div>
-        
+        	
+        	<!-- 구매할 수 있는 상품 리스트 조회 -->
             <div id="fo-product-main container">
                 
+                	<!-- 반복문을 통해 여러개의 상품 조회 가능 -->
                 	<c:forEach var="p" items="${ proList }">
-                		<%--<c:forEach var="keyc" items="${ keyCouponList }">
-                			<c:forEach var="stoc" items="${ stoCouponList }"> --%>
-			                    <div class="card fo-product-all" align="center">
-			                        <form action="purchase.fo" method="post" class="request">
-			                        	<input type="hidden" name="paymentNo" class="imp_uid">
-										<input type="hidden" name="orderNo" class="merchant_uid">
-										<input type="hidden" name="productNo" class="product_name" value="${ p.productNo }">
-										<input type="hidden" name="amount" class="amount">
-										<input type="hidden" name="couponPrice" class="couponPrice" value="3000">
-			                            <div class="fo-product-img">
-			                                <img src="https://img.topket.co.kr/files/0/g913TKL_700X700.jpg" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
-			                            </div>
-			                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
-			                            	${ p.productName }
-			                            </div>
-			                            <div class="fo-product-price" style="padding: 12px; margin: 0px;">
-			                            	${ p.price }
-			                            </div>
-			                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
-			                            	<select class="form-select couponSelect" name="couponPrice">
-			                            		<c:choose>
-				                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName ne null }">
-				                            			<option value="${ p.keyCouponPrice }" selected>
-				                            				${ p.keyCouponName }
-				                            			</option>
-					                            		<option value="${ p.stoCouponPrice }">
-					                            			${ p.stoCouponName }
-					                            		</option>
-				                            		</c:when>
-				                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
-				                            			<option value="${ p.keyCouponPrice }" selected>
-				                            				${ p.keyCouponName }
-				                            			</option>
-				                            		</c:when>
-				                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
-				                            			<option value="${ p.stoCouponPrice }" selected>
-				                            				${ p.stoCouponName }
-				                            			</option>
-				                            		</c:when>
-				                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
-				                            			<option value="0" selected disabled align="center">
-				                            				쿠폰 없음
-				                            			</option>
-				                            		</c:when>
-			                            		</c:choose>
-			                            	</select>
-			                            		
-			                            	<c:choose>
-			                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
-			                            			<input type="hidden" name="couponNo" value="${ p.keyCouponNo }">
-			                            		</c:when>
-			                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
-			                            			<input type="hidden" name="couponNo" value="${ p.stoCouponNo }">
-			                            		</c:when>
-			                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
-			                            			<input type="hidden" name="couponNo" value="X">
-			                            		</c:when>
-			                            	</c:choose>
-			                            	
-			                            </div>
-			                            <div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
-			                                <button type="button" id="buy-btn" class="btn btn-primary" onclick="requestPay(this);" style="padding: 9px; margin: 0px;">
-			                                   	 구매하기
-			                                </button>
-			                            </div>
-			                        </form>
-			                    </div> <!-- /.fo-product-all -->
-	                    	</c:forEach>
-	                    <%--</c:forEach>
-                    </c:forEach>  --%>
-                    
-                    <%--
-                    <div class="fo-product-all" align="center">
-                        <form action="purchase.fo" method="post" id="request">
-                        	<input type="hidden" name="paymentNo" id="imp_uid">
-							<input type="hidden" name="orderNo" id="merchant_uid">
-							<input type="hidden" name="productNo" id="product_name">
-							<input type="hidden" name="amount" id="amount">
-							<input type="hidden" name="conNo" id="buyer_name">
-							<input type="hidden" name="couponPrice" id="couponPrice" value="3000">
-                            <div class="fo-product-img"></div>
-                            <div class="fo-product-name">상품 제목 넣어버리기</div>
-                            <div class="fo-product-price">상품 가격 넣어버리기</div>
-                            <div class="fo-product-coupon">
-                            	<select>
-                            		<option>쿠폰이름들어감</option>
-                            		<option>쿠폰이름들어감</option>
-                            	</select>
-                            </div>
-                            <div class="fo-buy-button" align="center">
-                                <button onclick="requestPay();" type="button" class="btn btn-outline-info" style="width: 100px; height: 40px;">
-                                   	 구매하기
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                     --%>
+	                    <div class="card fo-product-all" align="center">
+	                        <form action="purchase.fo" method="post" class="request">
+	                        	<input type="hidden" name="paymentNo" class="imp_uid">
+								<input type="hidden" name="orderNo" class="merchant_uid">
+								<input type="hidden" name="productNo" class="product_name" value="${ p.productNo }">
+								<input type="hidden" name="amount" class="amount">
+								<input type="hidden" name="couponPrice" class="couponPrice" value="3000">
+	                            <div class="fo-product-img">
+	                                <img src="https://img.topket.co.kr/files/0/g913TKL_700X700.jpg" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+	                            </div>
+	                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
+	                            	${ p.productName }
+	                            </div>
+	                            <div class="fo-product-price" style="padding: 12px; margin: 0px;">
+	                            	${ p.price }
+	                            </div>
+	                            <div class="fo-product-coupon" style="padding: 8px; margin: 0px;">
+	                            	<select class="form-select couponSelect" name="couponPrice">
+	                            		<c:choose>
+	                            			<%-- 쿠폰 옵션 중 상품에 해당되는 옵션만 보여질 수 있음 --%>
+		                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName ne null }">
+		                            			<option value="${ p.keyCouponPrice }" selected>
+		                            				${ p.keyCouponName }
+		                            			</option>
+			                            		<option value="${ p.stoCouponPrice }">
+			                            			${ p.stoCouponName }
+			                            		</option>
+		                            		</c:when>
+		                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
+		                            			<option value="${ p.keyCouponPrice }" selected>
+		                            				${ p.keyCouponName }
+		                            			</option>
+		                            		</c:when>
+		                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
+		                            			<option value="${ p.stoCouponPrice }" selected>
+		                            				${ p.stoCouponName }
+		                            			</option>
+		                            		</c:when>
+		                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
+		                            			<option value="0" selected disabled align="center">
+		                            				쿠폰 없음
+		                            			</option>
+		                            		</c:when>
+	                            		</c:choose>
+	                            	</select>
+	                            		
+	                            	<c:choose>
+	                            		<c:when test="${ p.keyCouponName ne null and p.stoCouponName eq null }">
+	                            			<input type="hidden" name="couponNo" value="${ p.keyCouponNo }">
+	                            		</c:when>
+	                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName ne null }">
+	                            			<input type="hidden" name="couponNo" value="${ p.stoCouponNo }">
+	                            		</c:when>
+	                            		<c:when test="${ p.keyCouponName eq null and p.stoCouponName eq null }">
+	                            			<input type="hidden" name="couponNo" value="X">
+	                            		</c:when>
+	                            	</c:choose>
+	                            	
+	                            </div>
+	                            	<c:choose>
+	                            		<%-- 로그인이 되지 않았다면 구매하기 버튼 보이지 않음 --%>
+	                            		<c:when test="${ not empty loginUser }">
+	                            			<div class="fo-buy-button" align="center" style="padding: 7px; margin: 0px;">
+				                                <button type="button" id="buy-btn" class="btn btn-primary" onclick="requestPay(this);" style="padding: 9px; margin: 0px;">
+				                                   	 구매하기
+				                                </button>
+			                                </div>
+	                                	</c:when>
+	                                	<c:otherwise>
+	                                	</c:otherwise>
+	                                </c:choose>
+	                        </form>
+	                    </div> <%-- /.fo-product-all --%>
+	                </c:forEach>
                      
                      <br clear="both">
                     
@@ -272,12 +254,9 @@
 					</div>
 					<!-- 여기까지가 페이징 처리 구문 -->
                 
-            </div>
-            
-            
+            </div>            
         </div>
     </div>
-
 
 	<script>
 		

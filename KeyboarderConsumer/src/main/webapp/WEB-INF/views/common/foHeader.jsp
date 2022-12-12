@@ -92,6 +92,7 @@
    </c:if>
 
 	<div class="fo-header-full">
+			<!-- 좌측 상단 로고 -->
             <div id="fo-header-logo">
                 <a href="foProductNotice.pro">
                 	<img src="resources/fo_upfiles/keyboarder_logo.png" style="background-size: cover; width: 100%; height: 100%;">
@@ -99,6 +100,7 @@
             </div>
             <div id="fo-header-login">
                 <c:choose>
+                	<%-- 로그인이 되어있지 않다면 회원가입 버튼과 로그인 버튼이 보임 --%>
                     <c:when test="${ empty loginUser }">
                         <!-- 로그인전 -->
                         <!-- <div id="order-button" align="center"></div> -->
@@ -110,6 +112,7 @@
                         </div>
                     </c:when>
                     <c:otherwise>
+                    	<%-- 로그인이 되어있다면 로그아웃 버튼, 사용자 이름, 주문내역 조회 버튼이 보임 --%>
                         <div id="logout-button">
                             <button type="button" class="btn btn-primary" onclick="location.href='logout.me'">로그아웃</button>
                         </div>

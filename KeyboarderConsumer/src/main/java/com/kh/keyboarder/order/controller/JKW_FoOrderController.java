@@ -33,17 +33,34 @@ public class JKW_FoOrderController {
 		return "order/foOrderTotalView";
 	}
 	
+	@RequestMapping("foSearchDate.order")
+	public String foSearchDate(Model model, HttpSession session, String searchOrderMonth) {
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		int conNo = m.getConNo();
+		
+		String searchDate = searchOrderMonth + "-01";
+		
+		Order order = new Order(conNo, searchDate);
+		
+		ArrayList<Order> dateList = JKW_OrderService.foSearchDate(order);
+				
+		model.addAttribute("dateList", dateList);
+		
+		return "order/foOrderTotalView";
+	}
+	
 	@RequestMapping("foDetailView.order")
 	public String foDetailView(Model model, String ordNo) {
 		
 		Order orderDetailList = JKW_OrderService.foDetailViewList(ordNo);
-		
-		System.out.println(orderDetailList);
-		
+				
 		model.addAttribute("orderDetailList", orderDetailList);
 		
 		return "order/foOrderDetailView";
 	}
+	
 }
 
 

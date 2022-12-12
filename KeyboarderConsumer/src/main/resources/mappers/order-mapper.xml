@@ -21,7 +21,7 @@
 		<result column="SELLER_NAME" property="sellerName" />
 		<result column="PAYMENT_NO" property="paymentNo" />
 	</resultMap>
-	
+
 	<select id="foTotalViewList" parameterType="_int" resultMap="orderResultSet">
 		SELECT ORD.ORDER_NO
 			 , PAYMENT_NO
@@ -36,6 +36,23 @@
 		JOIN PAYMENT P ON (P.ORDER_NO = ORD.ORDER_NO)
 		WHERE CON_NO = #{conNo}
 		ORDER BY ORDER_DATE DESC
+	</select>
+
+	<select id="foSearchDate" parameterType="order" resultMap="orderResultSet">
+		SELECT ORD.ORDER_NO
+			 , PAYMENT_NO
+		     , TO_CHAR(ORDER_DATE, 'YY-MM-DD') "ORD_ORDER_DATE"
+		     , ORDER_PRICE
+		     , ORDER_STATUS
+		     , ORD.PRODUCT_NO
+		     , PRODUCT_NAME
+		     , ATTACHMENT1
+		FROM ORDERS ORD
+		JOIN PRODUCT PRO ON (PRO.PRODUCT_NO = ORD.PRODUCT_NO)
+		JOIN PAYMENT P ON (P.ORDER_NO = ORD.ORDER_NO)
+		WHERE CON_NO = #{conNo}
+		  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 	</select>
 	
 	<select id="foDetailViewList" parameterType="string" resultMap="orderResultSet">
