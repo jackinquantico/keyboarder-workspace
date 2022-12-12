@@ -1,10 +1,19 @@
 package com.kh.kmanager.po.order.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.kmanager.po.order.model.service.PoOrderService;
+import com.kh.kmanager.po.order.model.vo.PoOrder;
+
 @Controller
-public class Po_OrderController {
+public class PoOrderController {
+	@Autowired
+	public PoOrderService orderService;
 	
 	/**
 	 * PO 전체 주문내역 조회 페이지로 단순이동 처리를 해주는 메소드 - 백성현
@@ -21,7 +30,10 @@ public class Po_OrderController {
 	 * @return
 	 */
 	@RequestMapping("decision.po")
-	public String selectDecisionOrder() {
+	public String selectDecisionOrder(Model model) {
+		ArrayList<PoOrder> list = orderService.selectDecisionOrder();
+		model.addAttribute("list", list);
+		//System.out.println(list);
 		return "po/poOrder/poOrderDecisionListView";
 	}
 }

@@ -30,14 +30,14 @@
         
         #searchbtn {
         	width: 70px;  
-        	height: 30px; 
+        	height: 35px; 
         	background-color:black; 
         	line-height: 1px; 
-        	margin-left: 30px;"
+        	margin-left: 30px;
         }
         
         #decisionList {
-        	height : 55%;
+        	height : 520px;
             border: 1px solid;
             margin :auto; 
 	       	margin-bottom: 30px; 
@@ -68,9 +68,7 @@
 
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
-
-</div> <!-- /.content -->
-	<div id="orderConfirmForm">
+		<div id="orderConfirmForm">
         <div id="info">
             <p style="margin-top : 15px; margin-left:15px;">
                 ⦁ &nbsp;&nbsp;자동 구매확정 : 배송완료 후 7일 후 자동 구매확정됩니다. <br>
@@ -82,14 +80,14 @@
        <div id="date">
             <div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
-                <input type="date" style="height: 30px;"> ~ <input type="date" style="height: 30px;">
+                <input type="month" style="height: 35px;">
                 <input type="button" class="btn btn-dark" value="검색" id="searchbtn"  >
             </div>
         </div>
        <br><br>
        
         <div id="decisionList">
-        	 <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 30px; margin-top:20px; margin-bottom:20px;">
+        	 <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
@@ -104,21 +102,25 @@
                     </tr>
                 </thead>
                  <tbody style="background-color : white;">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <c:forEach var="o" items="${ list }" >
+                    	<tr>
+                        <td>${ o.orderNo }</td>
+                        <td>${ o.settleDate }</td>
+                        <td>${ o.keyMoneyDate}</td>
+                        <td>${ o.productNo }</td>
+                        <td>${ o.productName }</td>
+                        <td>${ o.orderPrice}</td>
+                        <td>${ o.conId }</td>
+                        <td>${ o.conName }</td>
                     </tr>
+                    </c:forEach>
                 </tbody>
+                 <br><br><br>
             </table>
         </div>
     </div>
-	
+</div> <!-- /.content -->
+
 </div> <!-- /.content-wrapper -->
 </body>
 </html>

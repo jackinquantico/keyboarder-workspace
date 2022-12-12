@@ -30,7 +30,7 @@
         }
         #searchbtn {
         	width: 70px;  
-        	height: 30px; 
+        	height: 35px; 
         	background-color:black; 
         	line-height: 1px; 
         	margin-left: 30px;"
@@ -79,7 +79,7 @@
         <div id="date">
             <div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
-                <input type="date" style="height: 30px;"> ~ <input type="date" style="height: 30px;">
+                <input type="month" style="height: 35px;">
                 <input type="button" class="btn btn-dark" value="검색" id="searchbtn"  >
             </div>
         </div>
@@ -87,7 +87,7 @@
 
         <div id="orderConfirmList" >
             <br>
-            <input type="button" class="btn btn-secondary" value="엑셀다운로드" style="float:right; margin-right: 30px;">
+            <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px;">
             <br><br><br>
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
@@ -110,7 +110,7 @@
 	                        <td>${ s.orderNo }</td>
 	                        <td>${ s.settleDate }</td>
 	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" align="center"></td>
-	                        <td></td>
+	                        <td>${s.price }</td>
 	                        <td>2500원</td>
 	                        <td></td>
 	                        <td></td>
@@ -124,7 +124,6 @@
         </div>
     </div>
 	
-
 </div> <!-- /.content -->
 
 </div> <!-- /.content-wrapper -->

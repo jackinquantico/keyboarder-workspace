@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="poorderMapper">
+	<resultMap id="poorderResultSet" type="poOrder">
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="ORDER_DATE" property="orderDate" />
+		<result column="ORDER_PRICE" property="orderPrice" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="CON_NO" property="conNo" />
+		<result column="SETTLE_DATE" property="settleDate" />
+		<result column="KMONEY_DATE" property="keyMoneyDate" />
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="CON_ID" property="conId" />
+		<result column="CON_NAME" property="conName" />
+	</resultMap>
+	
+<!-- 	<select id="selectListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*), TO_CHAR(ORDER_DATE, 'YYYY-MM')
+		FROM ORDERS
+		WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM')= #{nowMonth}
+		GROUP BY TO_CHAR(ORDER_DATE, 'YYYY-MM')
+	</select>
+	 -->
+	<select id="selectDecisionOrder"  parameterType="string" resultMap="poorderResultSet">
+		SELECT *
+		FROM (SELECT O.ORDER_NO "ORDER_NO"
+		                , S.SETTLE_DATE "SETTLE_DATE"
+		                , TO_CHAR((S.SETTLE_DATE)+1) "KMONEY_DATE"
+		                , O.PRODUCT_NO "PRODUCT_NO"
+		                , P.PRODUCT_NAME "PRODUCT_NAME"
+		                , O.ORDER_PRICE "ORDER_PRICE"
+		                , C.CON_ID "CON_ID"
+		                , C.CON_NAME "CON_NAME"
+		                , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH"
+		        FROM ORDERS O
+		        JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+		        JOIN CONSUMER C ON (C.CON_NO = O.CON_NO)
+		        JOIN SETTLEMENT S ON (S.ORDER_NO = O.ORDER_NO)
+		        ORDER BY O.ORDER_DATE DESC)
+		<if test=' #{nowMonth} != null '>
+			WHERE MONTH = #{nowMonth}
+		</if>
+
+	</select>
+</mapper>

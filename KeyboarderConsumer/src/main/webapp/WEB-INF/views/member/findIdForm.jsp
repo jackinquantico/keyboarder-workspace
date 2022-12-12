@@ -28,7 +28,7 @@
 			<h3>아이디 찾기</h3>
 			<p>회원가입 시 이메일인증을 완료한 계정만 아이디찾기가 가능합니다.</p>
 		</div><br>
-		<form id="findForm" action="findId.me" method="post">
+		<form id="findForm" action="" method="post">
 			<div>
 				<div class = "find-name">
 					<label>이름</label>
@@ -47,7 +47,7 @@
 				</div>
 				<br><br>
 				<div class ="btnSearch">
-					<button type="submit" id="findIdBtn" class="btn btn-dark btn-block" style="background-color : black;" data-toggle="modal" data-target="#myModal">찾기</button>
+					<button type="button" id="findIdBtn" class="btn btn-dark btn-block" style="background-color : black;" data-toggle="modal" data-target="#myModal" disabled>찾기</button>
 					<input type="button" name="cancle" class="btn btn-warning btn-block" value="취소" onClick="history.back()">
 				</div>
 			</div>
@@ -66,6 +66,7 @@
 					return false;
 				} else {
 					$("#nameMsg").css("display", "none");
+					$("#findForm button[type=button]").removeAttr("disabled");
 					return true;
 				}
 				})
@@ -83,6 +84,7 @@
 						return false;
 					} else {
 						$("#emailMsg").css("display", "none");
+						$("#findForm button[type=button]").removeAttr("disabled");
 						return true;
 					}
 				})
@@ -96,6 +98,7 @@
 						return false;
 					} else {
 						$("#phoneMsg").css("display", "none");
+						$("#findForm button[type=button]").removeAttr("disabled");
 						return true;
 					}
 				});
@@ -125,7 +128,7 @@
 					
 					<!-- Modal footer -->
 					<div class="modal-footer">
-					<button type="button" class="btn btn-warning" onclick="location.href='login.me';">로그인하기</button>
+					<button type="button" class="btn btn-warning" onclick="location.href='login.me';">메인페이지로</button>
 					<button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
 					</div>
 				</div>
