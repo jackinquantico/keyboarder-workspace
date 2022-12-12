@@ -1,11 +1,15 @@
 package com.kh.kmanager.bo.order.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.kmanager.bo.order.model.service.OrderService;
 import com.kh.kmanager.bo.order.model.vo.Order;
@@ -23,17 +27,27 @@ public class Bo_OrderController {
 	@RequestMapping("allOrderList.bo")
 	public String selectAllOrder(Model model) {
 		
-		int listCount = orderService.selectListCount();
+		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+		int listCount = orderService.selectListCount(nowMonth);
 		
 		ArrayList<Order> list = orderService.selectAllOrderList();
 		
-		System.out.println(list);
-		
-		
-		
-		
 		model.addAttribute("listCount", listCount);
+		model.addAttribute("list", list);
 		
 		return "bo/boOrder/boSelectAllOrder";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="option_date.bo")
+	public void selectOrder_Option(String currentDate, String endDate) {
+		
+		HashMap<String, String> optionDate = new HashMap<String, String>();
+		optionDate.put("currentDate", currentDate);
+		optionDate.put("endDate", endDate);
+		
+		int listCount = orderService.selectListCount(optionDate);
+		
+		System.out.println(listCount);
 	}
 }

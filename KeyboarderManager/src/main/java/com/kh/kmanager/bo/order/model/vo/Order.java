@@ -14,7 +14,7 @@ import lombok.ToString;
 public class Order {
 
 	private String orderNo;
-	private Date orderDate;
+	private String orderDate;
 	private int orderPrice;
 	private String couponYn;
 	private String orderStatus;

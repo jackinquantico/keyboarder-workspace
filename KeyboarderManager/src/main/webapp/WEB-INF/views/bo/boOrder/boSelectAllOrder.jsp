@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,19 +33,20 @@
 			<div id="selectOption">
 				<table id="option_table">
 					<tr>
-						<th width="10%" style="padding-left: 20px;">조회기간</th>
+						<th width="10%" style="padding-left: 20px;">조회기간 *</th>
 						<td width="10%">
 							<select>
 								<option>전체</option>
-								<option></option>
+								<option>1주일</option>
+								<option>1개월</option>
 							</select>
 						</td>
 						<td width="10%">
-							<input type="date">
+							<input type="date" id="currentDate" name="currentDate">
 						</td>
 						<td width="3px" style="text-align:center">~</td>
 						<td>
-							<input type="date">
+							<input type="date" id="endDate" name="endDate">
 						</td>
 						<td width="10%"></td>
 					</tr>
@@ -54,7 +56,7 @@
 							<input type="text" style="width:100%" placeholder="주문번호를 입력해주세요">
 						</td>
 						<td>
-							<button id="search_btn">검색</button>
+							<button id="search_btn" onclick="searchFormSubmit(1);">검색</button>
 						</td>
 					</tr>
 					<tr>
@@ -74,6 +76,25 @@
 					</tr>
 				</table>
 			</div>
+			
+			<script>
+				function searchFormSubmit() {
+					//console.log($("#currentDate").val());
+					//console.log($("#endDate").val());
+					
+					$.ajax({
+						url : "option_date.bo",
+						data : {currentDate:$("#currentDate").val(),
+								endDate:$("#endDate").val()},
+						success : function() {
+							
+						},
+						error : function() {
+							console.log("에러시불");
+						}
+					});
+				}
+			</script>
 
 			<br>
 
@@ -84,174 +105,49 @@
 						<button>엑셀 다운로드</button>
 					</div>
 				</div>
-				<div id="table_div">
+				<div id="table_div" style="overflow:auto;">
 					<table id="result_table" border="1">
 						<thead>
-							<td width="%"></td>
-							<td width="%">구매확정일시</td>
-							<td width="%">주문일시</td>
-							<td width="%">주문번호</td>
-							<td width="%">상품명</td>
-							<td width="%">입점업체명</td>
-							<td width="%">주문자명</td>
-							<td width="%">주문금액</td>
-							<td width="%">할인금액</td>
-							<td width="%">키보더할인액</td>
-							<td width="%">결제금액</td>
-							<td width="%">판매수수료</td>
-							<td width="%">결제수단</td>
+							<td width="1%"></td>
+							<td width="10%">구매확정일시</td>
+							<td width="10%">주문일시</td>
+							<td width="10%">주문번호</td>
+							<td width="15%">상품명</td>
+							<td width="10%">입점업체명</td>
+							<td width="5%">주문자명</td>
+							<td width="7%">주문금액</td>
+							<td width="7%">할인금액</td>
+							<td width="7%">키보더할인액</td>
+							<td width="7%">결제금액</td>
+							<td width="6%">판매수수료</td>
+							<td width="5%">결제수단</td>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
+							<c:choose>
+								<c:when test="${ not empty list }">
+									<c:forEach var="o" items="${ list }">
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>${ o.buyConfirmDate }</td>
+											<td>${ o.orderDate }</td>
+											<td>${ o.orderNo }</td>
+											<td>${ o.productName }</td>
+											<td>${ o.sellerName }</td>
+											<td>${ o.conName }</td>
+											<td>${ o.orderPrice }</td>
+											<td>${ o.poCouponPrice }</td>
+											<td>${ o.boCouponPrice }</td>
+											<td>${ o.paymentBill }</td>
+											<td>${ o.commission }</td>
+											<td>카드</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									
+								</c:otherwise>
+							</c:choose>
+
 						</tbody>
 					</table>
 				</div>
@@ -259,7 +155,6 @@
 		</div>
 	
 	</div> <!-- /.content-wrapper -->
-
 
 
 </body>

@@ -16,11 +16,10 @@
 		<result column="COMMISSION" property="commission" />
 	</resultMap>
 
-	<select id="selectListCount" parameterType="string" resultType="_int">
-		SELECT COUNT(*), TO_CHAR(ORDER_DATE, 'YYYY-MM')
+	<select id="selectListCount_default" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
 		  FROM ORDERS
 		 WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM') = #{nowMonth}
-		 GROUP BY TO_CHAR(ORDER_DATE, 'YYYY-MM')
 	</select>
 	
 	<select id="selectAllOrderList" parameterType="string" resultMap="orderResultSet">
@@ -52,6 +51,13 @@
 			      LEFT JOIN COUPON_KEYBOARDER C_KEY ON (C_KEY.COUPON_NO = KEY_U.COUPON_NO)
 			      ORDER BY O.ORDER_DATE DESC) A
 		 WHERE A.MONTH = #{nowMonth}
+	</select>
+	
+	<select id="selectListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDERS
+		 WHERE TO_DATE(TO_CHAR(ORDER_DATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')
+		 	   BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
 	</select>
 
 

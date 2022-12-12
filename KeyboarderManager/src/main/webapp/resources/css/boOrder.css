@@ -10,7 +10,6 @@
     margin : 0px 10px 10px 10px;
     padding : 10px 30px 10px 30px;
     height : 150px;
-    overflow: auto;
 }
 
 #option_table {
@@ -48,7 +47,7 @@
 }
 
 #result_div {
-    height : 40px;
+    height : 10%;
     position : relative;
 }
 
@@ -73,8 +72,10 @@
 }
 
 #table_div {
+    width : 100%;
+    height : 90%;      
     padding : 10px 20px 10px 20px;
-    overflow : auto;
+    /* overflow-y : scroll;*/
 }
 
 #result_table{
@@ -82,6 +83,7 @@
     text-align : center;
     width:100%;
     height:500px;
+    /*overflow-y : scroll;*/
 }
 
 #result_table>thead {
