@@ -8,9 +8,16 @@
 		<result column="CONFIRMED" property="confirmed" />
 		<result column="SUM_ORDER" property="sumOrder" />
 		<result column="SUM_SETTLE" property="sumSettle" />
+		
 		<result column="PAYMENT_BILL" property="paymentBill" />
 		<result column="PAYMENT_COUNT" property="paymentCount" />
 		<result column="REFUND_COUNT" property="refundCount" />
+		
+		<result column="ORDER_PRICE" property="orderPrice" />
+		<result column="ORDER_DATE" property="orderDate" />
+		
+		<result column="SHOW_PRODUCT" property="showProduct" />
+		<result column="HIDE_PRODUCT" property="hideProduct" />
 	</resultMap>
 
 	<select id="mainOrderSummary" parameterType="_int" resultMap="mainDataResultSet">
@@ -69,6 +76,35 @@
 		WHERE PAYMENT_DATE = SYSDATE
 		AND S.SELLER_NO = #{sellerNo}
 		AND PAYMENT_STATUS = 'N')
+	</select>
+	
+	<select id="mainBarGraph" parameterType="_int" resultMap="mainDataResultSet">
+		SELECT *
+		FROM (SELECT SUM(ORDER_PRICE) AS "ORDER_PRICE", ORDER_DATE
+			FROM (
+			SELECT SELLER_NO
+	             , EXTRACT(MONTH FROM ORDER_DATE) ORDER_DATE
+	             , ORDER_PRICE
+			FROM ORDERS
+			JOIN PRODUCT USING (PRODUCT_NO)
+			JOIN SELLER USING (SELLER_NO)
+			WHERE SELLER_NO = #{sellerNo})
+			GROUP BY  ORDER_DATE, SELLER_NO
+			ORDER BY  ORDER_DATE DESC)
+		<![CDATA[WHERE ROWNUM <= 4]]>
+	</select>
+	
+	<select id="mainProductSummary" parameterType="_int" resultMap="mainDataResultSet">
+		SELECT SHOW_PRODUCT, HIDE_PRODUCT
+		FROM 
+		(SELECT COUNT(PRODUCT_NO) "SHOW_PRODUCT"
+		FROM PRODUCT
+		WHERE PRODUCT_STATUS = 1
+		AND SELLER_NO = #{sellerNo}),
+		(SELECT COUNT(PRODUCT_NO) "HIDE_PRODUCT"
+		FROM PRODUCT
+		WHERE PRODUCT_STATUS = 0
+		AND SELLER_NO = #{sellerNo})
 	</select>
 
 </mapper>

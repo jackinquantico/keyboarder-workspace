@@ -23,4 +23,7 @@ public interface NoticeService {
 	
 	// 공지사항 수정 서비스 (BO 만 가능)
 	int updateNotice(Notice n);
+	
+	// 메인페이지에서 공지사항 최신글 5개 불러오기
+	ArrayList<Notice> selectMainNoticeList();
 }

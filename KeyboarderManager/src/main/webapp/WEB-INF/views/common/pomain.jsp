@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,15 +61,22 @@
 #left-status {
 	width: 67%;
 	float: left;
+	position: relative;
 }
 #right-status {
 	width: 30%;
 	float: right;
 }
-#left-status table, #right-status table {
+
+#left-status table {
+	width: 45%;
+	height: 100%;
+}
+#right-status table {
 	width: 100%;
 	height: 100%;
 }
+
 #mainSummary, #mid-status, #left-status, #right-status {
 	background-color: white;
 }
@@ -77,6 +85,34 @@
 	color: blue;
 	font-weight: normal;
 	float: right;
+}
+.tableBox {
+	width: 50%;
+	height: 95%;
+	position: absolute;
+	left: 15px;
+	top: 15px;
+}
+.tableBox table {
+	width: 100% !important;
+	height: 100%;
+}
+.tableBox .atag {
+	position: absolute;
+	left: 400px;
+	top: 30px;
+}
+
+.graphBox {
+	width:50%; 
+	height: 95%;
+	margin: 0px;
+	position: absolute;
+	right: 15px;
+	top: 15px;
+}
+.noticeatag {
+	color: black;
 }
 </style>
 </head>
@@ -134,13 +170,13 @@
 						<td width="40%">정산예정</td>
 						<td width="10%" class="align-right preSettlement">0</td>
 						<td width="40%">판매중 상품</td>
-						<td width="10%" class="align-right">0</td>
+						<td width="10%" class="align-right" id="showProduct"></td>
 					</tr>
 					<tr>
 						<td>정산확정</td>
 						<td class="align-right confirmSettlement">0</td>
 						<td>판매가능 상품수</td>
-						<td class="align-right">0</td>
+						<td class="align-right" id="hideProduct"></td>
 					</tr>
 					<tr>
 						<td>출금가능</td>
@@ -154,25 +190,19 @@
 		
 		<div id="btm-status">
 			<div id="left-status" class="card">
+			
+			<div class="tableBox">
+			<a href="" class="atag align-right">전체보기</a>
 				<table>
 				<thead>
 					<tr>
-						<th colspan="2" width="50%">
-							판매현황
-							<a href="" class="atag align-right">전체보기</a>
-						</th>
-						<th colspan="2" width="50%"></th>
+						<th colspan="2">판매현황</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td width="35%">결제금액</td>
-						<td width="15%" class="align-right" id="paymentBill"></td>
-						<td colspan="2" rowspan="3">
-							<div style="width:100%; height: 100%;">
-								<canvas id="sales-chart" height="100%" style="display: block; width: 100%;" class="chartjs-render-monitor"></canvas>
-							</div>
-						</td>
+						<td width="90%">결제금액</td>
+						<td width="10%" class="align-right" id="paymentBill"></td>
 					</tr>
 					<tr>
 						<td>결제건</td>
@@ -185,6 +215,10 @@
 				</tbody>
 			</table>
 			</div>
+			<div class="graphBox">
+				<canvas id="barCanvas" height="150"></canvas>
+			</div>
+			</div>
 			
 			<div id="right-status" class="card">
 				<table>
@@ -196,27 +230,24 @@
 							</td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="notice">
+					<c:choose>
+					<c:when test="${ not empty nlist }">
+						<c:forEach var="n" items="${ nlist }">
+							<tr>
+								<td><a class="noticeatag" href="noticeDetail.bo?nno=${ n.noticeNo }">${ n.noticeTitle }</a></td>
+								<td align="right">${ n.writeDate }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
 						<tr>
-							<td>공지사항111</td>
-							<td align="right">2022-12-01</td>
+							<td colspan="2">
+								현재 작성된 공지사항이 없습니다.
+							</td>
 						</tr>
-						<tr>
-							<td>공지사항222</td>
-							<td align="right">2022-12-01</td>
-						</tr>
-						<tr>
-							<td>공지사항333</td>
-							<td align="right">2022-12-01</td>
-						</tr>
-						<tr>
-							<td>공지사항444</td>
-							<td align="right">2022-12-01</td>
-						</tr>
-						<tr>
-							<td>공지사항555</td>
-							<td align="right">2022-12-01</td>
-						</tr>
+					</c:otherwise>
+					</c:choose>
 					</tbody>
 				</table>
 			</div>
@@ -258,7 +289,16 @@ function selectSettlement() {
 }
 
 function selectProduct() {
-	
+	$.ajax({
+		url: "mainProduct.po",
+		success: function(data) {
+			$("#showProduct").text(data.showProduct);
+			$("#hideProduct").text(data.hideProduct);
+		},
+		error: function() {
+			console.log("상품 통신실패");
+		}
+	});
 }
 
 function selectPayment() {
@@ -275,16 +315,75 @@ function selectPayment() {
 	});
 }
 
+function barChart() {
+	
+	$.ajax({
+		url: "mainBarGraph.po",
+		success: function(data) {			
+			
+			
+			const ctx = document.getElementById('barCanvas').getContext('2d');
+			
+			const myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        labels: [data[0].orderDate+'월'
+			        	   , data[1].orderDate+'월'
+			        	   , data[2].orderDate+'월'
+			        	   , data[3].orderDate+'월' ],
+			        datasets: [{
+			        	type: 'bar',
+			            label: '당월 입점업체별 매출',
+			            data: [data[0].orderPrice
+				        	   , data[1].orderPrice
+				        	   , data[2].orderPrice
+				        	   , data[3].orderPrice],
+			            backgroundColor: [
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(13, 110, 253, 1)'
+			            ],
+			            borderColor: [
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(13, 110, 253, 1)'
+			            ],
+			            borderWidth: 1,
+			            order: 1
+			        }]			    	
+			    }, options: {
+			    	maintainAspectRatio: false,
+			    	aspectRatio: 1,
+			        scales: {
+			            y: {
+			                beginAtZero: true
+			        		}
+		        	}
+				}
+			});
+		},
+		error: function() {
+			console.log("에이작스 통신실패");
+		}
+	});
+}
+
 $(function() {
 	selectSettlement();
 	selectOrderSummary();
 	selectPayment();
+	barChart();
+	selectProduct();
 });
 
 setInterval(function() {
 	selectSettlement();
 	selectOrderSummary();
 	selectPayment();
+	barChart();
+	selectProduct();
 }, 60000);
 </script>
 

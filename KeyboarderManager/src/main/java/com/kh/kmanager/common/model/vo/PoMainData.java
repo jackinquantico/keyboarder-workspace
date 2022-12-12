@@ -23,4 +23,12 @@ public class PoMainData {
 	private int paymentCount;
 	private int refundCount;
 	
+	// 판매현황 그래프용 필드 : ORDER_PRICE, ORDER_DATE
+	private int orderPrice;
+	private String orderDate;
+	
+	// 상품 현황 : SHOW_PRODUCT, HIDE_PRODUCT
+	private int showProduct;
+	private int hideProduct;
+	
 }

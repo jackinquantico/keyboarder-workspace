@@ -61,4 +61,14 @@
 		 WHERE NOTICE_NO = #{noticeNo}
 	</delete>
 	
+	<select id="selectMainNoticeList" resultMap="noticeResultSet">
+		SELECT *
+		FROM (SELECT NOTICE_NO
+		           , NOTICE_TITLE
+		           , TO_CHAR(WRITE_DATE, 'YYYY-MM-DD') AS "WRITE_DATE"
+		        FROM NOTICE
+		       ORDER BY NOTICE_NO DESC)
+		<![CDATA[WHERE ROWNUM <= 5]]>
+	</select>
+	
 </mapper>
