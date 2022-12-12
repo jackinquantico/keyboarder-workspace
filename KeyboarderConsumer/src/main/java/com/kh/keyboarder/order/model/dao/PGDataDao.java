@@ -33,4 +33,12 @@ public class PGDataDao {
 		return sqlSession.update("pgdMapper.refundPayment", pgd);
 	}
 
+	public int insertKeyboarderCouponUse(SqlSessionTemplate sqlSession, PGData pgd) {
+		return sqlSession.insert("pgdMapper.insertKeyboarderCouponUse", pgd);
+	}
+
+	public int insertStoreCouponUse(SqlSessionTemplate sqlSession, PGData pgd) {
+		return sqlSession.insert("pgdMapper.insertStoreCouponUse", pgd);
+	}
+
 }

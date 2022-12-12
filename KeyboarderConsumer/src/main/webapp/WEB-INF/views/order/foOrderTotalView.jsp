@@ -89,7 +89,7 @@
 	                 <button type="submit" class="btn btn-primary" id="date-search" style="margin-top: 10px; width: 15%;" onclick="selectOrderDate">
 	                 	검색하기
 	                 </button>
-	                 &nbsp&nbsp
+	                 &nbsp;&nbsp;
 	                 <button type="button" class="btn btn-primary" id="resetButton" style="margin-top: 10px; width: 15%;" onclick="selectOrderDate">
 	                 	초기화
 	                 </button>
@@ -158,10 +158,10 @@
 			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 50px;" align="center">
 			                    <c:choose>
 				                	<c:when test="${ date.orderStatus eq 1 }">
-					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                    <button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
 					                </c:when>
 				                    <c:when test="${ date.orderStatus eq 2 }">
-					                	<button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                	<button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
 									</c:when>
 				                    <c:when test="${ date.orderStatus eq 3 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
@@ -240,10 +240,10 @@
 			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 50px;" align="center">
 			                    <c:choose>
 				                	<c:when test="${ ord.orderStatus eq 1 }">
-					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                    <button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
 					                </c:when>
 				                    <c:when test="${ ord.orderStatus eq 2 }">
-					                	<button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                	<button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
 									</c:when>
 				                    <c:when test="${ ord.orderStatus eq 3 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>

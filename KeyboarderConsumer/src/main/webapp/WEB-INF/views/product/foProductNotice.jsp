@@ -323,10 +323,7 @@
       	 
     	}
 		
-		function refundPay() {
-			
-			location.href = "refundPay.fo?orderNo=20180131-0000067&paymentNo=imp_872602395619";
-		}
+		
 	</script>
 
 </body>

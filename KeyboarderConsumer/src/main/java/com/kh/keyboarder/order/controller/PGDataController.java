@@ -47,7 +47,13 @@ public class PGDataController {
 		
 		// System.out.println(pgd);
 		
-		int result = service.insertOrder(pgd);
+		int result = 0;
+		
+		if (pgd.getCouponNo().charAt(0) == 'X') {
+			result = service.insertOrderNoCoupon(pgd);
+		} else {			
+			result = service.insertOrder(pgd);
+		}
 		
 		if (result > 0) {
 			session.setAttribute("alertMsg", "결제 완료");

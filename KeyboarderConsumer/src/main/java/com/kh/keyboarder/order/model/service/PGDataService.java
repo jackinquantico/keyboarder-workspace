@@ -43,6 +43,13 @@ public class PGDataService {
 	public int insertOrder(PGData pgd) {
 		return dao.insertOrder(sqlSession, pgd) 
 				* dao.insertPayment(sqlSession, pgd)
+				* dao.insertSettlement(sqlSession, pgd)
+				* (pgd.getCouponNo().charAt(0) == 'K'? dao.insertKeyboarderCouponUse(sqlSession, pgd) : dao.insertStoreCouponUse(sqlSession, pgd));
+	}
+	
+	public int insertOrderNoCoupon(PGData pgd) {
+		return dao.insertOrder(sqlSession, pgd) 
+				* dao.insertPayment(sqlSession, pgd)
 				* dao.insertSettlement(sqlSession, pgd);
 	}
 

@@ -70,4 +70,15 @@
 		AND ORDER_NO = #{orderNo}
 	</update>
 	
+	<insert id="insertKeyboarderCouponUse" parameterType="pgd">
+		INSERT INTO KEYBOARDER_USE
+		VALUES (#{couponNo}, #{orderNo})
+	</insert>
+	
+	<insert id="insertStoreCouponUse" parameterType="pgd">
+		INSERT INTO STORE_USE
+		VALUES (#{couponNo}, #{orderNo})
+	</insert>
+	
+	
 </mapper>

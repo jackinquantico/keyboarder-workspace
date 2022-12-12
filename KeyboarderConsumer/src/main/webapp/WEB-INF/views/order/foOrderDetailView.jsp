@@ -152,8 +152,22 @@
                     </c:choose>
                     <hr style="width: 80%; margin-left: 15px; background-color: black; height: 2px;">
                     <div style="width: 100%; height: 80px; font-size: 18px; line-height: 60px;" align="center">
-                        <button type="button" class="btn btn-primary" id="refund-btn">환불요청</button>
+	                    <c:choose>
+		                	<c:when test="${ orderDetailList.orderStatus eq 1 }">
+			                    <button type="button" class="btn btn-primary" id="refund-btn" onclick="refundPay('${ orderDetailList.orderNo }','${ orderDetailList.paymentNo }');">환불요청</button>
+			                </c:when>
+		                    <c:when test="${ orderDetailList.orderStatus eq 2 }">
+			                	<button type="button" class="btn btn-primary" id="refund-btn" onclick="refundPay('${ orderDetailList.orderNo }','${ orderDetailList.paymentNo }');">환불요청</button>
+							</c:when>
+		                    <c:when test="${ orderDetailList.orderStatus eq 3 }">
+			                    <button type="button" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+			                </c:when>
+		                    <c:when test="${ orderDetailList.orderStatus eq 4 }">
+			                    <button type="button" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+							</c:when>
+		               	</c:choose>
                     </div>
+                    
                 </div>
             </form>
         </div>
@@ -238,6 +252,14 @@
             </c:choose>
         </div>
     </div>    
+    
+<script>
+function refundPay(orderNo, paymentNo) {
+	
+	// console.log(paymentNo);
+	location.href = "refundPay.fo?orderNo=" + orderNo + "&paymentNo=" + paymentNo;
+}
+</script>
 
 </body>
 </html>
