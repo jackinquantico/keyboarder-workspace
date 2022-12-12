@@ -35,11 +35,11 @@ public class BoGraphController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date()); // 오늘 날짜
 		SimpleDateFormat sdf = new SimpleDateFormat("MM"); // 월만 뽑아서
-		// int thisMonth = Integer.parseInt(sdf.format(cal.getTime())); // 이번달
-		int thisMonth = 10;
+		int thisMonth = Integer.parseInt(sdf.format(cal.getTime())); // 당월
+		// int thisMonth = 10;
 		cal.add(Calendar.MONTH, -1);
-		// int nextMonth = Integer.parseInt(sdf.format(cal.getTime())); // 다음달
-		int lastMonth = 9;
+		int lastMonth = Integer.parseInt(sdf.format(cal.getTime())); // 전월
+		// int lastMonth = 9;
 		
 		// 당월, 전월 매출 실적 조회해서 보여주는 메소드
 		ArrayList<SalesGraph> tlist = graphService.selectSalesGraph(thisMonth);
@@ -66,11 +66,11 @@ public class BoGraphController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date()); // 오늘 날짜
 		SimpleDateFormat sdf = new SimpleDateFormat("MM"); // 월만 뽑아서
-		// int thisMonth = Integer.parseInt(sdf.format(cal.getTime())); // 이번달
-		int thisMonth = 10;
+		int thisMonth = Integer.parseInt(sdf.format(cal.getTime())); // 이번달
+		// int thisMonth = 10;
 		cal.add(Calendar.MONTH, -1);
-		// int nextMonth = Integer.parseInt(sdf.format(cal.getTime())); // 다음달
-		int lastMonth = 9;
+		int lastMonth = Integer.parseInt(sdf.format(cal.getTime())); // 다음달
+		// int lastMonth = 9;
 		
 		// 당월, 전월 매출 실적 조회해서 보여주는 메소드
 		ArrayList<SalesGraph> tlist = graphService.selectSalesGraph(thisMonth);
