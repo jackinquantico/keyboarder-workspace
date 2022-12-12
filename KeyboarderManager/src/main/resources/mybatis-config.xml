@@ -19,6 +19,7 @@
 		<typeAlias type="com.kh.kmanager.bo.settlement.model.vo.CWS_Settlement" alias="cws_settlement" />
 		<typeAlias type="com.kh.kmanager.bo.order.model.vo.Order" alias="order" />
 		<typeAlias type="com.kh.kmanager.po.coupon.model.vo.Coupon" alias="coupon"/>
+		<typeAlias type="com.kh.kmanager.common.model.vo.PoMainData" alias="mainData"/>
 	</typeAliases>
 	
 	<mappers>
@@ -33,6 +34,7 @@
 		<mapper resource="/mappers/boSettlement-mapper.xml" />
 		<mapper resource="/mappers/order-mapper.xml" />
 		<mapper resource="/mappers/poCoupon-mapper.xml"/>
+		<mapper resource="/mappers/mainPage-mapper.xml"/>
 	</mappers>
 	
 

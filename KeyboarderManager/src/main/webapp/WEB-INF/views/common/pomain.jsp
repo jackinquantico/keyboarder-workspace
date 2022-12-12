@@ -105,11 +105,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td class="confirmSettlement"></td>
+						<td id="newOrder"></td>
+						<td id="shipping"></td>
+						<td id="confirmed"></td>
+						<td id="sumOrder"></td>
+						<td id="sumSettle"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -167,7 +167,7 @@
 				<tbody>
 					<tr>
 						<td width="35%">결제금액</td>
-						<td width="15%" class="align-right">0</td>
+						<td width="15%" class="align-right" id="paymentBill"></td>
 						<td colspan="2" rowspan="3">
 							<div style="width:100%; height: 100%;">
 								<canvas id="sales-chart" height="100%" style="display: block; width: 100%;" class="chartjs-render-monitor"></canvas>
@@ -176,11 +176,11 @@
 					</tr>
 					<tr>
 						<td>결제건</td>
-						<td class="align-right">0</td>
+						<td class="align-right" id="paymentCount"></td>
 					</tr>
 					<tr>
-						<td>결제취소내역</td>
-						<td class="align-right">0</td>
+						<td>결제취소건</td>
+						<td class="align-right" id="refundCount"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -227,6 +227,22 @@
 </div> <!-- /.content-wrapper -->
 
 <script>
+function selectOrderSummary() {
+	$.ajax({
+		url: "mainOrder.po",
+		success: function(data) {
+			$("#newOrder").text(data.newOrder);
+			$("#shipping").text(data.shipping);
+			$("#confirmed").text(data.confirmed);
+			$("#sumOrder").text(data.sumOrder);
+			$("#sumSettle").text(data.sumSettle);
+		},
+		error: function() {
+			console.log("주문 통신실패");
+		}
+	});
+}
+
 function selectSettlement() {
 	$.ajax({
 		url: "mainSettlement.po",
@@ -236,16 +252,39 @@ function selectSettlement() {
 			$(".ableBalance").text(data.ableBalance);
 		},
 		error: function() {
-			console.log("ajax 통신실패");
+			console.log("정산 통신실패");
+		}
+	});
+}
+
+function selectProduct() {
+	
+}
+
+function selectPayment() {
+	$.ajax({
+		url: "mainPayment.po",
+		success: function(data) {
+			$("#paymentBill").text(data.paymentBill);
+			$("#paymentCount").text(data.paymentCount);
+			$("#refundCount").text(data.refundCount);
+		},
+		error: function() {
+			console.log("판매현황 통신실패");
 		}
 	});
 }
 
 $(function() {
 	selectSettlement();
+	selectOrderSummary();
+	selectPayment();
 });
+
 setInterval(function() {
 	selectSettlement();
+	selectOrderSummary();
+	selectPayment();
 }, 60000);
 </script>
 
