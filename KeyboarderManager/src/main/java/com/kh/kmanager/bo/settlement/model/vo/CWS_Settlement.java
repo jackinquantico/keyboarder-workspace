@@ -34,6 +34,9 @@ public class CWS_Settlement {
 	private String location;
 	private String productName;
 	private int price;
+	private int kcouponPrice;
+	private int ccouponPrice;
+	private int realPayPrice;
 	
 	public CWS_Settlement(String sellerName) {
 		super();

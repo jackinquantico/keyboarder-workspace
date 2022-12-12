@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,6 +32,7 @@ public class CWS_SettlementController {
 		
 		String[] sellerListValues = new String[sellerList.size()];
 
+		System.out.println(list);
 		
 		session.setAttribute("sellerList", sellerList);
 		
@@ -40,7 +42,7 @@ public class CWS_SettlementController {
 	}
 	
 	@RequestMapping("searchSettlement.bo")
-	public String searchBoSettlement(HttpSession session, String seller, String searchSettlementDate) {
+	public String searchBoSettlement(HttpSession session, Model model, String seller, String searchSettlementDate) {
 
 		String searchDate = searchSettlementDate + "-01";
 		
@@ -52,7 +54,7 @@ public class CWS_SettlementController {
 			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
 		};
 		
-		session.setAttribute("list", list);
+		model.addAttribute("list", list);
 		
 		return "bo/boSettlement/commitionSales";
 	}

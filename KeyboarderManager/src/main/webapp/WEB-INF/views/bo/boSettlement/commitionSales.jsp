@@ -207,7 +207,7 @@
 					<div style="font-size : 18px;">지불내역&nbsp;&nbsp;</div>
 					<div id="result_count" style="font-size : 18px;">총<div id="result_count_content" style="color:red;"> <c:out value="${ list.size() }"/></div> 건</div>
 					<div id="result_btn">
-						<button>엑셀 다운로드</button>
+						<!--<button>엑셀 다운로드</button>-->
 					</div>
 				</div>
 				<div id="table_div" style="overflow:scroll; width:1050px; height:500px; text-align:center;">
@@ -234,8 +234,8 @@
 									<td>${ sl1.sellerNo }</td>
 									<td><input type="hidden">${ sl1.sellerName }</td>
 									<td><input type="hidden">${ sl1.settleDate }</td>
-									<td><input type="hidden" class="modalsHidden" value="${ sl1.orderNo }">${ sl1.orderPrice }</td>
-									<td>쿠폰필요</td>
+									<td><input type="hidden" class="modalsHidden" value="${ sl1.orderNo }">${ sl1.realPayPrice }(${ sl1.orderPrice } - ${ sl1.ccouponPrice })</td>
+									<td>${ sl1.kcouponPrice }</td>
 									<td>
 										<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="modalCalls">
 										${ sl1.billPublishAmount }
