@@ -52,7 +52,7 @@ input[type=date] {
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
-	<form id="showExCouponList" action="Searchexpire.co" method="post">
+	<form id="showAbleCouponList" action="Searchexpire.co" method="post">
 	
 		<div class="content-wrapper">
 		<br>
@@ -158,7 +158,7 @@ input[type=date] {
 				$("#toDate").val("");
 			}
 			
-						/* 
+			/* 			
 			function showList(){
 				
 				$.ajax({
@@ -175,12 +175,12 @@ input[type=date] {
 						
 						for(var i =0; i<result.length; i++){
 							resultStr += "<tr>"
-										+"<td>" + result[i].couponNo +"</td>"
+										+"<td>" + result[i].couponNo   +"</td>"
 										+"<td>" + result[i].couponName +"</td>"
 										+"<td>" +result[i].couponPrice +"</td>"
 										+"<td>" +result[i].couponPrice +"</td>"
 										+"<td>" +result[i].productName +"</td>"
-										+"<td>" +result[i].couponStmt +"</td>"
+										+"<td>" +result[i].couponStmt  +"</td>"
 										+"<td>" +result[i].createDate  +"</td>"
 										+"<td>" +result[i].dueDate     +"</td>"
 										+"</tr>";
@@ -195,7 +195,7 @@ input[type=date] {
 					}
 				});
 					
-			} */
+			}
 			/*
 			function searchCoupon() {
 				
@@ -236,10 +236,10 @@ input[type=date] {
 				}
 			}
 			*/
-				$(function() {
+			/* 	$(function() {
 					showList();
 				});
-
+ */ */
 					
 			</script>
 			

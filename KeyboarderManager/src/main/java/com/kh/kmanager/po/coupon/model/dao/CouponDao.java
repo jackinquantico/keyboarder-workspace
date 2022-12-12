@@ -35,5 +35,19 @@ public class CouponDao {
 
 	
 
+	public ArrayList<Coupon> searchExCouponList(SqlSessionTemplate sqlSession, Coupon c) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("poCouponMapper.searchExCouponList",c);
+	}
+
+	
+	public ArrayList<Coupon> poCouponUsedList(SqlSessionTemplate sqlSession, Coupon c){
+		return (ArrayList)sqlSession.selectList("poCouponMapper.poCouponUsedList",c);
+		
+	}
+		
+	public ArrayList<Coupon> searchPoCouponUsed(SqlSessionTemplate sqlSession, Coupon c){
+		return (ArrayList)sqlSession.selectList("poCouponMapper.searchPoCouponUsed",c);
+	}
 
 }

@@ -169,7 +169,7 @@ input[type=date] {
 				$("#toDate").val("");
 			}
 			
-			/*			
+			/* 		
 			function showList(){
 				
 				$.ajax({
@@ -208,9 +208,9 @@ input[type=date] {
 					}
 				});
 			
-			}
+			} */
 			
-			function searchCoupon() {
+			/* function searchCoupon() {
 				
 					$.ajax({
 						url: "SearchAble.co",
@@ -246,13 +246,13 @@ input[type=date] {
 						}
 					});
 					
-				}
+				} */
 			
-			$(function() {
+		/* 	$(function() {
 				showList();
 			});
+			 */
 			
-			*/
 			</script>
 			
 	</body>

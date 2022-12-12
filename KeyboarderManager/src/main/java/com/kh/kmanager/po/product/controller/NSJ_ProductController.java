@@ -133,61 +133,7 @@ public class NSJ_ProductController {
 	}
 
 	
-	/**
-	 * po 상품 등록 메소드 -성진
-	 * 
-	 * @return
-	 */
-	/*
-	@RequestMapping("insert.pro")
-	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
-			ModelAndView mv) throws Exception {
-
-		List<MultipartFile> upfiles = request.getFiles("upfile"); // 파일name 담기
-		String path = session.getServletContext().getRealPath("/resources/uploadFiles/"); // 실제 경로 알아내기
-
-		System.out.println(upfiles);
-		int c = 0;
-		for (MultipartFile f : upfiles) {
-			if (!f.getOriginalFilename().equals("")) {
-				// System.out.println(f.getOriginalFilename());
-
-				String originFileName = f.getOriginalFilename();// 원본 파일 명
-				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-				String ext = originFileName.substring(originFileName.lastIndexOf("."));
-				String saveFileName = String.format("%s%s", currentTime, ext);// 수정파일명 만들기
-
-				try {
-					// 파일생성 하기
-					f.transferTo(new File(path, saveFileName));
-
-					if (c == 0) {
-						p.setAttachment1(saveFileName); // Product에 담아주기
-					} else if (c == 1) {
-						p.setAttachment2(saveFileName); // Product에 담아주기
-					} else if (c == 2) {
-						p.setAttachment3(saveFileName); // Product에 담아주기
-					} else {
-						p.setAttachment4(saveFileName); // Product에 담아주기
-					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				c++;
-			}
-		}
-		int result = productService.insertProduct(p); // Service단으로 보내기
-
-		if (result > 0) {
-			session.setAttribute("alertMsg", "사진이 업로드 되었습니다.");
-			mv.setViewName("redirect:/insertEnroll.pro");
-		} else {
-
-		}
-		return mv;
-	}*/
+	
 
 	@RequestMapping("insert.pro")
 	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
@@ -238,13 +184,7 @@ public class NSJ_ProductController {
 		return mv;
 	}
 
-	/*
-	@RequestMapping("detail.pro")
-	public String detailProduct() {
-		return "po/poProduct/poProductDetailview";
-	}
-	*/
-
+	
 	/**
 	 * po 상품 삭제 메소드-성진
 	 * 

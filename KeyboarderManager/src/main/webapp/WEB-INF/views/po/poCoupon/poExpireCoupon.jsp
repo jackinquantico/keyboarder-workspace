@@ -52,7 +52,7 @@ input[type=date] {
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
-	<form id="showExCouponList" action="Searchexpire.co" method="post">
+	
 	
 		<div class="content-wrapper">
 		<br>
@@ -124,9 +124,12 @@ input[type=date] {
 			               <th width="9%">발급일</th>
 			               <th width="9%" >만료일</th>
 			        	</tr>
+			        	
+			        	
 			       
 			    	</thead>
 			        <tbody id="couponList">
+			        
 			        <c:forEach var="c" items="${list}">
 			            <tr>
 			               <td width="10%">${c.couponNo}</td>
@@ -147,19 +150,16 @@ input[type=date] {
 			</div> <!-- /.content -->
 			</div> <!-- /.content-wrapper -->
 			
-			</form>
-			
-			
 			<script>
 			//기간검색
 			function reset() {
-				$("#select option:eq(2)").prop("selected", true);
+				$("#select option:eq(1)").prop("selected", true);
 				$("#fromDate").val("");
 				$("#toDate").val("");
 			}
 			
-						/* 
-			function showList(){
+						
+			/* function showList(){
 				
 				$.ajax({
 					
@@ -175,7 +175,7 @@ input[type=date] {
 						
 						for(var i =0; i<result.length; i++){
 							resultStr += "<tr>"
-										+"<td>" + result[i].couponNo +"</td>"
+										+"<td>" + result[i].couponNo+  +"</td>"
 										+"<td>" + result[i].couponName +"</td>"
 										+"<td>" +result[i].couponPrice +"</td>"
 										+"<td>" +result[i].couponPrice +"</td>"
@@ -195,7 +195,7 @@ input[type=date] {
 					}
 				});
 					
-			} */
+			}
 			/*
 			function searchCoupon() {
 				
@@ -240,7 +240,7 @@ input[type=date] {
 					showList();
 				});
 
-					
+					 */
 			</script>
 			
 			

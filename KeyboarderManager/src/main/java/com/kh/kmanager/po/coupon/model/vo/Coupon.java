@@ -22,7 +22,9 @@ public class Coupon {
 	private String fromDate; //기간검색용
 	private String toDate;  //기간검색용
 	private String productName;
-	
-	
+	private String orderDate;
+	private String orderNo;
+	private int orderPrice;
+	private int paymentBill;
 
 }

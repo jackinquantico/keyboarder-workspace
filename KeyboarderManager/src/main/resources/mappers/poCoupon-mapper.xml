@@ -12,6 +12,10 @@
 		<result column="COUPON_STMT" property="couponStmt" />
 		<result column="SELLER_NO" property="sellerNo" />
 		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PAYMENT_BILL" property="paymentBill" />
+		<result column="ORDER_PRICE" property="orderPrice" />
+		<result column="ORDER_NO" property="orderNo"/>
+		<result column="ORDER_DATE" property="orderDate" />
 	</resultMap>
 	
 	
@@ -26,7 +30,7 @@
 							 PRODUCT_NO,
 							SELLER_NO
 							)
-VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
+		VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
 		#{couponName},
 		#{couponPrice},
 		#{createDate},
@@ -82,5 +86,55 @@ VALUES('k'||SEQ_COUPON_STORE_NO.NEXTVAL,
 			
 	</select>
 	
+	<select id="searchExCouponList" parameterType="coupon" resultMap="poCouponResultMap">
+	     	SELECT COUPON_NO as "COUPON_NO",
+            COUPON_NAME as "COUPON_NAME",
+            COUPON_PRICE as "COUPON_PRICE",
+            P.PRODUCT_NAME as "PRODUCT_NAME",
+            COUPON_STMT as "COUPON_STMT",
+            TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",
+            TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
+            FROM COUPON_STORE S
+            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
+           	WHERE S.SELLER_NO=#{sellerNo}
+			AND CREATE_DATE BETWEEN #{fromDate} AND #{toDate}
+			AND COUPON_STMT='N'
+			ORDER BY COUPON_NO DESC
+			
+		</select>
+			<select id="poCouponUsedList" parameterType="coupon" resultMap="poCouponResultMap">
+	
+			SELECT O.ORDER_NO as "ORDER_NO",
+            COUPON_NAME as "COUPON_NAME",
+			P.PRODUCT_NAME as "PRODUCT_NAME",
+			TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as "ORDER_DATE",
+			ORDER_PRICE as "ORDER_PRICE",
+            COUPON_PRICE as "COUPON_PRICE",
+			T.PAYMENT_BILL as "PAYMENT_BILL"
+		    FROM COUPON_STORE S
+		    JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
+		    JOIN ORDERS  O ON (O.PRODUCT_NO =P. PRODUCT_NO)
+		    JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
+		    WHERE S.SELLER_NO=#{sellerNo}
+		    ORDER BY ORDER_NO DESC
+			</select>
+			
+			<select id="searchPoCouponUsed"  parameterType="coupon" resultMap="poCouponResultMap">
+			SELECT O.ORDER_NO as "ORDER_NO",
+            COUPON_NAME as "COUPON_NAME",
+			P.PRODUCT_NAME as "PRODUCT_NAME",
+			TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as "ORDER_DATE",
+			ORDER_PRICE as "ORDER_PRICE",
+            COUPON_PRICE as "COUPON_PRICE",
+			T.PAYMENT_BILL as "PAYMENT_BILL"
+		    FROM COUPON_STORE S
+		    JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
+		    JOIN ORDERS  O ON (O.PRODUCT_NO =P. PRODUCT_NO)
+		    JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
+		    WHERE S.SELLER_NO=#{sellerNo}
+		    AND ORDER_DATE BETWEEN #{fromDate} AND #{toDate}
+		    ORDER BY ORDER_NO DESC
+			</select>
+			
 	</mapper>
 	

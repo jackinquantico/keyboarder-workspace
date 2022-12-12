@@ -80,7 +80,7 @@ public class NSJ_CouponController {
 	
 
 	@RequestMapping("SearchAble.co")
-	public String ableCouponSearch(Coupon c, String createDate, HttpSession session, Model model) {
+	public String ableCouponSearch(Coupon c, HttpSession session, Model model) {
 		
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 		c.setSellerNo(sellerNo);
@@ -101,11 +101,88 @@ public class NSJ_CouponController {
 	 * @return
 	 */
 	@RequestMapping("ableCoupon.po")
-	public String ableCouponList() {
-		
-		return "po/poCoupon/poCouponList";
+	public String ableCouponList(Model model,Coupon c,HttpSession session) {
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
+		c.setCouponStmt("Y");
+		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "po/poCoupon/poAbleCouponList";
 	}
 	
+	/**
+	 * 사용만료 쿠폰 전체 조회 페이지
+	 * @return
+	 */
+	@RequestMapping("expireCoupon.po")
+	public String expireCouponList(Model model,Coupon c,HttpSession session) {
+
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
+		c.setCouponStmt("N");
+		System.out.println(c);
+		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
+		model.addAttribute("list", list);
+		return "po/poCoupon/poShowExpiredCouponList";
+	}
+	
+	
+
+	/**
+	 * po 사용만료쿠폰 기간조회 -성진
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping("Searchexpire.co")
+	public String searchExCouponList(Coupon c, HttpSession session, Model model){
+	
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
+		ArrayList<Coupon> list = couponService.searchExCouponList(c);
+		System.out.println(list);
+		if(list!=null) {
+			model.addAttribute("list", list);
+		}
+		return "po/poCoupon/poExpireCoupon";
+	
+	}
+
+	/**
+	 * po 쿠폰 사용내역 검색 -성진
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping("usedCList.po")
+	public String poCouponUsedList(Model model,Coupon c,HttpSession session) {
 		
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
+		ArrayList<Coupon> list = couponService.poCouponUsedList(c);
+		model.addAttribute("list", list);
+		
+		return "po/poCoupon/CouponsuedPo";
+		
+		}
+	/**
+	 * po 쿠폰 사용내역 전체조회 -성진
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping("searchCUsed.po")
+	public String searchPoCouponUsed(Model model,Coupon c, HttpSession session) {
+		
+		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		c.setSellerNo(sellerNo);
+		
+		ArrayList<Coupon> list = couponService.searchPoCouponUsed(c);
+		model.addAttribute("list", list);
+		
+		return "po/poCoupon/CouponsuedPoSearch";
+		
+		}
 	}
 
