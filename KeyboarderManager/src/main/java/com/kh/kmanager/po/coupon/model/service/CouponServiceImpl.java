@@ -60,5 +60,15 @@ public class CouponServiceImpl implements CouponService{
 		return couponDao.searchPoCouponUsed(sqlSession,c);
 	
 	}
+
+	@Override
+	public ArrayList<Coupon> showCouponListPo(Coupon c) {
+		return couponDao.showCouponListPo(sqlSession,c);
+	}
+
+	@Override
+	public ArrayList<Coupon> CouponDetailSearch(Coupon c) {
+		return couponDao.CouponDetailSearch(sqlSession,c);
+	}
 	
 }

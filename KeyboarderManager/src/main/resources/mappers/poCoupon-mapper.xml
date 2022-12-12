@@ -136,5 +136,47 @@
 		    ORDER BY ORDER_NO DESC
 			</select>
 			
+			<select id="showCouponListPo" parameterType="coupon" resultMap="poCouponResultMap">
+		
+			SELECT COUPON_NO as "COUPON_NO",
+            COUPON_NAME as "COUPON_NAME",
+            COUPON_PRICE as "COUPON_PRICE",
+            P.PRODUCT_NAME as "PRODUCT_NAME",
+            COUPON_STMT as "COUPON_STMT",
+            TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",
+            TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
+            FROM COUPON_STORE S
+            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
+           	WHERE S.SELLER_NO=#{sellerNo}
+           
+           </select>
+			<select id="CouponDetailSearch" parameterType="coupon" resultMap="poCouponResultMap">
+		
+			SELECT COUPON_NO as "COUPON_NO",
+            COUPON_NAME as "COUPON_NAME",
+            COUPON_PRICE as "COUPON_PRICE",
+            P.PRODUCT_NAME as "PRODUCT_NAME",
+            COUPON_STMT as "COUPON_STMT",
+            TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",
+            TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
+            FROM COUPON_STORE S
+            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
+           	WHERE S.SELLER_NO=#{sellerNo}
+           	 <choose>
+			<when test='couponStmt == "N"'>
+				AND COUPON_STMT = 'N'
+				<if test='fromDate != null'>
+					AND CREATE_DATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+			</when>
+			<when test='couponStmt == "Y"'>
+				AND COUPON_STMT = 'Y'
+				<if test='fromDate != null'>
+					AND CREATE_DATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+			</when>
+		</choose>
+			ORDER BY COUPON_NO DESC
+			</select>
 	</mapper>
 	

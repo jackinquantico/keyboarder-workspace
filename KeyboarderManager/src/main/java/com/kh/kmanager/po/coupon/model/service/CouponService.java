@@ -29,6 +29,12 @@ public interface CouponService {
 	//사용한 쿠폰 기간 조회하는 메소드
 	ArrayList<Coupon> searchPoCouponUsed(Coupon c);
 
+	//전체  쿠폰내역을 가져오는 메소드
+	ArrayList<Coupon> showCouponListPo(Coupon c);
+	
+	//기간, 상태별로 조회하는 메소드
+	ArrayList<Coupon> CouponDetailSearch(Coupon c);
+
 	
 	
 	

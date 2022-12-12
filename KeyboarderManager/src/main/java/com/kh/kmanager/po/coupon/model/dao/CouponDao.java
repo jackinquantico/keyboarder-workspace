@@ -50,4 +50,14 @@ public class CouponDao {
 		return (ArrayList)sqlSession.selectList("poCouponMapper.searchPoCouponUsed",c);
 	}
 
+
+	public ArrayList<Coupon> showCouponListPo(SqlSessionTemplate sqlSession, Coupon c) {
+		return(ArrayList)sqlSession.selectList("poCouponMapper.showCouponListPo",c);
+	}
+
+
+	public ArrayList<Coupon> CouponDetailSearch(SqlSessionTemplate sqlSession, Coupon c) {
+		return(ArrayList)sqlSession.selectList("poCouponMapper.CouponDetailSearch",c);
+	}
+
 }

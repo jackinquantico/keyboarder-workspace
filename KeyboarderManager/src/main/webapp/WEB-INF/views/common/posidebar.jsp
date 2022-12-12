@@ -117,7 +117,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="CouponList.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>쿠폰 조회/수정</p>
                 </a>

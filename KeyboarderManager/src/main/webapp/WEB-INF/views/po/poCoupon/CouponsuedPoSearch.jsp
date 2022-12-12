@@ -56,7 +56,7 @@ input[type=date] {
 
 <jsp:include page="../../common/posidebar.jsp" />
 	
-<form id=" poCouponUsedList" action="searchCUsed.po" method="post">
+
 
 <div class="content-wrapper">
 <br>
@@ -133,7 +133,7 @@ input[type=date] {
 
 </div> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
-</form>
+
 <script>
 function reset() {
 	$("#select option:eq(0)").prop("selected", true);

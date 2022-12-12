@@ -52,7 +52,7 @@ input[type=date] {
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
-	<form id="showExCouponList" action="Searchexpire.co" method="post">
+	<form id="showCouponListPo" action="DetailCoupon.po" method="post">
 	
 		<div class="content-wrapper">
 		<br>
@@ -83,10 +83,10 @@ input[type=date] {
 	        <td>
 	   			
 	   		
-	        	<select class="form-control" id="select">
+	        	<select class="form-control"  name="couponStmt">
 	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="Y" name="couponStmt">사용가능</option>
-	            	<option value="N" name="couponStmt">만료</option>
+	            	<option value="Y">사용가능</option>
+	            	<option value="N" >만료</option>
 	        	</select>
 	        </td>
 	    </tr>

@@ -184,5 +184,27 @@ public class NSJ_CouponController {
 		return "po/poCoupon/CouponsuedPoSearch";
 		
 		}
+		
+		@RequestMapping("CouponList.po")
+		public String showCouponListPo(Model model,Coupon c, HttpSession session) {
+			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+			c.setSellerNo(sellerNo);
+			ArrayList<Coupon> list = couponService.showCouponListPo(c);
+			model.addAttribute("list", list);
+			return "po/poCoupon/poshowAllCouponList";
+			
+		}
+		
+		@RequestMapping("DetailCoupon.po")
+		public String CouponDetailSearch(Model model,Coupon c, HttpSession session) {
+			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+			c.setSellerNo(sellerNo);
+			
+			
+		System.out.println(c);
+			ArrayList<Coupon> list = couponService.CouponDetailSearch(c);
+			model.addAttribute("list", list);
+			return "po/poCoupon/poDetailCoupon";
 	}
+}
 
