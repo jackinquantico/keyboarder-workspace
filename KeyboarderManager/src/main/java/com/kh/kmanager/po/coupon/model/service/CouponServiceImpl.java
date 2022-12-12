@@ -70,5 +70,16 @@ public class CouponServiceImpl implements CouponService{
 	public ArrayList<Coupon> CouponDetailSearch(Coupon c) {
 		return couponDao.CouponDetailSearch(sqlSession,c);
 	}
+
+	@Override
+	public int updateCouponPo(Coupon c) {
+		return couponDao.updateCouponPo(sqlSession,c);
+	}
+
+	@Override
+	public Coupon detailCoupon(String couponNo) {
+	
+		return couponDao.detailCoupon(sqlSession,couponNo);
+	}
 	
 }

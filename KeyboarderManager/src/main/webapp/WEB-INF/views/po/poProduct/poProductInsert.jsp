@@ -122,7 +122,7 @@ height:150px;
 											alt="..." /> <label for="attachNo">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											사진 선택하기 </label> <input type="file" id="file1" name="upfile"
-											onchange="addImg();" />
+											onchange="addImg();"/>
 									</div>
 								</div>
 
@@ -135,7 +135,7 @@ height:150px;
 											src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg"
 											alt="..." /> <label for="attachNo">
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											사진 선택하기 </label> <input type="file"  id="file2"
+											사진 선택하기 </label><input type="file" id="file2"
 											name="upfile" />
 									</div>
 								</div>

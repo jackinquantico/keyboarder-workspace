@@ -52,7 +52,7 @@ input[type=date] {
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
-	<form id="showCouponListPo" action="DetailCoupon.po" method="post">
+	<form id="showCouponListPo" action="SearchCoupon.po" method="post">
 	
 		<div class="content-wrapper">
 		<br>
@@ -126,10 +126,11 @@ input[type=date] {
 			        	</tr>
 			       
 			    	</thead>
+			    	
 			        <tbody id="couponList">
 			        <c:forEach var="c" items="${list}">
 			            <tr>
-			               <td width="10%">${c.couponNo}</td>
+			               <td width="10%"onclick="location.href='detailCoupon.po?couponNo=${c.couponNo}'">${c.couponNo}</td>
 			               <td width="25%">${c.couponName}</td>
 			               <td width="10%">${c.couponPrice}</td>
 			               <td width="5%" >${c.couponPrice}</td>
@@ -157,7 +158,16 @@ input[type=date] {
 				$("#fromDate").val("");
 				$("#toDate").val("");
 			}
-			
+			   $(function() {
+		              
+		              $("#tb>tbody>tr").on("click", function() {
+		     
+		                 var couponNo = $(this).children().eq(0).text();
+		     																																																																																														
+		                 location.href = "kmanager/DetailCoupon.po?couponNo=" + couPonNo;
+		                 
+		              });           
+		           });
 						/* 
 			function showList(){
 				

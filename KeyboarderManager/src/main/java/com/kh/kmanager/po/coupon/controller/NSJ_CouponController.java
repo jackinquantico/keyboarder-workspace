@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.kmanager.bo.coupon.model.vo.BoCoupon;
@@ -186,7 +187,7 @@ public class NSJ_CouponController {
 		}
 		
 		@RequestMapping("CouponList.po")
-		public String showCouponListPo(Model model,Coupon c, HttpSession session) {
+		public String showCouponListPo(Model model, Coupon c, HttpSession session) {
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 			c.setSellerNo(sellerNo);
 			ArrayList<Coupon> list = couponService.showCouponListPo(c);
@@ -195,16 +196,58 @@ public class NSJ_CouponController {
 			
 		}
 		
-		@RequestMapping("DetailCoupon.po")
+		@RequestMapping("SearchCoupon.po")
 		public String CouponDetailSearch(Model model,Coupon c, HttpSession session) {
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 			c.setSellerNo(sellerNo);
-			
-			
-		System.out.println(c);
 			ArrayList<Coupon> list = couponService.CouponDetailSearch(c);
 			model.addAttribute("list", list);
-			return "po/poCoupon/poDetailCoupon";
+			return "po/poCoupon/poSearchCouponAll";
+			
 	}
+		/**
+		 * po 쿠폰 수정하는 메소드 -성진
+		 * 
+		 * @return
+		 */
+		@RequestMapping("updateCoupon.po")
+		public String updateCouponPo( Coupon c, HttpSession session) {
+			
+			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+			c.setSellerNo(sellerNo);
+			System.out.println(c);
+			int result = couponService.updateCouponPo(c);	
+			System.out.println(result);
+			if (result > 0) {
+				session.setAttribute("alertMsg", "쿠폰 수정에 성공했습니다.");
+			} else {
+				session.setAttribute("alertMsg", "쿠폰 수정에 실패했습니다.");
+			}
+		
+			return "po/poCoupon/poshowAllCouponList";
+		}
+		
+
+		/**
+		 * po 쿠폰의 상세페이지 이동
+		 * 
+		 * @return
+		 */
+		
+		@RequestMapping("detailCoupon.po")
+		public ModelAndView detailCoupon(String couponNo, ModelAndView mv) {
+			
+			System.out.println(couponNo);
+			
+			Coupon c = couponService.detailCoupon(couponNo);
+			
+			System.out.println(c);
+
+			mv.addObject("c", c).setViewName("po/poCoupon/PoCoupondetail");
+
+			return mv;
+		
+			
+		}
 }
 

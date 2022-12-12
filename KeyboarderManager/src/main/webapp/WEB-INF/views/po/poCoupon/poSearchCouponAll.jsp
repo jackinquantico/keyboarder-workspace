@@ -129,7 +129,7 @@ input[type=date] {
 			        <tbody id="couponList">
 			        <c:forEach var="c" items="${list}">
 			            <tr>
-			               <td width="10%">${c.couponNo}</td>
+			               <td width="10%" >${c.couponNo}</td>
 			               <td width="25%">${c.couponName}</td>
 			               <td width="10%">${c.couponPrice}</td>
 			               <td width="5%" >${c.couponPrice}</td>
@@ -150,6 +150,8 @@ input[type=date] {
 			
 			
 			
+			
+			
 			<script>
 			//기간검색
 			function reset() {
@@ -158,91 +160,21 @@ input[type=date] {
 				$("#toDate").val("");
 			}
 			
-						/* 
-			function showList(){
-				
-				$.ajax({
-					
-					url:"able.co",
-					
-					data:{
-						
-						sellerNo :"${loginUser.sellerNo }"
-					},
-				
-					success : function(result) {
-						var resultStr = "";
-						
-						for(var i =0; i<result.length; i++){
-							resultStr += "<tr>"
-										+"<td>" + result[i].couponNo +"</td>"
-										+"<td>" + result[i].couponName +"</td>"
-										+"<td>" +result[i].couponPrice +"</td>"
-										+"<td>" +result[i].couponPrice +"</td>"
-										+"<td>" +result[i].productName +"</td>"
-										+"<td>" +result[i].couponStmt +"</td>"
-										+"<td>" +result[i].createDate  +"</td>"
-										+"<td>" +result[i].dueDate     +"</td>"
-										+"</tr>";
-										
-						}
-						
-						$("#couponList").html(resultStr);				
-					},
-					
-					error: function() {
-						console.log("loadCoupon 실패");
-					}
-				});
-					
-			} */
-			/*
-			function searchCoupon() {
-				
-				if ($("#select option:selected").val() == 1) {
-					
-					$.ajax({
-						url: "SearchAble.co",
-						data: {
-							sellerNo :"${loginUser.sellerNo }",
-							fromDate: $("#fromDate").val(),
-							toDate: $("#toDate").val()
-						},
-						success: function(result) {
-							
-							var resultStr = "";
-
-							for(var i =0; i<result.length; i++){
-								resultStr += "<tr>"
-											+"<td>" + result[i].couponNo+  +"</td>"
-											+"<td>" + result[i].couponName +"</td>"
-											+"<td>" +result[i].couponPrice +"</td>"
-											+"<td>" +result[i].couponPrice +"</td>"
-											+"<td>" +result[i].productName +"</td>"
-											+"<td>" +result[i].couponStmt +"</td>"
-											+"<td>" +result[i].createDate  +"</td>"
-											+"<td>" +result[i].dueDate     +"</td>"
-											+"</tr>";
-											
-							}
-							
-						
-							$("#couponList").html(resultStr);
-						},
-						error: function() {
-							console.log("ableCoupon 실패");
-						}
-					});
-				}
-			}
-			*/
-				/* $(function() {
-					showList();
-				});
-
-					 */
-			</script>
 			
+			
+
+	           $(function() {
+	              
+	              $("#tb>tbody>tr").on("click", function() {
+	     
+	                 var couponNo = $(this).children().eq(1).text();
+	     																																																																																														
+	                 location.href = "/kmanager/DetailCoupon.po?couponNo=" + couPonNo;
+	                 
+	              });           
+	           });
+			
+			</script>
 			
 			</body>
 	</html>

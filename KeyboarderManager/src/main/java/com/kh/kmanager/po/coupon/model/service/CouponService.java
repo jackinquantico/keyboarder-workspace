@@ -35,6 +35,12 @@ public interface CouponService {
 	//기간, 상태별로 조회하는 메소드
 	ArrayList<Coupon> CouponDetailSearch(Coupon c);
 
+	//쿠폰을 수정하는 메소드
+	int updateCouponPo(Coupon c);
+
+	//쿠폰 상세조회
+	Coupon detailCoupon(String couponNo);
+
 	
 	
 	

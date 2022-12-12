@@ -150,8 +150,9 @@
            	WHERE S.SELLER_NO=#{sellerNo}
            
            </select>
+           
+           
 			<select id="CouponDetailSearch" parameterType="coupon" resultMap="poCouponResultMap">
-		
 			SELECT COUPON_NO as "COUPON_NO",
             COUPON_NAME as "COUPON_NAME",
             COUPON_PRICE as "COUPON_PRICE",
@@ -178,5 +179,31 @@
 		</choose>
 			ORDER BY COUPON_NO DESC
 			</select>
+			
+			
+		<select id="detailCoupon" parameterType="coupon" resultMap="poCouponResultMap">
+		   SELECT
+		   COUPON_NO,
+		   COUPON_NAME,
+		   COUPON_PRICE,
+		   CREATE_DATE,
+		   DUE_DATE
+		   FROM COUPON_STORE
+		   WHERE COUPON_NO=#{couponNo}
+			
+		</select>
+			
+			
+			
+	
+	<update id="updateCouponPo" parameterType="coupon">
+	
+		UPDATE COUPON_STORE
+		SET COUPON_NAME = #{couponName}
+  		, COUPON_PRICE = #{couponPrice}
+		WHERE COUPON_NO = #{couponNo}
+		AND COUPON_STMT='Y'
+	
+			</update>
 	</mapper>
 	

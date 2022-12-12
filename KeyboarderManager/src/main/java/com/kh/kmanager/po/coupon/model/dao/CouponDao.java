@@ -60,4 +60,14 @@ public class CouponDao {
 		return(ArrayList)sqlSession.selectList("poCouponMapper.CouponDetailSearch",c);
 	}
 
+
+	public int updateCouponPo(SqlSessionTemplate sqlSession, Coupon c) {
+		return sqlSession.update("poCouponMapper.updateCouponPo",c);
+	}
+
+
+	public Coupon detailCoupon(SqlSessionTemplate sqlSession, String couponNo) {
+		 return sqlSession.selectOne("poCouponMapper.detailCoupon",couponNo);
+	}
+
 }
