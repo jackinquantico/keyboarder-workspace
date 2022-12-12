@@ -183,7 +183,7 @@
                 </div>
                 <div class="order-product-img" style="float: left; width: 30%; height: 200px;">
                     <div style="width: 84%; height: 160px; margin-left: 10px; margin-top: 22px; border-radius: 30px;">
-                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTlfMjEg%2FMDAxNjU4MTY2ODUyMDk2.rYbdL6xRUcVwKXgw3ixjv1y9DpL715DNDoH7iZC4_Wog.FsdShZZI_8nZ8Nz3y50G7fCp4PzSFzzpIa1NRRZhsu4g.JPEG.khj221100%2FIMG_1269.JPG&type=sc960_832" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+                        <img src="${ orderDetailList.productAttachment }" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
                 	</div>
                 </div>
                 <div class="order-product-name-price" style="float: left; width: 40%; height: 200px;">
