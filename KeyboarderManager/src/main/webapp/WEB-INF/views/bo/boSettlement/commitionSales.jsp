@@ -120,8 +120,32 @@
 		#result_count, #result_count_content {
 			display : inline;
 		}
-				
+		
+        th {
+            height : 30px;
+            background-color: rgb(244, 245, 249);
+        }
+
+        .provider {
+            background-color: rgb(255, 225, 225);
+            color : rgb(185, 88, 86);
+        }
+
+        .supplier {
+            background-color: rgb(242, 245, 255);
+            color : rgb(25, 88, 195);
+        }
+        
+        table a {
+        	text-decoration : none;
+        	color : black;
+        }				
 	</style>
+	    <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -204,49 +228,134 @@
 							<td width="%">매출액</td>
 						</thead>
 						<tbody>
+							<% int i = 0; %>
 							<c:forEach var="sl1" items="${ list }" varStatus="status" >
 								<tr id="settlement${status.index}">
 									<td>${ sl1.sellerNo }</td>
-									<td>${ sl1.sellerName }</td>
-									<td>${ sl1.settleDate }</td>
-									<td>${ sl1.orderPrice }</td>
+									<td><input type="hidden">${ sl1.sellerName }</td>
+									<td><input type="hidden">${ sl1.settleDate }</td>
+									<td><input type="hidden" class="modalsHidden" value="${ sl1.orderNo }">${ sl1.orderPrice }</td>
 									<td>쿠폰필요</td>
 									<td>
-										<a data-toggle="modal" data-target="#modal${status.index}" style="cursor:pointer;">
+										<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="modalCalls">
 										${ sl1.billPublishAmount }
 										</a>
 									</td>
 									<td>${ sl1.sales }</td>
 								</tr>
-								<!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->
-							    <div class="modal fade" id="modal${status.index}">
-							        <div class="modal-dialog modal-sm">
-							            <div class="modal-content">
-							                <!-- Modal Header -->
-							                <div class="modal-header">
-							                    <h4 class="modal-title">KEYBOAR-DER</h4>
-							                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-							                </div>
-							        
-							                <form action="login.me" method="post">
-							                    <!-- Modal body -->
-							                    <div class="modal-body">
-
-							                    </div>
-							                    <!-- Modal footer -->
-							                    <div class="modal-footer" id="infofind" style="font-size :13px;">
-
-							                    </div>
-							                </form>
-							            </div>
-							            </div>
-							        </div>
+								<% i++; %>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</div>
+				    <!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->
+				    <div class="modal fade" id="myModal">
+				        <div class="modal-dialog modal-xl">
+				            <div class="modal-content">                                 
+				                    <!-- Modal body -->
+				                    <div class="modal-body">
+				                        <table border="1" style="width:1000px; text-align: center;">
+				                            <tr>
+				                                <th colspan="5" style="height:35px; width: 500px;">전자세금 계산서</th>
+				                                <th style="width:100px;">승인번호</th>
+				                                <td colspan="4" style="width: 400px;" id="mResultOrderNo"></td>
+				                            </tr>
+				                            <tr>
+				                                <th rowspan="5" class="provider" style="width: 10px; writing-mode:vertical-lr; background-color:rgb(255, 183, 183); color: rgb(226, 68, 72);">공급자</th>
+				                                <th class="provider" style="width : 100px;">등록번호</th>
+				                                <td style="width : 145px;">851-87-00622</td>
+				                                <th class="provider" style="width : 100px;">종사업장<br>번호</th>
+				                                <td style="width : 145px;">서울 강남 <br> 제2014-01호 </td>
+				                                <th rowspan="5" class="supplier" style="width: 10px; writing-mode:vertical-lr; background-color:rgb(194, 217, 242); color: rgb(51, 113, 207);">공급받는자</th>
+				                                <th class="supplier" style="width : 100px;">등록번호</th>
+				                                <td style="width : 145px;" id="mResultCorpNo"></td>
+				                                <th class="supplier" style="width : 100px;">종사업장번호</th>
+				                                <td style="width : 145px;"></td>
+				                            </tr>
+				                            <tr>
+				                                <th class="provider">상호<br>(법인명)</th>
+				                                <td>(주)키보더</td>
+				                                <th class="provider">성명</th>
+				                                <td>서채영</td>
+				                                <th class="supplier">상호<br>(법인명)</th>
+				                                <td id="mResultSellerName"></td>
+				                                <th class="supplier">성명</th>
+				                                <td id="mResultRepName"></td>
+				                            </tr>
+				                            <tr>
+				                                <th class="provider">사업장<br>주소</th>
+				                                <td colspan="3">서울특별시 영등포구 선유동2로 57 이레빌딩</td>
+				                                <th class="supplier">사업장<br>주소</th>
+				                                <td colspan="3" id="mResultLocation"></td>
+				                            </tr>
+				                            <tr>
+				                                <th class="provider">업태</th>
+				                                <td>도소매</td>
+				                                <th class="provider">종목</th>
+				                                <td>컴퓨터 주변기기</td>
+				                                <th class="supplier">업태</th>
+				                                <td>제조업</td>
+				                                <th class="supplier">종목</th>
+				                                <td>컴퓨터 주변기기</td>                            
+				                            </tr>
+				                            <tr>
+				                                <th class="provider">이메일</th>
+				                                <td colspan="3">keyboarderofficial@gmail.com</td>
+				                                <th class="supplier">이메일</th>
+				                                <td colspan="3" id="mResultSellerEmail"></td>
+				                            </tr>
+				                            <tr style="height : 30px;">
+				                                <th colspan="2">작성일자</th>
+				                                <th colspan="2">공급가액</th>
+				                                <th colspan="2">세액</th>
+				                                <th>수정사유</th>
+				                                <th colspan="3">비고</th>
+				                            </tr>
+				                            <tr style="height : 30px;">
+				                                <td colspan="2" id="modalToday"></td>
+				                                <td colspan="2" id="mResultSupplyValue"></td>
+				                                <td colspan="2" id="mResultTaxAmount"></td>
+				                                <td></td>
+				                                <td colspan="3"></td>
+				                            </tr>
+				                            <tr>
+				                                <th colspan="2">정산일</th>				                               
+				                                <th colspan="3">품목</th>				                              
+				                                <th>수량</th>
+				                                <th>단가</th>
+				                                <th>공급가액</th>
+				                                <th>세액</th>
+				                                <th>비고</th>
+				                            </tr>
+				                            <tr style="height : 30px;">
+				                                <td colspan="2" id="mResultSettleDate"></td>				                                
+				                                <td colspan="3" id="mResultProductName"></td>        				                              
+				                                <td>1</td>
+				                                <td id="mResultPrice"></td>
+				                                <td id="mResultSupplyValue2"></td>
+				                                <td id="mResultTaxAmount2"></td>
+				                                <td></td>
+				                            </tr>
+				                            <tr style="height : 30px;">
+				                                <th colspan="2">합계금액</th>
+				                                <th colspan="2">현금</th>
+				                                <th>수표</th>
+				                                <th>어음</th>
+				                                <th>왜상미수금</th>
+				                                <th colspan="3" rowspan="2">이 금액을 (청구)함</th>                       
+				                            </tr>
+				                            <tr style="height : 30px;">
+				                                <td colspan="2" id="mResultBPA"></td>
+				                                <td colspan="2" id="mResultBPA2"></td>
+				                                <td></td>
+				                                <td></td>
+				                                <td></td>
+				                            </tr>
+				                        </table>
+				                        <div style="text-align:center; margin-top:5px; font-weight : bold;">본 인쇄물은 키보더(www.keyboarder.com)에서 발급 또는 전송 입력된 전자 (세금) 계산서 입니다.</div>
+				                    </div>
+				            </div>
+				            </div>
+				        </div>
 	
 	</div> <!-- /.content-wrapper -->
 
@@ -254,16 +363,63 @@
 	$(function() {
 		
 		
-		
+		// 지정한 날짜를 알맞은 형식으로 보내도록
 		var date = new Date();
-		
+	
 		String(date);
 		
 		var year = date.getFullYear();
 		var month = date.getMonth() + 1;
+		var day = date.getDate();
+		
+		$("#modalToday").text(year+"-"+month+"-"+day); // 모달 작성일(오늘) 부분
 		
 		document.getElementById("settleDate").value = year + "-" + month;
 
+
+		var clickEle = $(".modalCalls"); // a 태그를 클래스화 해서 전부 가져옴(화면상 갯수만큼)
+		clickEle.on("click",function() { 
+			var indexNo = clickEle.index(this); // indexNo을 클릭한 a 태그의 번호로 부여 (n 번째 태그인지)
+			var modalOrderNo = $(".modalsHidden").eq(indexNo).val(); // input 태그를 0부터 증감하여 부여했으므로 n(=indexNo)번째 hidden input의  value를 modalOrderNo으로 변수 선언하겠다.
+			
+			// 모달에 값넣어주기
+			$("#myModal").on("show.bs.modal", function (e) {
+						
+				$.ajax({
+					url : "sellerBillModal.bo",
+					async : false, // 동기식으로 바꾸겠다(비동기식은 모달먼저 띄우고 데이터를 받아오는데, 동기식으로 하면 데이터를 받아오는 것에 맞춰서 모달을 띄움)
+					data : {modalOrderNo : modalOrderNo},
+					success : function(result) {
+						
+						$("#mResultOrderNo").text(result.orderNo);
+						$("#mResultCorpNo").text(result.corpNo);
+						$("#mResultSellerName").text(result.sellerName);
+						$("#mResultRepName").text(result.repName);
+						$("#mResultLocation").text(result.location);
+						$("#mResultSellerEmail").text(result.sellerEmail);
+						$("#mResultSupplyValue").text(result.supplyValue);
+						$("#mResultTaxAmount").text(result.taxAmount);
+						$("#mResultSettleDate").text(result.settleDate);
+						$("#mResultProductName").text(result.productName);
+						$("#mResultPrice").text(result.price);
+						$("#mResultSupplyValue2").text(result.supplyValue);
+						$("#mResultTaxAmount2").text(result.taxAmount);
+						$("#mResultBPA").text(result.billPublishAmount);
+						$("#mResultBPA2").text(result.billPublishAmount);
+						
+					}, error : function() {
+						console.log("모달 호출용 ajax 통신 실패")
+					}
+				});
+				
+			});
+		});
+		
+		
+
+		
+		
+		
 		// 검색 결과 입점사명, 조회 기간 기본값으로 설정
 		/*
 		var searchSellerName = document.getElementById("searchSellerName").value;
@@ -299,6 +455,9 @@
 			
 			location.href="commitionSales.bo";
 		});
+		
+		
+		
 	});
 
 </script>

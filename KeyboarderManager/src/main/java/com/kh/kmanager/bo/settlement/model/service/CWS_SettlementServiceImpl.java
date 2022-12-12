@@ -43,5 +43,13 @@ public class CWS_SettlementServiceImpl implements CWS_SettlementService {
 		return list;
 	}
 
+	@Override
+	public CWS_Settlement sellerBillModal(String modalOrderNo) {
+		
+		CWS_Settlement result = settlementDao.sellerBillModal(sqlSession, modalOrderNo);
+		
+		return result;
+	}
+
 
 }

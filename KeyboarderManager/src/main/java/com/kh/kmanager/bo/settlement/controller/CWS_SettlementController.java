@@ -1,7 +1,5 @@
 package com.kh.kmanager.bo.settlement.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.kmanager.bo.settlement.model.service.CWS_SettlementService;
 import com.kh.kmanager.bo.settlement.model.vo.CWS_Settlement;
@@ -57,4 +56,14 @@ public class CWS_SettlementController {
 		
 		return "bo/boSettlement/commitionSales";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="sellerBillModal.bo")
+	public CWS_Settlement sellerBillModal(HttpSession session, String modalOrderNo) {
+		
+		CWS_Settlement result = settlementService.sellerBillModal(modalOrderNo);
+		
+		return result;		
+	}
+	
 }

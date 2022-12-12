@@ -14,6 +14,21 @@
 		<result column="SUPPLY_VALUE" property="supplyValue" />
 		<result column="PAYMENT_NO" property="paymentNo" />
 	</resultMap>
+	
+	<resultMap id="modalResultSet" type="cws_settlement">
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRICE" property="price" />
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="CORP_NO" property="corpNo" />
+		<result column="SELLER_NAME" property="sellerName" />
+		<result column="REP_NAME" property="repName" />
+		<result column="LOCATION" property="location" />
+		<result column="SELLER_EMAIL" property="sellerEmail" />
+		<result column="SELLER_PHONE" property="sellerPhone" />
+		<result column="SUPPLY_VALUE" property="supplyValue" />
+		<result column="TAX_AMOUNT" property="taxAmount" />
+		<result column="SETTLE_DATE" property="settleDate" /> 
+	</resultMap>
 
 	<select id="selectSeller" resultMap="sellerResultSet">
 		SELECT SELLER_NAME
@@ -53,6 +68,26 @@
 	    WHERE SELLER_NAME = #{sellerName}
 	      AND EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{settleDate}, 'YYYY-MM-DD'))
 	      AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE(#{settleDate}, 'YYYY-MM-DD'))
+	</select>
+	
+	<select id="sellerBillModal" parameterType="String" resultMap="modalResultSet">
+		SELECT PRODUCT_NAME, PRICE, ORDER_NO, CORP_NO, SELLER_NAME, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, SUPPLY_VALUE, TAX_AMOUNT, SETTLE_DATE
+		FROM (SELECT ORDER_NO
+					 , CORP_NO
+					 , SELLER_NAME
+					 , REP_NAME
+					 , LOCATION
+					 , SELLER_EMAIL
+					 , SELLER_PHONE
+					 , SUPPLY_VALUE
+					 , TAX_AMOUNT
+					 , SETTLE_DATE
+					 , PRODUCT_NO
+				FROM SETTLEMENT
+		        JOIN ORDERS USING (ORDER_NO)
+				JOIN SELLER USING (SELLER_NO)) S
+		JOIN PRODUCT USING (PRODUCT_NO)
+		WHERE ORDER_NO = #{modalOrderNo}
 	</select>
 	
 </mapper>

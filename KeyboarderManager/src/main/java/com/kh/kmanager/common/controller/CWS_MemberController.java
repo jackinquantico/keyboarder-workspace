@@ -36,8 +36,7 @@ public class CWS_MemberController {
 	}
 	
 	@RequestMapping("login.me")
-	public ModelAndView loginMember(Member m, 
-								    ModelAndView mv, 
+	public String loginMember(Member m, 
 								    HttpSession session,
 								    String sellerId,
 								    String saveId, 
@@ -60,9 +59,9 @@ public class CWS_MemberController {
 
 		if(loginUser == null) { // 아이디나 비밀번호가 일치하지 않을때
 			
-			mv.addObject("alertMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			
-			mv.setViewName("common/login");
+			return "redirect:/";
 			
 		} else { // 아이디, 비밀번호가 일치할 때
 			
@@ -70,40 +69,38 @@ public class CWS_MemberController {
 			
 			if(loginUser.getSellerId().equals("admin")) { // 관리자로 로그인 했을때
 				
-				mv.addObject("alertMsg", "로그인 성공");
+				session.setAttribute("alertMsg", "로그인 성공");
 				
 				session.setAttribute("loginUser", loginUser);
-				mv.setViewName("common/bomain");
+				
+				return "redirect:/bomain";
 				
 			} else { // 판매자로 로그인 했을때
 				
 				if(loginUser.getMailAuth() != 1) { // 이메일이 인증되지 않았을 때
 					
 					session.invalidate();
-					mv.setViewName("common/emailAuthFail");
+					return "redirect:/";
 					
 				} else if(loginUser.getIdentifyStatus().equals("N")) {
 					
-					mv.addObject("alertMsg", "승인되지 않은 판매자입니다.");
+					session.setAttribute("alertMsg", "승인되지 않은 판매자입니다.");
 					
-					mv.setViewName("common/login");
+					return "redirect:/";
 					
 				} else { // 이메일 인증됬을 때
 					
-					mv.addObject("alertMsg", "로그인 성공");
+					session.setAttribute("alertMsg", "로그인 성공");
 					
 					session.setAttribute("loginUser", loginUser);
 					session.setAttribute("sellerNo", loginUser.getSellerNo());
-					mv.setViewName("common/pomain");	
+					return "redirect:/pomain";	
 				}
 				
 			}
 			
 		}
 		
-		
-
-		return mv;
 	}
 	
 	@RequestMapping("logout.me")

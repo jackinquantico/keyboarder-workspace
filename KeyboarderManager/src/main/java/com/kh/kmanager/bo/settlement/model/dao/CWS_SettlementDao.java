@@ -37,4 +37,15 @@ public class CWS_SettlementDao {
 		
 	}
 	
+	public CWS_Settlement sellerBillModal(SqlSessionTemplate sqlSession, String modalOrderNo) {
+		
+		CWS_Settlement result = sqlSession.selectOne("boSettlement-mapper.sellerBillModal", modalOrderNo);
+		
+		result.setSettleDate(result.getSettleDate().substring(0, 10));
+		result.setBillPublishAmount(result.getSupplyValue() - result.getTaxAmount());
+		result.setSales((int)(result.getBillPublishAmount()/1.1));
+		
+		return result;
+	}
+	
 }

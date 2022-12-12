@@ -15,4 +15,7 @@ public interface CWS_SettlementService {
 	
 	// 입점업체 검색
 	ArrayList<CWS_Settlement> searchSellerCommition(CWS_Settlement searchCondition);
+	
+	// 전자세금계산서 모달 팝업
+	CWS_Settlement sellerBillModal(String modalOrderNo);
 }
