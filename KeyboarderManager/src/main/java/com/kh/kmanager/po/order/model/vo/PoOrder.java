@@ -37,10 +37,13 @@ public class PoOrder {
 	private int marketCouponPrice;
 	private int commitionFin;
 	private int settleDept;
+	private String startDate;
+	private String endDate;
 	
 	private String nowMonth;  // 조회용
 	
 	private String searchDecisionDate; // 기간조회검색
 	private String searchDate;
+	
 
 }

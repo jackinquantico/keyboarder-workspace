@@ -68,7 +68,9 @@
                   LEFT JOIN STORE_USE S ON (O.ORDER_NO=S.ORDER_NO)
                   LEFT  JOIN KEYBOARDER_USE T ON (O.ORDER_NO=T.ORDER_NO) 
 				  WHERE R.SELLER_NO = #{sellerNo}
-		
+				 <if test="startDate!=null">
+				 AND  ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+				 </if> 
 			</select>
 			
 			
@@ -96,7 +98,9 @@
                  LEFT JOIN STORE_USE S ON (O.ORDER_NO=S.ORDER_NO)
                  LEFT  JOIN KEYBOARDER_USE T ON (O.ORDER_NO=T.ORDER_NO) 
 				 WHERE R.SELLER_NO = #{sellerNo}
-		
+		 		<if test="startDate!=null">
+				 AND  ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+				</if> 
 			
 			</select>
 		

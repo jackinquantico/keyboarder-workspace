@@ -26,12 +26,12 @@ public class PoSettlementDao {
 		return sqlSession.selectOne("settlementMapper.selectKmoneySettlement", sellerNo);
 	}
 
-	public ArrayList<Settlement>selectSettleDetailList(SqlSessionTemplate sqlSession, int sellerNo) {
-		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleDetailList", sellerNo);
+	public ArrayList<Settlement>selectSettleDetailList(SqlSessionTemplate sqlSession, PoOrder o) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleDetailList", o);
 	}
 
-	public ArrayList<Settlement>selectSettleSumList(SqlSessionTemplate sqlSession, int sellerNo) {
-		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleSumList", sellerNo);
+	public ArrayList<Settlement>selectSettleSumList(SqlSessionTemplate sqlSession,PoOrder o) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleSumList", o);
 	}
 
 }

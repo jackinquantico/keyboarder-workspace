@@ -126,13 +126,13 @@ public class SettlementController {
 	 * @return
 	 */
 	@RequestMapping("settleView.po")
-	public String selectSettleDetailList(HttpSession session, Model model) {
+	public String selectSettleDetailList(HttpSession session, Model model,PoOrder o) {
 		
 		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
-	
+		o.setSellerNo(sellerNo);
 		
-		ArrayList<Settlement> list = settlementService.selectSettleDetailList(sellerNo);
-		ArrayList<Settlement> list2 =settlementService.selectSettleSumList(sellerNo);
+		ArrayList<Settlement> list = settlementService.selectSettleDetailList(o);
+		ArrayList<Settlement> list2 =settlementService.selectSettleSumList(o);
 		
 		if(list!=null) {
 			model.addAttribute("list",list);
@@ -144,9 +144,11 @@ public class SettlementController {
 		return "po/poSettlement/poSettlementDetailList";
 	}
 	
-	/* WHERE 절에 날짜 관련 조건 추가한거
+	
 	@RequestMapping("searchSettle.po")
-	public String searchSettleDetailList(HttpSession session, Model model,PoOrder o) {
+
+	public String selectSearchList(HttpSession session, Model model,PoOrder o) {
+		
 		
 		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
 		o.setSellerNo(sellerNo);
@@ -154,15 +156,20 @@ public class SettlementController {
 
 		System.out.println(o);
 		
+		ArrayList<Settlement> list = settlementService.selectSettleDetailList(o);
+		ArrayList<Settlement> list2 =settlementService.selectSettleSumList(o);
 		
-		ArrayList<Settlement> list = settlementService.searchSettleDetailList(o);
+		
 		System.out.println(list);
 		if(list!=null) {
 			model.addAttribute("list",list);
 			
+		if(list2!=null) {
+			model.addAttribute("list2",list2);
+			}
 		}
+		
 		return "po/poSettlement/poSettlementDetailList";
 	}
-	*/
 
 }

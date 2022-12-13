@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -46,8 +47,7 @@ height:500px;
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 	<form id="selectSettleDetailList" action="searchSettle.po" method="post">   
-			<div class="content-wrapper">
-			
+	<div class="content-wrapper">
 			<!-- 콘텐츠 영역 제목 -->
 			<div class="content-header">
 			  <div class="container-fluid">
@@ -65,7 +65,7 @@ height:500px;
 		 <div class="card" style="padding:30px;">
 			 <div>
 			 	<span style="font-size :25px; margin-left:20px; margin-right:50px;">조회기간</span>
-			 	<input type="date" style="height:45px;">&nbsp; ~ &nbsp; <input type="date" style="height:45px;"></td>
+			 	<input type="date" style="height:45px;" name="startDate">&nbsp; ~ &nbsp; <input type="date" name="endDate" style="height:45px;"></td>
 			 </div>
 			 <div align="center">  
 			 	 <button class="btn btn-dark" style="width:100px; margin-right:10px;">검색</button>  
@@ -75,7 +75,7 @@ height:500px;
 			  <br> <br>  <br>
 			   
 	<div class="card">
-		<table  align="center"; width="100%" class="table-bordered">
+		<table align="center"; width="100%" class="table-bordered">
 		       <thead>
 		        <tr>
 		           <th rowspan="2">판매량</th>
@@ -158,3 +158,8 @@ height:500px;
 	</form>
 		</body>
 	</html>
+
+
+
+
+

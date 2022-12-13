@@ -49,14 +49,14 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 
 	@Override
-	public ArrayList<Settlement> selectSettleDetailList(int sellerNo) {
-		return settlementDao.selectSettleDetailList(sqlSession, sellerNo);
+	public ArrayList<Settlement> selectSettleDetailList(PoOrder o) {
+		return settlementDao.selectSettleDetailList(sqlSession, o);
 	}
 
 	@Override
-	public ArrayList<Settlement>selectSettleSumList(int sellerNo) {
+	public ArrayList<Settlement>selectSettleSumList(PoOrder o) {
 	
-		return settlementDao.selectSettleSumList(sqlSession, sellerNo);
+		return settlementDao.selectSettleSumList(sqlSession, o);
 		}
 
 	

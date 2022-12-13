@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,7 +18,8 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
-        
+    .content {margin : auto;}   
+    
  td{
   padding-left:15px;
   }
@@ -27,6 +29,14 @@
 #coupone_view{
  border-collapse: collapse;
 }
+
+#settementList{
+
+margin:auto;
+overflow-y:scroll;
+height:500px;
+}
+
  </style>
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
@@ -36,9 +46,8 @@
 <jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
-	<form id="selectSettleView" action="searchSettle.po" method="post">   
-			<div class="content-wrapper">
-			
+	<form id="selectSettleDetailList" action="searchSettle.po" method="post">   
+	<div class="content-wrapper">
 			<!-- 콘텐츠 영역 제목 -->
 			<div class="content-header">
 			  <div class="container-fluid">
@@ -52,33 +61,21 @@
 			
 			<!-- 실제 콘텐츠 영역 -->
 			
-			<div class="content">
-			 <fieldset>
-		
-			     <table>
-			    <tr>
-			    <th>조회기간</th>
-			        <td>
-			            <input type="date">~<input type="date"></td>
-			            </tr>
-			            <tr>
-			                <td colspan="2">
-			                    
-			                </td> 
-			                </tr>
-			   </table>
-			
-			    <div align="center">
-			        <button>검색</button>  
-			        <button>초기화</button>
-			    </div>
-			      
-			    </fieldset>
-			
+	<div class="content" style="width:95%;" >
+		 <div class="card" style="padding:30px;">
+			 <div>
+			 	<span style="font-size :25px; margin-left:20px; margin-right:50px;">조회기간</span>
+			 	<input type="date" style="height:45px;" name="startDate">&nbsp; ~ &nbsp; <input type="date" name="endDate" style="height:45px;"></td>
+			 </div>
+			 <div align="center">  
+			 	 <button class="btn btn-dark" style="width:100px; margin-right:10px;">검색</button>  
+			     <button class="btn btn-outline-secondary" style="width:100px;">초기화</button>    
+			 </div>
+	    </div>  
 			  <br> <br>  <br>
 			   
-			     
-		<table border="1" width="100%" id="coupone_list">
+	<div class="card">
+		<table align="center"; width="100%" class="table-bordered">
 		       <thead>
 		        <tr>
 		           <th rowspan="2">판매량</th>
@@ -90,44 +87,43 @@
 		        </tr>
 		
 		        <tr>
-		           <th>KEYBOAR-DER 쿠폰</th>
+		           <th>KEYBOAR-DER쿠폰</th>
 		           <th>업체쿠폰</th>
 		           <th>판매수수료</th>
 		           <th>수수료할인</th>
 		           <th>최종수수료</th>
-		    </tr>
+		    	</tr>
 		    <tbody>
 		        <tr>
-		            <td>100</td>
-		            <td>130000</td>
-		            <td>0</td>
-		            <td>10000</td>
-		            <td>3000</td>
-            		<td>19500</td>
-		            <td>10000</td>
-		            <td>9500</td>
-		            <td>97500</td>
-		    
-
-		      </tr>
+		       	<c:forEach var="o" items="${list2}">
+		            <td>${o.orderNo }</td>
+		            <td>${o.orderPrice}</td>
+		            <td>${o.orderNo*2500}</td>
+		            <td>${o.keyboarderCouponPrice}</td>
+		            <td>${o.marketCouponPrice}</td>
+            		<td>${o.commitionFin}</td>
+		            <td>${o.keyboarderCouponPrice}</td>
+		            <td>${o.commition}</td>
+		            <td>${o.settleDept }</td>
+		    	</tr>
+		       </c:forEach>
 		    </tbody>
 		</table>
-		       
-		
+	</div>
 	<br> <br>  <br>
 		
-		
-	<table border="1" width="100%" id="coupone_view">
-				   
+	<div id="settementList" class="card">
+	<table  id="coupone_view" class="table table-bordered" align="center" style="width:100%;">
+				<thead align="center"> 
 				<tr>
-				   <th rowspan="2">구분</th>
-				   <th rowspan="2">취소여부</th>
-				   <th rowspan="2">매출일</th>
+				   <th style="vertical-align:middle;" rowspan="2">구분</th>
+				   <th style="vertical-align:middle;" rowspan="2">취소여부</th>
+				   <th style="vertical-align:middle;" rowspan="2">매출일</th>
 				   <th colspan="4" >주문상품정보</th>
 				   <th colspan="3">주문결제정보</th>
-				   
 				</tr>
 				
+		
 				<tr>
 				    <th>주문번호</th>
 				    <th>주문자</th>
@@ -137,28 +133,33 @@
 				    <th>할인쿠폰</th>
 				    <th>수수료</th>
 				</tr>
-				<tbody>
+				</thead>
+				<tbody style="background-color:white;">
+				
 			<c:forEach var="o" items="${list}">
 				<tr>
-				    <td>${o.orderStatus}</td>
-				    <td>${o.orderStatus }</td>
+				    <td>${o.orderStatus==3?"구매확정" : "미확정"}</td>
+				    <td>${o.orderStatus==3?"구매확정" : "미확정"}</td>
 				    <td>${o.orderDate}</td>
 				    <td>${o.orderNo}</td>
 				    <td>${o.conName}</td>
 				    <td>${o.productNo}</td>
-				    <td>>${o.productName}</td>
-				    <td>${o.price }</td>
+				    <td>${o.productName}</td>
+				    <td>${o.price}</td>
 				    <td>${o.couponPrice}</td>
-				    <td>${o.commition}></td>
+				    <td>${o.commition}</td>
 					</tr>
 					 </c:forEach>
-					
 					</tbody>
-					
-					</table>
-				
-					</div>
-					</div>
-					</form>
-					</body>
-					</html>
+				</table>
+				</div>
+			</div>
+		</div>
+	</form>
+		</body>
+	</html>
+
+
+
+
+
