@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.kmanager.bo.order.model.vo.Order;
+import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
 
@@ -22,6 +24,14 @@ public class PoSettlementDao {
 
 	public Settlement selectKmoneySettlement(SqlSessionTemplate sqlSession, int sellerNo) {
 		return sqlSession.selectOne("settlementMapper.selectKmoneySettlement", sellerNo);
+	}
+
+	public ArrayList<Settlement>selectSettleDetailList(SqlSessionTemplate sqlSession, int sellerNo) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleDetailList", sellerNo);
+	}
+
+	public ArrayList<Settlement>selectSettleSumList(SqlSessionTemplate sqlSession, int sellerNo) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleSumList", sellerNo);
 	}
 
 }

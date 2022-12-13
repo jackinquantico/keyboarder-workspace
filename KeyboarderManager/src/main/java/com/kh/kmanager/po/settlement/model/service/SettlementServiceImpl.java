@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.kmanager.bo.order.model.vo.Order;
+import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.dao.PoSettlementDao;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
@@ -15,6 +17,8 @@ public class SettlementServiceImpl implements SettlementService {
 
 	@Autowired
 	private PoSettlementDao settlementDao;
+	
+	
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -44,4 +48,17 @@ public class SettlementServiceImpl implements SettlementService {
 		return settlementDao.selectKmoneySettlement(sqlSession, sellerNo);
 	}
 
-}
+	@Override
+	public ArrayList<Settlement> selectSettleDetailList(int sellerNo) {
+		return settlementDao.selectSettleDetailList(sqlSession, sellerNo);
+	}
+
+	@Override
+	public ArrayList<Settlement>selectSettleSumList(int sellerNo) {
+	
+		return settlementDao.selectSettleSumList(sqlSession, sellerNo);
+		}
+
+	
+	}
+

@@ -12,6 +12,15 @@
 		<result column="PRODUCT_NAME" property="productName" />
 		<result column="CON_ID" property="conId" />
 		<result column="CON_NAME" property="conName" />
+		<result column="COMMISSION" property="commission" />
+		<result column="PRICE" property="price" />
+		<result column="COUPON_PRICE" property="couponPrice" />
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="ORDER_STATUS" property="orderStatus"/>
+		<result column="KEYBOARDER_COUPON_PRICE" property="keyboarderCouponPrice"/>
+		<result column="MARKET_COUPON_PRICE" property="marketCouponPrice"/>
+		<result column="COMMITIONFIN" property="commitionFin"/>
+		<result column="SETTLE_DEPT" property="settleDept"/>
 	</resultMap>
 	
 <!-- 	<select id="selectListCount" parameterType="string" resultType="_int">
@@ -40,6 +49,72 @@
 		<if test=' #{nowMonth} != null '>
 			WHERE MONTH = #{nowMonth}
 		</if>
+</select>
+		<!-- 정산 상세내역 조회 -->
+	<select id="selectSettleDetailList" parameterType="_int" resultMap="poorderResultSet">
+				  SELECT 
+                  O.ORDER_STATUS  as "ORDER_STATUS", 
+                  O.ORDER_DATE as "ORDER_DATE",
+                  O.ORDER_NO as "ORDER_NO",
+                  C.CON_NAME as "CON_NAME",
+                  P.PRODUCT_NO as "PRODUCT_NO",
+                  P.PRODUCT_NAME as "PRODUCT_NAME",
+                  P.PRICE as "PRICE",
+                  COALESCE(B.COUPON_PRICE, M.COUPON_PRICE,0) as "COUPON_PRICE", 
+                  E.COMMITION as "COMMITION"
+                  FROM ORDERS O
+                  LEFT  JOIN PRODUCT P ON (O.PRODUCT_NO=P.PRODUCT_NO)
+                  LEFT  JOIN SELLER R ON (P.SELLER_NO=R.SELLER_NO)
+                  LEFT  JOIN SETTLEMENT E ON (O.ORDER_NO =E.ORDER_NO)
+                  LEFT  JOIN CONSUMER C ON(O.CON_NO=C.CON_NO)
+                  LEFT  JOIN STORE_USE S ON (O.ORDER_NO=S.ORDER_NO)
+                  LEFT  JOIN COUPON_STORE M ON (M.COUPON_NO=S.COUPON_NO)
+                  LEFT  JOIN KEYBOARDER_USE K ON (O.ORDER_NO=K.ORDER_NO)
+                  LEFT  JOIN COUPON_KEYBOARDER B ON (B.COUPON_NO=K.COUPON_NO) 
+                  LEFT JOIN STORE_USE S ON (O.ORDER_NO=S.ORDER_NO)
+                  LEFT  JOIN KEYBOARDER_USE T ON (O.ORDER_NO=T.ORDER_NO) 
+				  WHERE R.SELLER_NO = #{sellerNo}
+		
+			</select>
+			
+			
+			<select id="selectSettleSumList" parameterType="_int" resultMap="poorderResultSet">
+			
+			
+			   	 SELECT 
+                 COUNT(O.ORDER_NO) as "ORDER_NO",
+                 SUM(O.ORDER_PRICE) as "ORDER_PRICE",
+                 SUM(B.COUPON_PRICE) as "KEYBOARDER_COUPON_PRICE",
+                 SUM(M.COUPON_PRICE) as "MARKET_COUPON_PRICE",
+                 SUM(E.COMMITION +COALESCE(B.COUPON_PRICE,0 ))as "COMMITIONFIN",
+                 SUM(B.COUPON_PRICE) as "KEYBOARDER_COUPON_PRICE",
+                 SUM(E.COMMITION)as  "COMMITION",
+                 SUM(E.SETTLE_DEPT) as "SETTLE_DEPT"
+                 FROM ORDERS O
+                 LEFT  JOIN PRODUCT P ON (O.PRODUCT_NO=P.PRODUCT_NO)
+                 LEFT  JOIN SELLER R ON (P.SELLER_NO=R.SELLER_NO)
+                 LEFT  JOIN SETTLEMENT E ON (O.ORDER_NO =E.ORDER_NO)
+                 LEFT  JOIN CONSUMER C ON(O.CON_NO=C.CON_NO)
+                 LEFT  JOIN STORE_USE S ON (O.ORDER_NO=S.ORDER_NO)
+                 LEFT  JOIN COUPON_STORE M ON (M.COUPON_NO=S.COUPON_NO)
+                 LEFT  JOIN KEYBOARDER_USE K ON (O.ORDER_NO=K.ORDER_NO)
+                 LEFT  JOIN COUPON_KEYBOARDER B ON (B.COUPON_NO=K.COUPON_NO) 
+                 LEFT JOIN STORE_USE S ON (O.ORDER_NO=S.ORDER_NO)
+                 LEFT  JOIN KEYBOARDER_USE T ON (O.ORDER_NO=T.ORDER_NO) 
+				 WHERE R.SELLER_NO = #{sellerNo}
+		
+			
+			</select>
+			
+			
+			
+			
+			
+			
+			<!-- 날짜로 검색 -->
+			<select id="">
+			
+			</select>
 
-	</select>
+
 </mapper>

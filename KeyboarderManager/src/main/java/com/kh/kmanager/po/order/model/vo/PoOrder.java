@@ -28,6 +28,14 @@ public class PoOrder {
 	private String productName; // 조인할 상품명
 	private String conId; // 조인할 구매자아이디
 	private String conName; // 조인할 구매자명
-
+	
+	private int sellerNo; //조인할 셀러명
+	private int price; //조인할 상품가격
+	private int commition; //조인할 수수료
+	private int couponPrice; //조인할 쿠폰가격
+	private int keyboarderCouponPrice;
+	private int marketCouponPrice;
+	private int commitionFin;
+	private int settleDept;
 
 }

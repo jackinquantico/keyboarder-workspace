@@ -18,7 +18,13 @@
 		<result column="PRE_SETTLEMENT" property="preSettlement" />
 		<result column="REMIT_BALANCE" property="remitBalance" />
 		<result column="ABLE_BALANCE" property="ableBalance" />
+		
 	</resultMap>
+	
+
+	
+	
+	
 
 	<insert id="insertWithdraw" parameterType="withdraw">
 		INSERT INTO WITHDRAW (SELLER_NO

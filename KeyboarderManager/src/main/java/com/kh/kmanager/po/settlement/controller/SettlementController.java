@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.kmanager.bo.order.model.vo.Order;
 import com.kh.kmanager.member.model.vo.Member;
+import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.service.SettlementService;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
@@ -118,4 +120,49 @@ public class SettlementController {
 	public String selectSettleList() {
 		return "po/poSettlement/poSettlementTotalListView";
 	}
+	
+	/**
+	 *	정산내역 상세조회페이지뷰- 성진 
+	 * @return
+	 */
+	@RequestMapping("settleView.po")
+	public String selectSettleDetailList(HttpSession session, Model model) {
+		
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+	
+		
+		ArrayList<Settlement> list = settlementService.selectSettleDetailList(sellerNo);
+		ArrayList<Settlement> list2 =settlementService.selectSettleSumList(sellerNo);
+		
+		if(list!=null) {
+			model.addAttribute("list",list);
+		if(list2!=null) {
+			model.addAttribute("list2",list2);
+			}
+		}
+		
+		return "po/poSettlement/poSettlementDetailList";
+	}
+	
+	/* WHERE 절에 날짜 관련 조건 추가한거
+	@RequestMapping("searchSettle.po")
+	public String searchSettleDetailList(HttpSession session, Model model,PoOrder o) {
+		
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		o.setSellerNo(sellerNo);
+		
+
+		System.out.println(o);
+		
+		
+		ArrayList<Settlement> list = settlementService.searchSettleDetailList(o);
+		System.out.println(list);
+		if(list!=null) {
+			model.addAttribute("list",list);
+			
+		}
+		return "po/poSettlement/poSettlementDetailList";
+	}
+	*/
+
 }

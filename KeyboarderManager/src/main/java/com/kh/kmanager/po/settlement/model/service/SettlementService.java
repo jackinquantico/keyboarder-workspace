@@ -2,6 +2,8 @@ package com.kh.kmanager.po.settlement.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.kmanager.bo.order.model.vo.Order;
+import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
 
@@ -15,4 +17,12 @@ public interface SettlementService {
 
 	// k-money 잔액관리 메인페이지용 - 채영
 	public Settlement selectKmoneySettlement(int sellerNo);
+
+	//정산 상세보기 페이지-성진
+	public ArrayList<Settlement>selectSettleDetailList(int sellerNo);
+
+	//정산 합산 내역 조회-성진
+	public ArrayList<Settlement> selectSettleSumList(int sellerNo);
+	
+	
 }

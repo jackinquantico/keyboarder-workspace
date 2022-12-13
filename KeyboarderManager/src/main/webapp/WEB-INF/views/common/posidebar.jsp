@@ -158,7 +158,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="settleView.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>정산 상세내역</p>
                 </a>
