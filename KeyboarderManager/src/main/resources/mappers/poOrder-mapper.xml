@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="poorderMapper">
+
 	<resultMap id="poorderResultSet" type="poOrder">
 		<result column="ORDER_NO" property="orderNo" />
 		<result column="ORDER_DATE" property="orderDate" />
@@ -43,7 +44,7 @@
 		<if test=' #{nowMonth} != null '>
 			WHERE MONTH = #{nowMonth}
 		</if>
-</select>
+	</select>
 		<!-- 정산 상세내역 조회 -->
 	<select id="selectSettleDetailList" parameterType="_int" resultMap="poorderResultSet">
 				  SELECT 
@@ -69,14 +70,11 @@
                   LEFT  JOIN KEYBOARDER_USE T ON (O.ORDER_NO=T.ORDER_NO) 
 				  WHERE R.SELLER_NO = #{sellerNo}
 				 <if test="startDate!=null">
-				 AND  ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+				 	AND  ORDER_DATE BETWEEN #{startDate} AND #{endDate}
 				 </if> 
-			</select>
-			
+	</select>
 			
 			<select id="selectSettleSumList" parameterType="_int" resultMap="poorderResultSet">
-			
-			
 			   	 SELECT 
                  COUNT(O.ORDER_NO) as "ORDER_NO",
                  SUM(O.ORDER_PRICE) as "ORDER_PRICE",
@@ -99,9 +97,8 @@
                  LEFT  JOIN KEYBOARDER_USE T ON (O.ORDER_NO=T.ORDER_NO) 
 				 WHERE R.SELLER_NO = #{sellerNo}
 		 		<if test="startDate!=null">
-				 AND  ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+				 	AND  ORDER_DATE BETWEEN #{startDate} AND #{endDate}
 				</if> 
-			
 			</select>
 		
 		<!-- 구매확정내역 기간별 조회 - 장미 -->
@@ -125,6 +122,18 @@
 					AND EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 					AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE (#{searchDate}, 'YYYY-MM-DD'))	
 				ORDER BY ORDER_NO
-</select>
+		</select>
+		
+		<select id="selectListCount_default" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDERS O
+		  JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
+		 WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM') = #{nowMonth}
+		   AND P.SELLER_NO = #{sellerNo}
+		</select>
+		
+		<!-- 	
+		<select id="selectAllOrderList" parameterType="hashmap" resultMap="">
+		</select> -->
 
 </mapper>

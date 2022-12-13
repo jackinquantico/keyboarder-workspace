@@ -39,6 +39,10 @@ public class Bo_OrderController {
 		return "bo/boOrder/boSelectAllOrder";
 	}
 	
+	/**
+	 * BO 전체 주문내역 조회 페이지의 검색옵션으로 검색해주는 메소드 - 백성현
+	 * @return : ajax 데이터
+	 */
 	@ResponseBody
 	@RequestMapping(value="option_date.bo", produces="application/json; charset=UTF-8")
 	public String selectOrder_Option(String currentDate, String endDate, Model model) {

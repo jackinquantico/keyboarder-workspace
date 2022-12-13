@@ -1,13 +1,15 @@
 package com.kh.kmanager.po.order.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.kmanager.member.model.vo.Member;
@@ -20,12 +22,28 @@ public class PoOrderController {
 	public PoOrderService orderService;
 	
 	/**
-	 * PO 전체 주문내역 조회 페이지로 단순이동 처리를 해주는 메소드 - 백성현
+	 * PO 전체 주문내역 조회 페이지 이동 처리 및 현재 월의 전체 주문내역 조회를 해주는 메소드 - 백성현
 	 * @return : PO 전체 주문내역 조회 페이지 이동
 	 */
-	@RequestMapping("viewAllOrder.po")
-	public String selectAllOrder() {
+	@RequestMapping("allOrderList.po")
+	public String selectAllOrder(HttpSession session) {
 		
+		Member m = (Member)session.getAttribute("loginUser");
+		String sellerNo = Integer.toString(m.getSellerNo());
+		
+		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+		
+		HashMap<String, String> optionDefault = new HashMap<String, String>();
+		optionDefault.put("sellerNo", sellerNo);
+		optionDefault.put("nowMonth", nowMonth);
+		
+		int listCount = orderService.selectListCount(optionDefault);
+		System.out.println(listCount);
+		ArrayList<PoOrder> list = orderService.selectAllOrderList(optionDefault);
+		/*
+		model.addAttribute("listCount", listCount);
+		model.addAttribute("list", list);
+		*/
 		return "po/poOrder/poSelectAllOrder";
 	}
 	

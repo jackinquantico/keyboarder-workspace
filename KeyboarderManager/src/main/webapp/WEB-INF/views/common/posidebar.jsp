@@ -94,7 +94,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="viewAllOrder.po" class="nav-link">
+                <a href="allOrderList.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 주문내역</p>
                 </a>

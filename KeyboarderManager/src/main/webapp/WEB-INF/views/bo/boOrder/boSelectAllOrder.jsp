@@ -89,7 +89,7 @@
 				<div id="table_div" style="overflow-x:scroll;">
 					<table id="result_table" border="1">
 						<thead>
-							<td></td>
+							<td><input type="checkbox"></td>
 							<td>구매확정일시</td>
 							<td>주문일시</td>
 							<td>주문번호</td>
@@ -140,7 +140,7 @@
 				
 				if(num == 1) {
 					
-					$("#currentDate").val(new Date());
+					// $("#currentDate").val(new Date());
 				}
 			}
 		</script>

@@ -1,6 +1,7 @@
 package com.kh.kmanager.po.order.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class PoOrderSerivceImpl implements PoOrderService{
 	@Override
 	public ArrayList<PoOrder> searchPoOrderDecision(PoOrder poOrder) {
 		return orderDao. searchPoOrderDecision(sqlSession, poOrder);
+	}
+	
+	@Override
+	public int selectListCount(HashMap<String, String> optionDefault) {
+		return orderDao.selectListCount(sqlSession, optionDefault);
+	}
+
+	@Override
+	public ArrayList<PoOrder> selectAllOrderList(HashMap<String, String> optionDefault) {
+		return orderDao.selectAllOrderList(sqlSession, optionDefault);
 	}
 	
 
