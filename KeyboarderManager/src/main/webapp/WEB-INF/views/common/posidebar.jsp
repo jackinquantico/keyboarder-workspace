@@ -208,12 +208,6 @@
                   <p>K-MONEY 잔액관리</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>판매자 탈퇴</p>
-                </a>
-              </li>
             </ul>
           </li>
           

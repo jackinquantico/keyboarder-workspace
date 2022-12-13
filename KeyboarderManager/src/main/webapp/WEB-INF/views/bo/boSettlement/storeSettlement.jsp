@@ -115,7 +115,7 @@ th {
 	</style>
 	<!-- jQuery 라이브러리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+	<!-- "excel download" -->
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -153,17 +153,10 @@ th {
 							</td>
 							<td></td>
 							<td></td>
-							<td></td>
 							<td><button type="submit" id="submitButton">검색</button></td>
 						</tr>
 						<tr>
 							<th width="10%" style="padding-left: 20px;">조회기간</th>
-							<td width="10%">
-								<select>
-									<option>전체</option>
-									<option></option>
-								</select>
-							</td>
 							<td width="10%">
 								<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);">
 							</td>
@@ -171,11 +164,9 @@ th {
 							<td width="10%">
 								<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);">
 							</td>
-							<td><button type="button" id="resetButton">초기화 </button></td>
+							<td><a href="storeSettlement.bo"><button type="button" id="resetButton">초기화 </button></a></td>
 						</tr>					
-					</table>
-					
-									
+					</table>								
 				</form>
 
 			</div>
@@ -186,7 +177,7 @@ th {
 				<div id="result_div">
 					<div id="result_count">입점업체 정산 목록 (전체 <c:out value="${ list.size() }"/>건)</div>
 					<div id="result_btn">
-						<button>엑셀 다운로드</button>
+						<button id="btn-excel-download">엑셀 다운로드</button>
 					</div>
 				</div>
 				<div id="table_div" style="overflow:scroll; height:530px;">
@@ -296,6 +287,7 @@ th {
 		}
 		
 	}
+	
 </script>
 
 </body>
