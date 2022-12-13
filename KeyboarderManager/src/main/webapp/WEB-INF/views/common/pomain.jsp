@@ -333,7 +333,7 @@ function barChart() {
 			        	   , data[3].orderDate+'월' ],
 			        datasets: [{
 			        	type: 'bar',
-			            label: '당월 입점업체별 매출',
+			            label: '월별 매출',
 			            data: [data[0].orderPrice
 				        	   , data[1].orderPrice
 				        	   , data[2].orderPrice
