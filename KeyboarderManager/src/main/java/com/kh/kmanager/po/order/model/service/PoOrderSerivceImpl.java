@@ -22,8 +22,17 @@ public class PoOrderSerivceImpl implements PoOrderService{
 	 * 구매확정조회-장미
 	 */
 	@Override
-	public ArrayList<PoOrder> selectDecisionOrder() {
-		return orderDao.selectDecisionOrder(sqlSession);
+	public ArrayList<PoOrder> selectDecisionOrder(int sellerNo) {
+		return orderDao.selectDecisionOrder(sqlSession, sellerNo);
 	}
+
+	/**
+	 * 구매확정내역 기간별 조회 - 장미
+	 */
+	@Override
+	public ArrayList<PoOrder> searchPoOrderDecision(PoOrder poOrder) {
+		return orderDao. searchPoOrderDecision(sqlSession, poOrder);
+	}
+	
 
 }

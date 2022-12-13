@@ -23,13 +23,7 @@
 		<result column="SETTLE_DEPT" property="settleDept"/>
 	</resultMap>
 	
-<!-- 	<select id="selectListCount" parameterType="string" resultType="_int">
-		SELECT COUNT(*), TO_CHAR(ORDER_DATE, 'YYYY-MM')
-		FROM ORDERS
-		WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM')= #{nowMonth}
-		GROUP BY TO_CHAR(ORDER_DATE, 'YYYY-MM')
-	</select>
-	 -->
+	<!-- 구매확정내역 전체조회(해당월)-장미 -->
 	<select id="selectDecisionOrder"  parameterType="string" resultMap="poorderResultSet">
 		SELECT *
 		FROM (SELECT O.ORDER_NO "ORDER_NO"
@@ -105,16 +99,28 @@
 		
 			
 			</select>
-			
-			
-			
-			
-			
-			
-			<!-- 날짜로 검색 -->
-			<select id="">
-			
-			</select>
-
+		
+		<!-- 구매확정내역 기간별 조회 - 장미 -->
+		<select id="searchPoOrderDecision" parameterType="poOrder" resultMap="poorderResultSet">
+				SELECT *
+				FROM (SELECT O.ORDER_NO "ORDER_NO"
+											, S.SETTLE_DATE "SETTLE_DATE"
+											, TO_CHAR((S.SETTLE_DATE)+1) "KMONEY_DATE"
+											, O.PRODUCT_NO "PRODUCT_NO"
+											, P.PRODUCT_NAME "PRODUCT_NAME"
+											, O.ORDER_PRICE "ORDER_PRICE"
+											, C.CON_ID "CON_ID"
+											, C.CON_NAME "CON_NAME"
+											, P.SELLER_NO "SELLER_NO"
+								FROM ORDERS O
+								JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+								JOIN CONSUMER C ON (C.CON_NO = O.CON_NO)
+								JOIN SETTLEMENT S ON (S.ORDER_NO = O.ORDER_NO)
+								ORDER BY O.ORDER_DATE DESC)
+				WHERE SELLER_NO = #{sellerNo}
+					AND EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+					AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE (#{searchDate}, 'YYYY-MM-DD'))	
+				ORDER BY ORDER_NO
+</select>
 
 </mapper>

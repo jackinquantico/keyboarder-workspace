@@ -36,8 +36,15 @@
         	margin-left: 30px;
         }
         
+        #resetbtn {
+        	width: 70px;  
+        	height: 35px; 
+        	margin-left : 10px;
+        }
+        
+        
         #decisionList {
-        	height : 520px;
+        	height : 500px;
             border: 1px solid;
             margin :auto; 
 	       	margin-bottom: 30px; 
@@ -78,40 +85,44 @@
         </div>
         <br><br>
        <div id="date">
-            <div style="line-height: 70px; margin-left: 20px;">
+       	<form action="searchDecision.po">
+       		<div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
-                <input type="month" style="height: 35px;">
-                <input type="button" class="btn btn-dark" value="검색" id="searchbtn"  >
+                <input type="month" style="height: 35px;" id="searchDecisionDate" name="searchDecisionDate">
+                <input type="submit" class="btn btn-dark" value="검색" id="searchbtn" onclick="selectDecisionDate">
+                <input type="button" class="btn btn-outline-secondary" value="초기화" id="resetbtn" onclick="selectDecisionDate">
             </div>
+       	</form>
+            
         </div>
        <br><br>
        
         <div id="decisionList">
-        	 <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+        	 <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;" onclick="download();">
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
-                        <th>주문번호</th>
-                        <th>구매확정일</th>
-                        <th>K-Money지급일</th>
-                        <th>상품번호</th>
-                        <th>상품명</th>
-                        <th>주문금액</th>
-                        <th>구매자ID</th>
-                        <th>구매자명</th>
+                        <th width="12%">주문번호</th>
+                        <th width="10%">구매확정일</th>
+                        <th width="12%">K-Money지급일</th>
+                        <th width="8%">상품번호</th>
+                        <th width="32%">상품명</th>
+                        <th width="10%">주문금액</th>
+                        <th width="8%">구매자ID</th>
+                        <th width="8%">구매자명</th>
                     </tr>
                 </thead>
                  <tbody style="background-color : white;">
                     <c:forEach var="o" items="${ list }" >
                     	<tr>
-                        <td>${ o.orderNo }</td>
-                        <td>${ o.settleDate }</td>
-                        <td>${ o.keyMoneyDate}</td>
-                        <td>${ o.productNo }</td>
+                        <td align="center">${ o.orderNo }</td>
+                        <td align="center">${ o.settleDate }</td>
+                        <td align="center">${ o.keyMoneyDate}</td>
+                        <td align="center">${ o.productNo }</td>
                         <td>${ o.productName }</td>
-                        <td>${ o.orderPrice}</td>
-                        <td>${ o.conId }</td>
-                        <td>${ o.conName }</td>
+                        <td align="center">${ o.orderPrice} 원</td>
+                        <td align="center">${ o.conId }</td>
+                        <td align="center">${ o.conName }</td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -120,7 +131,19 @@
         </div>
     </div>
 </div> <!-- /.content -->
-
+<script>
+	$(function() {
+		var date = new Date();
+		String(date);
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		
+		document.getElementById("searchmonth").value = year+"-"+month;
+		$("#resetButton").click(funtion() {
+			location.href="decision.po";
+		});
+	})
+</script>
 </div> <!-- /.content-wrapper -->
 </body>
 </html>
