@@ -143,9 +143,9 @@
 	</style>
 	    <!-- jQuery 라이브러리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -174,7 +174,7 @@
 				<hr>
 					<div id="searchConditions">
 						<div id="searchCondition1">입점사</div>
-						<input type="hidden" id="searchSellerName" name="searchSellerName" value="${ list.get(0).getSellerName() }">
+						<input type="hidden" id="searchSellerName" name="searchSellerName" value="${ list.get(0).getSellerName() }"> <!-- 검색 키워드를 유지하기 위한 요소 (추후 구현) -->
 						<div class='v-line'></div>
 						<div id="searchCondition2">
 							<select id="sellerList" name="seller">
@@ -185,7 +185,7 @@
 						</div>
 						<div class='v-line' id="v-line2"></div>
 						<div id="searchCondition3">정산년월</div>
-						<input type="hidden" id="searchSettleDate" name="searchSettleDate" value="${ list.get(0).getSettleDate() }">
+						<input type="hidden" id="searchSettleDate" name="searchSettleDate" value="${ list.get(0).getSettleDate() }"> <!-- 검색 키워드를 유지하기 위한 요소 (추후 구현)  -->
 						<div class='v-line' id="v-line3"></div>
 						<div id="searchCondition4">
 							<input type="month" id="settleDate" name="searchSettlementDate">
@@ -234,7 +234,7 @@
 									<td>${ sl1.sellerNo }</td>
 									<td><input type="hidden">${ sl1.sellerName }</td>
 									<td><input type="hidden">${ sl1.settleDate }</td>
-									<td><input type="hidden" class="modalsHidden" value="${ sl1.orderNo }">${ sl1.realPayPrice }(${ sl1.orderPrice } - ${ sl1.ccouponPrice })</td>
+									<td><input type="hidden" class="modalsHidden" value="${ sl1.orderNo }">${ sl1.realPayPrice }(${ sl1.orderPrice } - ${ sl1.scouponPrice })</td>
 									<td>${ sl1.kcouponPrice }</td>
 									<td>
 										<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="modalCalls">

@@ -15,28 +15,33 @@ import lombok.ToString;
 @ToString
 public class CWS_Settlement {
 	
-	private int sellerNo;
-	private String sellerName;
-	private String orderNo;
-	private int orderPrice;
-	private String settleDate;
-	private int commition;
-	private int settleDept;
-	private int taxAmount;
-	private int supplyValue;
-	private int billPublishAmount;
-	private int sales;
-	private String paymentNo;
-	private String corpNo;
-	private String repName;
-	private String sellerEmail;
-	private String sellerPhone;
-	private String location;
-	private String productName;
-	private int price;
-	private int kcouponPrice;
-	private int ccouponPrice;
-	private int realPayPrice;
+	private int sellerNo; // 입점사코드
+	private String sellerName; // 입점사명
+	private String orderNo; // 주문번호
+	private int orderPrice; // 주문금액
+	private int totalOrderPrice; // 총 주문 금액 (주문금액 - 쿠폰할인합계)
+	private String settleDate; // 정산일
+	private String searchSettleDate2; // 입점업체 정산금 검색용 필드
+	private int commition; // 수수료
+	private int settleDept; // 정산금액
+	private int taxAmount; // 세액
+	private int supplyValue; // 공급가액
+	private int billPublishAmount; // 계산서발행액
+	private int sales; // 매출액
+	private String paymentNo; // 결제번호
+	private String corpNo; // 입점업체 사업자등록번호
+	private String repName; // 입점업체 대표자명
+	private String sellerEmail; // 입점업체 이메일
+	private String sellerPhone; // 입점업체 연락처
+	private String location; // 입점업체 본사 주소
+	private String productName; // 정산 제품명
+	private int price; // 주문가격
+	private int kcouponPrice; // 키보더 쿠폰 할인액 = 수수료 할인액
+	private int scouponPrice; // 스토어 쿠폰 할인액
+	private int totalCouponPrice;
+ 	private int realPayPrice; // 결제 금액
+	private int totalDeductible; // 총 공제액
+ 	
 	
 	public CWS_Settlement(String sellerName) {
 		super();
@@ -71,4 +76,13 @@ public class CWS_Settlement {
 		this.price = price;
 		this.settleDate = settleDate;
 	}
+
+	public CWS_Settlement(int sellerNo, String sellerName, String settleDate, String searchSettleDate2) {
+		super();
+		this.sellerNo = sellerNo; // 사실 필요없는데 생성자 생성을 위한 더미 필드
+		this.sellerName = sellerName;
+		this.settleDate = settleDate;
+		this.searchSettleDate2 = searchSettleDate2;
+	}
+	
 }

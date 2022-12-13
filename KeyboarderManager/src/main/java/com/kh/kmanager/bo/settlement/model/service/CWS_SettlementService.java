@@ -18,4 +18,11 @@ public interface CWS_SettlementService {
 	
 	// 전자세금계산서 모달 팝업
 	CWS_Settlement sellerBillModal(String modalOrderNo);
+	
+	// 입점업체 정산금 전체 조회
+	ArrayList<CWS_Settlement> selectStoreSettlement();
+	
+	// 입점업체 정산금 검색
+	ArrayList<CWS_Settlement> searchStoreSettlement(CWS_Settlement searchCondition);
+	
 }

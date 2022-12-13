@@ -51,5 +51,22 @@ public class CWS_SettlementServiceImpl implements CWS_SettlementService {
 		return result;
 	}
 
+	@Override
+	public ArrayList<CWS_Settlement> selectStoreSettlement() {
+		
+		ArrayList<CWS_Settlement> list = settlementDao.selectStoreSettlement(sqlSession); 
+		
+		return list;
+	}
+
+	@Override
+	public ArrayList<CWS_Settlement> searchStoreSettlement(CWS_Settlement searchCondition) {
+		
+		ArrayList<CWS_Settlement> list = settlementDao.searchStoreSettlement(sqlSession, searchCondition); 
+		
+		return list;
+		
+	}
+
 
 }

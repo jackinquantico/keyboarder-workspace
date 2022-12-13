@@ -68,4 +68,43 @@ public class CWS_SettlementController {
 		return result;		
 	}
 	
+	@RequestMapping("storeSettlement.bo")
+	public String storeSettlementPage(HttpSession session) {
+		
+		ArrayList <Member> sellerList = settlementService.selectSeller();
+		ArrayList <CWS_Settlement> list = settlementService.selectStoreSettlement();
+		
+		for(int i = 0; i < list.size(); i ++) {
+			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
+			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+		};
+		
+		session.setAttribute("sellerList", sellerList);
+		session.setAttribute("list", list);
+		
+		return "bo/boSettlement/storeSettlement";
+	}
+	
+	@RequestMapping("searchStoreSettlement.bo")
+	public String searchStoreSettlement(HttpSession session, String seller, String searchSettlementDate1, String searchSettlementDate2) {
+		
+		CWS_Settlement searchCondition = new CWS_Settlement(1, seller, searchSettlementDate1, searchSettlementDate2);
+		
+		ArrayList <CWS_Settlement> list = settlementService.searchStoreSettlement(searchCondition);
+		
+		for(int i = 0; i < list.size(); i ++) {
+			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
+			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+		};
+
+		
+		session.setAttribute("list", list);
+		
+		return "bo/boSettlement/storeSettlement";
+	}
+	
 }
