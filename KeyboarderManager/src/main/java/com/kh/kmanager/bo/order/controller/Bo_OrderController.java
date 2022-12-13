@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.kmanager.bo.order.model.service.OrderService;
 import com.kh.kmanager.bo.order.model.vo.Order;
 
@@ -39,8 +40,8 @@ public class Bo_OrderController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="option_date.bo")
-	public void selectOrder_Option(String currentDate, String endDate) {
+	@RequestMapping(value="option_date.bo", produces="application/json; charset=UTF-8")
+	public String selectOrder_Option(String currentDate, String endDate, Model model) {
 		
 		HashMap<String, String> optionDate = new HashMap<String, String>();
 		optionDate.put("currentDate", currentDate);
@@ -48,6 +49,9 @@ public class Bo_OrderController {
 		
 		int listCount = orderService.selectListCount(optionDate);
 		
-		System.out.println(listCount);
+		ArrayList<Order> list = orderService.selectOrderList(optionDate);
+		
+		model.addAttribute("listCount", listCount);
+		return new Gson().toJson(list);
 	}
 }

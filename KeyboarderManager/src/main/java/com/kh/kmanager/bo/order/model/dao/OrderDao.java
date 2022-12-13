@@ -15,22 +15,24 @@ public class OrderDao {
 
 	public int selectListCount(SqlSessionTemplate sqlSession, String nowMonth) {
 		
-		return sqlSession.selectOne("orderMapper.selectListCount_default", nowMonth);
+		return sqlSession.selectOne("boOrderMapper.selectListCount_default", nowMonth);
 	}
 	
 	public ArrayList<Order> selectAllOrderList(SqlSessionTemplate sqlSession) {
 		
 		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
 		
-		return (ArrayList)sqlSession.selectList("orderMapper.selectAllOrderList", nowMonth);
+		return (ArrayList)sqlSession.selectList("boOrderMapper.selectAllOrderList", nowMonth);
 	}
 	
 	public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, String> optionDate) {
 		
-		//System.out.println(optionDate.get("currentDate"));
-		//System.out.println(optionDate.get("endDate"));
+		return sqlSession.selectOne("boOrderMapper.selectListCount", optionDate);
+	}
+	
+	public ArrayList<Order> selectOrderList(SqlSessionTemplate sqlSession, HashMap<String, String> optionDate) {
 		
-		return sqlSession.selectOne("orderMapper.selectListCount", optionDate);
+		return (ArrayList)sqlSession.selectList("boOrderMapper.selectOrderList", optionDate);
 	}
 	
 }

@@ -37,8 +37,8 @@
 						<td width="10%">
 							<select>
 								<option>전체</option>
-								<option>1주일</option>
-								<option>1개월</option>
+								<option onclick="optionDate(1);">1주일</option>
+								<option onclick="optionDate(2);">1개월</option>
 							</select>
 						</td>
 						<td width="10%">
@@ -76,25 +76,6 @@
 					</tr>
 				</table>
 			</div>
-			
-			<script>
-				function searchFormSubmit() {
-					//console.log($("#currentDate").val());
-					//console.log($("#endDate").val());
-					
-					$.ajax({
-						url : "option_date.bo",
-						data : {currentDate:$("#currentDate").val(),
-								endDate:$("#endDate").val()},
-						success : function() {
-							
-						},
-						error : function() {
-							console.log("에러시불");
-						}
-					});
-				}
-			</script>
 
 			<br>
 
@@ -105,22 +86,22 @@
 						<button>엑셀 다운로드</button>
 					</div>
 				</div>
-				<div id="table_div" style="overflow:auto;">
+				<div id="table_div" style="overflow-x:scroll;">
 					<table id="result_table" border="1">
 						<thead>
-							<td width="1%"></td>
-							<td width="10%">구매확정일시</td>
-							<td width="10%">주문일시</td>
-							<td width="10%">주문번호</td>
-							<td width="15%">상품명</td>
-							<td width="10%">입점업체명</td>
-							<td width="5%">주문자명</td>
-							<td width="7%">주문금액</td>
-							<td width="7%">할인금액</td>
-							<td width="7%">키보더할인액</td>
-							<td width="7%">결제금액</td>
-							<td width="6%">판매수수료</td>
-							<td width="5%">결제수단</td>
+							<td></td>
+							<td>구매확정일시</td>
+							<td>주문일시</td>
+							<td>주문번호</td>
+							<td>상품명</td>
+							<td>입점업체명</td>
+							<td>주문자명</td>
+							<td>주문금액</td>
+							<td>할인금액</td>
+							<td>키보더할인액</td>
+							<td>결제금액</td>
+							<td>판매수수료</td>
+							<td>결제수단</td>
 						</thead>
 						<tbody>
 							<c:choose>
@@ -153,6 +134,58 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+			function optionDate(num) {
+				
+				if(num == 1) {
+					
+					$("#currentDate").val(new Date());
+				}
+			}
+		</script>
+		
+		<script>
+			function searchFormSubmit() {
+				//console.log($("#currentDate").val());
+				//console.log($("#endDate").val());
+				
+				$.ajax({
+					url : "option_date.bo",
+					data : {currentDate:$("#currentDate").val(),
+							endDate:$("#endDate").val()},
+					success : function(result) {
+						
+						var resultStr = "";
+						
+						for(var i = 0; i < result.length; i++) {
+							
+							resultStr += "<tr>"
+											+ "<td><input type='checkbox'></td>"
+											+ "<td>" + result[i].buyConfirmDate + "</td>"
+											+ "<td>" + result[i].orderDate + "</td>"
+											+ "<td>" + result[i].orderNo + "</td>"
+											+ "<td>" + result[i].productName + "</td>"
+											+ "<td>" + result[i].sellerName + "</td>"
+											+ "<td>" + result[i].conName + "</td>"
+											+ "<td>" + result[i].orderPrice + "</td>"
+											+ "<td>" + result[i].poCouponPrice + "</td>"
+											+ "<td>" + result[i].boCouponPrice + "</td>"
+											+ "<td>" + result[i].paymentBill + "</td>"
+											+ "<td>" + result[i].commission + "</td>"
+											+ "<td>카드</td>"
+										+ "</tr>"
+						}
+						
+						$("#result_table>tbody").html(resultStr);
+						$("#result_count").html("주문건&nbsp;&nbsp;" + result.length);
+					},
+					error : function() {
+						console.log("에러");
+					}
+				});
+			}
+		</script>
 	
 	</div> <!-- /.content-wrapper -->
 
