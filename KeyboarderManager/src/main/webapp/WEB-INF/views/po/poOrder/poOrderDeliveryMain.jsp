@@ -8,7 +8,7 @@
 
     <style>
         div{
-            border: 1px solid red;
+            /* border: 1px solid red; */
             box-sizing: border-box;
             margin: auto;
         }
@@ -19,25 +19,25 @@
         }
 
         .delivery-header{
-            border: 1px solid blue;
             width: 100%;
             height: 10%;
         }
 
         .delivery-tracking{
-            border: 1px solid green;
             width: 100%;
             height: 10%;
         }
+        
+        .delivery-status-main{
+        	border: 2px solid black;
+        }
 
         .delivery-date-tracking{
-            border: 1px solid purple;
             width: 100%;
             height: 30%;
         }
 
         .delivery-information{
-            border: 1px solid pink;
             width: 100%;
             height: 50%;
         }
@@ -61,7 +61,6 @@
         }
 
         .delivery-status-main{
-            border: 1px solid orange;
             width: 24.8%;
             height: 100%;
             display: inline-block;
@@ -160,20 +159,20 @@
 		        <div class="delivery-tracking">
 		            <div id="delivery-tracking-main">
 		                <div class="delivery-status-main">
-		                    <div class="delivery-status">배송준비중</div>
-		                    <div class="delivery-status-num">10</div>
-		                </div>
-		                <div class="delivery-status-main">
 		                    <div class="delivery-status">배송중</div>
-		                    <div class="delivery-status-num">10</div>
+		                    <div class="delivery-status-num">${ status1 }</div>
 		                </div>
 		                <div class="delivery-status-main">
 		                    <div class="delivery-status">배송완료</div>
-		                    <div class="delivery-status-num">10</div>
+		                    <div class="delivery-status-num">${ status2 }</div>
 		                </div>
 		                <div class="delivery-status-main">
 		                    <div class="delivery-status">구매확정</div>
-		                    <div class="delivery-status-num">10</div>
+		                    <div class="delivery-status-num">${ status3 }</div>
+		                </div>
+		                <div class="delivery-status-main">
+		                    <div class="delivery-status">환불</div>
+		                    <div class="delivery-status-num">${ status4 }</div>
 		                </div>
 		            </div>
 		        </div>
@@ -186,11 +185,7 @@
 		                    <div style="display: inline-block; margin-left: 2%; font-size: 20px; margin-top: 25px; width: 8%;">
 		                    	조회기간
 		                    </div>
-		                    <select style="margin-left: 5%;">
-		                        <option>전체</option>
-		                        <option>언제로할까</option>
-		                    </select>
-		                    <input type="date" style="margin-left: 3%;">
+		                    <input type="date" style="margin-left: 5%;">
 		                    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~
 		                    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 		                    <input type="date">
@@ -218,7 +213,7 @@
 		            <div id="delivery-information-header">
 		                <div id="delivery-information-main">
 		                    <div id="delivery-information-count" style="margin-top: 5px;">주문건&nbsp:&nbsp </div>       
-		                    <div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp20&nbsp</div>    
+		                    <div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ orderCount }&nbsp</div>    
 		                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;">
 		                    	엑셀다운로드
 		                    </button>       
