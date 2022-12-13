@@ -66,7 +66,7 @@
 		UPDATE PAYMENT
 		SET PAYMENT_STATUS = 'N'
 		  , REFUND_DATE = SYSDATE
-		WHERE PAYMENT_NO = #{paymentNo}
+		WHERE PAYMhttp://localhost:8888/kmanager/logout.meENT_NO = #{paymentNo}
 		AND ORDER_NO = #{orderNo}
 	</update>
 	
@@ -80,5 +80,10 @@
 		VALUES (#{couponNo}, #{orderNo})
 	</insert>
 	
+	<update id="confirmPay" parameterType="pgd">
+		UPDATE ORDERS
+		SET ORDER_STATUS = 3
+		WHERE ORDER_NO = #{orderNo}
+	</update>
 	
 </mapper>

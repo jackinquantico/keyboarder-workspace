@@ -41,4 +41,8 @@ public class PGDataDao {
 		return sqlSession.insert("pgdMapper.insertStoreCouponUse", pgd);
 	}
 
+	public int confirmPay(SqlSessionTemplate sqlSession, PGData pgd) {
+		return sqlSession.update("pgdMapper.confirmPay", pgd);
+	}
+
 }

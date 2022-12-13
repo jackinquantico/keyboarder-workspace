@@ -85,4 +85,18 @@ public class PGDataController {
 			return "redirect:/foProductNotice.pro";
 		}
 	}
+	
+	@RequestMapping("confirmPay.fo")
+	public String confirmPay(PGData pgd, HttpSession session) {
+		
+		int result = service.confirmPay(pgd);
+		
+		if (result > 0) {
+			session.setAttribute("alertMsg", "구매 확정에 성공했습니다.");
+		} else {
+			session.setAttribute("alertMsg", "구매 확정에 실패했습니다.");
+		}
+		
+		return "redirect:/foTotalView.order";
+	}
 }

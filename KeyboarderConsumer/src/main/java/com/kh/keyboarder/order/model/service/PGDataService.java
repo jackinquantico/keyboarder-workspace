@@ -163,4 +163,8 @@ public class PGDataService {
 	    
 	    return response.getResponse().getAmount();
 	}
+	
+	public int confirmPay(PGData pgd) {
+		return dao.confirmPay(sqlSession, pgd);
+	}
 }

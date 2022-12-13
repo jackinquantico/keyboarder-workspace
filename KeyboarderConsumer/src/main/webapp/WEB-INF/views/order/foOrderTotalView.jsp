@@ -17,6 +17,7 @@
             width: 1200px;
             height: 1000px;
             margin: auto;
+            padding-top: 70px;
         }
 
         #order-title{
@@ -29,11 +30,11 @@
         }
 
         #order-date-tracking{
-            width: 80%;
+            width: 86%;
             height: 200px;
             margin: auto;
-            border: 2px solid black;
-            border-radius: 30px;
+            /* border: 2px solid black;
+            border-radius: 30px; */
         }
 
         #delivery-lookup{
@@ -43,10 +44,11 @@
 
         .order-product-main{
             width: 86%;
-            height: 202px;
+            height: 250px;
             margin: auto;
-            border: 2px solid black;
-            border-radius: 30px;
+            /* border: 1px solid lightgray; */
+            padding-top: 15px;
+            /* border-radius: 30px; */
         }
         
         #date-search:hover{
@@ -76,7 +78,7 @@
             	주문내역조회
         </div>
         <br>
-        <div id="order-date-tracking">
+        <div id="order-date-tracking" class="card">
         	<!-- 조회 기간에 따른 주문내역 조회 가능 -->
         	<form action="foSearchDate.order">
 	            <div id="delivery-lookup">
@@ -90,25 +92,25 @@
 	                 	검색하기
 	                 </button>
 	                 &nbsp;&nbsp;
-	                 <button type="button" class="btn btn-primary" id="resetButton" style="margin-top: 10px; width: 15%;" onclick="selectOrderDate">
+	                 <button type="button" class="btn btn-outline-primary" id="resetButton" style="margin-top: 10px; width: 15%;" onclick="selectOrderDate">
 	                 	초기화
 	                 </button>
 	             </div>
              </form>
         </div>
         <br><br>
-        <hr style="background-color : black; height: 5px;">
+        <hr style="background-color : lightgray; height: 1px;">
         <br><br clear="both">
         <!-- form 태그 추가로 인해 %에서 px로 변경 필요 -->
         <c:choose>
 	        <c:when test="${ not empty dateList }">
 	        	<c:forEach var="date" items="${ dateList }">
-			        <div class="order-product-main">
+			        <div class="order-product-main card">
 			            <form action="refundPay.fo" method="post">
 			            	<input type="hidden" name="orderNo" value="${ date.orderNo }">
 			            	<input type="hidden" name="paymentNo" value="${ date.paymentNo }">
-			                <div class="order-product-date" style="float: left; width: 15%; height: 200px;">
-			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+			                <div class="order-product-date" style="float: left; width: 15%; height: 250px;">
+			                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 			                        	주문일시
 			                    </div>
 			                    <hr>
@@ -116,12 +118,12 @@
 			                        ${ date.orderDate }
 			                    </div>
 			                </div>
-			                <div class="order-product-img" style="float: left; width: 30%; height: 200px;">
+			                <div class="order-product-img" style="float: left; width: 30%; height: 250px;  padding-top: 20px;">
 			                    <div style="width: 90%; height: 180px; margin: auto; margin-top: 10px">
 			                        <img src="${ date.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
 			                	</div>
 			                </div>
-			                <div class="order-product-name-price" style="float: left; width: 40%; height: 200px;">
+			                <div class="order-product-name-price" style="float: left; width: 40%; height: 250px; padding-top: 40px;">
 			                    <div style="width: 100%; height: 100px; font-size: 17px; padding-top: 20px;" align="center">
 			                        <a href="foDetailView.order?ordNo=${ date.orderNo }">
 			                        	${ date.productName }
@@ -131,25 +133,25 @@
 			                        	결제 금액 : ${ date.orderPrice }원
 			                    </div>
 			                </div>
-			                <div class="order-product-delivery-status" style="float: left; width: 15%; height: 200px;">
+			                <div class="order-product-delivery-status" style="float: left; width: 15%; height: 250px;">
 			                <c:choose>
 			                	<c:when test="${ date.orderStatus eq 1 }">
-				                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	배송중
 				                    </div>
 			                    </c:when>
 			                    <c:when test="${ date.orderStatus eq 2 }">
-				                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	배송완료
 				                    </div>
 			                    </c:when>
 			                    <c:when test="${ date.orderStatus eq 3 }">
-				                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	구매확정
 				                    </div>
 			                    </c:when>
 			                    <c:when test="${ date.orderStatus eq 4 }">
-				                    <div class="orderStatus" style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div class="orderStatus" style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	환불
 				                    </div>
 			                    </c:when>
@@ -159,15 +161,19 @@
 			                    <c:choose>
 				                	<c:when test="${ date.orderStatus eq 1 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
+					                    <button type="button" class="btn btn-primary" id="refund-btn" onclick="confirmPay('${ ord.orderNo }');">구매확정</button>
 					                </c:when>
 				                    <c:when test="${ date.orderStatus eq 2 }">
 					                	<button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
+					                	<button type="button" class="btn btn-primary" id="refund-btn" onclick="confirmPay('${ ord.orderNo }');">구매확정</button>
 									</c:when>
 				                    <c:when test="${ date.orderStatus eq 3 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                    <button type="button" class="btn btn-primary" id="refund-btn" disabled>구매확정</button>
 					                </c:when>
 				                    <c:when test="${ date.orderStatus eq 4 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                    <button type="button" class="btn btn-primary" id="refund-btn" disabled>구매확정</button>
 									</c:when>
 			                	</c:choose>
 			                    </div>
@@ -185,25 +191,25 @@
 	        </c:when>
 	        <c:when test="${ not empty orderList }">
 	        	<c:forEach var="ord" items="${ orderList }">
-			        <div class="order-product-main">
+			        <div class="order-product-main card">
 			            <form action="refundPay.fo" method="post">
 			            	<input type="hidden" name="orderNo" value="${ ord.orderNo }">
 			            	<input type="hidden" name="paymentNo" value="${ ord.paymentNo }">
-			                <div class="order-product-date" style="float: left; width: 15%; height: 200px;">
-			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+			                <div class="order-product-date" style="float: left; width: 15%; height: 250px;">
+			                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 			                        	주문일시
 			                    </div>
 			                    <hr>
-			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 40px;" align="center">
+			                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 40px; padding-top: 30px;" align="center">
 			                        ${ ord.orderDate }
 			                    </div>
 			                </div>
-			                <div class="order-product-img" style="float: left; width: 30%; height: 200px;">
+			                <div class="order-product-img" style="float: left; width: 30%; height: 250px; padding-top: 20px;">
 			                    <div style="width: 90%; height: 180px; margin: auto; margin-top: 10px">
 			                        <img src="${ ord.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
 			                	</div>
 			                </div>
-			                <div class="order-product-name-price" style="float: left; width: 40%; height: 200px;">
+			                <div class="order-product-name-price" style="float: left; width: 40%; height: 250px;  padding-top: 40px;">
 			                    <div style="width: 100%; height: 100px; font-size: 17px; padding-top: 20px;" align="center">
 			                        <a href="foDetailView.order?ordNo=${ ord.orderNo }">
 			                        	${ ord.productName }
@@ -213,25 +219,25 @@
 			                        	결제 금액 : ${ ord.orderPrice }원
 			                    </div>
 			                </div>
-			                <div class="order-product-delivery-status" style="float: left; width: 15%; height: 200px;">
+			                <div class="order-product-delivery-status" style="float: left; width: 15%; height: 250px;">
 			                <c:choose>
 			                	<c:when test="${ ord.orderStatus eq 1 }">
-				                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	배송중
 				                    </div>
 			                    </c:when>
 			                    <c:when test="${ ord.orderStatus eq 2 }">
-				                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	배송완료
 				                    </div>
 			                    </c:when>
 			                    <c:when test="${ ord.orderStatus eq 3 }">
-				                    <div style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	구매확정
 				                    </div>
 			                    </c:when>
 			                    <c:when test="${ ord.orderStatus eq 4 }">
-				                    <div class="orderStatus" style="width: 100%; height: 80px; font-size: 18px; line-height: 120px;" align="center">
+				                    <div class="orderStatus" style="width: 100%; height: 100px; font-size: 18px; line-height: 120px;" align="center">
 				                        	환불
 				                    </div>
 			                    </c:when>
@@ -241,15 +247,19 @@
 			                    <c:choose>
 				                	<c:when test="${ ord.orderStatus eq 1 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
+					                    <button type="button" class="btn btn-primary" id="refund-btn" onclick="confirmPay('${ ord.orderNo }');">구매확정</button>
 					                </c:when>
 				                    <c:when test="${ ord.orderStatus eq 2 }">
 					                	<button type="submit" class="btn btn-primary" id="refund-btn">환불요청</button>
+					                	<button type="button" class="btn btn-primary" id="refund-btn" onclick="confirmPay('${ ord.orderNo }');">구매확정</button>
 									</c:when>
 				                    <c:when test="${ ord.orderStatus eq 3 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                    <button type="button" class="btn btn-primary" id="refund-btn" disabled>구매확정</button>
 					                </c:when>
 				                    <c:when test="${ ord.orderStatus eq 4 }">
 					                    <button type="submit" class="btn btn-primary" id="refund-btn" disabled>환불요청</button>
+					                    <button type="button" class="btn btn-primary" id="refund-btn" disabled>구매확정</button>
 									</c:when>
 			                	</c:choose>
 			                    </div>
@@ -291,6 +301,11 @@
     		});
     		--%>
     	});
+    	
+
+    	function confirmPay(orderNo) {
+    		location.href = "confirmPay.fo?orderNo=" + orderNo;
+    	}
     </script>
     
 </body>
