@@ -249,7 +249,7 @@
 											<td>${ sl1.orderPrice }</td>
 											<td>${ sl1.scouponPrice }</td>
 											<td>${ sl1.kcouponPrice }</td>
-											<td>${ sl1.commition }</td>
+											<td><input type="hidden" class="modalsHidden3" value="${ sl1.commition }">${ sl1.commition }</td>
 											<td>
 												<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
 												상세보기
@@ -401,14 +401,14 @@
 			var indexNo = clickEle.index(this); // indexNo을 클릭한 a 태그의 번호로 부여 (n 번째 태그인지)
 			var sellerName = $(".modalsHidden1").eq(indexNo).val(); // input 태그를 0부터 증감하여 부여했으므로 n(=indexNo)번째 hidden input의  value를 modalOrderNo으로 변수 선언하겠다.
 			var settleDate = $(".modalsHidden2").eq(indexNo).val();
-			
+			var commition = $(".modalsHidden3").eq(indexNo).val();
 			// 모달에 값넣어주기
 			$("#myModal").on("show.bs.modal", function (e) {
 						
 				$.ajax({
 					url : "sellerBillModal.bo",
 					async : false, // 동기식으로 바꾸겠다(비동기식은 모달먼저 띄우고 데이터를 받아오는데, 동기식으로 하면 데이터를 받아오는 것에 맞춰서 모달을 띄움)
-					data : {sellerName : sellerName, settleDate : settleDate},
+					data : {sellerName : sellerName, settleDate : settleDate, commition : commition},
 					success : function(result) {
 
 						$("#mResultCorpNo").text(result.corpNo);
@@ -420,12 +420,12 @@
 						$("#mResultSupplyValue").text(result.supplyValue);
 						$("#mResultTaxAmount").text(result.taxAmount);
 						$("#mResultSettleDate").text(result.settleDate);
-						$("#mResultProductName").text("키보드");
-						$("#mResultPrice").text(result.price);
+						$("#mResultProductName").text("수수료 매출");
+						$("#mResultPrice").text(result.commition);
 						$("#mResultSupplyValue2").text(result.supplyValue);
 						$("#mResultTaxAmount2").text(result.taxAmount);
-						$("#mResultBPA").text(result.billPublishAmount);
-						$("#mResultBPA2").text(result.billPublishAmount);
+						$("#mResultBPA").text(result.commition);
+						$("#mResultBPA2").text(result.commition);
 						
 					}, error : function() {
 						console.log("모달 호출용 ajax 통신 실패")

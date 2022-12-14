@@ -42,15 +42,33 @@ public class CWS_SettlementController {
         // 포맷 적용
         formatedNow = now.format(formatter);     
         
-        // 결과값 중 이번달 건 빼기(이번달이 안끝난 경우)
+        // 결과값 필터링
         for(int i = 0; i < list.size(); i++) {
         	
-        	if(list.get(i).getSettleDate().substring(0, 7).equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
+        	int day2 = Integer.parseInt(formatedNow.substring(8)); // 오늘이 몇일인지
+        	
+        	int month1 = Integer.parseInt(list.get(i).getSettleDate().substring(5, 7)); // 정산월
+        	int month2 = Integer.parseInt(formatedNow.substring(5, 7)); // 오늘이 몇달인지
+        	
+        	int year1 = Integer.parseInt(list.get(i).getSettleDate().substring(0, 4)); // 정산연도
+        	int year2 = Integer.parseInt(formatedNow.substring(0, 4)); // 오늘이 몇년도인지
+        	
+        	if(month1 == month2 && year1 == year2) { // 정산일이 오늘 기준 월과 연도가 같으면(아직 이번달이 끝나지 않은 경우)
         		list.remove(list.get(i)); // 해당 행 제거
+        		--i;
+        	} else if(month1 == 12 // 정산일이 12월일때,
+        			&& month2 == 1 // 이번달이 1월이면서
+        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
+        			&& day2 < 10) {   // 오늘이 10일보다 전일때
+        		list.remove(list.get(i));
+        		--i;
+        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
+        		list.remove(list.get(i));
         		--i;
         	}
         }
 		
+        /*
 		// 결과 테이블의 정산일을 정산 발생일의 다음달 10일로 맞춰주기
 		for(int i = 0; i < list.size(); i++) {
 			
@@ -72,7 +90,27 @@ public class CWS_SettlementController {
 				list.get(i).setSettleDate(year + "-" + month2 + "-10");
 			}
 		}
+        */
         
+        for(int i = 0; i < list.size(); i++) {
+        	
+    		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+    		String endSettleDate = list.get(i).getSettleDate();
+    		
+    		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
+    		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
+            
+            // 해당 월의 마지막 일수 구하기
+            Calendar cal = Calendar.getInstance();
+
+            cal.set(settleDateYear, settleDateMonth, 1);
+
+            endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            
+            list.get(i).setSettleDate(endSettleDate);
+        }
+
+		
         
 		session.setAttribute("sellerList", sellerList);
 		
@@ -83,20 +121,8 @@ public class CWS_SettlementController {
 	
 	@RequestMapping("searchSettlement.bo")
 	public String searchBoSettlement(HttpSession session, Model model, String seller, String searchSettlementDate) {
-
-		String month1;
-		int month2;
-		String settleDate2;
 		
-		if (searchSettlementDate.equals("01")) {
-			month1 = "12";
-			settleDate2 = searchSettlementDate.substring(0, 5) + month1;
-		} else {
-			month2 = Integer.parseInt(searchSettlementDate.substring(5, 7)) - 1;
-			settleDate2 = searchSettlementDate.substring(0, 5) + month2;
-		}
-		
-		String searchDate = settleDate2 + "-01";
+		String searchDate = searchSettlementDate + "-01";
 		
 		CWS_Settlement searchCondition = new CWS_Settlement(seller, searchDate);
 		
@@ -114,12 +140,13 @@ public class CWS_SettlementController {
         // 결과값 중 이번달 건 빼기(이번달이 안끝난 경우)
         for(int i = 0; i < list.size(); i++) {
         	
-        	if(list.get(i).getSettleDate().substring(0, 7).equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
+        	if(list.get(i).getSettleDate().equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
         		list.remove(list.get(i)); // 해당 행 제거
         		--i;
         	}
         }
 		
+        /*
 		// 결과 테이블의 정산일을 정산 발생일의 다음달 10일로 맞춰주기
 		for(int i = 0; i < list.size(); i++) {
 			
@@ -140,8 +167,28 @@ public class CWS_SettlementController {
 				
 				list.get(i).setSettleDate(year + "-" + month4 + "-10");
 			}
-		}		
-		
+		}
+		*/
+        
+        for(int i = 0; i < list.size(); i++) {
+        	
+    		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+    		String endSettleDate = list.get(i).getSettleDate();
+    		
+    		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
+    		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
+            
+            // 해당 월의 마지막 일수 구하기
+            Calendar cal = Calendar.getInstance();
+
+            cal.set(settleDateYear, settleDateMonth, 1);
+
+            endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            
+            list.get(i).setSettleDate(endSettleDate);
+        }
+
+        
 		model.addAttribute("list", list);
 		
 		return "bo/boSettlement/commitionSales";
@@ -149,8 +196,9 @@ public class CWS_SettlementController {
 	
 	@ResponseBody
 	@RequestMapping(value="sellerBillModal.bo")
-	public CWS_Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate) {
+	public CWS_Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate, int commition) {
 		
+		/* 테이블의 정산일을 해당 달의 말일로 수정했으므로 필요없음
 		String month1;
 		int month2;
 		String settleDate2;
@@ -167,11 +215,15 @@ public class CWS_SettlementController {
 			month2 = Integer.parseInt(settleDate.substring(5, 7)) - 1;
 			settleDate2 = settleDate.substring(0, 5) + "0" + month2;
 		}
+		*/ 
 		
-		CWS_Settlement modalRequest = new CWS_Settlement(sellerName, settleDate2);
+		String requestDate = settleDate.substring(0, 7); // 'yyyy-mm'
+		
+		CWS_Settlement modalRequest = new CWS_Settlement(sellerName, requestDate);
 		
 		CWS_Settlement result = settlementService.sellerBillModal(modalRequest);
 		
+		/* 해당 테이블의 정산일을 그대로 가져가므로 필요없음
 		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
 		String modalSettleDate = result.getSettleDate() + "-01";
 		
@@ -187,16 +239,23 @@ public class CWS_SettlementController {
 		} else {
 			modalWriteDate = settleDateYear + "-" + (settleDateMonth + 1) + "-" + "10";			
 		}
+		*/
 		
-        // 해당 월의 마지막 일수 구하기
+		/* 테이블에 말일이 구해져있으므로 필요없음
+              해당 월의 마지막 일수 구하기
         Calendar cal = Calendar.getInstance();
 
         cal.set(settleDateYear, settleDateMonth, settleDateDay);
 
         modalSettleDate = result.getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		*/
 		
-        result.setSettleDate(modalSettleDate);
-        result.setModalWriteDate(modalWriteDate);
+        result.setSettleDate(settleDate); // 테이블의 값(해당 달의 말일)을 그대로 넣어주기
+        result.setModalWriteDate(settleDate);
+        result.setCommition(commition);
+        result.setSupplyValue((int)(commition/1.1));
+        result.setTaxAmount(commition - (int)(commition/1.1));
+        
         
 		return result;		
 	}
