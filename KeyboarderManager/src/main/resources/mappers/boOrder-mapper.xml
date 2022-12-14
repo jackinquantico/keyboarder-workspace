@@ -24,7 +24,7 @@
 	
 	<select id="selectAllOrderList" parameterType="string" resultMap="boOrderResultSet">
 		SELECT A.*
-		  FROM (SELECT SETT.SETTLE_DATE "CONFIRMDATE_BUY"
+		  FROM (SELECT to_char(SETT.SETTLE_DATE, 'YYYY-MM-DD') "CONFIRMDATE_BUY"
 			         , O.ORDER_DATE "ORDER_DATE"
 			         , O.ORDER_NO "ORDER_NO"
 			         , P.PRODUCT_NAME "PRODUCT_NAME"

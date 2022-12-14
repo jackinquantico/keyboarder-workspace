@@ -89,19 +89,21 @@
 				<div id="table_div" style="overflow-x:scroll;">
 					<table id="result_table" border="1">
 						<thead>
-							<td><input type="checkbox"></td>
-							<td>구매확정일시</td>
-							<td>주문일시</td>
-							<td>주문번호</td>
+						<tr>
+							<td width="2%"><input type="checkbox"></td>
+							<td width="7%">구매확정일시</td>
+							<td width="7%">주문일시</td>
+							<td width="10%">주문번호</td>
 							<td>상품명</td>
-							<td>입점업체명</td>
-							<td>주문자명</td>
-							<td>주문금액</td>
-							<td>할인금액</td>
-							<td>키보더할인액</td>
-							<td>결제금액</td>
-							<td>판매수수료</td>
-							<td>결제수단</td>
+							<td width="7%">입점업체명</td>
+							<td width="5%">주문자명</td>
+							<td width="5%">주문금액</td>
+							<td width="5%">할인금액</td>
+							<td width="8%">키보더할인액</td>
+							<td width="5%">결제금액</td>
+							<td width="7%">판매수수료</td>
+							<td width="5%">결제수단</td>
+						</tr>
 						</thead>
 						<tbody>
 							<c:choose>
