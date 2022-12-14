@@ -6,6 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<link href="resources/css/boNotice.css" rel="stylesheet">
+<style>
+#noticeArea {
+	width: 95%;
+	margin: auto;
+	height: 830px;
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -29,24 +36,22 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
+		
+		<div id="noticeArea" class="card">
 			<form id="noticeEnrollForm" method="post" action="insertNotice.bo">
-			
-				<hr>
-				<div id="noticeTitle">
+				<div id="noticeTitle" style="margin-top: 15px;">
 					<input type="text" id="title" placeholder="제목을 입력해주세요" name="noticeTitle" required>
 				</div>
 				<hr>
 				<div id="noticeContent">
 					<textarea id="content" rows="10" style="resize:none;" placeholder="내용을 입력해주세요 " name="noticeContent" required></textarea>
 				</div>
-				<hr>
 				<div id="noticeBtns">
-					<button type="submit" id="write_btn">작성하기</button>&nbsp;&nbsp;&nbsp;
-					<a href="noticeList.bo"><input type="button" id="cancle_btn" value="취소"></input></a>
+					<button type="submit" class="btn" id="write_btn">작성하기</button>&nbsp;&nbsp;&nbsp;
+					<a href="noticeList.bo"><input type="button" class="btn btn-outline-secondary" id="cancle_btn" value="취소"></input></a>
 				</div>
-				<hr>
-
 			</form>
+		</div>
 		</div>
 	</div> <!-- /.content-wrapper -->
 

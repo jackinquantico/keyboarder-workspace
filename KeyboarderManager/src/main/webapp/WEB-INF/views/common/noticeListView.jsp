@@ -6,7 +6,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="resources/css/boNotice.css" rel="stylesheet">
+<link href="resources/css/boNotice.css" rel="stylesheet">
+<style>
+#writeNotice {
+	width: 98%;
+	align: right;
+}
+#noticeList {
+	width: 95%;
+	margin: auto;
+	height: 750px;
+	padding: 0px;
+}
+#noticeList_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+#noticeList_table td {
+	text-align: center;
+	height: 50px;
+}
+#noticeList_table thead {
+	height: 50px;
+	background-color: gray;
+	color: white;
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -25,31 +50,31 @@
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
-	
+	<br>
 		<!-- 콘텐츠 영역 제목 -->
 		<div class="content-header">
 		  <div class="container-fluid">
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
-		        <h1 class="m-0">&nbsp;공지사항</h1>
+		        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h1>
 		      </div><!-- /.col -->
+		      
+			<!-- 로그인세션의 계정 검사해서 관리자(BO) 일 경우에만 글쓰기 보이게끔 조건 설정 -->
+			<c:if test="${ loginUser.sellerId eq 'admin' }">
+				<div id="writeNotice">
+					<a href="noticeEnrollForm.bo"><button id="writeNotice_btn" class="btn btn-secondary">글쓰기</button></a>
+				</div>
+			</c:if>
+			
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
 		</div>
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<!-- 로그인세션의 계정 검사해서 관리자(BO) 일 경우에만 글쓰기 보이게끔 조건 설정 -->
-			<c:if test="${ loginUser.sellerId eq 'admin' }">
-				<div id="writeNotice">
-					<a href="noticeEnrollForm.bo"><button id="writeNotice_btn">글쓰기</button></a>
-				</div>
-			</c:if>
 
-			<br>
-
-			<div id="noticeList">
-				<table id="noticeList_table" border="1">
+			<div id="noticeList" class="card">
+				<table id="noticeList_table" class="table-bordered">
 					<thead>
 						<tr>
 							<th width="10%">번호</th>
@@ -59,14 +84,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="n" items="${ list }">
-							<tr>
-								<td>${ n.noticeNo }</td>
-								<td>${ n.noticeTitle }</td>
-								<td>${ n.viewCount }</td>
-								<td>${ n.writeDate }</td>
-							</tr>
-						</c:forEach>
+						<c:if test="${ not empty list }">
+							<c:forEach var="n" items="${ list }">
+								<tr>
+									<td>${ n.noticeNo }</td>
+									<td>${ n.noticeTitle }</td>
+									<td>${ n.viewCount }</td>
+									<td>${ n.writeDate }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
@@ -76,15 +103,15 @@
 			<div id="pagingArea">
 				<c:choose>
 					<c:when test="${ pi.currentPage eq 1 }">
-						<button disabled>&lt;</button>&nbsp;
+						<button class="btn btn-secondary" disabled>&lt;</button>&nbsp;
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ loginUser.sellerId eq 'admin' }">
-								<button onclick="location.href='noticeList.bo?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+								<button class="btn btn-secondary" onclick="location.href='noticeList.bo?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
 							</c:when>
 							<c:otherwise>
-								<button onclick="location.href='noticeList.po?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+								<button class="btn btn-secondary" onclick="location.href='noticeList.po?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
 							</c:otherwise>
 						</c:choose>
 					
@@ -94,25 +121,25 @@
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:choose>
 						<c:when test="${ loginUser.sellerId eq 'admin' }">
-							<button onclick="location.href='noticeList.bo?cpage=${ p }'">${ p }</button>&nbsp;
+							<button class="btn btn-secondary" onclick="location.href='noticeList.bo?cpage=${ p }'">${ p }</button>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<button onclick="location.href='noticeList.po?cpage=${ p }'">${ p }</button>&nbsp;
+							<button class="btn btn-secondary" onclick="location.href='noticeList.po?cpage=${ p }'">${ p }</button>&nbsp;
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				
 				<c:choose>
 					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<button disabled>&gt;</button>
+						<button class="btn btn-secondary" disabled>&gt;</button>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ loginUser.sellerId eq 'admin' }">
-								<button onclick="location.href='noticeList.bo?cpage=${ pi.currentPage + 1}'">&gt;</button>
+								<button class="btn btn-secondary" onclick="location.href='noticeList.bo?cpage=${ pi.currentPage + 1}'">&gt;</button>
 							</c:when>
 							<c:otherwise>
-								<button onclick="location.href='noticeList.po?cpage=${ pi.currentPage + 1}'">&gt;</button>
+								<button class="btn btn-secondary" onclick="location.href='noticeList.po?cpage=${ pi.currentPage + 1}'">&gt;</button>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>

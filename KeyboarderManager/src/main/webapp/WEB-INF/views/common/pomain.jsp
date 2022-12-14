@@ -157,11 +157,11 @@
 					<tr>
 						<th colspan="2">
 							정산현황
-							<a href="" class="atag align-right">전체보기</a>
+							<a href="settleView.po" class="atag align-right">전체보기</a>
 						</th>
 						<th colspan="2">
 							상품현황
-							<a href="" class="atag align-right">전체보기</a>
+							<a href="show.pro" class="atag align-right">전체보기</a>
 						</th>
 					</tr>
 				</thead>
@@ -192,7 +192,7 @@
 			<div id="left-status" class="card">
 			
 			<div class="tableBox">
-			<a href="" class="atag align-right">전체보기</a>
+			<a href="allOrderList.po" class="atag align-right">전체보기</a>
 				<table>
 				<thead>
 					<tr>
@@ -226,7 +226,7 @@
 						<tr>
 							<th>공지사항</th>
 							<td align="right">
-								<a href="" class="atag">전체보기</a>
+								<a href="noticeList.po" class="atag">전체보기</a>
 							</td>
 						</tr>
 					</thead>

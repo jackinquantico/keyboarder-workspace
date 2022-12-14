@@ -5,7 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/css/boNotice.css" rel="stylesheet">
+<link href="resources/css/boNotice.css" rel="stylesheet">
+<style>
+#noticeArea {
+	width: 95%;
+	margin: auto;
+	height: 820px;
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -29,9 +36,9 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
+		<div id="noticeArea" class="card">
 			<form id="noticeUpdateForm" method="post" action="noticeUpdate.bo">
 				<input type="hidden" value="${ n.noticeNo }" name="noticeNo">
-				<hr>
 				<div id="noticeTitle">
 					<input type="text" id="title" value="${ n.noticeTitle }" name="noticeTitle" required>
 				</div>
@@ -39,14 +46,12 @@
 				<div id="noticeContent">
 					<textarea id="content" rows="10" style="resize:none;" name="noticeContent" required>${ n.noticeContent }</textarea>
 				</div>
-				<hr>
 				<div id="noticeBtns">
-					<button type="submit" id="write_btn">수정하기</button>&nbsp;&nbsp;&nbsp;
-					<a href="noticeList.bo"><input type="button" id="cancle_btn" value="취소"></input></a>
+					<button type="submit" id="write_btn" class="btn">수정하기</button>&nbsp;&nbsp;&nbsp;
+					<a href="noticeList.bo"><input type="button" id="cancle_btn" value="취소" class="btn btn-outline-secondary"></input></a>
 				</div>
-				<hr>
-
 			</form>
+		</div>
 		</div>
 	</div> <!-- /.content-wrapper -->
 

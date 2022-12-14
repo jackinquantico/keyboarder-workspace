@@ -6,16 +6,9 @@
     height : 800px;
 }
 
-#writeNotice {
-    width : 100%;
-    height : 5%;
-    padding-right : 30px;
-}
-
 #writeNotice_btn {
     float: right;
     height : 100%;
-    background-color : #323232;
     color : white;
     border : none;
     width : 100px;
@@ -29,7 +22,6 @@
 
 #noticeList_table {
     width : 100%;
-    height : 100%;
     text-align : center;
 }
 
@@ -47,7 +39,6 @@
 }
 
 #pagingArea>button {
-    border : 1px solid black;
     width : 30px;
     height : 30px;
 }
@@ -58,17 +49,13 @@
     border-color : rgb(219, 221, 224);
 }
 
-#noticeTitle, #noticeContent {
-    margin : -15px 0px -15px 0px;
-}
-
 #noticeTitle {
     height : 70px;
-    position : relative;
 }
 
 #noticeContent {
-    height : 500px;
+    height : 650px;
+    padding: 15px;
 }
 
 #title, #content {
@@ -87,10 +74,11 @@
 #noticeBtns {
     text-align: right;
     width : 100%;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
 
 #write_btn, #cancle_btn {
-    border : 1px solid black;
     width : 120px;
     height : 40px;
     font-weight: bold;
@@ -109,24 +97,19 @@
 
 /* -------------- BO 공지사항 상세조회 페이지 적용 CSS ------------------ */
 #writer, #writeDate {
-    height : 80%;
+	margin-right: 15px;
     font-size : 25px;
-    margin-top : 7px;
-    margin-bottom: 7px;
     border : none;
 }
 
 #writer {
-    width : 6%;
-    float : center;
-    position : absolute;
-    border-right: 1px solid rgb(219, 221, 224) !important;
+	float: right;
+    width : 15%;
 }
 
 #writeDate {
-    width : 9%;
-    float : right;
-    padding-left : 20px;
+	float: right;
+    width : 15%;
 }
 
 #update_btn, #delete_btn {
