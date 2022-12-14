@@ -177,9 +177,14 @@ th {
 				<div id="result_div">
 					<div id="result_count">입점업체 정산 목록 (전체 <c:out value="${ list.size() }"/>건)</div>
 					<div id="result_btn">
-						<button id="btn-excel-download">엑셀 다운로드</button>
+	                    <a href="excelSettlement.bo">
+		                    <button type="button" class="btn btn-outline-secondary">
+		                    	엑셀다운로드
+		                    </button>
+	                    </a>						
 					</div>
 				</div>
+				<br>
 				<div id="table_div" style="overflow:scroll; height:530px;">
 					<table id="result_table" border="1">
 						<thead>
@@ -197,7 +202,7 @@ th {
 							<tr>
 								<th width="9%;">업체코드</th>
 								<th width="6%;">업체명</th>
-								<th width="7%;">입점사 부담액<br>(a)</th>
+								<th width="7%;">입점사 부담액<br>(b)</th>
 								<th width="12%;">Keyboar-der 부담액<br>(c)</th>
 								<th width="6%;">합계<br>(b+c)</th>							
 							</tr>
