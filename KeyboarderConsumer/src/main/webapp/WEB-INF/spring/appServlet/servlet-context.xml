@@ -23,6 +23,23 @@
 	
 	<context:component-scan base-package="com.kh.keyboarder" />
 	
-	
+	<interceptors>
+		<interceptor>
+			<!-- path : 요청 url 매핑값 -> url 매핑값 개수만큼 mapping 태그 추가 -->
+			<!-- 결제 관련 페이지 -->
+			<mapping path="/purchase.fo" />
+			<mapping path="/refundPay.fo" />
+			<mapping path="/confirmPay.fo" />
+			
+			<!-- 주문내역 조회 관련 페이지 -->
+			<mapping path="/foTotalView.order" />
+			<mapping path="/foSearchDate.order" />
+			<mapping path="/foDetailView.order" />
+			
+			<!-- beans:bean : 어느 타입의 객체를 어느 이름으로 생성할지 bean을 등록 -->
+			<!-- class : 등록할 풀 클래스명, id : 객체명 -->
+			<beans:bean class="com.kh.keyboarder.common.interceptor.LoginInterceptor" id="loginInterceptor" />
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
