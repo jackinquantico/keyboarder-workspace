@@ -24,8 +24,8 @@
 	
 	<select id="selectAllOrderList" parameterType="string" resultMap="boOrderResultSet">
 		SELECT A.*
-		  FROM (SELECT to_char(SETT.SETTLE_DATE, 'YYYY-MM-DD') "CONFIRMDATE_BUY"
-			         , O.ORDER_DATE "ORDER_DATE"
+		  FROM (SELECT TO_CHAR(SETT.SETTLE_DATE, 'YYYY-MM-DD') "CONFIRMDATE_BUY"
+			         , TO_CHAR(O.ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE"
 			         , O.ORDER_NO "ORDER_NO"
 			         , P.PRODUCT_NAME "PRODUCT_NAME"
 			         , S.SELLER_NAME "SELLER_NAME"
@@ -62,8 +62,8 @@
 	
 	<select id="selectOrderList" parameterType="hashmap" resultMap="boOrderResultSet">
 		SELECT A.*
-		  FROM (SELECT SETT.SETTLE_DATE "CONFIRMDATE_BUY"
-		             , O.ORDER_DATE "ORDER_DATE"
+		  FROM (SELECT TO_CHAR(SETT.SETTLE_DATE, 'YYYY-MM-DD') "CONFIRMDATE_BUY"
+		             , TO_CHAR(O.ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE"
 		             , O.ORDER_NO "ORDER_NO"
 		             , P.PRODUCT_NAME "PRODUCT_NAME"
 		             , S.SELLER_NAME "SELLER_NAME"

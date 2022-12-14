@@ -80,7 +80,7 @@
 #result_table{
     border : 1px solid black;
     text-align : center;
-    min-width:100%;
+    min-width : 2000px;
     height:500px;
 }
 

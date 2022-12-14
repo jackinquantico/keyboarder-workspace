@@ -79,16 +79,18 @@
 				<div id="table_div" style="overflow:scroll;">
 					<table id="result_table" border="1">
 						<thead>
-							<td><input type="checkbox"></td>
-							<td>상태</td>
-							<td>주문일시</td>
-							<td>주문번호</td>
-							<td>상품명</td>
-							<td>수량</td>
-							<td>주문금액</td>
-							<td>구매자ID</td>
-							<td>구매자명</td>
-							<td>환불처리</td>
+							<tr>
+								<td width="2%"><input type="checkbox"></td>
+								<td width="7%">상태</td>
+								<td width="8%">주문일시</td>
+								<td width="10%">주문번호</td>
+								<td>상품명</td>
+								<td width="3%">수량</td>
+								<td width="6%">주문금액</td>
+								<td width="8%">구매자ID</td>
+								<td width="6%">구매자명</td>
+								<td width="6%">환불처리</td>
+							</tr>
 						</thead>
 						<tbody>
 							<c:choose>
@@ -139,28 +141,22 @@
 								<div id="orderDetail">
 									<table id="orderDetail_table">
 										<tr style="border-top:2px solid black;">
-											<td width="28%" style="border-left:none;">주문번호</td>
-											<td width="24%">${ m.orderNo }</td>
-											<td width="24%"></td>
-											<td width="24%" style="border-right:none;"></td>
+											<td style="border-left:none;">주문번호</td>
+											<td colspan="3" style="border-right:none;">${ m.orderNo }</td>
 										</tr>
 										<tr>
-											<td style="border-left:none;">주문상태</td>
+											<td width="25%" style="border-left:none;">주문상태</td>
 											<td>${ m.orderStatus }</td>
-											<td>구매확정일자</td>
-											<td style="border-right:none;">${ m.settleDate }</td>
+											<td width="25%">구매확정일자</td>
+											<td width="20%" style="border-right:none;">${ m.settleDate }</td>
 										</tr>
 										<tr>
 											<td style="border-left:none;">상품번호</td>
-											<td>${ m.productNo }</td>
-											<td></td>
-											<td style="border-right:none;"></td>
+											<td colspan="3" style="border-right:none;">${ m.productNo }</td>
 										</tr>
 										<tr>
 											<td style="border-left:none;">상품명</td>
-											<td>${ m.productName }</td>
-											<td></td>
-											<td style="border-right:none;"></td>
+											<td colspan="3" style="border-right:none;">${ m.productName }</td>
 										</tr>
 										<tr>
 											<td style="border-left:none;">수량</td>
@@ -177,14 +173,14 @@
 										<tr>
 											<td style="border-left:none;">주문금액</td>
 											<td>${ m.orderPrice }</td>
-											<td></td>
-											<td style="border-right:none;"></td>
+											<td>배송비</td>
+											<td style="border-right:none;">2500</td>
 										</tr>
 										<tr style="border-bottom:2px solid black;">
 											<td style="border-left:none;">실상품판매금액</td>
 											<td>${ m.price }</td>
-											<td></td>
-											<td style="border-right:none;"></td>
+											<td>실결제금액</td>
+											<td style="border-right:none;">${ m.paymentBill }</td>
 										</tr>
 									</table>
 								</div>
@@ -203,11 +199,11 @@
 										</tr>
 										<tr>
 											<td style="border-left:none;">판매수수료(예상)</td>
-											<td style="border-right:none;">${ m.paymentBill * 0.15 }</td>
+											<td style="border-right:none;">${ Math.round(m.paymentBill * 0.15) }</td>
 										</tr>
 										<tr style="border-bottom:2px solid black;">
 											<td style="border-left:none;">정산예정금액</td>
-											<td style="border-right:none;">${ m.paymentBill - (m.paymentBill * 0.15) }</td>
+											<td style="border-right:none;">${ Math.round(m.paymentBill - (m.paymentBill * 0.15)) }</td>
 										</tr>
 									</table>
 								</div>

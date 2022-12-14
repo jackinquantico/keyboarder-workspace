@@ -146,14 +146,6 @@
 				ORDER BY ORDER_NO
 		</select>
 		
-		<select id="selectListCount_default" parameterType="hashmap" resultType="_int">
-		SELECT COUNT(*)
-		  FROM ORDERS O
-		  JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
-		 WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM') = #{nowMonth}
-		   AND P.SELLER_NO = #{sellerNo}
-		</select>
-		
 		<select id="orderStatus1" parameterType="_int" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -218,6 +210,14 @@
 			ORDER BY ORD_ORDER_DATE DESC
 		</select>
 		
+		<select id="selectListCount_default" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		  FROM ORDERS O
+		  JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
+		 WHERE TO_CHAR(ORDER_DATE, 'YYYY-MM') = #{nowMonth}
+		   AND P.SELLER_NO = #{sellerNo}
+		</select>
+		
 		<select id="selectAllOrderList" parameterType="hashmap" resultMap="poorderResultSet">
 			SELECT A.*
 			  FROM (SELECT DISTINCT CASE WHEN O.ORDER_STATUS = '1' THEN '결제완료'
@@ -225,7 +225,7 @@
 			                             WHEN O.ORDER_STATUS = '3' THEN '구매확정'
 			                             ELSE '환불'
 			                         END "ORDER_STATUS" <!-- 주문상태 -->
-			                      , O.ORDER_DATE "ORDER_DATE" <!-- 주문일시 -->
+			                      , TO_CHAR(O.ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE" <!-- 주문일시 -->
 			                      , O.ORDER_NO "ORDER_NO" <!-- 주문번호 -->
 			                      , P.PRODUCT_NAME "PRODUCT_NAME" <!-- 상품명 -->
 			                      , O.ORDER_PRICE "ORDER_PRICE" <!-- 주문금액 -->
@@ -256,7 +256,7 @@
 			                   LEFT JOIN COUPON_STORE C_STO ON (STO_U.COUPON_NO = C_STO.COUPON_NO)
 			                   LEFT JOIN KEYBOARDER_USE KEY_U ON (O.ORDER_NO = KEY_U.ORDER_NO)
 			                   LEFT JOIN COUPON_KEYBOARDER C_KEY ON (KEY_U.COUPON_NO = C_KEY.COUPON_NO)
-			                    ORDER BY O.ORDER_DATE DESC) A
+			                    ORDER BY ORDER_DATE DESC) A
 			WHERE A.SELLER_NO = #{sellerNo}
 			  AND A.MONTH = #{nowMonth}
 		</select>
