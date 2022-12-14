@@ -50,7 +50,8 @@ public class PoOrder {
 
 	private int productPrice; // 상품 가격
 	private int keyCouponPrice; // PO 쿠폰 가격
-	private int stoCouponPrice; // BO 쿠폰 가격	
+	private int stoCouponPrice; // BO 쿠폰 가격
+	private String sellerName;
 	
 	private int supplyValue; // 품목 판매단가(공급가액) -> 상품금액 / 1.1
 	private String couponType; // 사용한 쿠폰 종류

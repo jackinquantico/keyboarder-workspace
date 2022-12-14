@@ -44,6 +44,7 @@
 		<result column="CON_ID" property="conId" />
 		<result column="CON_PHONE" property="conPhone" />
 		<result column="COMMITION" property="commition" />
+		<result column="SELLER_NAME" property="sellerName" />
 	</resultMap>
 	
 	<!-- 구매확정내역 전체조회(해당월)-장미 -->
@@ -199,6 +200,7 @@
 			     , KCOU.COUPON_PRICE AS "K_COUPON_PRICE"
 			     , SCOU.COUPON_PRICE AS "S_COUPON_PRICE"
 			     , ORD.ORDER_PRICE * 0.15 AS "COMMISSION"
+			     , SEL.SELLER_NAME
 			FROM ORDERS ORD
 			LEFT JOIN PRODUCT PRO ON (ORD.PRODUCT_NO = PRO.PRODUCT_NO)
 			LEFT JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
@@ -206,6 +208,7 @@
 			LEFT JOIN STORE_USE SUSE ON(ORD.ORDER_NO = SUSE.ORDER_NO)
 			LEFT JOIN COUPON_KEYBOARDER KCOU ON (KUSE.COUPON_NO = KCOU.COUPON_NO)
 			LEFT JOIN COUPON_STORE SCOU ON (SUSE.COUPON_NO = SCOU.COUPON_NO)
+			LEFT JOIN SELLER SEL ON (SEL.SELLER_NO = PRO.SELLER_NO)
 			WHERE PRO.SELLER_NO = #{selNo}
 			ORDER BY ORD_ORDER_DATE DESC
 		</select>
