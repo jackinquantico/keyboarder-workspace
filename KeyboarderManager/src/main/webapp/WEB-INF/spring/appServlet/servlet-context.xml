@@ -59,6 +59,23 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/withdraw.po" />
 			<mapping path="/mainSettlement.po" />
 			
+			<!-- BO - 쿠폰 관리 관련 페이지 -->
+			<mapping path="/coupon.bo" />
+			<mapping path="/registCoupon.bo" />
+			<mapping path="/loadCoupon.bo" />
+			<mapping path="/ableCoupon.bo" />
+			<mapping path="/expireCoupon.bo" />
+			<mapping path="/insertCoupon.bo" />
+			<mapping path="/usedCoupon.bo" />
+			<mapping path="/searchUsedCoupon.bo" />
+			<mapping path="/couponAble.bo" />
+			<mapping path="/couponExpire.bo" />
+			<mapping path="/couponDetail.bo" />
+			<mapping path="/updateCoupon.bo" />
+			
+			<!-- BO - 매출 통계 관련 페이지 -->
+			<mapping path="/salesStatics.bo" />
+			<mapping path="/mainBarGraph.bo" />
 			
 			<!-- beans:bean : 어느 타입의 객체를 어느 이름으로 생성할지 bean을 등록 -->
 			<!-- class : 등록할 풀 클래스명, id : 객체명 -->
