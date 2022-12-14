@@ -224,7 +224,7 @@
 							<td width="%">협력사명</td>
 							<td width="%">정산일</td>
 							<td width="%">
-							실결제금액<br>
+							입점사 실결제금액<br>
 							(주문금액 - 입점사 쿠폰금액)
 							</td>
 							<td>주문금액</td>
@@ -232,9 +232,9 @@
 							<td width="%">
 							KEYBOAR-DER<br>
 							할인액	
-							</td>
+							</td>							
+							<td width="%">KEYBOAR-DER<br>매출액</td>
 							<td width="%">계산서발행액</td>
-							<td width="%">매출액</td>
 						</thead>
 						<tbody>
 							<c:choose>
@@ -249,12 +249,12 @@
 											<td>${ sl1.orderPrice }</td>
 											<td>${ sl1.scouponPrice }</td>
 											<td>${ sl1.kcouponPrice }</td>
+											<td>${ sl1.commition }</td>
 											<td>
 												<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
 												상세보기
 												</a>
-											</td>
-											<td>${ sl1.sales }</td>
+											</td>											
 										</tr>
 										<% i++; %>
 									</c:forEach>								

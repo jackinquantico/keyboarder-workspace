@@ -23,9 +23,9 @@ public class CWS_SettlementDao {
 		
 		for(int i = 0; i < list.size(); i++) {
 			
-			list.get(i).setRealPayPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+			list.get(i).setRealPayPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice());
+			list.get(i).setCommition(list.get(i).getCommition() + list.get(i).getKcouponPrice());
 			list.get(i).setBillPublishAmount(list.get(i).getSupplyValue() - list.get(i).getTaxAmount());
-			list.get(i).setSales((int)(list.get(i).getBillPublishAmount()/1.1));
 			
 		}
 		
@@ -44,7 +44,7 @@ public class CWS_SettlementDao {
 		
 		for(int i = 0; i < list.size(); i++) {
 			
-			list.get(i).setRealPayPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+			list.get(i).setRealPayPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice());
 			list.get(i).setBillPublishAmount(list.get(i).getSupplyValue() - list.get(i).getTaxAmount());
 			list.get(i).setSales((int)(list.get(i).getBillPublishAmount()/1.1));
 			
