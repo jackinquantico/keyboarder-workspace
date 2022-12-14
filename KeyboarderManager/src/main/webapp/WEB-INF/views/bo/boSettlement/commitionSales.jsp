@@ -19,6 +19,14 @@
 			left : -250px;
 			border : 1px solid darkgray;
 	 	}
+	 	
+	 	form {
+	 		margin-left : 200px;
+	 	}
+	 	
+	 	.formHr {
+	 		left : -348px;
+	 	}
 		
 		#searchConditions>div {
 			float : left;
@@ -171,7 +179,7 @@
 		<div class="content">
 		
 			<form id="searchSettlementForm" action="searchSettlement.bo">
-				<hr>
+				<hr class="formHr">
 					<div id="searchConditions">
 						<div id="searchCondition1">입점사</div>
 						<input type="hidden" id="searchSellerName" name="searchSellerName" value="${ list.get(0).getSellerName() }"> <!-- 검색 키워드를 유지하기 위한 요소 (추후 구현) -->
@@ -191,7 +199,7 @@
 							<input type="month" id="settleDate" name="searchSettlementDate">
 						</div>
 					</div>
-					<hr id="line1">					
+					<hr id="line1" class="formHr">					
 				<div id="buttons">
 					<input type="submit" id="searchButton" value="조회">
 					<input type="button" id="resetButton" value="초기화">		
@@ -210,8 +218,8 @@
 						<!--<button>엑셀 다운로드</button>-->
 					</div>
 				</div>
-				<div id="table_div" style="overflow:scroll; width:1050px; height:500px; text-align:center;">
-					<table id="result_table" border="1" width="1000px;">
+				<div id="table_div" style="overflow:scroll; width:1300px; height:500px; text-align:center;">
+					<table id="result_table" border="1" width="1280px;">
 						<thead style="background-color:darkgray; font-weight:bold;">
 							<td width="%">협력사번호</td>
 							<td width="%">협력사명</td>
@@ -220,6 +228,8 @@
 							실결제금액<br>
 							(주문금액 - 입점사 쿠폰금액)
 							</td>
+							<td>주문금액</td>
+							<td>입점사 쿠폰금액</td>
 							<td width="%">
 							KEYBOAR-DER<br>
 							할인액	
@@ -232,13 +242,15 @@
 							<c:forEach var="sl1" items="${ list }" varStatus="status" >
 								<tr id="settlement${status.index}">
 									<td>${ sl1.sellerNo }</td>
-									<td><input type="hidden">${ sl1.sellerName }</td>
-									<td><input type="hidden">${ sl1.settleDate }</td>
-									<td><input type="hidden" class="modalsHidden" value="${ sl1.orderNo }">${ sl1.realPayPrice }(${ sl1.orderPrice } - ${ sl1.scouponPrice })</td>
+									<td><input type="hidden" class="modalsHidden1" value="${ sl1.sellerName }">${ sl1.sellerName }</td>
+									<td><input type="hidden" class="modalsHidden2" value="${ sl1.settleDate }">${ sl1.settleDate }</td>
+									<td>${ sl1.realPayPrice }</td>
+									<td>${ sl1.orderPrice }</td>
+									<td>${ sl1.scouponPrice }</td>
 									<td>${ sl1.kcouponPrice }</td>
 									<td>
-										<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="modalCalls">
-										${ sl1.billPublishAmount }
+										<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
+										상세보기
 										</a>
 									</td>
 									<td>${ sl1.sales }</td>
@@ -253,22 +265,20 @@
 				            <div class="modal-content">                                 
 				                    <!-- Modal body -->
 				                    <div class="modal-body">
-				                        <table border="1" style="width:1000px; text-align: center;">
+				                        <table border="1" style="width:1100px; text-align: center;">
 				                            <tr>
-				                                <th colspan="5" style="height:35px; width: 500px;">전자세금 계산서</th>
-				                                <th style="width:100px;">승인번호</th>
-				                                <td colspan="4" style="width: 400px;" id="mResultOrderNo"></td>
+				                                <th colspan="10" style="height:35px; width: 500px;">전자세금 계산서</th>
 				                            </tr>
 				                            <tr>
-				                                <th rowspan="5" class="provider" style="width: 10px; writing-mode:vertical-lr; background-color:rgb(255, 183, 183); color: rgb(226, 68, 72);">공급자</th>
-				                                <th class="provider" style="width : 100px;">등록번호</th>
-				                                <td style="width : 145px;">851-87-00622</td>
-				                                <th class="provider" style="width : 100px;">종사업장<br>번호</th>
+				                                <th rowspan="5" class="provider" style="width: 2%; writing-mode:vertical-lr; background-color:rgb(255, 183, 183); color: rgb(226, 68, 72);">공급자</th>
+				                                <th class="provider" style="width : 105px;">등록번호</th>
+				                                <td style="width : 160px;">851-87-00622</td>
+				                                <th class="provider" style="width : 105px;">종사업장<br>번호</th>
 				                                <td style="width : 145px;">서울 강남 <br> 제2014-01호 </td>
-				                                <th rowspan="5" class="supplier" style="width: 10px; writing-mode:vertical-lr; background-color:rgb(194, 217, 242); color: rgb(51, 113, 207);">공급받는자</th>
-				                                <th class="supplier" style="width : 100px;">등록번호</th>
-				                                <td style="width : 145px;" id="mResultCorpNo"></td>
-				                                <th class="supplier" style="width : 100px;">종사업장번호</th>
+				                                <th rowspan="5" class="supplier" style="width: 2%; writing-mode:vertical-lr; background-color:rgb(194, 217, 242); color: rgb(51, 113, 207);">공급받는자</th>
+				                                <th class="supplier" style="width : 105px;">등록번호</th>
+				                                <td style="width : 160px;" id="mResultCorpNo"></td>
+				                                <th class="supplier" style="width : 105px;">종사업장<br>번호</th>
 				                                <td style="width : 145px;"></td>
 				                            </tr>
 				                            <tr>
@@ -311,7 +321,7 @@
 				                                <th colspan="3">비고</th>
 				                            </tr>
 				                            <tr style="height : 30px;">
-				                                <td colspan="2" id="modalToday"></td>
+				                                <td colspan="2" id="mResultWriteDate"></td>
 				                                <td colspan="2" id="mResultSupplyValue"></td>
 				                                <td colspan="2" id="mResultTaxAmount"></td>
 				                                <td></td>
@@ -380,7 +390,8 @@
 		var clickEle = $(".modalCalls"); // a 태그를 클래스화 해서 전부 가져옴(화면상 갯수만큼)
 		clickEle.on("click",function() { 
 			var indexNo = clickEle.index(this); // indexNo을 클릭한 a 태그의 번호로 부여 (n 번째 태그인지)
-			var modalOrderNo = $(".modalsHidden").eq(indexNo).val(); // input 태그를 0부터 증감하여 부여했으므로 n(=indexNo)번째 hidden input의  value를 modalOrderNo으로 변수 선언하겠다.
+			var sellerName = $(".modalsHidden1").eq(indexNo).val(); // input 태그를 0부터 증감하여 부여했으므로 n(=indexNo)번째 hidden input의  value를 modalOrderNo으로 변수 선언하겠다.
+			var settleDate = $(".modalsHidden2").eq(indexNo).val();
 			
 			// 모달에 값넣어주기
 			$("#myModal").on("show.bs.modal", function (e) {
@@ -388,19 +399,19 @@
 				$.ajax({
 					url : "sellerBillModal.bo",
 					async : false, // 동기식으로 바꾸겠다(비동기식은 모달먼저 띄우고 데이터를 받아오는데, 동기식으로 하면 데이터를 받아오는 것에 맞춰서 모달을 띄움)
-					data : {modalOrderNo : modalOrderNo},
+					data : {sellerName : sellerName, settleDate : settleDate},
 					success : function(result) {
-						
-						$("#mResultOrderNo").text(result.orderNo);
+
 						$("#mResultCorpNo").text(result.corpNo);
 						$("#mResultSellerName").text(result.sellerName);
 						$("#mResultRepName").text(result.repName);
 						$("#mResultLocation").text(result.location);
 						$("#mResultSellerEmail").text(result.sellerEmail);
+						$("#mResultWriteDate").text(result.modalWriteDate);
 						$("#mResultSupplyValue").text(result.supplyValue);
 						$("#mResultTaxAmount").text(result.taxAmount);
 						$("#mResultSettleDate").text(result.settleDate);
-						$("#mResultProductName").text(result.productName);
+						$("#mResultProductName").text("키보드");
 						$("#mResultPrice").text(result.price);
 						$("#mResultSupplyValue2").text(result.supplyValue);
 						$("#mResultTaxAmount2").text(result.taxAmount);

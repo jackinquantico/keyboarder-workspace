@@ -1,6 +1,10 @@
 package com.kh.kmanager.bo.settlement.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,13 +30,12 @@ public class CWS_SettlementController {
 		ArrayList <Member> sellerList = settlementService.selectSeller();
 		ArrayList <CWS_Settlement> list = settlementService.selectSellerCommition();		
 		
+		/*
 		for(int i = 0; i < list.size(); i++) {
 			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
 		};		
-		
+		*/
 		String[] sellerListValues = new String[sellerList.size()];
-
-		System.out.println(list);
 		
 		session.setAttribute("sellerList", sellerList);
 		
@@ -61,10 +64,38 @@ public class CWS_SettlementController {
 	
 	@ResponseBody
 	@RequestMapping(value="sellerBillModal.bo")
-	public CWS_Settlement sellerBillModal(HttpSession session, String modalOrderNo) {
+	public CWS_Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate) {
 		
-		CWS_Settlement result = settlementService.sellerBillModal(modalOrderNo);
+		CWS_Settlement modalRequest = new CWS_Settlement(sellerName, settleDate);
 		
+		CWS_Settlement result = settlementService.sellerBillModal(modalRequest);
+		
+		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+		String modalSettleDate = result.getSettleDate() + "-01";
+		
+		int settleDateYear = Integer.parseInt((modalSettleDate.substring(0, 4)));
+		int settleDateMonth = Integer.parseInt((modalSettleDate.substring(5, 7)));
+		int settleDateDay = Integer.parseInt(modalSettleDate.substring(8));        
+		
+		String modalWriteDate;
+		
+		if(settleDateMonth == 12) {
+			// 작성일용 변수
+			modalWriteDate = settleDateYear + "-" + "01" + "-" + "10";
+		} else {
+			modalWriteDate = settleDateYear + "-" + (settleDateMonth + 1) + "-" + "10";			
+		}
+		
+        // 해당 월의 마지막 일수 구하기
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(settleDateYear, settleDateMonth, settleDateDay);
+
+        modalSettleDate = result.getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
+        result.setSettleDate(modalSettleDate);
+        result.setModalWriteDate(modalWriteDate);
+        
 		return result;		
 	}
 	

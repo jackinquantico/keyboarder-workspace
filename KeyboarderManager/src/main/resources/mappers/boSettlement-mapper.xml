@@ -18,9 +18,7 @@
 	</resultMap>
 	
 	<resultMap id="modalResultSet" type="cws_settlement">
-		<result column="PRODUCT_NAME" property="productName" />
 		<result column="PRICE" property="price" />
-		<result column="ORDER_NO" property="orderNo" />
 		<result column="CORP_NO" property="corpNo" />
 		<result column="SELLER_NAME" property="sellerName" />
 		<result column="REP_NAME" property="repName" />
@@ -49,7 +47,7 @@
 	</select>
 
 	<select id="selectSellerCommition" resultMap="sellerResultSet">
-		SELECT ORDER_NO, KCOUPON, SCOUPON, KCOUPON_PRICE, SCOUPON_PRICE, SELLER_NO, ORDER_PRICE, SETTLE_DATE, COMMITION, SETTLE_DEPT, TAX_AMOUNT, SUPPLY_VALUE, PAYMENT_NO, SELLER_NAME
+		SELECT TO_CHAR(SETTLE_DATE, 'yyyy-mm') SETTLE_DATE ,SUM (KCOUPON_PRICE) KCOUPON_PRICE, SUM (SCOUPON_PRICE) SCOUPON_PRICE, SUM (ORDER_PRICE) ORDER_PRICE, SUM (COMMITION) COMMITON, SUM (SETTLE_DEPT) SETTLE_DEPT, SUM (TAX_AMOUNT) TAX_AMOUT, SUM (SUPPLY_VALUE) SUPPLY_VALUE, SELLER_NAME, SELLER_NO
 		FROM (SELECT ORDER_NO, KCOUPON, SCOUPON, CK.COUPON_PRICE KCOUPON_PRICE, CS.COUPON_PRICE SCOUPON_PRICE, SE.SELLER_NO, ORDER_PRICE, SETTLE_DATE, COMMITION, SETTLE_DEPT, TAX_AMOUNT, SUPPLY_VALUE, PAYMENT_NO
 		    FROM(SELECT ORDER_NO, K.COUPON_NO KCOUPON, S.COUPON_NO SCOUPON, ORDER_PRICE
 		        FROM ORDERS
@@ -59,6 +57,8 @@
 		    LEFT JOIN COUPON_STORE CS ON (CS.COUPON_NO = SCOUPON)
 		    JOIN SETTLEMENT SE USING (ORDER_NO)) Z
 		JOIN SELLER USING (SELLER_NO)
+        GROUP BY SELLER_NAME, SELLER_NO, TO_CHAR(SETTLE_DATE, 'yyyy-mm')
+        ORDER BY SETTLE_DATE DESC
 	</select>
 
 	<select id="searchSellerCommition" parameterType="cws_settlement" resultMap="sellerResultSet">
@@ -77,10 +77,9 @@
 	      AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE(#{settleDate}, 'YYYY-MM-DD'))
 	</select>
 	
-	<select id="sellerBillModal" parameterType="String" resultMap="modalResultSet">
-		SELECT PRODUCT_NAME, PRICE, ORDER_NO, CORP_NO, SELLER_NAME, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, SUPPLY_VALUE, TAX_AMOUNT, SETTLE_DATE
-		FROM (SELECT ORDER_NO
-					 , CORP_NO
+	<select id="sellerBillModal" parameterType="cws_settlement" resultMap="modalResultSet">
+		SELECT SUM(PRICE) PRICE, CORP_NO, SELLER_NAME, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, SUM(SUPPLY_VALUE) SUPPLY_VALUE, SUM(TAX_AMOUNT) TAX_AMOUNT, TO_CHAR(SETTLE_DATE, 'yyyy-mm') SETTLE_DATE
+		FROM (SELECT  CORP_NO
 					 , SELLER_NAME
 					 , REP_NAME
 					 , LOCATION
@@ -94,7 +93,9 @@
 		        JOIN ORDERS USING (ORDER_NO)
 				JOIN SELLER USING (SELLER_NO)) S
 		JOIN PRODUCT USING (PRODUCT_NO)
-		WHERE ORDER_NO = #{modalOrderNo}
+         WHERE SELLER_NAME = #{sellerName}
+           AND TO_CHAR(SETTLE_DATE, 'yyyy-mm') = #{settleDate}
+        GROUP BY SELLER_NAME, CORP_NO, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, TO_CHAR(SETTLE_DATE, 'yyyy-mm')
 	</select>
 	
 	<select id="selectStoreSettlement" resultMap="storeResultSet">

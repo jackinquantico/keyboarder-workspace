@@ -21,6 +21,7 @@ public class CWS_Settlement {
 	private int orderPrice; // 주문금액
 	private int totalOrderPrice; // 총 주문 금액 (주문금액 - 쿠폰할인합계)
 	private String settleDate; // 정산일
+	private String modalWriteDate; // 세금계산서 작성일
 	private String searchSettleDate2; // 입점업체 정산금 검색용 필드
 	private int commition; // 수수료
 	private int settleDept; // 정산금액
@@ -61,9 +62,8 @@ public class CWS_Settlement {
 		this.settleDate = settleDate;
 	}
 		
-	public CWS_Settlement(String orderNo, String corpNo, String sellerName, String repName, String location, String sellerEmail, String sellerPhone
-						, int supplyValue, int taxAmount, String productName, int price, String settleDate) {
-		this.orderNo = orderNo;
+	public CWS_Settlement(String corpNo, String sellerName, String repName, String location, String sellerEmail, String sellerPhone
+						, int supplyValue, int taxAmount, int price, String settleDate) {
 		this.corpNo = corpNo;
 		this.sellerName = sellerName;
 		this.repName = repName;
@@ -72,7 +72,6 @@ public class CWS_Settlement {
 		this.sellerPhone = sellerPhone;
 		this.supplyValue = supplyValue;
 		this.taxAmount = taxAmount;
-		this.productName = productName;
 		this.price = price;
 		this.settleDate = settleDate;
 	}
