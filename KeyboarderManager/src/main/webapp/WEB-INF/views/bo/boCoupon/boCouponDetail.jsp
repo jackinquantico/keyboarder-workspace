@@ -15,7 +15,7 @@
 #insertStcoupone {
 	width: 100%;
 }
-#insertStcoupone table {
+#couponForm table {
 	width: 100%;
 	line-height: 25px;
 }

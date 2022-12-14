@@ -175,7 +175,7 @@ function searchCoupon() {
 			// 조회된 arraylist 반복문돌려서 출력
 			for (var i=0; i<result.length; i++) {
 				resultStr += "<tr>"
-								+ "<td>" + result[i].couponNo + "</td>"
+								+ "<td>" + '<a href="couponDetail.bo?cno=' + result[i].couponNo + '">' + result[i].couponNo + "</a></td>"
 								+ "<td>" + result[i].couponName + "</td>"
 								+ "<td>키보더쿠폰</td>"
 								+ "<td>" + result[i].couponPrice + "</td>"
