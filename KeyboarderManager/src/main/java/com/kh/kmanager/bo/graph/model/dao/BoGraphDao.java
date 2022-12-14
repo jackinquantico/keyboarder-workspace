@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.kmanager.bo.graph.model.vo.SalesGraph;
+import com.kh.kmanager.po.product.model.vo.Product;
 
 @Repository
 public class BoGraphDao {
@@ -16,6 +17,15 @@ public class BoGraphDao {
 
 	public ArrayList<SalesGraph> selectAvgSalesGraph(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("graphMapper.selectAvgSalesGraph");
+	}
+
+	public ArrayList<SalesGraph> selectopProduct(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("graphMapper.selectopProduct");
+	}
+
+	public ArrayList<Product> showProductImages(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("graphMapper.showProductImages");
 	}
 
 	

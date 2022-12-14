@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.kmanager.bo.graph.model.dao.BoGraphDao;
 import com.kh.kmanager.bo.graph.model.vo.SalesGraph;
+import com.kh.kmanager.po.product.model.vo.Product;
 
 @Service
 public class BoGraphServiceImpl implements BoGraphService {
@@ -33,6 +34,17 @@ public class BoGraphServiceImpl implements BoGraphService {
 	@Override
 	public ArrayList<SalesGraph> selectAvgSalesGraph() {
 		return graphDao.selectAvgSalesGraph(sqlSession);
+	}
+
+	@Override
+	public ArrayList<SalesGraph>selectopProduct() {
+		
+		return graphDao.selectopProduct(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Product> showProductImages() {
+		return graphDao.showProductImages(sqlSession);
 	}
 
 }

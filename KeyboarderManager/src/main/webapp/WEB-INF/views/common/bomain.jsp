@@ -9,6 +9,7 @@
 <title>Document</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <style>
+
 .content {
 	border: 1px solid white;
 	padding: 50px;
@@ -90,40 +91,40 @@
 			<div class="card-body">
 			
 				<div id="left-status" style="width:35%;">
-					<canvas id="visitors-chart" style="display: block; height: 100%; width: 100%;" class="chartjs-render-monitor"></canvas>
+					<canvas id="productGraph" style="display: block; height: 100%; width: 100%;" class="chartjs-render-monitor"></canvas>
 				</div>
 				<div id="right-status" style="width:65%;">
 					<table>
 						<tr>
 							<td class="topTitle" width="15%">TOP 1</td>
 							<td align="center">
-								<div>
+								<div id="attachment0">
 									<img class="card-img-top" style="width: 150px; height: 150px"
 									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
 									alt="..." />
 								</div>
-								<div>상품명</div>
-								<div>상품가격</div>
+								<div id="productName0">상품명</div>
+								<div id="price0">상품가격</div>
 							</td>
 							<td class="topTitle" width="15%">TOP 2</td>
 							<td align="center">
-								<div>
+								<div id="attachment1">
 									<img class="card-img-top"
 									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
 									alt="..." />
 								</div>
-								<div>상품명</div>
-								<div>상품가격</div>
+								<div id="productName1">상품명</div>
+								<div id="price1">상품가격</div>
 							</td>
 							<td class="topTitle" width="15%">TOP 3</td>
 							<td align="center">
-								<div>
+								<div id="attachment2">
 									<img class="card-img-top"
 									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
 									alt="..." />
 								</div>
-								<div>상품명</div>
-								<div>상품가격</div>
+								<div id="productName2">상품명</div>
+								<div id="price2">상품가격</div>
 							</td>
 						</tr>
 					</table>
@@ -227,8 +228,86 @@ function barChart() {
 	});
 }
 
+function productChart(){
+	$.ajax({
+		url: "topProduct.bo",
+		success: function(plist){			
+			
+			console.log(plist);
+			
+			// var tlist = data.map.tlist;
+			// var llist = data.map.llist;
+			// console.log(tlist);
+			// console.log(llist);
+			
+			const ctx = document.getElementById('productGraph').getContext('2d');
+			
+			const myChart = new Chart(ctx, {
+			    type: 'doughnut',
+			    data: {
+			        labels: [plist[0].productName
+			        	   , plist[1].productName
+			        	   , plist[2].productName],
+			        datasets: [{
+			        	type: 'doughnut',
+			            label: '주문건별 top3 상품',
+			            data: [plist[0].orderCount
+			            	  ,plist[1].orderCount
+			                  ,plist[2].orderCount
+			                ],
+			            backgroundColor: [
+			            	'rgba(13, 110, 253, 0.2)',
+			            	'rgba(153, 102, 255, 0.2)',
+			            	'rgba(255, 206, 86, 0.2)'
+			            ],
+			            borderColor: [
+			            	'rgba(13, 110, 253, 1)',
+			            	'rgba(153, 102, 255, 1)',
+			            	'rgba(255, 206, 86, 1)'
+			            ],
+			            borderWidth: 1,
+			            order: 3
+			        }]			    	
+			    }, options: {
+			    	maintainAspectRatio: false,
+			    	aspectRatio: 1,
+			        scales: {
+			            y: {
+			                beginAtZero: true
+			        		}
+		        	}
+				}
+			});
+		
+		},
+		error: function() {
+			console.log("에이작스 통신실패");
+		} 
+	});
+}
+		
+		function productImages(){
+        $.ajax({
+        	url:"productImg.bo",
+            data:data,
+            success:function(data) {
+            	for(var i = 0; i < data.length; i++){
+
+	          		$("#attachment1"+i).attr("src", data[i].productAttachment);
+	          		$("#productName" + i).text(data[i].productName);
+	          		$("#price" + i).text(data[i].productPrice);
+            	}
+            }
+        });
+    };
+
+
 $(function() {
 	barChart();
+});
+
+$(function(){
+	productChart();
 });
 
 setInterval(function() {

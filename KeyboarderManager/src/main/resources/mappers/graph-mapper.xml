@@ -5,6 +5,10 @@
 	<resultMap id="salesGraphResultSet" type="salesGraph">
 		<result column="SELLER_NAME" property="sellerName" />
 		<result column="SETTLE_DEPT" property="settleDept" />
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="ORDER_COUNT" property="orderCount"/>
+		<result column="PRICE" property="price"/>
+		<result column="ATTACHMENT" property="attachment"/>
 	</resultMap>
 
 	<select id="selectSalesGraph" parameterType="_int" resultMap="salesGraphResultSet">
@@ -39,4 +43,36 @@
 		ORDER BY SELLER_NAME
 	</select>
 
+	<!-- 상품통계 전체 조회용 -->
+	<select id="selectopProduct" resultMap="salesGraphResultSet">
+	SELECT RNUM, ORDER_COUNT, PRODUCT_NAME
+	FROM (
+	SELECT ROWNUM RNUM, ORDER_COUNT, PRODUCT_NAME
+	FROM(SELECT ORDER_COUNT, PRODUCT_NAME
+            FROM (SELECT COUNT(ORDER_NO) as "ORDER_COUNT", PRODUCT_NAME
+                        FROM ORDERS O
+                        JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
+                        GROUP BY PRODUCT_NAME)
+            ORDER BY ORDER_COUNT DESC))
+ 			<![CDATA[WHERE RNUM<=3]]>
+ 			 
+	</select>
+	
+	<!-- 상품 가져오기 -->
+	<select id="productImg" resultMap="salesGraphResultSet"> 
+		SELECT RANK, PRODUCT_NAME as "PRODUCT_NAME",		
+									,PRICE as "PRICE" 
+									,ATTACHMENT1 as "ATTACHMENT"
+			FROM (
+            SELECT RANK() OVER(ORDER BY ORDER_NO DESC) AS "RANK",
+            PRODUCT_NAME,PRICE,ATTACHMENT1
+            FROM PRODUCT P
+            LEFT JOIN ORDERS O ON(P.PRODUCT_NO=O.PRODUCT_NO) )		
+			<![CDATA[WHERE RANK <= 3]]>
+	</select>
+	
+
+
+
+		
 </mapper>

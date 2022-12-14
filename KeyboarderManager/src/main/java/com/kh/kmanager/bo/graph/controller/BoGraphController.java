@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.kh.kmanager.bo.graph.model.service.BoGraphService;
 import com.kh.kmanager.bo.graph.model.vo.SalesGraph;
+import com.kh.kmanager.po.product.model.vo.Product;
 
 @Controller
 public class BoGraphController {
@@ -82,4 +83,30 @@ public class BoGraphController {
 		
 		return new Gson().toJson(map);
 	}
+	
+	/**
+	 * bo 메인페이지 top3 상품조회- 성진
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="topProduct.bo", produces="application/json; charset=UTF-8")
+	public String topProduct(Model model) {
+		
+		ArrayList<SalesGraph>plist = graphService.selectopProduct();
+		
+		return new Gson().toJson(plist);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="productImg.bo", produces="application/json; charset=UTF-8")
+	public String productImg(Model model) {
+		
+		ArrayList<Product> plist = graphService.showProductImages();
+		Map<String, ArrayList<Product>> map = new HashMap<String, ArrayList<Product>>();
+		map.put("plist", plist);
+		System.out.println(plist);
+		
+		return new Gson().toJson(plist);
+	}
+
 }
