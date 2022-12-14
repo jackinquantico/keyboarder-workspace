@@ -26,11 +26,9 @@ public class PoOrderController {
 	 * @return : PO 전체 주문내역 조회 페이지 이동
 	 */
 	@RequestMapping("allOrderList.po")
-	public String selectAllOrder(HttpSession session) {
+	public String selectAllOrder(HttpSession session, Model model) {
 		
-		Member m = (Member)session.getAttribute("loginUser");
-		String sellerNo = Integer.toString(m.getSellerNo());
-		
+		String sellerNo = Integer.toString(((Member)session.getAttribute("loginUser")).getSellerNo());
 		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
 		
 		HashMap<String, String> optionDefault = new HashMap<String, String>();
@@ -38,12 +36,11 @@ public class PoOrderController {
 		optionDefault.put("nowMonth", nowMonth);
 		
 		int listCount = orderService.selectListCount(optionDefault);
-		System.out.println(listCount);
 		ArrayList<PoOrder> list = orderService.selectAllOrderList(optionDefault);
-		/*
+		
 		model.addAttribute("listCount", listCount);
 		model.addAttribute("list", list);
-		*/
+		
 		return "po/poOrder/poSelectAllOrder";
 	}
 	

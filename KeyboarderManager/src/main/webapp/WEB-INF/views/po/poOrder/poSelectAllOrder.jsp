@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,244 +71,165 @@
 
 			<div id="allOrder_result">
 				<div id="result_div">
-					<div id="result_count">주문건 XX</div>
+					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">
 						<button>엑셀 다운로드</button>
 					</div>
 				</div>
-				<div id="table_div">
+				<div id="table_div" style="overflow:scroll;">
 					<table id="result_table" border="1">
 						<thead>
-							<td width="2%"></td>
-							<td width="8%">상태</td>
-							<td width="10%">입점사코드</td>
-							<td width="15%">주문번호</td>
-							<td width="30%">상품명</td>
-							<td width="5%">수량</td>
-							<td width="10%">주문금액</td>
-							<td width="10%">구매자ID</td>
-							<td width="10%">구매자명</td>
+							<td><input type="checkbox"></td>
+							<td>상태</td>
+							<td>주문일시</td>
+							<td>주문번호</td>
+							<td>상품명</td>
+							<td>수량</td>
+							<td>주문금액</td>
+							<td>구매자ID</td>
+							<td>구매자명</td>
+							<td>환불처리</td>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>발송준비중</td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test1234</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>발송완료</td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test12345</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>배송완료</td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test12346</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>구매확정</td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test12343</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test12342</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test123457</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test12348</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test12349</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test1234</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td></td>
-								<td></td>
-								<td data-toggle="modal" data-target="#orderDetailModal">주문번호test123</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
+							<c:choose>
+								<c:when test="${ not empty list }">
+									<c:forEach var="o" items="${ list }">
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>${ o.orderStatus }</td>
+											<td>${ o.orderDate }</td>
+											<td data-toggle="modal" data-target="#orderDetailModal_${ o.orderNo }">${ o.orderNo }</td>
+											<td>${ o.productName }</td>
+											<td>1</td>
+											<td>${ o.orderPrice }</td>
+											<td>${ o.conId }</td>
+											<td>${ o.conName }</td>
+											<td><input type="button" value="환불"></td>
+										</tr>
+										
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		
+		
+		<c:if test="${ not empty list }">
+			<c:forEach var="m" items="${ list }">
+				<!-- 주문번호 누르면 나오는 모달창 -->
+				<!-- The Modal -->
+				<div class="modal fade" id="orderDetailModal_${ m.orderNo }">
+					<div class="modal-dialog">
+						<div class="modal-content">
+			
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">주문정보 : 1건</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+			
+							<!-- Modal body -->
+							<div class="modal-body">
+								<div id="orderDetail">
+									<table id="orderDetail_table">
+										<tr style="border-top:2px solid black;">
+											<td width="28%" style="border-left:none;">주문번호</td>
+											<td width="24%">${ m.orderNo }</td>
+											<td width="24%"></td>
+											<td width="24%" style="border-right:none;"></td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">주문상태</td>
+											<td>${ m.orderStatus }</td>
+											<td>구매확정일자</td>
+											<td style="border-right:none;">${ m.settleDate }</td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">상품번호</td>
+											<td>${ m.productNo }</td>
+											<td></td>
+											<td style="border-right:none;"></td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">상품명</td>
+											<td>${ m.productName }</td>
+											<td></td>
+											<td style="border-right:none;"></td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">수량</td>
+											<td>1</td>
+											<td>판매단가</td>
+											<td style="border-right:none;">${ m.supplyValue }</td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">할인쿠폰종류</td>
+											<td>${ m.couponType }</td>
+											<td>할인금액</td>
+											<td style="border-right:none;">${ m.couponPrice }</td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">주문금액</td>
+											<td>${ m.orderPrice }</td>
+											<td></td>
+											<td style="border-right:none;"></td>
+										</tr>
+										<tr style="border-bottom:2px solid black;">
+											<td style="border-left:none;">실상품판매금액</td>
+											<td>${ m.price }</td>
+											<td></td>
+											<td style="border-right:none;"></td>
+										</tr>
+									</table>
+								</div>
+			
+								<div id="expectedSettlement">
+									<br>
+									<h4>정산예정금액확인</h4>
+									<table id="expectedSettlement_table">
+										<tr style="border-top:2px solid black;">
+											<td width="28%" style="border-left:none;">정산기준금액</td>
+											<td width="72%" style="border-right:none;">${ m.paymentBill }</td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">수수료율</td>
+											<td style="border-right:none;">15%</td>
+										</tr>
+										<tr>
+											<td style="border-left:none;">판매수수료(예상)</td>
+											<td style="border-right:none;">${ m.paymentBill * 0.15 }</td>
+										</tr>
+										<tr style="border-bottom:2px solid black;">
+											<td style="border-left:none;">정산예정금액</td>
+											<td style="border-right:none;">${ m.paymentBill - (m.paymentBill * 0.15) }</td>
+										</tr>
+									</table>
+								</div>
+								<br>
+								<div id="orderDetailModal_info">
+									<p>전체주문내역에서 조회하시는 정산예정금액은 주문상품별 예상되는 금액으로, <br>
+										정확한 정산금액은 ‘정산관리’ 메뉴에서 확인해주세요.</p>
+								</div>
+			
+							</div>
+			
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
+
 	
 	</div> <!-- /.content-wrapper -->
 
 
-	<!-- 주문번호 누르면 나오는 모달창 -->
-	<!-- The Modal -->
-	<div class="modal" id="orderDetailModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">주문정보 : 1건</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div id="orderDetail">
-						<table id="orderDetail_table">
-							<tr style="border-top:2px solid black;">
-								<td width="28%" style="border-left:none;">주문번호</td>
-								<td width="24%"></td>
-								<td width="24%"></td>
-								<td width="24%" style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">주문상태</td>
-								<td></td>
-								<td>구매확정일자</td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">상품번호</td>
-								<td></td>
-								<td></td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">상품명</td>
-								<td></td>
-								<td></td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">수량</td>
-								<td></td>
-								<td>판매단가</td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">할인쿠폰종류</td>
-								<td></td>
-								<td>할인금액</td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">주문금액</td>
-								<td></td>
-								<td></td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr style="border-bottom:2px solid black;">
-								<td style="border-left:none;">실상품판매금액</td>
-								<td></td>
-								<td></td>
-								<td style="border-right:none;"></td>
-							</tr>
-						</table>
-					</div>
-
-					<div id="expectedSettlement">
-						<br>
-						<h4>정산예정금액확인</h4>
-						<table id="expectedSettlement_table">
-							<tr style="border-top:2px solid black;">
-								<td width="28%" style="border-left:none;">정산기준금액</td>
-								<td width="72%" style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">수수료율</td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr>
-								<td style="border-left:none;">판매수수료(예상)</td>
-								<td style="border-right:none;"></td>
-							</tr>
-							<tr style="border-bottom:2px solid black;">
-								<td style="border-left:none;">정산예정금액</td>
-								<td style="border-right:none;"></td>
-							</tr>
-						</table>
-					</div>
-					<br>
-					<div id="orderDetailModal_info">
-						<p>전체주문내역에서 조회하시는 정산예정금액은 주문상품별 예상되는 금액으로, <br>
-							정확한 정산금액은 ‘정산관리’ 메뉴에서 확인해주세요.</p>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 
 
