@@ -1,10 +1,9 @@
 package com.kh.kmanager.bo.settlement.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +20,10 @@ import com.kh.kmanager.member.model.vo.Member;
 @Controller
 public class CWS_SettlementController {
 
+	private LocalDate now;
+	private DateTimeFormatter formatter;
+	private String formatedNow;
+	
 	@Autowired
 	private CWS_SettlementService settlementService;
 	
@@ -28,15 +31,49 @@ public class CWS_SettlementController {
 	public String commitionSalesPage(HttpSession session) {
 		
 		ArrayList <Member> sellerList = settlementService.selectSeller();
-		ArrayList <CWS_Settlement> list = settlementService.selectSellerCommition();		
+		ArrayList <CWS_Settlement> list = settlementService.selectSellerCommition();							
 		
-		/*
+        // 현재 날짜 구하기
+        now = LocalDate.now();
+ 
+        // 포맷 정의	
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+ 
+        // 포맷 적용
+        formatedNow = now.format(formatter);     
+        
+        // 결과값 중 이번달 건 빼기(이번달이 안끝난 경우)
+        for(int i = 0; i < list.size(); i++) {
+        	
+        	if(list.get(i).getSettleDate().substring(0, 7).equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
+        		list.remove(list.get(i)); // 해당 행 제거
+        		--i;
+        	}
+        }
+		
+		// 결과 테이블의 정산일을 정산 발생일의 다음달 10일로 맞춰주기
 		for(int i = 0; i < list.size(); i++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
-		};		
-		*/
-		String[] sellerListValues = new String[sellerList.size()];
-		
+			
+			String year;
+			String month;					
+			int month2;
+			
+			if(list.get(i).getSettleDate().substring(5, 7).equals("12")) {
+				// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+				year = list.get(i).getSettleDate().substring(0, 4); // 2022
+				month = "01";
+				
+				list.get(i).setSettleDate(year + "-" + month + "-10");
+			} else {
+				// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+				year = list.get(i).getSettleDate().substring(0, 4); // 2022
+				month2 = Integer.parseInt(list.get(i).getSettleDate().substring(5, 7)) + 1;
+				
+				list.get(i).setSettleDate(year + "-" + month2 + "-10");
+			}
+		}
+        
+        
 		session.setAttribute("sellerList", sellerList);
 		
 		session.setAttribute("list", list);
@@ -47,15 +84,63 @@ public class CWS_SettlementController {
 	@RequestMapping("searchSettlement.bo")
 	public String searchBoSettlement(HttpSession session, Model model, String seller, String searchSettlementDate) {
 
-		String searchDate = searchSettlementDate + "-01";
+		String month1;
+		int month2;
+		String settleDate2;
+		
+		if (searchSettlementDate.equals("01")) {
+			month1 = "12";
+			settleDate2 = searchSettlementDate.substring(0, 5) + month1;
+		} else {
+			month2 = Integer.parseInt(searchSettlementDate.substring(5, 7)) - 1;
+			settleDate2 = searchSettlementDate.substring(0, 5) + month2;
+		}
+		
+		String searchDate = settleDate2 + "-01";
 		
 		CWS_Settlement searchCondition = new CWS_Settlement(seller, searchDate);
 		
 		ArrayList <CWS_Settlement> list = settlementService.searchSellerCommition(searchCondition);
 		
+        // 현재 날짜 구하기
+        now = LocalDate.now();
+ 
+        // 포맷 정의	
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+ 
+        // 포맷 적용
+        formatedNow = now.format(formatter);     
+        
+        // 결과값 중 이번달 건 빼기(이번달이 안끝난 경우)
+        for(int i = 0; i < list.size(); i++) {
+        	
+        	if(list.get(i).getSettleDate().substring(0, 7).equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
+        		list.remove(list.get(i)); // 해당 행 제거
+        		--i;
+        	}
+        }
+		
+		// 결과 테이블의 정산일을 정산 발생일의 다음달 10일로 맞춰주기
 		for(int i = 0; i < list.size(); i++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
-		};
+			
+			String year;
+			String month3;					
+			int month4;
+			
+			if(list.get(i).getSettleDate().substring(5, 7).equals("12")) {
+				// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+				year = list.get(i).getSettleDate().substring(0, 4); // 2022
+				month3 = "01";
+				
+				list.get(i).setSettleDate(year + "-" + month3 + "-10");
+			} else {
+				// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+				year = list.get(i).getSettleDate().substring(0, 4); // 2022
+				month4 = Integer.parseInt(list.get(i).getSettleDate().substring(5, 7)) + 1;
+				
+				list.get(i).setSettleDate(year + "-" + month4 + "-10");
+			}
+		}		
 		
 		model.addAttribute("list", list);
 		
@@ -66,7 +151,24 @@ public class CWS_SettlementController {
 	@RequestMapping(value="sellerBillModal.bo")
 	public CWS_Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate) {
 		
-		CWS_Settlement modalRequest = new CWS_Settlement(sellerName, settleDate);
+		String month1;
+		int month2;
+		String settleDate2;
+		
+		String requestDate = settleDate.substring(5, 7); // 정산월만 (01~12)
+		
+		if (requestDate.equals("01")) {
+			month1 = "12";
+			settleDate2 = settleDate.substring(0, 5) + month1;
+		} else if(requestDate.equals("12") || requestDate.equals("11")){
+			month2 = Integer.parseInt(settleDate.substring(5, 7)) - 1;
+			settleDate2 = settleDate.substring(0, 5) + month2;
+		} else {
+			month2 = Integer.parseInt(settleDate.substring(5, 7)) - 1;
+			settleDate2 = settleDate.substring(0, 5) + "0" + month2;
+		}
+		
+		CWS_Settlement modalRequest = new CWS_Settlement(sellerName, settleDate2);
 		
 		CWS_Settlement result = settlementService.sellerBillModal(modalRequest);
 		

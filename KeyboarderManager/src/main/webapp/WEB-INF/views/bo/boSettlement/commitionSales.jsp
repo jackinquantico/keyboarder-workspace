@@ -182,10 +182,10 @@
 				<hr class="formHr">
 					<div id="searchConditions">
 						<div id="searchCondition1">입점사</div>
-						<input type="hidden" id="searchSellerName" name="searchSellerName" value="${ list.get(0).getSellerName() }"> <!-- 검색 키워드를 유지하기 위한 요소 (추후 구현) -->
 						<div class='v-line'></div>
 						<div id="searchCondition2">
 							<select id="sellerList" name="seller">
+								<option value="allStore">전체</option>
 								<c:forEach var="sl" items="${ sellerList }">
 									<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
 								</c:forEach>
@@ -193,7 +193,6 @@
 						</div>
 						<div class='v-line' id="v-line2"></div>
 						<div id="searchCondition3">정산년월</div>
-						<input type="hidden" id="searchSettleDate" name="searchSettleDate" value="${ list.get(0).getSettleDate() }"> <!-- 검색 키워드를 유지하기 위한 요소 (추후 구현)  -->
 						<div class='v-line' id="v-line3"></div>
 						<div id="searchCondition4">
 							<input type="month" id="settleDate" name="searchSettlementDate">
@@ -238,25 +237,35 @@
 							<td width="%">매출액</td>
 						</thead>
 						<tbody>
-							<% int i = 0; %>
-							<c:forEach var="sl1" items="${ list }" varStatus="status" >
-								<tr id="settlement${status.index}">
-									<td>${ sl1.sellerNo }</td>
-									<td><input type="hidden" class="modalsHidden1" value="${ sl1.sellerName }">${ sl1.sellerName }</td>
-									<td><input type="hidden" class="modalsHidden2" value="${ sl1.settleDate }">${ sl1.settleDate }</td>
-									<td>${ sl1.realPayPrice }</td>
-									<td>${ sl1.orderPrice }</td>
-									<td>${ sl1.scouponPrice }</td>
-									<td>${ sl1.kcouponPrice }</td>
-									<td>
-										<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
-										상세보기
-										</a>
-									</td>
-									<td>${ sl1.sales }</td>
-								</tr>
-								<% i++; %>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${ not empty list }">
+									<% int i = 0; %>
+									<c:forEach var="sl1" items="${ list }" varStatus="status" >
+										<tr id="settlement${status.index}">
+											<td>${ sl1.sellerNo }</td>
+											<td><input type="hidden" class="modalsHidden1" value="${ sl1.sellerName }">${ sl1.sellerName }</td>
+											<td><input type="hidden" class="modalsHidden2" value="${ sl1.settleDate }">${ sl1.settleDate }</td>
+											<td>${ sl1.realPayPrice }</td>
+											<td>${ sl1.orderPrice }</td>
+											<td>${ sl1.scouponPrice }</td>
+											<td>${ sl1.kcouponPrice }</td>
+											<td>
+												<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
+												상세보기
+												</a>
+											</td>
+											<td>${ sl1.sales }</td>
+										</tr>
+										<% i++; %>
+									</c:forEach>								
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td colspan="9">조회된 결과가 없습니다.</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+
 						</tbody>
 					</table>
 				    <!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->

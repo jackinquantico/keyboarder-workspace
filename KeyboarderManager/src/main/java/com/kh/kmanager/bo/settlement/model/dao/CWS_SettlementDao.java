@@ -34,7 +34,13 @@ public class CWS_SettlementDao {
 	
 	public ArrayList<CWS_Settlement> searchSellerCommition(SqlSessionTemplate sqlSession, CWS_Settlement searchCondition) {
 		
-		 ArrayList<CWS_Settlement> list = (ArrayList)sqlSession.selectList("boSettlement-mapper.searchSellerCommition", searchCondition);
+		ArrayList<CWS_Settlement> list;
+		
+		if(searchCondition.getSellerName().equals("allStore")) {
+			list = (ArrayList)sqlSession.selectList("boSettlement-mapper.searchAllStoreCommition", searchCondition);
+		} else {
+			list = (ArrayList)sqlSession.selectList("boSettlement-mapper.searchSellerCommition", searchCondition);
+		}
 		
 		for(int i = 0; i < list.size(); i++) {
 			
