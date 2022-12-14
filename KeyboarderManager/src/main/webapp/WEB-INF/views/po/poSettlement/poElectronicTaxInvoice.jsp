@@ -8,7 +8,7 @@
 
     <style>
         div{
-            border: 1px solid red;
+            /* border: 1px solid red; */
             box-sizing: border-box;
             margin: auto;
         }
@@ -21,6 +21,23 @@
 		#electronic-list>tbody>tr{
 			height: 30px;
 			text-align: center;
+		}
+		
+		.electronic-information-notice{
+			width: 92%;
+			height: 235px;
+			overflow: scroll;
+		}
+		
+		#electronic-list{
+		    border: 0px;
+		    border-collapse: collapse;	
+		}
+		
+		#electronic-list>thead>tr{
+			position: sticky;
+		    top: 0px;
+		    background-color: lightgray !important;	
 		}
         
     </style>
@@ -53,13 +70,6 @@
 		                    <input type="date">
 		                </div>
 		                <hr style="background-color: orange; width: 92%;">
-		                <div id="electronic-period">
-		                    <div style="display: inline-block; margin-left: 4%; font-size: 20px; padding: 20px 50px; margin: 0px; width: 20%;">계산서 종류</div>
-		                    <select style="margin-left: 5%;">
-		                        <option>계산서종류는</option>
-		                        <option>뭐가있을까?</option>
-		                    </select>
-		                </div>
 		                <div id="electronic-button" align="center">
 		                    <button type="button" class="btn btn-outline-success" style="margin-top: 17px; width: 20%; font-size: 17px;">
 		                        	검색하기
@@ -77,7 +87,7 @@
 		            <hr style="height: 3px; background-color: green; width: 92%;">
 		            <div class="electronic-information-notice">
 		                <form>
-		                    <table border="1" width="92%" id="electronic-list" align="center">
+		                    <table border="1" width="100%" id="electronic-list" align="center">
 		                        <thead>
 		                            <tr>
 		                                <th width="15%">정산기간</th>
@@ -91,7 +101,47 @@
 		                        <tbody>
 		                            <tr>
 		                                <td>2022-11-01 ~ 2022-12-01</td>
-		                                <td>계산서 종류 무엇?</td>
+		                                <td>매입</td>
+		                                <td>3000000</td>
+		                                <td>5000000</td>
+		                                <td>1000000</td>
+		                                <td><a href="#">세금계산서 확인</a></td>
+		                            </tr>
+		                            <tr>
+		                                <td>2022-11-01 ~ 2022-12-01</td>
+		                                <td>매입</td>
+		                                <td>3000000</td>
+		                                <td>5000000</td>
+		                                <td>1000000</td>
+		                                <td><a href="#">세금계산서 확인</a></td>
+		                            </tr>
+		                            <tr>
+		                                <td>2022-11-01 ~ 2022-12-01</td>
+		                                <td>매입</td>
+		                                <td>3000000</td>
+		                                <td>5000000</td>
+		                                <td>1000000</td>
+		                                <td><a href="#">세금계산서 확인</a></td>
+		                            </tr>
+		                            <tr>
+		                                <td>2022-11-01 ~ 2022-12-01</td>
+		                                <td>매입</td>
+		                                <td>3000000</td>
+		                                <td>5000000</td>
+		                                <td>1000000</td>
+		                                <td><a href="#">세금계산서 확인</a></td>
+		                            </tr>
+		                            <tr>
+		                                <td>2022-11-01 ~ 2022-12-01</td>
+		                                <td>매입</td>
+		                                <td>3000000</td>
+		                                <td>5000000</td>
+		                                <td>1000000</td>
+		                                <td><a href="#">세금계산서 확인</a></td>
+		                            </tr>
+		                            <tr>
+		                                <td>2022-11-01 ~ 2022-12-01</td>
+		                                <td>매입</td>
 		                                <td>3000000</td>
 		                                <td>5000000</td>
 		                                <td>1000000</td>

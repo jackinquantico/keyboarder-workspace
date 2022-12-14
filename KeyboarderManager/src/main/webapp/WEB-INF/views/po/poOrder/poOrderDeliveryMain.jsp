@@ -105,20 +105,21 @@
         .delivery-information-notice{
             width: 100%;
             height: 85%;
-        }
-        
-        .delivery-information-notice{
-        	overflow: scroll;
+            overflow: scroll;
         }
 
         #delivery-list{
-            border-collapse: collapse;
+            border: 0px;
+		    border-collapse: collapse;
         }
 
-        #delivery-list>thead>tr>th{
+        #delivery-list>thead>tr{
             font-size: 16px;
             height: 30px;
             text-align: center;
+            position: sticky;
+		    top: 0px;
+		    background-color: lightgray !important;
         }
 
         #delivery-list>tbody>tr>td{
