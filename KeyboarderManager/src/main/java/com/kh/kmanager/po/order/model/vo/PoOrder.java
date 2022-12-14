@@ -16,7 +16,7 @@ import lombok.ToString;
 public class PoOrder {
 
 	private String orderNo; // 주문번호
-	private Date orderDate; // 주문일시
+	private String orderDate; // 주문일시
 	private int orderPrice; // 주문금액
 	private String couponYN; // 쿠폰사용여부
 	private String orderStatus; //구매상태
@@ -45,5 +45,11 @@ public class PoOrder {
 	private String searchDecisionDate; // 기간조회검색
 	private String searchDate;
 	
+	private String conPhone;
+	private int commission;
+
+	private int productPrice; // 상품 가격
+	private int keyCouponPrice; // PO 쿠폰 가격
+	private int stoCouponPrice; // BO 쿠폰 가격	
 
 }

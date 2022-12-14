@@ -24,6 +24,24 @@
 		<result column="SETTLE_DEPT" property="settleDept"/>
 	</resultMap>
 	
+	<resultMap id="deliveryOrderResultSet" type="poOrder">
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="ORD_ORDER_DATE" property="orderDate" />
+		<result column="ORDER_PRICE" property="orderPrice" />
+		<result column="COUPON_YN" property="couponYN" />
+		<result column="ORDER_STATUS" property="orderStatus" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="CON_NO" property="conNo" />
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRICE" property="productPrice" />
+		<result column="K_COUPON_PRICE" property="keyCouponPrice" />
+		<result column="S_COUPON_PRICE" property="stoCouponPrice" />
+		<result column="CON_NAME" property="conName" />
+		<result column="CON_ID" property="conId" />
+		<result column="CON_PHONE" property="conPhone" />
+		<result column="COMMITION" property="commition" />
+	</resultMap>
+	
 	<!-- 구매확정내역 전체조회(해당월)-장미 -->
 	<select id="selectDecisionOrder"  parameterType="string" resultMap="poorderResultSet">
 		SELECT *
@@ -135,5 +153,69 @@
 		<!-- 	
 		<select id="selectAllOrderList" parameterType="hashmap" resultMap="">
 		</select> -->
+		
+		<select id="orderStatus1" parameterType="_int" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{selNo}
+			  AND ORDER_STATUS = '1'
+		</select>
+		
+		<select id="orderStatus2" parameterType="_int" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{selNo}
+			  AND ORDER_STATUS = '2'
+		</select>
+		
+		<select id="orderStatus3" parameterType="_int" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{selNo}
+			  AND ORDER_STATUS = '3'
+		</select>
+		
+		<select id="orderStatus4" parameterType="_int" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{selNo}
+			  AND ORDER_STATUS = '4'
+		</select>
+		
+		<select id="orderCount" parameterType="_int" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{selNo}
+		</select>
+		
+		<select id="orderList" parameterType="_int" resultMap="deliveryOrderResultSet">
+			SELECT DISTINCT ORD.ORDER_NO
+			     , ORD.ORDER_STATUS
+			     , ORD.ORDER_PRICE
+			     , TO_CHAR(ORD.ORDER_DATE, 'YY-MM-DD') AS "ORD_ORDER_DATE"
+			     , PRO.PRODUCT_NO
+			     , PRO.PRODUCT_NAME
+			     , PRO.PRICE
+			     , CONS.CON_ID
+			     , CONS.CON_NAME
+			     , CONS.CON_PHONE
+			     , KCOU.COUPON_PRICE AS "K_COUPON_PRICE"
+			     , SCOU.COUPON_PRICE AS "S_COUPON_PRICE"
+			     , ORD.ORDER_PRICE * 0.15 AS "COMMISSION"
+			FROM ORDERS ORD
+			LEFT JOIN PRODUCT PRO ON (ORD.PRODUCT_NO = PRO.PRODUCT_NO)
+			LEFT JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
+			LEFT JOIN KEYBOARDER_USE KUSE ON (ORD.ORDER_NO = KUSE.ORDER_NO)
+			LEFT JOIN STORE_USE SUSE ON(ORD.ORDER_NO = SUSE.ORDER_NO)
+			LEFT JOIN COUPON_KEYBOARDER KCOU ON (KUSE.COUPON_NO = KCOU.COUPON_NO)
+			LEFT JOIN COUPON_STORE SCOU ON (SUSE.COUPON_NO = SCOU.COUPON_NO)
+			WHERE PRO.SELLER_NO = #{selNo}
+			ORDER BY ORD_ORDER_DATE DESC
+		</select>
 
 </mapper>

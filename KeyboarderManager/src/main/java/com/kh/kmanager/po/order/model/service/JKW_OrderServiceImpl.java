@@ -1,10 +1,13 @@
 package com.kh.kmanager.po.order.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.kmanager.po.order.model.dao.JKW_OrderDao;
+import com.kh.kmanager.po.order.model.vo.PoOrder;
 
 @Service
 public class JKW_OrderServiceImpl implements JKW_OrderService {
@@ -43,6 +46,12 @@ public class JKW_OrderServiceImpl implements JKW_OrderService {
 	public int orderCount(int selNo) {
 		
 		return JKW_OrderDao.orderCount(sqlSession, selNo);
+	}
+
+	@Override
+	public ArrayList<PoOrder> orderList(int selNo) {
+		
+		return JKW_OrderDao.orderList(sqlSession, selNo);
 	}
 
 }
