@@ -32,16 +32,16 @@ public class PGDataController {
 		// 쿠폰종류별 수수료 계산
 		int commition = 0;
 		if (pgd.getCouponNo().charAt(0) == 'X') { // 쿠폰 없음
-			commition = (int)(pgd.getPaymentBill() * 0.15);
+			commition = (int)(pgd.getOrderPrice() * 0.15);
 		} else if (pgd.getCouponNo().charAt(0) == 'k') { // 스토어 쿠폰
-			commition = (int)(pgd.getPaymentBill() * 0.15);
+			commition = (int)(pgd.getOrderPrice() * 0.15);
 		} else { // 키보더 쿠폰
-			commition = (int)(pgd.getPaymentBill() * 0.15) - pgd.getCouponPrice();
+			commition = (int)(pgd.getOrderPrice() * 0.15) - pgd.getCouponPrice();
 		}
 		
 		pgd.setCommition(commition); // 수수료
 		
-		pgd.setSettleDept(pgd.getPaymentBill() - pgd.getCommition()); // 정산금액
+		pgd.setSettleDept(pgd.getOrderPrice() - pgd.getCommition()); // 정산금액
 		pgd.setSupplyValue((int)(pgd.getPaymentBill() / 1.1)); // 공급가액
 		pgd.setTaxAmount(pgd.getPaymentBill() - pgd.getSupplyValue()); // 세액
 		
@@ -56,7 +56,7 @@ public class PGDataController {
 		}
 		
 		if (result > 0) {
-			session.setAttribute("alertMsg", "결제 완료");
+			session.setAttribute("alertMsg", "상품의 결제가 완료되었습니다.");
 			return "redirect:/foProductNotice.pro";
 		} else {
 			session.setAttribute("alertMsg", "결제 실패");
