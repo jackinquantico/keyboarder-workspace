@@ -33,5 +33,9 @@ public class PoSettlementDao {
 	public ArrayList<Settlement>selectSettleSumList(SqlSessionTemplate sqlSession,PoOrder o) {
 		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleSumList", o);
 	}
+	
+	public ArrayList<Settlement> selectSettleTotalList(SqlSessionTemplate sqlSession, int sellerNo) {
+		return (ArrayList)sqlSession.selectList("settlementMapper.selectSettleTotalList", sellerNo);
+	}
 
 }

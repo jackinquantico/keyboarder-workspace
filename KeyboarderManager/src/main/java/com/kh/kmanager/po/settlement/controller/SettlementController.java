@@ -117,7 +117,10 @@ public class SettlementController {
 	 * @return
 	 */
 	@RequestMapping("list.se")
-	public String selectSettleList() {
+	public String selectSettleList(HttpSession session, Model model) {
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		ArrayList<Settlement> list = settlementService.selectSettleTotalList(sellerNo);
+		model.addAttribute("list", list);
 		return "po/poSettlement/poSettlementTotalListView";
 	}
 	

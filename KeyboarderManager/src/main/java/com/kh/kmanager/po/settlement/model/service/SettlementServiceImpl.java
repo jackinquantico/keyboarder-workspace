@@ -59,6 +59,14 @@ public class SettlementServiceImpl implements SettlementService {
 		return settlementDao.selectSettleSumList(sqlSession, o);
 		}
 
+	/**
+	 * 정산내역전체조회 - 장미
+	 */
+	@Override
+	public ArrayList<Settlement> selectSettleTotalList(int sellerNo) {
+		return settlementDao.selectSettleTotalList(sqlSession, sellerNo);
+	}
+
 	
 	}
 

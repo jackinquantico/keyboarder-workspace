@@ -44,6 +44,11 @@ public class PoOrderSerivceImpl implements PoOrderService{
 	public ArrayList<PoOrder> selectAllOrderList(HashMap<String, String> optionDefault) {
 		return orderDao.selectAllOrderList(sqlSession, optionDefault);
 	}
+
+	@Override
+	public ArrayList<PoOrder> orderDecisionList(int sellerNo) {
+		return orderDao.orderDecisionList(sqlSession, sellerNo);
+	}
 	
 
 }

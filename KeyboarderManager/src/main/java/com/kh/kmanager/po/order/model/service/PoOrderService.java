@@ -16,4 +16,7 @@ public interface PoOrderService {
 	// 현재 월의 전체주문내역 리스트 조회 서비스
 	int selectListCount(HashMap<String, String> optionDefault); // 해당 PO의 현재 월의 주문내역 총 개수
 	ArrayList<PoOrder> selectAllOrderList(HashMap<String, String> optionDefault); // 해당 PO의 현재 월의 주문내역 리스트 
+
+	// 엑셀다운로드
+	ArrayList<PoOrder> orderDecisionList(int sellerNo);
 }

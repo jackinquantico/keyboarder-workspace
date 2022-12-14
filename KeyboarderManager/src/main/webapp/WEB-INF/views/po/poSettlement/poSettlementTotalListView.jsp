@@ -112,11 +112,11 @@
 	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" align="center"></td>
 	                        <td>${s.price }</td>
 	                        <td>2500원</td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
+	                        <td>${ s.paymentBill }</td>
+	                        <td>${ s.commition }</td>
+	                        <td>${ s.keyCouponPrice }</td>
+	                        <td>${ s.marketCouponPrice }</td>
+	                        <td>${ s.settleDept }</td>
                     </tr>
                 	</c:forEach>
                 </tbody>

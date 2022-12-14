@@ -98,7 +98,9 @@
        <br><br>
        
         <div id="decisionList">
-        	 <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;" onclick="download();">
+            <form action="excelDownloadDecision.po">
+                <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+            </form>
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
@@ -112,7 +114,7 @@
                         <th width="8%">구매자명</th>
                     </tr>
                 </thead>
-                 <tbody style="background-color : white;">
+                <tbody style="background-color : white;">
                     <c:forEach var="o" items="${ list }" >
                     	<tr>
                         <td align="center">${ o.orderNo }</td>
@@ -126,7 +128,7 @@
                     </tr>
                     </c:forEach>
                 </tbody>
-                 <br><br><br>
+                <br><br><br>
             </table>
         </div>
     </div>

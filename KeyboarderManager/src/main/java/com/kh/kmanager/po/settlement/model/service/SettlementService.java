@@ -24,5 +24,6 @@ public interface SettlementService {
 	//정산 합산 내역 조회-성진
 	public ArrayList<Settlement> selectSettleSumList(PoOrder o);
 	
-	
+	// 정산내역전제조회 - 장미
+	public ArrayList<Settlement> selectSettleTotalList(int sellerNo);
 }

@@ -43,5 +43,10 @@ public class PoOrderDao {
 		return (ArrayList)sqlSession.selectList("poorderMapper.selectAllOrderList", optionDefault);
 	}
 	
+	// 구매확정내역 엑셀다운로드
+	public ArrayList<PoOrder> orderDecisionList(SqlSessionTemplate sqlSession, int sellerNo) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.orderDecisionList", sellerNo);
+	}
+	
 	
 }
