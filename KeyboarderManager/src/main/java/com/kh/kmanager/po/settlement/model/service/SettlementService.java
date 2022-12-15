@@ -26,4 +26,7 @@ public interface SettlementService {
 	
 	// 정산내역전제조회 - 장미
 	public ArrayList<Settlement> selectSettleTotalList(int sellerNo);
+	
+	// 전자세금계산서 조회 - 건우
+	ArrayList<Settlement> selectElectronicList(int selNo);
 }

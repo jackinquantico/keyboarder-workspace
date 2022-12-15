@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,54 +100,16 @@
 		                            </tr>
 		                        </thead>
 		                        <tbody>
+		                        	<c:forEach var="elec" items="${ elecList }">
 		                            <tr>
-		                                <td>2022-11-01 ~ 2022-12-01</td>
+		                                <td>${ elec.settleDate }</td>
 		                                <td>매입</td>
 		                                <td>3000000</td>
-		                                <td>5000000</td>
-		                                <td>1000000</td>
+		                                <td>${ elec.supplyValue }</td>
+		                                <td>${ elec.taxAmount }</td>
 		                                <td><a href="#">세금계산서 확인</a></td>
 		                            </tr>
-		                            <tr>
-		                                <td>2022-11-01 ~ 2022-12-01</td>
-		                                <td>매입</td>
-		                                <td>3000000</td>
-		                                <td>5000000</td>
-		                                <td>1000000</td>
-		                                <td><a href="#">세금계산서 확인</a></td>
-		                            </tr>
-		                            <tr>
-		                                <td>2022-11-01 ~ 2022-12-01</td>
-		                                <td>매입</td>
-		                                <td>3000000</td>
-		                                <td>5000000</td>
-		                                <td>1000000</td>
-		                                <td><a href="#">세금계산서 확인</a></td>
-		                            </tr>
-		                            <tr>
-		                                <td>2022-11-01 ~ 2022-12-01</td>
-		                                <td>매입</td>
-		                                <td>3000000</td>
-		                                <td>5000000</td>
-		                                <td>1000000</td>
-		                                <td><a href="#">세금계산서 확인</a></td>
-		                            </tr>
-		                            <tr>
-		                                <td>2022-11-01 ~ 2022-12-01</td>
-		                                <td>매입</td>
-		                                <td>3000000</td>
-		                                <td>5000000</td>
-		                                <td>1000000</td>
-		                                <td><a href="#">세금계산서 확인</a></td>
-		                            </tr>
-		                            <tr>
-		                                <td>2022-11-01 ~ 2022-12-01</td>
-		                                <td>매입</td>
-		                                <td>3000000</td>
-		                                <td>5000000</td>
-		                                <td>1000000</td>
-		                                <td><a href="#">세금계산서 확인</a></td>
-		                            </tr>
+		                            </c:forEach>
 		                        </tbody>
 		                    </table>
 		                </form> 

@@ -38,4 +38,9 @@ public class PoSettlementDao {
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectSettleTotalList", sellerNo);
 	}
 
+	public ArrayList<Settlement> selectElectronicList(SqlSessionTemplate sqlSession, int selNo) {
+		
+		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
+	}
+
 }

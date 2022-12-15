@@ -21,6 +21,12 @@
 		
 	</resultMap>
 	
+	<resultMap id="settlementElectronicResultSet" type="settlement">
+		<result column="SETTLE_DATE" property="settleDate" />
+		<result column="TAX_AMOUNT" property="taxAmount" />
+		<result column="SUPPLY_VALUE" property="supplyValue" />
+	</resultMap>
+	
 
 	
 	
@@ -82,6 +88,17 @@
 		from withdraw
 		where seller_no = #{sellerNo}
 		and req_result = 'N') d
+	</select>
+	
+	<select id="selectElectronicList" parameterType="_int" resultMap="settlementElectronicResultSet">
+		SELECT SETTLE_DATE, SUM(TAX_AMOUNT) TAX_AMOUNT, SUM(SUPPLY_VALUE) SUPPLY_VALUE
+		FROM(SELECT TO_CHAR(SETTLE_DATE, 'YYYY-MM') SETTLE_DATE
+		     , TAX_AMOUNT
+		     , SUPPLY_VALUE
+		FROM SETTLEMENT
+		WHERE SELLER_NO = #{selNo})
+		GROUP BY SETTLE_DATE
+		ORDER BY SETTLE_DATE DESC
 	</select>
 	
 </mapper>

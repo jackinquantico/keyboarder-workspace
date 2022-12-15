@@ -24,7 +24,7 @@ public class Settlement {
 	
 	private int sellerNo;  //판매자
 	private String orderNo; //주문번호
-	private Date settleDate; // 정산일
+	private String settleDate; // 정산일
 	private int commition; // 수수료금액
 	private int settleDept; // 정산금액
 	private int taxAmount; // 세액

@@ -281,11 +281,7 @@ public class JKW_PoOrderController {
 	    response.getOutputStream().close();
 	}
 	
-	@RequestMapping("electronicTaxInvoice.poOrder")
-	public String electronicTaxInvoice() {
-		
-		return "po/poSettlement/poElectronicTaxInvoice";
-	}
+	
 	
 }
 

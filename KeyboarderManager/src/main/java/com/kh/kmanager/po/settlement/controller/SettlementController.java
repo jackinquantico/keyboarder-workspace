@@ -175,4 +175,51 @@ public class SettlementController {
 		return "po/poSettlement/poSettlementDetailList";
 	}
 
+	@RequestMapping("electronicTaxInvoice.po")
+	public String electronicTaxInvoice(HttpSession session, Model model) {
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		int selNo = m.getSellerNo();
+		
+		ArrayList<Settlement> elecList = settlementService.selectElectronicList(selNo);
+		
+		model.addAttribute("elecList", elecList);
+		
+		return "po/poSettlement/poElectronicTaxInvoice";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

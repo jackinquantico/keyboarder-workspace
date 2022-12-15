@@ -67,6 +67,15 @@ public class SettlementServiceImpl implements SettlementService {
 		return settlementDao.selectSettleTotalList(sqlSession, sellerNo);
 	}
 
+	/**
+	 * 전자세금계산서 조회 - 건우
+	 */
+	@Override
+	public ArrayList<Settlement> selectElectronicList(int selNo) {
+		
+		return settlementDao.selectElectronicList(sqlSession, selNo);
+	}
+
 	
 	}
 

@@ -236,11 +236,9 @@
 		                <div id="delivery-information-main" style="border: 2px solid black;">
 		                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>       
 		                    <div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ orderCount }&nbsp</div>
-		                    <a href="excelDownload.poOrder">    
-			                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;">
-			                    	엑셀다운로드
-			                    </button>
-		                    </a>       
+		                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
+		                    	엑셀다운로드
+		                    </button>
 		                </div>
 		            </div>
 		            <div class="delivery-information-notice" style="border: 2px solid black;">
