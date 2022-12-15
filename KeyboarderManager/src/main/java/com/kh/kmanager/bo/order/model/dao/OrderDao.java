@@ -18,21 +18,19 @@ public class OrderDao {
 		return sqlSession.selectOne("boOrderMapper.selectListCount_default", nowMonth);
 	}
 	
-	public ArrayList<Order> selectAllOrderList(SqlSessionTemplate sqlSession) {
-		
-		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+	public ArrayList<Order> selectAllOrderList(SqlSessionTemplate sqlSession, String nowMonth) {
 		
 		return (ArrayList)sqlSession.selectList("boOrderMapper.selectAllOrderList", nowMonth);
 	}
 	
-	public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, String> optionDate) {
+	public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, String> option) {
 		
-		return sqlSession.selectOne("boOrderMapper.selectListCount", optionDate);
+		return sqlSession.selectOne("boOrderMapper.selectListCount", option);
 	}
 	
-	public ArrayList<Order> selectOrderList(SqlSessionTemplate sqlSession, HashMap<String, String> optionDate) {
+	public ArrayList<Order> selectOrderList(SqlSessionTemplate sqlSession, HashMap<String, String> option) {
 		
-		return (ArrayList)sqlSession.selectList("boOrderMapper.selectOrderList", optionDate);
+		return (ArrayList)sqlSession.selectList("boOrderMapper.selectOrderList", option);
 	}
 	
 }

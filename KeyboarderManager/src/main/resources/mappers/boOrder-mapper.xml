@@ -58,6 +58,9 @@
 		  FROM ORDERS
 		 WHERE TO_DATE(TO_CHAR(ORDER_DATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')
 		 	   BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+			<if test="orderNo != ''">
+				AND ORDER_NO LIKE '%' || #{orderNo} || '%'
+			</if>
 	</select>
 	
 	<select id="selectOrderList" parameterType="hashmap" resultMap="boOrderResultSet">
@@ -69,14 +72,13 @@
 		             , S.SELLER_NAME "SELLER_NAME"
 		             , CON.CON_NAME "CON_NAME"
 		             , O.ORDER_PRICE "ORDER_PRICE"
-		             , NVL(C_STO.COUPON_PRICE, 0) "STORE_COUPON_PRICE" -- 스토어쿠폰
-		             , NVL(C_KEY.COUPON_PRICE, 0) "KEYBOARDER_COUPON_PRICE" -- 키보더쿠폰 
+		             , NVL(C_STO.COUPON_PRICE, 0) "STORE_COUPON_PRICE" <!-- 스토어쿠폰 -->
+		             , NVL(C_KEY.COUPON_PRICE, 0) "KEYBOARDER_COUPON_PRICE" <!-- 키보더쿠폰 --> 
 		             , PAY.PAYMENT_BILL "PAYMENT_BILL"
-		             , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 -- 스토어쿠폰을 사용한경우
-		                    WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 - C_KEY.COUPON_PRICE -- 키보더쿠폰을 사용한경우
-		                    ELSE PAY.PAYMENT_BILL * 0.15 -- 아무것도 안쓴경우
+		             , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 <!-- 스토어쿠폰을 사용한경우 -->
+		                    WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 - C_KEY.COUPON_PRICE <!-- 키보더쿠폰을 사용한경우 -->
+		                    ELSE PAY.PAYMENT_BILL * 0.15 <!-- 아무것도 안쓴경우 -->
 		                END "COMMISSION"
-		             , TO_DATE(TO_CHAR(O.ORDER_DATE, 'YYYY-MM-DD'), 'YYYY-MM-DD') "ODATE"
 		          FROM ORDERS O
 		          JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
 		          JOIN CONSUMER CON ON (CON.CON_NO = O.CON_NO)
@@ -88,7 +90,11 @@
 		          LEFT JOIN KEYBOARDER_USE KEY_U ON (KEY_U.ORDER_NO = O.ORDER_NO)
 		          LEFT JOIN COUPON_KEYBOARDER C_KEY ON (C_KEY.COUPON_NO = KEY_U.COUPON_NO)
 		          ORDER BY O.ORDER_DATE DESC) A
-		 WHERE A.ODATE BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+		 WHERE TO_DATE(ORDER_DATE, 'YYYY-MM-DD')
+		 	   BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+			<if test="orderNo != ''">
+				AND ORDER_NO LIKE '%' || #{orderNo} || '%'	
+			</if>
 	</select>
 
 

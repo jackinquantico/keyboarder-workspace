@@ -35,28 +35,29 @@
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간 *</th>
 						<td width="10%">
-							<select>
-								<option>전체</option>
-								<option onclick="optionDate(1);">1주일</option>
-								<option onclick="optionDate(2);">1개월</option>
+							<select id="selectbox_date">
+								<option selected></option>
+								<option value="1week">1주일</option>
+								<option value="1month">1개월</option>
+								<option value="3month">3개월</option>
 							</select>
 						</td>
 						<td width="10%">
-							<input type="date" id="currentDate" name="currentDate">
+							<input type="date" id="currentDate" name="currentDate" value="">
 						</td>
 						<td width="3px" style="text-align:center">~</td>
 						<td>
-							<input type="date" id="endDate" name="endDate">
+							<input type="date" id="endDate" name="endDate" value="">
 						</td>
 						<td width="10%"></td>
 					</tr>
 					<tr>
 						<th style="padding-left: 20px;">주문번호</th>
 						<td colspan="4">
-							<input type="text" style="width:100%" placeholder="주문번호를 입력해주세요">
+							<input type="text" style="width:100%" placeholder="주문번호를 입력해주세요" id="search_orderNo">
 						</td>
 						<td>
-							<button id="search_btn" onclick="searchFormSubmit(1);">검색</button>
+							<button id="search_btn" onclick="searchFormSubmit();">검색</button>
 						</td>
 					</tr>
 					<tr>
@@ -138,52 +139,88 @@
 		</div>
 		
 		<script>
-			function optionDate(num) {
+			var today = new Date();
+			var today_str = today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2);
+			
+			$("#selectbox_date").change(function() {
 				
-				if(num == 1) {
+				if($(this).val() == "1week") {
+					var week = new Date(today_str);
+					week.setDate(week.getDate() - 7);
+					var week_str = week.getFullYear() + "-" + ("0"+(week.getMonth() + 1)).slice(-2) + "-" + ("0"+week.getDate()).slice(-2);
 					
-					// $("#currentDate").val(new Date());
+					$("#currentDate").val(week_str);
+					$("#endDate").val(today_str);
+					
+				} else if($(this).val() == "1month") {
+					var month = new Date(today_str);
+					month.setMonth(month.getMonth() - 1);
+					var month_str = month.getFullYear() + "-" + ("0"+(month.getMonth() + 1)).slice(-2) + "-" + ("0"+month.getDate()).slice(-2);
+					
+					$("#currentDate").val(month_str);
+					$("#endDate").val(today_str);
+					
+				} else if($(this).val() == "3month") {
+					var month3 = new Date(today_str);
+					month3.setMonth(month3.getMonth() - 3);
+					var month3_str = month3.getFullYear() + "-" + ("0"+(month3.getMonth() + 1)).slice(-2) + "-" + ("0"+month3.getDate()).slice(-2);
+					
+					$("#currentDate").val(month3_str);
+					$("#endDate").val(today_str);
+					
+				} else {
+					$("#currentDate").val("");
+					$("#endDate").val("");
+					
 				}
-			}
+			});
 		</script>
 		
 		<script>
 			function searchFormSubmit() {
 				
-				$.ajax({
-					url : "option_date.bo",
-					data : {currentDate:$("#currentDate").val(),
-							endDate:$("#endDate").val()},
-					success : function(result) {
-						
-						var resultStr = "";
-						
-						for(var i = 0; i < result.length; i++) {
+				if($("#currentDate").val() != "" && $("#endDate").val() != "") {
+					
+					$.ajax({
+						url : "option_date.bo",
+						data : {currentDate:$("#currentDate").val(),
+								endDate:$("#endDate").val(),
+								search_orderNo:$("#search_orderNo").val()
+								},
+						success : function(result) {
 							
-							resultStr += "<tr>"
-											+ "<td><input type='checkbox'></td>"
-											+ "<td>" + result[i].buyConfirmDate + "</td>"
-											+ "<td>" + result[i].orderDate + "</td>"
-											+ "<td>" + result[i].orderNo + "</td>"
-											+ "<td>" + result[i].productName + "</td>"
-											+ "<td>" + result[i].sellerName + "</td>"
-											+ "<td>" + result[i].conName + "</td>"
-											+ "<td>" + result[i].orderPrice + "</td>"
-											+ "<td>" + result[i].poCouponPrice + "</td>"
-											+ "<td>" + result[i].boCouponPrice + "</td>"
-											+ "<td>" + result[i].paymentBill + "</td>"
-											+ "<td>" + result[i].commission + "</td>"
-											+ "<td>카드</td>"
-										+ "</tr>"
+							var resultStr = "";
+							
+							for(var i = 0; i < result.length; i++) {
+								
+								resultStr += "<tr>"
+												+ "<td><input type='checkbox'></td>"
+												+ "<td>" + result[i].buyConfirmDate + "</td>"
+												+ "<td>" + result[i].orderDate + "</td>"
+												+ "<td>" + result[i].orderNo + "</td>"
+												+ "<td>" + result[i].productName + "</td>"
+												+ "<td>" + result[i].sellerName + "</td>"
+												+ "<td>" + result[i].conName + "</td>"
+												+ "<td>" + result[i].orderPrice + "</td>"
+												+ "<td>" + result[i].poCouponPrice + "</td>"
+												+ "<td>" + result[i].boCouponPrice + "</td>"
+												+ "<td>" + result[i].paymentBill + "</td>"
+												+ "<td>" + result[i].commission + "</td>"
+												+ "<td>카드</td>"
+											+ "</tr>"
+							}
+							
+							$("#result_table>tbody").html(resultStr);
+							$("#result_count").html("주문건&nbsp;&nbsp;" + result.length);
+						},
+						error : function() {
+							console.log("에러");
 						}
-						
-						$("#result_table>tbody").html(resultStr);
-						$("#result_count").html("주문건&nbsp;&nbsp;" + result.length);
-					},
-					error : function() {
-						console.log("에러");
-					}
-				});
+					});
+				}
+				else {
+					alert("조회기간을 입력해주세요");
+				}
 			}
 		</script>
 	

@@ -26,18 +26,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public ArrayList<Order> selectAllOrderList() {
-		return orderDao.selectAllOrderList(sqlSession);
+	public ArrayList<Order> selectAllOrderList(String nowMonth) {
+		return orderDao.selectAllOrderList(sqlSession, nowMonth);
 	}
 
 	@Override
-	public int selectListCount(HashMap<String, String> optionDate) {
-		return orderDao.selectListCount(sqlSession, optionDate);
+	public int selectListCount(HashMap<String, String> option) {
+		return orderDao.selectListCount(sqlSession, option);
 	}
 
 	@Override
-	public ArrayList<Order> selectOrderList(HashMap<String, String> optionDate) {
-		return orderDao.selectOrderList(sqlSession, optionDate);
+	public ArrayList<Order> selectOrderList(HashMap<String, String> option) {
+		return orderDao.selectOrderList(sqlSession, option);
 	}
 
 }

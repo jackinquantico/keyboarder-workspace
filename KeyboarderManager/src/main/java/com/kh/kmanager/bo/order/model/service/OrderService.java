@@ -9,9 +9,9 @@ public interface OrderService {
 
 	// 현재 월의 전체주문내역 리스트 조회 서비스
 	int selectListCount(String nowMonth); // 현재 월의 주문내역 총 개수
-	ArrayList<Order> selectAllOrderList();
+	ArrayList<Order> selectAllOrderList(String nowMonth);
 	
-	// 옵션 있을때 주문내역 리스트 조회 서비스
-	int selectListCount(HashMap<String, String> optionDate);
-	ArrayList<Order> selectOrderList(HashMap<String, String> optionDate);
+	// 검색 옵션 있을때 주문내역 리스트 조회 서비스
+	int selectListCount(HashMap<String, String> option);
+	ArrayList<Order> selectOrderList(HashMap<String, String> option);
 }

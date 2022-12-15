@@ -31,7 +31,7 @@ public class Bo_OrderController {
 		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
 		int listCount = orderService.selectListCount(nowMonth);
 		
-		ArrayList<Order> list = orderService.selectAllOrderList();
+		ArrayList<Order> list = orderService.selectAllOrderList(nowMonth);
 		
 		model.addAttribute("listCount", listCount);
 		model.addAttribute("list", list);
@@ -45,15 +45,16 @@ public class Bo_OrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="option_date.bo", produces="application/json; charset=UTF-8")
-	public String selectOrder_Option(String currentDate, String endDate, Model model) {
+	public String selectOrder_Option(String currentDate, String endDate, String search_orderNo, Model model) {
 		
-		HashMap<String, String> optionDate = new HashMap<String, String>();
-		optionDate.put("currentDate", currentDate);
-		optionDate.put("endDate", endDate);
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("currentDate", currentDate);
+		option.put("endDate", endDate);
+		option.put("orderNo", search_orderNo);
 		
-		int listCount = orderService.selectListCount(optionDate);
+		int listCount = orderService.selectListCount(option);
 		
-		ArrayList<Order> list = orderService.selectOrderList(optionDate);
+		ArrayList<Order> list = orderService.selectOrderList(option);
 		
 		model.addAttribute("listCount", listCount);
 		return new Gson().toJson(list);
