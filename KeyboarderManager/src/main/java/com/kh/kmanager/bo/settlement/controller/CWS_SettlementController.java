@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.kmanager.bo.settlement.model.service.CWS_SettlementService;
 import com.kh.kmanager.bo.settlement.model.vo.CWS_Settlement;
 import com.kh.kmanager.member.model.vo.Member;
-import com.kh.kmanager.po.order.model.vo.PoOrder;
 
 @Controller
 public class CWS_SettlementController {

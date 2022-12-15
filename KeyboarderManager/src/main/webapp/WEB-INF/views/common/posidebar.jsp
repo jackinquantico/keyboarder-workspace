@@ -197,7 +197,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="updateInfoPage.po" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>판매자 정보 수정</p>
                 </a>

@@ -324,13 +324,11 @@
                         accountNo.select(); // 재입력 유도
                         return false;
                     }
-                }
-
-       
+                } 
             </script>
             
             <script>
-                // 주소, 이메일 값 합쳐서 한번에 넘기기
+                // 주소 값 합쳐서 한번에 넘기기
                 $(function() {
                     $("#enroll-btn").click(function() {
                         var address = $("#sample6_postcode").val() + " " + $("#sample6_address").val() + $("#sample6_detailAddress").val();

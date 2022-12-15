@@ -40,6 +40,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<!-- BO - 매출통계관련 페이지 -->
 			<mapping path="/salesStatics.bo" />
 			<mapping path="/mainBarGraph.bo" />
+			<mapping path="/commitionSales.bo" />
+			<mapping path="/storeSettlement.bo" />
 			
 			<!-- BO - 입점업체관리 관련 페이지 -->
 			<mapping path="/store.bo" />
@@ -52,6 +54,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<!--  BO - 정산관리 관련 페이지 -->
 			<mapping path="/commitionSales.bo" />
 			<mapping path="/storeSettlement.bo" />
+			
+			<!-- PO - 판매 정보 수정, 탈퇴 페이지 -->
+			<mapping path="/updateInfoPage.po" />
 			
 			<!-- PO - K-money 잔액관리 페이지 -->
 			<mapping path="/kmoney.po" />
