@@ -78,27 +78,14 @@ input[type=date] {
 			           <td>
 			           		<input type="radio" checked>&nbsp;전체 &nbsp;
 			           </td>
-			    <tr>
-	        <td>쿠폰상태 *&nbsp;</td>
-	        <td>
-	   			
-	   		
-	        	<select class="form-control" id="select">
-	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="1" name="couponStmt">사용가능</option>
-	            	<option value="2" name="couponStmt">만료</option>
-	        	</select>
-	        </td>
-	    </tr>
-   		<tr>
-			   		
-			   		<tr>
-				        <td>발행일 기준 기간 검색</td>
-				        <td>
-				        	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
-				        	
-				        </td>  
-			   		</tr>
+			    </tr>
+	   		<tr>
+		        <td>발행일 기준 기간 검색</td>
+		        <td>
+		        	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
+		        	
+		        </td>  
+	   		</tr>
 				</table>
 			      
 			    <div align="center"> 

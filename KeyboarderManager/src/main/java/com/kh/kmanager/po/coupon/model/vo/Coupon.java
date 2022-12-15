@@ -27,4 +27,5 @@ public class Coupon {
 	private int orderPrice;
 	private int paymentBill;
 
+
 }

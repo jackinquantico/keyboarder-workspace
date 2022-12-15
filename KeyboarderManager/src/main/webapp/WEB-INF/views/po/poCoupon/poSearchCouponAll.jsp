@@ -83,98 +83,88 @@ input[type=date] {
 	        <td>
 	   			
 	   		
-	        	<select class="form-control" id="select" name="couponStmt">
+       		<select class="form-control" id="select" name="couponStmt">
 	        		<option value="0" selected>선택 안 함</option>
 	            	<option value="Y" >사용가능</option>
 	            	<option value="N">만료</option>
 	        	</select>
 	        </td>
 	    </tr>
-   		<tr>
-			   		
-			   		<tr>
-				        <td>발행일 기준 기간 검색</td>
-				        <td>
-				        	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
-				        	
-				        </td>  
-			   		</tr>
-				</table>
-			      
-			    <div align="center"> 
-			        <button type="button" onclick="reset();" class="btn btn-outline-secondary">초기화</button>&nbsp;
-			        <button type="submit"  class="btn btn-secondary">조회</button>
-			    </div>
-			</div> <!-- /#searchArea -->
-			
-			<br><br>
-			
-			<div id="listArea" class="card">
-			
-				<table id="listTable" class="table-bordered">
-			    	<thead>
-			    	
-			            <tr>
-			               <th width="10%">쿠폰번호</th>
-			               <th width="25%">쿠폰이름</th>
-			               <th width="10%">쿠폰금액</th>
-			               <th width="5%" >할인액</th>
-			               <th width="25%">상품명</th>
-			               <th width="7%">쿠폰상태</th>
-			               <th width="9%">발급일</th>
-			               <th width="9%" >만료일</th>
-			        	</tr>
-			       
-			    	</thead>
-			        <tbody id="couponList">
-			        <c:forEach var="c" items="${list}">
-			            <tr>
-			               <td width="10%" >${c.couponNo}</td>
-			               <td width="25%">${c.couponName}</td>
-			               <td width="10%">${c.couponPrice}</td>
-			               <td width="5%" >${c.couponPrice}</td>
-			               <td width="25%">${c.productName}</td>
-			               <td width="7%">${c.couponStmt}</td>
-			               <td width="9%">${c.createDate}</td>
-			               <td width="9%">${c.dueDate}</td>
-			        	</tr>
-			            </c:forEach>
-			        </tbody>
-				</table>
-			
-			</div><!-- /#listArea -->
-			
-			</div> <!-- /.content -->
-			</div> <!-- /.content-wrapper -->
-			
-			
-			
-			
-			
-			
-			<script>
-			//기간검색
-			function reset() {
-				$("#select option:eq(2)").prop("selected", true);
-				$("#fromDate").val("");
-				$("#toDate").val("");
-			}
-			
-			
-			
-
-	           $(function() {
-	              
-	              $("#tb>tbody>tr").on("click", function() {
-	     
-	                 var couponNo = $(this).children().eq(1).text();
-	     																																																																																														
-	                 location.href = "/kmanager/DetailCoupon.po?couponNo=" + couPonNo;
-	                 
-	              });           
-	           });
-			
-			</script>
-			
-			</body>
-	</html>
+ 		<tr>
+	   		<tr>
+		        <td>발행일 기준 기간 검색</td>
+		        <td>
+       	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
+		        	
+		        </td>  
+	   		</tr>
+		</table>
+      
+		    <div align="center"> 
+		        <button type="button" onclick="reset();" class="btn btn-outline-secondary">초기화</button>&nbsp;
+		        <button type="submit"  class="btn btn-secondary">조회</button>
+		    </div>
+		</div> <!-- /#searchArea -->
+		
+		<br><br>
+		
+	<div id="listArea" class="card">
+	
+		<table id="listTable" class="table-bordered">
+	    	<thead>
+	    	
+	            <tr>
+	               <th width="10%">쿠폰번호</th>
+	               <th width="25%">쿠폰이름</th>
+	               <th width="10%">쿠폰금액</th>
+	               <th width="5%" >할인액</th>
+	               <th width="25%">상품명</th>
+	               <th width="7%">쿠폰상태</th>
+	               <th width="9%">발급일</th>
+	               <th width="9%" >만료일</th>
+	        	</tr>
+	       
+	    	</thead>
+	        <tbody id="couponList">
+	        <c:forEach var="c" items="${list}">
+	            <tr>
+	               <td width="10%" >${c.couponNo}</td>
+	               <td width="25%">${c.couponName}</td>
+	               <td width="10%">${c.couponPrice}</td>
+	               <td width="5%" >${c.couponPrice}</td>
+	               <td width="25%">${c.productName}</td>
+	               <td width="7%">${c.couponStmt}</td>
+	               <td width="9%">${c.createDate}</td>
+	               <td width="9%">${c.dueDate}</td>
+	        	</tr>
+	            </c:forEach>
+	        </tbody>
+			</table>
+		
+		</div><!-- /#listArea -->
+		
+		</div> <!-- /.content -->
+		</div> <!-- /.content-wrapper -->
+		
+		<script>
+		//기간검색
+		function reset() {
+			$("#select option:eq(2)").prop("selected", true);
+			$("#fromDate").val("");
+			$("#toDate").val("");
+		}
+          $(function() {
+             
+             $("#tb>tbody>tr").on("click", function() {
+    
+                var couponNo = $(this).children().eq(1).text();
+    																																																																																														
+                location.href = "/kmanager/DetailCoupon.po?couponNo=" + couPonNo;
+                
+             });           
+          });
+	
+	</script>
+		
+		</body>
+</html>

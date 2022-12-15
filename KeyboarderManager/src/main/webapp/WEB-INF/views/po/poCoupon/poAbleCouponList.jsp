@@ -85,16 +85,6 @@ input[type=date] {
 			           		<input type="radio" checked>&nbsp;전체 &nbsp;
 			           </td>
 			        </tr>
-			        
-			        <tr>
-			        <td>쿠폰상태 *&nbsp;</td>
-	       		 <td>
-	        	<select class="form-control" id="select">
-	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="1" selected>사용가능</option>
-	        	</select>
-	        </td>
-	    </tr>
 			   		
 			   		<tr>
 				        <td>발행일 기준 기간 검색</td>

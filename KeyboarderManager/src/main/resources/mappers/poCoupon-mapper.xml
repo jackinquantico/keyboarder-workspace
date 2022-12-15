@@ -46,7 +46,9 @@
             COUPON_NAME as "COUPON_NAME",
             COUPON_PRICE as "COUPON_PRICE",
             P.PRODUCT_NAME as "PRODUCT_NAME",
-            COUPON_STMT as "COUPON_STMT",
+            CASE WHEN COUPON_STMT = 'Y' THEN '사용가능'
+                       WHEN COUPON_STMT = 'N' THEN '사용불가'
+              	  END AS "COUPON_STMT",
             TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",
             TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
             FROM COUPON_STORE S
@@ -116,6 +118,9 @@
 		    JOIN ORDERS  O ON (O.PRODUCT_NO =P. PRODUCT_NO)
 		    JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
 		    WHERE S.SELLER_NO=#{sellerNo}
+		    <if test="fromDate != null">
+		    AND ORDER_DATE BETWEEN #{fromDate} AND #{toDate}
+		    </if>
 		    ORDER BY ORDER_NO DESC
 			</select>
 			
@@ -132,7 +137,9 @@
 		    JOIN ORDERS  O ON (O.PRODUCT_NO =P. PRODUCT_NO)
 		    JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
 		    WHERE S.SELLER_NO=#{sellerNo}
+		    <if test="fromDate != null">
 		    AND ORDER_DATE BETWEEN #{fromDate} AND #{toDate}
+		    </if>
 		    ORDER BY ORDER_NO DESC
 			</select>
 			
@@ -151,13 +158,14 @@
            
            </select>
            
-           
 			<select id="CouponDetailSearch" parameterType="coupon" resultMap="poCouponResultMap">
 			SELECT COUPON_NO as "COUPON_NO",
             COUPON_NAME as "COUPON_NAME",
             COUPON_PRICE as "COUPON_PRICE",
             P.PRODUCT_NAME as "PRODUCT_NAME",
-            COUPON_STMT as "COUPON_STMT",
+           	CASE WHEN COUPON_STMT = 'Y' THEN '사용가능'
+                 WHEN COUPON_STMT = 'N' THEN '사용불가'
+              	 END AS "COUPON_STMT",
             TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE",
             TO_CHAR(DUE_DATE, 'YYYY-MM-DD') AS "DUE_DATE"
             FROM COUPON_STORE S

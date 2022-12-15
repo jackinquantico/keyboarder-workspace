@@ -1,6 +1,8 @@
 package com.kh.kmanager.po.coupon.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -146,12 +148,12 @@ public class NSJ_CouponController {
 		if(list!=null) {
 			model.addAttribute("list", list);
 		}
-		return "po/poCoupon/poExpireCoupon";
+		return "po/poCoupon/poShowExpiredCouponList";
 	
 	}
 
 	/**
-	 * po 쿠폰 사용내역 검색 -성진
+	 * po 쿠폰 사용내역 전체화면 -성진
 	 * 
 	 * @return
 	 */
@@ -168,7 +170,7 @@ public class NSJ_CouponController {
 		
 		}
 	/**
-	 * po 쿠폰 사용내역 전체조회 -성진
+	 * po 쿠폰 사용내역 기간검색 -성진
 	 * 
 	 * @return
 	 */
@@ -181,28 +183,48 @@ public class NSJ_CouponController {
 		
 		ArrayList<Coupon> list = couponService.searchPoCouponUsed(c);
 		model.addAttribute("list", list);
-		
-		return "po/poCoupon/CouponsuedPoSearch";
-		
+		if(list!=null) {
+			model.addAttribute("list", list);
 		}
-		
+		return "po/poCoupon/CouponsuedPoSearch";
+	}
+	/**
+	 * po 쿠폰 전체내역화면-성진
+	 * 
+	 * @return
+	 */
 		@RequestMapping("CouponList.po")
 		public String showCouponListPo(Model model, Coupon c, HttpSession session) {
+			
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 			c.setSellerNo(sellerNo);
 			ArrayList<Coupon> list = couponService.showCouponListPo(c);
-			model.addAttribute("list", list);
+			if(list!=null) {
+				model.addAttribute("list", list);
+			}
+		
 			return "po/poCoupon/poshowAllCouponList";
 			
 		}
 		
+		/**
+		 * po 쿠폰 전체내역조회-성진
+		 * 
+		 * @return
+		 */
+		
 		@RequestMapping("SearchCoupon.po")
 		public String CouponDetailSearch(Model model,Coupon c, HttpSession session) {
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+			
 			c.setSellerNo(sellerNo);
 			ArrayList<Coupon> list = couponService.CouponDetailSearch(c);
 			model.addAttribute("list", list);
-			return "po/poCoupon/poSearchCouponAll";
+			if(list!=null) {
+		
+			}
+			// return "po/poCoupon/poSearchCouponAll";
+			return "po/poCoupon/poshowAllCouponList";
 			
 	}
 		/**
@@ -215,7 +237,6 @@ public class NSJ_CouponController {
 			
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 			c.setSellerNo(sellerNo);
-			System.out.println(c);
 			int result = couponService.updateCouponPo(c);	
 			System.out.println(result);
 			if (result > 0) {
