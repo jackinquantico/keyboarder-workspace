@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -70,58 +69,53 @@ public class NSJ_ProductController {
 	 * @return //
 	 */
 	@RequestMapping("update.pro")
-	public String updateProduct(Product p, List<MultipartFile> reupfile, HttpSession session) throws Exception {
+	public String updateProduct(Product p, MultipartFile[] reupfile, HttpSession session, String[] originfile) throws Exception {
 		// 새로넘어온 첨부파일이 있는 경우 => 기존 넘어온 첨부파일을 삭제
-
-		int c = 0;
-		// 기존 첨부파일이 있었을 경우 => 기존첨부파일을 찾아서 삭제
-		for (MultipartFile f : reupfile) {
-			if (!f.getOriginalFilename().equals("")) {
-				// 수정 파일명 만들기
-				String path = session.getServletContext().getRealPath("/resources/uploadFiles/");
-				String originFileName = f.getOriginalFilename();// 원본 파일 명
+		
+		// 반복을 돌리면서 검사 => 0 ~ 3번째 인덱스까지 filename 에 제대로된 값이 있는지 (일반포문)
+		// 만약 제대로된 값이 있따면 거기에 대한 컬럼만 update 해주기
+		
+		// 수정 파일명 만들기
+		String path = session.getServletContext().getRealPath("/resources/uploadFiles/");
+		
+		// 로직 추가 전 => p 에는 update 시 필요한 정보들이 모두 담겨있어야함
+		// 기존파일들의 수정명만 일일이 다 필드에 담기
+		p.setAttachment1(originfile[0]);
+		p.setAttachment2(originfile[1]);
+		p.setAttachment3(originfile[2]);
+		p.setAttachment4(originfile[3]);
+		
+		// 이 로직은 지금 reupfile 기준으로 수정할 파일이 있을 경우 => 기존 필드값을 수정파일의 수정명으로 덮어씌우는 작업
+		for(int i = 0; i < reupfile.length; i++) {
+			
+			if(!reupfile[i].getOriginalFilename().equals("")) { // 수정파일이 있을 경우
+				
+				String originFileName = reupfile[i].getOriginalFilename();// 원본 파일 명
 				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 				String ext = originFileName.substring(originFileName.lastIndexOf("."));
 				String saveFileName = String.format("%s%s", currentTime, ext);
-
-				try {
-					if (c == 0) {
-						if (p.getAttachment1() != null)
-							session.getServletContext().getRealPath(p.getAttachment1());
-						new File(path).delete();
-						f.transferTo(new File(path, saveFileName));
-						p.setAttachment1(saveFileName);
-					} else if (c == 1) {
-						if (p.getAttachment2() != null)
-							session.getServletContext().getRealPath(p.getAttachment2());
-						new File(path).delete();
-						f.transferTo(new File(path, saveFileName));
-						p.setAttachment2(saveFileName);
-
-					} else if (c == 2) {
-						if (p.getAttachment3() != null)
-							session.getServletContext().getRealPath(p.getAttachment3());
-						new File(path).delete();
-						f.transferTo(new File(path, saveFileName));
-						p.setAttachment3(saveFileName);
-
-					} else {
-						if (p.getAttachment4() != null)
-							session.getServletContext().getRealPath(p.getAttachment4());
-						new File(path).delete();
-						f.transferTo(new File(path, saveFileName));
-						p.setAttachment4(saveFileName);
-
-					}
-					c++;
+				
+				reupfile[i].transferTo(new File(path, saveFileName));
+				switch(i) {
+				case 0 : 
+					p.setAttachment1(saveFileName);
+					break;
+				case 1 :
+					p.setAttachment2(saveFileName);
+					break;
+				case 2 : 
+					p.setAttachment3(saveFileName);
+					break;
+				case 3 : 
+					p.setAttachment4(saveFileName);
+					break;
 				}
-
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-
+				
+				// 해당 자리와 맞는 기존파일을 삭제
+				new File(path + originfile[i]).delete();
 			}
 		}
+		
 		int result = productService.updateProduct(p);
 
 		System.out.println(result);
@@ -136,10 +130,8 @@ public class NSJ_ProductController {
 	
 
 	@RequestMapping("insert.pro")
-	public ModelAndView insertProduct(Product p, MultipartHttpServletRequest request, HttpSession session,
+	public ModelAndView insertProduct(List<MultipartFile> upfile, Product p, MultipartHttpServletRequest request, HttpSession session,
 			ModelAndView mv) throws Exception {
-
-		List<MultipartFile> upfiles = request.getFiles("upfile");
 
 		String path = request.getSession().getServletContext().getRealPath("/resources/uploadFiles/");
 
@@ -151,36 +143,52 @@ public class NSJ_ProductController {
 
 		long time = System.currentTimeMillis();
 
-		for (MultipartFile f : upfiles) {
+		for (int i = 0; i < upfile.size(); i++) {
 
-			String originFileName = f.getOriginalFilename(); // 원본 파일 명
+			String originFileName = upfile.get(i).getOriginalFilename(); // 원본 파일 명
 			String saveFileName = String.format("%d_%s", time, originFileName);
 
 			try {
 				// 파일생성
-				f.transferTo(new File(path, saveFileName));
-				p.setAttachment1(saveFileName);
+				upfile.get(i).transferTo(new File(path, saveFileName));
+				
+				switch(i) {
+				case 0 : 
+					p.setAttachment1(saveFileName);
+					break;
+				case 1 : 
+					p.setAttachment2(saveFileName);
+					break;
+				case 2 : 
+					p.setAttachment3(saveFileName);
+					break;
+				case 3 : 
+					p.setAttachment4(saveFileName);
+					break;
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println(p);
-			int result = productService.insertProduct(p);
-			System.out.println(result);
-			if (result > 0) {
-				session.setAttribute("alertMsg", "성공적으로 사진이 업로드 되었습니다.");
-
-				mv.setViewName("redirect:/show.pro");
-			} else { // 실패 => 에러페이지로 포워딩
-
-				// mv.addObject("errorMsg", "게시글 작성 실패");
-				// mv.setViewName("common/errorPage");
-
-				// addObject 메소드의 반환형은 ModelAndView 타입임
-				// => 다음과 같이 메소드 체이닝도 가능하다.
-				mv.addObject("errorMsg", "게시글 작성 실패").setViewName("common/errorPage");
-			}
-
 		}
+
+		System.out.println(p);
+		int result = productService.insertProduct(p);
+		System.out.println(result);
+		if (result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 사진이 업로드 되었습니다.");
+
+			mv.setViewName("redirect:/show.pro");
+		} else { // 실패 => 에러페이지로 포워딩
+
+			// mv.addObject("errorMsg", "게시글 작성 실패");
+			// mv.setViewName("common/errorPage");
+
+			// addObject 메소드의 반환형은 ModelAndView 타입임
+			// => 다음과 같이 메소드 체이닝도 가능하다.
+			mv.addObject("errorMsg", "게시글 작성 실패").setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 

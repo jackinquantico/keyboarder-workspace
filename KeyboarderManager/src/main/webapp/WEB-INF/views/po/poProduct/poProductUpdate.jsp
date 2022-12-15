@@ -91,7 +91,7 @@
 							</label> 
 							<c:if test="${not empty p.attachment1}">
 							<input type="file" id="file1" name="reupfile" onchange="addImg();"/>
-							<input type="hidden" name="attachment1" value="${p.attachment1 }">
+							<input type="hidden" name="originfile" value="${p.attachment1 }">
 						</c:if>	
                  	</td>
                   <td colspan="6" style="height: 250px; width:60%">
@@ -112,7 +112,7 @@
                            alt="..." style="width: 250px; height: 250px;" />
 							<c:if test="${not empty p.attachment2}">
 							<input type="file" id="file2" name="reupfile" onchange="addImg();"/>
-							<input type="hidden" name="attachment2" value="${p.attachment2 }">
+							<input type="hidden" name="originfile" value="${p.attachment2 }">
 						</c:if>		
                   </div> 
                  </td>
@@ -124,7 +124,7 @@
                            alt="..." style="width: 250px; height: 250px;"/> 
 							<c:if test="${not empty p.attachment3}">
 							<input type="file" id="file3" name="reupfile" onchange="addImg();"/>
-							<input type="hidden" name="attachment3" value="${p.attachment3 }">
+							<input type="hidden" name="originfile" value="${p.attachment3 }">
                            </c:if>		
                   </div>
                  </td>
@@ -136,7 +136,7 @@
                            alt="..." style="width: 250px; height: 250px;"/>
 							<c:if test="${not empty p.attachment4}">
 							<input type="file" id="file4" name="reupfile" onchange="addImg();"/>
-							<input type="hidden" name="attachment4" value="${p.attachment4 }">
+							<input type="hidden" name="originfile" value="${p.attachment4 }">
                            </c:if>	
                   </div>
                  </td>

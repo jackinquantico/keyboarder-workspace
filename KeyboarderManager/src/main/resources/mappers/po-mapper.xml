@@ -24,32 +24,20 @@
 						 , PRICE
 						 , DESCRIPTION
 						 , ATTACHMENT1
-						 <if test='attachment2!=null and !attachment2.equalsIgnoreCase("null")'>
 						 , ATTACHMENT2
-						 </if>
-				   		<if test='attachment3!=null  and !attachment3.equalsIgnoreCase("null")'>
 						 , ATTACHMENT3
-						 </if>
-				   		 <if test='attachment4!=null  and !attachment4.equalsIgnoreCase("null")'>
 						 , ATTACHMENT4
-						 </if>
 						 , SELLER_NO)			 
 				   VALUES (SEQ_PRODUCT_NO.NEXTVAL
 				   		 , #{productName}
 				   		 , #{price}
 				   		 , #{description}
 				   		 , #{attachment1}
-				   		  <if test='attachment2!=null  and !attachment2.equalsIgnoreCase("null")'>
-				   		 	, #{attachment2}
-				   		 </if>
-				   		 <if test='attachment3!=null  and !attachment3.equalsIgnoreCase("null")'>
-				   		 	, #{attachment3}
-				   		 </if>
-				   		 <if test='attachment4!=null  and !attachment4.equalsIgnoreCase("null")'>
-				   		 	, #{attachment4}
-				   		 </if>
+				   		 , #{attachment2}
+				   		 , #{attachment3}
+				   		 , #{attachment4}
 				   		 , #{sellerNo})
-						</insert>
+		</insert>
 			
 								
 						<!-- 이미지 전체 조회 -->
