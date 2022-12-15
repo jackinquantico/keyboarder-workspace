@@ -1,6 +1,8 @@
 package com.kh.kmanager.po.settlement.model.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -34,13 +36,19 @@ public class PoSettlementDao {
 		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleSumList", o);
 	}
 	
-	public ArrayList<Settlement> selectSettleTotalList(SqlSessionTemplate sqlSession, int sellerNo) {
-		return (ArrayList)sqlSession.selectList("settlementMapper.selectSettleTotalList", sellerNo);
-	}
-
 	public ArrayList<Settlement> selectElectronicList(SqlSessionTemplate sqlSession, int selNo) {
 		
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
+	}
+	
+	// 정산내역 전체조회(해당월) -장미
+	public ArrayList<Settlement> selectSettleTotalList(SqlSessionTemplate sqlSession, Settlement set) {
+		return (ArrayList)sqlSession.selectList("settlementMapper.selectSettleTotalList", set);
+	}
+	
+	// 정산내역 기간조회 -장미
+	public ArrayList<Settlement> searchSettleList(SqlSessionTemplate sqlSession, Settlement set) {
+		return (ArrayList)sqlSession.selectList("settlementMapper.searchSettleList", set);
 	}
 
 }

@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.kmanager.bo.order.model.vo.Order;
 import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.dao.PoSettlementDao;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
@@ -63,10 +62,19 @@ public class SettlementServiceImpl implements SettlementService {
 	 * 정산내역전체조회 - 장미
 	 */
 	@Override
-	public ArrayList<Settlement> selectSettleTotalList(int sellerNo) {
-		return settlementDao.selectSettleTotalList(sqlSession, sellerNo);
+	public ArrayList<Settlement> selectSettleTotalList(Settlement set) {
+		return settlementDao.selectSettleTotalList(sqlSession, set);
 	}
 
+	/**
+	 * 정산내역 기간조회 -장미
+	 */
+	@Override
+	public ArrayList<Settlement> searchSettleList(Settlement set) {
+		return settlementDao.searchSettleList(sqlSession, set);
+	}
+	
+	
 	/**
 	 * 전자세금계산서 조회 - 건우
 	 */
@@ -75,6 +83,7 @@ public class SettlementServiceImpl implements SettlementService {
 		
 		return settlementDao.selectElectronicList(sqlSession, selNo);
 	}
+
 
 	
 	}

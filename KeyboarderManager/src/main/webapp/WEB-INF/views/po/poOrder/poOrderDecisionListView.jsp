@@ -140,7 +140,7 @@
 		var year = date.getFullYear();
 		var month = date.getMonth()+1;
 		
-		document.getElementById("searchmonth").value = year+"-"+month;
+		document.getElementById("searchDecisionDate").value = year+"-"+month;
 		$("#resetButton").click(funtion() {
 			location.href="decision.po";
 		});

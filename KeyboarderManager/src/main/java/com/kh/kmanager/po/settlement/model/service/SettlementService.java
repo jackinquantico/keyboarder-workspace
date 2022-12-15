@@ -25,7 +25,10 @@ public interface SettlementService {
 	public ArrayList<Settlement> selectSettleSumList(PoOrder o);
 	
 	// 정산내역전제조회 - 장미
-	public ArrayList<Settlement> selectSettleTotalList(int sellerNo);
+	public ArrayList<Settlement> selectSettleTotalList(Settlement set);
+	
+	// 정산내역 기간별조회 - 장미
+	public ArrayList<Settlement> searchSettleList(Settlement set);
 	
 	// 전자세금계산서 조회 - 건우
 	ArrayList<Settlement> selectElectronicList(int selNo);

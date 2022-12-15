@@ -1,6 +1,8 @@
 package com.kh.kmanager.po.settlement.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -119,7 +121,36 @@ public class SettlementController {
 	@RequestMapping("list.se")
 	public String selectSettleList(HttpSession session, Model model) {
 		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
-		ArrayList<Settlement> list = settlementService.selectSettleTotalList(sellerNo);
+		
+		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+		Settlement set = new Settlement();
+		set.setNowMonth(nowMonth);
+		set.setSellerNo(sellerNo);
+		
+		ArrayList<Settlement> list = settlementService.selectSettleTotalList(set);
+		
+		model.addAttribute("list", list);
+		return "po/poSettlement/poSettlementTotalListView";
+	}
+	
+	/**
+	 * 정산내역 기간조회 -장미
+	 * @param session
+	 * @param model
+	 * @param searchSettleDate
+	 * @return
+	 */
+	@RequestMapping("searchSettlementTotal.po")
+	public String searchSettleList(HttpSession session, Model model, String searchSettleDate) {
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		String searchDate =  searchSettleDate+"-01";
+		Settlement set = new Settlement();
+		set.setSellerNo(sellerNo);
+		// System.out.println(sellerNo);
+		set.setSearchDate(searchDate);
+		System.out.println(searchDate);
+		ArrayList<Settlement> list = settlementService.searchSettleList(set);
+		System.out.println(list);
 		model.addAttribute("list", list);
 		return "po/poSettlement/poSettlementTotalListView";
 	}

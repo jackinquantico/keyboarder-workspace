@@ -36,7 +36,7 @@
         	margin-left: 30px;"
         }
         #orderConfirmList {
-            height : 55%;
+            height : 500px;
             border: 1px solid;
             margin :auto; 
 	       	margin-bottom: 30px; 
@@ -76,12 +76,16 @@
             </p>
         </div>
         <br><br>
+        
         <div id="date">
-            <div style="line-height: 70px; margin-left: 20px;">
+         <form action="searchSettlementTotal.po">
+        	 <div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
-                <input type="month" style="height: 35px;">
-                <input type="button" class="btn btn-dark" value="검색" id="searchbtn"  >
+                <input type="month" style="height: 35px;" id="searchSettleDate" name="searchSettleDate">
+                <input type="submit" class="btn btn-dark" value="검색" id="searchbtn" onclick="selectSettleDate" >
+                 <input type="button" class="btn btn-outline-secondary" value="초기화" id="resetbtn" onclick="selectSettleDate">
             </div>
+        </form>
         </div>
         <br><br>
 
@@ -106,17 +110,17 @@
                 </thead>
                 <tbody style="background-color : white;">
                 	<c:forEach var="s" items="${ list }">
-                		<tr>
+                		<tr align="center">
 	                        <td>${ s.orderNo }</td>
 	                        <td>${ s.settleDate }</td>
-	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" align="center"></td>
-	                        <td>${s.price }</td>
+	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" style="height:30px; font-size :90%"></td>
+	                        <td>${s.price } 원</td>
 	                        <td>2500원</td>
-	                        <td>${ s.paymentBill }</td>
-	                        <td>${ s.commition }</td>
-	                        <td>${ s.keyCouponPrice }</td>
-	                        <td>${ s.marketCouponPrice }</td>
-	                        <td>${ s.settleDept }</td>
+	                        <td>${ s.paymentBill } 원</td>
+	                        <td>${ s.commition } 원</td>
+	                        <td>${ s.keyCouponPrice } 원</td>
+	                        <td>${ s.stoCouponPrice } 원</td>
+	                        <td>${ s.settleDept } 원</td>
                     </tr>
                 	</c:forEach>
                 </tbody>
@@ -125,7 +129,19 @@
     </div>
 	
 </div> <!-- /.content -->
-
+<script>
+	$(function() {
+		var date = new Date();
+		String(date);
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		
+		document.getElementById("searchSettleDate").value = year+"-"+month;
+		$("#resetButton").click(funtion() {
+			location.href="list.se";
+		});
+	})
+</script>
 </div> <!-- /.content-wrapper -->
 </body>
 </html>

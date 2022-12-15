@@ -1,7 +1,5 @@
 package com.kh.kmanager.po.settlement.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,4 +28,15 @@ public class Settlement {
 	private int taxAmount; // 세액
 	private int supplyValue; // 공급가액
 	private String paymentNo; // 결제번호
+	private String nowMonth;
+	private int price; // 조인할 상품가격
+	private int keyCouponPrice; // 조인할 키보더쿠폰가격
+	private int stoCouponPrice; // 조인할 스토어쿠폰가격
+	private int paymentBill; // 조인할 결제금액
+	private int couponPrice;
+	
+	private String searchSettleDate; // 기간조회검색
+	private String searchDate;
+		
+
 }
