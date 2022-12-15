@@ -142,30 +142,64 @@ th {
 			<div id="selectOption">
 				<form action="searchStoreSettlement.bo">
 					<table id="option_table">
-						<tr>
-							<th style="padding-left: 20px;">입점업체</th>
-							<td>
-								<select id="sellerList" name="seller">
-									<c:forEach var="sl" items="${ sellerList }">
-										<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
-									</c:forEach>
-								</select>	
-							</td>
-							<td></td>
-							<td></td>
-							<td><button type="submit" id="submitButton">검색</button></td>
-						</tr>
-						<tr>
-							<th width="10%" style="padding-left: 20px;">조회기간</th>
-							<td width="10%">
-								<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);">
-							</td>
-							<td width="3px" style="text-align:center">~</td>
-							<td width="10%">
-								<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);">
-							</td>
-							<td><a href="storeSettlement.bo"><button type="button" id="resetButton">초기화 </button></a></td>
-						</tr>					
+						<c:choose>
+							<c:when test="${ not empty searchCondition }">
+								<tr>
+									<th style="padding-left: 20px;">입점업체</th>							
+									<td>
+										<input type="hidden" id="TFCondition" value="notEmptyCondition">
+										<input type="hidden" id="conditionName" value="${ searchCondition.sellerName }">
+										<input type="hidden" id="conditionDate1" value="${ searchCondition.settleDate }">
+										<input type="hidden" id="conditionDate2" value="${ searchCondition.searchSettleDate2 }">									
+										<select id="sellerList" name="seller">
+											<c:forEach var="sl" items="${ sellerList }">
+												<option id="${ sl.sellerName }" value="${ sl.sellerName }">${ sl.sellerName }</option> 
+											</c:forEach>
+										</select>	
+									</td>
+									<td></td>
+									<td></td>
+									<td><button type="submit" id="submitButton">검색</button></td>
+								</tr>
+								<tr>
+									<th width="10%" style="padding-left: 20px;">조회기간</th>
+									<td width="10%">
+										<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);" value="${ searchCondition.settleDate }">
+									</td>
+									<td width="3px" style="text-align:center">~</td>
+									<td width="10%">
+										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);" value="${ searchCondition.searchSettleDate2 }">
+									</td>
+									<td><a href="resetStoreSettlement.bo"><button type="button" id="resetButton">초기화 </button></a></td>
+								</tr>									
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<th style="padding-left: 20px;">입점업체</th>							
+									<td>
+										<select id="sellerList" name="seller">
+											<c:forEach var="sl" items="${ sellerList }">
+												<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
+											</c:forEach>
+										</select>	
+									</td>
+									<td></td>
+									<td></td>
+									<td><button type="submit" id="submitButton">검색</button></td>
+								</tr>
+								<tr>
+									<th width="10%" style="padding-left: 20px;">조회기간</th>
+									<td width="10%">
+										<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);">
+									</td>
+									<td width="3px" style="text-align:center">~</td>
+									<td width="10%">
+										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);">
+									</td>
+									<td><a href="storeSettlement.bo"><button type="button" id="resetButton">초기화 </button></a></td>
+								</tr>							
+							</c:otherwise>				
+						</c:choose>	
 					</table>								
 				</form>
 
@@ -177,11 +211,26 @@ th {
 				<div id="result_div">
 					<div id="result_count">입점업체 정산 목록 (전체 <c:out value="${ list.size() }"/>건)</div>
 					<div id="result_btn">
-	                    <a href="excelSettlement.bo">
-		                    <button type="button" class="btn btn-outline-secondary">
-		                    	엑셀다운로드
-		                    </button>
-	                    </a>						
+						<c:choose>
+							<c:when test="${ not empty searchCondition }">								
+			                    <form action="excelSearchSettlement.bo">
+									<input type="hidden" name="conditionName" value="${ searchCondition.sellerName }">
+									<input type="hidden" name="conditionDate1" value="${ searchCondition.settleDate }">
+									<input type="hidden" name="conditionDate2" value="${ searchCondition.searchSettleDate2 }">			                    
+				                    <button type="submit" class="btn btn-outline-secondary">
+				                    	엑셀다운로드
+				                    </button>
+			                    </form>									
+							</c:when>
+							<c:otherwise>
+			                    <a href="excelSettlement.bo">
+				                    <button type="button" class="btn btn-outline-secondary">
+				                    	엑셀다운로드
+				                    </button>
+			                    </a>
+							</c:otherwise>
+						</c:choose>
+					
 					</div>
 				</div>
 				<br>
@@ -236,18 +285,35 @@ th {
 <script>
 	$(function() {
 		
-		// 지정한 날짜를 알맞은 형식으로 보내도록
-		var date = new Date();
+		var TFCondition = $("#TFCondition").val();
 		
-		String(date);
+		if(TFCondition == "notEmptyCondition") {
+			
+			var conditionName = $("#conditionName").val();
+			var conditionDate1 = $("#conditionDate1").val();
+			var conditionDate2 = $("#conditionDate2").val();	
+			
+			document.getElementById(conditionName).selected = true;
+			document.getElementById("settleDate1").value = conditionDate1;
+			document.getElementById("settleDate2").value = conditionDate2;
+			
+		} else {
+			
+			// 지정한 날짜를 알맞은 형식으로 보내도록
+			var date = new Date();
+			
+			String(date);
+			
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var month2 = date.getMonth();
+			var day = date.getDate();		
+			
+			document.getElementById("settleDate2").value = year + "-" + month + "-" + day;
+			document.getElementById("settleDate1").value = year + "-" + month2 + "-" + day;
+		}
 		
-		var year = date.getFullYear();
-		var month = date.getMonth() + 1;
-		var month2 = date.getMonth();
-		var day = date.getDate();		
-		
-		document.getElementById("settleDate2").value = year + "-" + month + "-" + day;
-		document.getElementById("settleDate1").value = year + "-" + month2 + "-" + day;
+
 											
 	});
 	
