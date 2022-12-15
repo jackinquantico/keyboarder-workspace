@@ -213,6 +213,84 @@
 			ORDER BY ORD_ORDER_DATE DESC
 		</select>
 		
+		<select id="deliverySearchDate" parameterType="poOrder" resultMap="deliveryOrderResultSet">
+			SELECT DISTINCT ORD.ORDER_NO
+			     , ORD.ORDER_STATUS
+			     , ORD.ORDER_PRICE
+			     , TO_CHAR(ORD.ORDER_DATE, 'YY-MM-DD') AS "ORD_ORDER_DATE"
+			     , PRO.PRODUCT_NO
+			     , PRO.PRODUCT_NAME
+			     , PRO.PRICE
+			     , CONS.CON_ID
+			     , CONS.CON_NAME
+			     , CONS.CON_PHONE
+			     , KCOU.COUPON_PRICE AS "K_COUPON_PRICE"
+			     , SCOU.COUPON_PRICE AS "S_COUPON_PRICE"
+			     , ORD.ORDER_PRICE * 0.15 AS "COMMISSION"
+			     , SEL.SELLER_NAME
+			FROM ORDERS ORD
+			LEFT JOIN PRODUCT PRO ON (ORD.PRODUCT_NO = PRO.PRODUCT_NO)
+			LEFT JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
+			LEFT JOIN KEYBOARDER_USE KUSE ON (ORD.ORDER_NO = KUSE.ORDER_NO)
+			LEFT JOIN STORE_USE SUSE ON(ORD.ORDER_NO = SUSE.ORDER_NO)
+			LEFT JOIN COUPON_KEYBOARDER KCOU ON (KUSE.COUPON_NO = KCOU.COUPON_NO)
+			LEFT JOIN COUPON_STORE SCOU ON (SUSE.COUPON_NO = SCOU.COUPON_NO)
+			LEFT JOIN SELLER SEL ON (SEL.SELLER_NO = PRO.SELLER_NO)
+			WHERE PRO.SELLER_NO = #{sellerNo}
+			  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+  			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+			ORDER BY ORD_ORDER_DATE DESC
+		</select>
+		
+		<select id="dateOrderStatus1" parameterType="poOrder" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{sellerNo}
+			  AND ORDER_STATUS = '1'
+			  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+  			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		</select>
+		
+		<select id="dateOrderStatus2" parameterType="poOrder" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{sellerNo}
+			  AND ORDER_STATUS = '2'
+			  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+  			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		</select>
+		
+		<select id="dateOrderStatus3" parameterType="poOrder" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{sellerNo}
+			  AND ORDER_STATUS = '3'
+			  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+  			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		</select>
+		
+		<select id="dateOrderStatus4" parameterType="poOrder" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{sellerNo}
+			  AND ORDER_STATUS = '4'
+			  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+  			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		</select>
+		
+		<select id="dateOrderCount" parameterType="poOrder" resultType="_int">
+			SELECT COUNT(*)
+			FROM ORDERS
+			JOIN PRODUCT USING(PRODUCT_NO)
+			WHERE SELLER_NO = #{sellerNo}
+			AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+  			AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		</select>
+		
 		<select id="selectListCount_default" parameterType="hashmap" resultType="_int">
 		SELECT COUNT(*)
 		  FROM ORDERS O

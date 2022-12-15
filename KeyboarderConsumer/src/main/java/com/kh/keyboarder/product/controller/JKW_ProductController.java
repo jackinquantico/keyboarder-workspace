@@ -34,7 +34,7 @@ public class JKW_ProductController {
 
 		model.addAttribute("pi", pi);
 		model.addAttribute("proList", proList);
-		
+				
 		return "product/foProductNotice";
 	}
 }

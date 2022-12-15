@@ -17,4 +17,16 @@ public interface JKW_OrderService {
 	int orderCount(int selNo);
 	
 	ArrayList<PoOrder> orderList(int selNo);
+
+	ArrayList<PoOrder> deliverySearchDate(PoOrder poOrder);
+
+	int dateOrderStatus1(PoOrder poOrder);
+
+	int dateOrderStatus2(PoOrder poOrder);
+
+	int dateOrderStatus3(PoOrder poOrder);
+
+	int dateOrderStatus4(PoOrder poOrder);
+
+	int dateOrderCount(PoOrder poOrder);
 }

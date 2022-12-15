@@ -39,6 +39,38 @@ public class JKW_OrderDao {
 		
 		return (ArrayList)sqlSession.selectList("poorderMapper.orderList", selNo);
 	}
+
+	public ArrayList<PoOrder> deliverySearchDate(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
+		return (ArrayList)sqlSession.selectList("poorderMapper.deliverySearchDate", poOrder);
+	}
+
+	public int dateOrderStatus1(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
+		return sqlSession.selectOne("poorderMapper.dateOrderStatus1", poOrder);
+	}
+
+	public int dateOrderStatus2(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
+		return sqlSession.selectOne("poorderMapper.dateOrderStatus2", poOrder);
+	}
+
+	public int dateOrderStatus3(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
+		return sqlSession.selectOne("poorderMapper.dateOrderStatus3", poOrder);
+	}
+
+	public int dateOrderStatus4(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
+		return sqlSession.selectOne("poorderMapper.dateOrderStatus4", poOrder);
+	}
+
+	public int dateOrderCount(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
+		return sqlSession.selectOne("poorderMapper.dateOrderCount", poOrder);
+	}
+	
+	
 }
 
 

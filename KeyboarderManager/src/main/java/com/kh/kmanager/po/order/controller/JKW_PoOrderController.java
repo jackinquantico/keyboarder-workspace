@@ -57,6 +57,39 @@ public class JKW_PoOrderController {
 		return "po/poOrder/poOrderDeliveryMain";
 	}
 	
+	@RequestMapping("SearchDate.poOrder")
+	public String deliverySearchDate(Model model, HttpSession session, String searchDeliveryMonth) {
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		int selNo = m.getSellerNo();
+		
+		String searchDate = searchDeliveryMonth + "-01";
+		
+		PoOrder poOrder = new PoOrder(selNo, searchDate);
+				
+		int dateStatus1 = JKW_OrderService.dateOrderStatus1(poOrder);
+		
+		int dateStatus2 = JKW_OrderService.dateOrderStatus2(poOrder);
+		
+		int dateStatus3 = JKW_OrderService.dateOrderStatus3(poOrder);
+		
+		int dateStatus4 = JKW_OrderService.dateOrderStatus4(poOrder);
+		
+		int dateOrderCount = JKW_OrderService.dateOrderCount(poOrder);
+		
+		ArrayList<PoOrder> dateList = JKW_OrderService.deliverySearchDate(poOrder);
+				
+		model.addAttribute("dateStatus1", dateStatus1);
+		model.addAttribute("dateStatus2", dateStatus2);
+		model.addAttribute("dateStatus3", dateStatus3);
+		model.addAttribute("dateStatus4", dateStatus4);
+		model.addAttribute("dateOrderCount", dateOrderCount);
+		model.addAttribute("dateList", dateList);
+		
+		return "po/poOrder/poOrderDeliveryMain";
+	}
+	
 	@RequestMapping("excelDownload.poOrder")
 	public void excelDownload(HttpServletResponse response, Model model, HttpSession session) throws Exception {
 		

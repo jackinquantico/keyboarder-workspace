@@ -178,39 +178,62 @@
 		        </div>
 		
 		        <!-- 배송 현황 조회 -->
-		        <div class="delivery-tracking">
-		            <div id="delivery-tracking-main">
-		                <div class="delivery-status-main">
-		                    <div class="delivery-status">배송중</div>
-		                    <div class="delivery-status-num">${ status1 }</div>
-		                </div>
-		                <div class="delivery-status-main">
-		                    <div class="delivery-status">배송완료</div>
-		                    <div class="delivery-status-num">${ status2 }</div>
-		                </div>
-		                <div class="delivery-status-main">
-		                    <div class="delivery-status">구매확정</div>
-		                    <div class="delivery-status-num">${ status3 }</div>
-		                </div>
-		                <div class="delivery-status-main">
-		                    <div class="delivery-status">환불</div>
-		                    <div class="delivery-status-num">${ status4 }</div>
-		                </div>
-		            </div>
-		        </div>
+		        <c:choose>
+		        	<c:when test="${ not empty dateList }">
+				        <div class="delivery-tracking">
+				            <div id="delivery-tracking-main">
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">배송중</div>
+				                    <div class="delivery-status-num">${ dateStatus1 }</div>
+				                </div>
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">배송완료</div>
+				                    <div class="delivery-status-num">${ dateStatus2 }</div>
+				                </div>
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">구매확정</div>
+				                    <div class="delivery-status-num">${ dateStatus3 }</div>
+				                </div>
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">환불</div>
+				                    <div class="delivery-status-num">${ dateStatus4 }</div>
+				                </div>
+				            </div>
+				        </div>
+		        	</c:when>
+		        	<c:when test="${ not empty ordList }">
+				        <div class="delivery-tracking">
+				            <div id="delivery-tracking-main">
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">배송중</div>
+				                    <div class="delivery-status-num">${ status1 }</div>
+				                </div>
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">배송완료</div>
+				                    <div class="delivery-status-num">${ status2 }</div>
+				                </div>
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">구매확정</div>
+				                    <div class="delivery-status-num">${ status3 }</div>
+				                </div>
+				                <div class="delivery-status-main">
+				                    <div class="delivery-status">환불</div>
+				                    <div class="delivery-status-num">${ status4 }</div>
+				                </div>
+				            </div>
+				        </div>
+		        	</c:when>
+		        </c:choose>
 		
 		        <!-- 배송 날짜별 조회 -->
 		        <div class="delivery-date-tracking" style="border: 2px solid black;">
 		            <br>
-		            <form action="" method="">
+		            <form action="SearchDate.poOrder">
 		                <div id="delivery-lookup">
 		                    <div style="display: inline-block; margin-left: 2%; font-size: 20px; margin-top: 7px; width: 8%;">
 		                    	조회기간
 		                    </div>
-		                    <input type="date" style="margin-left: 5%;">
-		                    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~
-		                    	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		                    <input type="date">
+		                    <input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
 		                </div>
 		                <div id="delivery-period">
 		                    <div style="display: inline-block; margin-left: 2%; font-size: 20px; width: 8%;">검색어</div>
@@ -223,7 +246,7 @@
 		                    </div>
 		                </div>
 		                <div id="delivery-button" align="center">
-		                	<button type="button" class="btn btn-outline-success" style="width: 20%; font-size: 17px;">
+		                	<button type="submit" class="btn btn-outline-success" style="width: 20%; font-size: 17px;">
 		                		검색하기
 		                	</button>
 		                </div>
@@ -234,8 +257,15 @@
 		        <div class="delivery-information" style="border: 2px solid black;">
 		            <div id="delivery-information-header">
 		                <div id="delivery-information-main" style="border: 2px solid black;">
-		                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>       
-		                    <div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ orderCount }&nbsp</div>
+		                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>      
+		                    <c:choose> 
+		                    	<c:when test="${ not empty dateList }">
+		                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ dateOrderCount }&nbsp</div>
+		                    	</c:when>
+		                    	<c:when test="${ not empty ordList }">
+		                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ orderCount }&nbsp</div>
+		                    	</c:when>
+		                    </c:choose>
 		                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
 		                    	엑셀다운로드
 		                    </button>
@@ -514,6 +544,35 @@
 	    	</div>
 		</div>
 	</div>
+	
+	<script>
+    	$(function(){
+    		
+    		var date = new Date();
+    		
+    		String(date);
+    		
+    		var year = date.getFullYear();
+    		var month = date.getMonth() + 1;
+    		
+    		document.getElementById("deliveryMonth").value = year + "-" + month;
+    		
+    		$("#resetButton").click(function() {
+    			
+    			location.href="delivery.poOrder";
+    		});
+    		
+    		<%--
+    		$.ajax({
+    			url : "selectDate.order",
+   			data : 
+    			
+    		});
+    		--%>
+    	});
+    	
+    	}
+    </script>
 </body>
 </html>
 

@@ -54,4 +54,40 @@ public class JKW_OrderServiceImpl implements JKW_OrderService {
 		return JKW_OrderDao.orderList(sqlSession, selNo);
 	}
 
+	@Override
+	public ArrayList<PoOrder> deliverySearchDate(PoOrder poOrder) {
+		
+		return JKW_OrderDao.deliverySearchDate(sqlSession, poOrder);
+	}
+
+	@Override
+	public int dateOrderStatus1(PoOrder poOrder) {
+		
+		return JKW_OrderDao.dateOrderStatus1(sqlSession, poOrder);
+	}
+
+	@Override
+	public int dateOrderStatus2(PoOrder poOrder) {
+		
+		return JKW_OrderDao.dateOrderStatus2(sqlSession, poOrder);
+	}
+
+	@Override
+	public int dateOrderStatus3(PoOrder poOrder) {
+		
+		return JKW_OrderDao.dateOrderStatus3(sqlSession, poOrder);
+	}
+
+	@Override
+	public int dateOrderStatus4(PoOrder poOrder) {
+		
+		return JKW_OrderDao.dateOrderStatus4(sqlSession, poOrder);
+	}
+
+	@Override
+	public int dateOrderCount(PoOrder poOrder) {
+		
+		return JKW_OrderDao.dateOrderCount(sqlSession, poOrder);
+	}
+
 }
