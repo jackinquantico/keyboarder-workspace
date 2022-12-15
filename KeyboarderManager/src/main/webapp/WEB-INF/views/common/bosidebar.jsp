@@ -120,7 +120,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="storeSettlement.bo" class="nav-link">
+                <a href="resetStoreSettlement.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>입점업체 정산금 관리</p>
                 </a>
