@@ -70,6 +70,7 @@ public class NSJ_ProductController {
 	 */
 	@RequestMapping("update.pro")
 	public String updateProduct(Product p, MultipartFile[] reupfile, HttpSession session, String[] originfile) throws Exception {
+		
 		// 새로넘어온 첨부파일이 있는 경우 => 기존 넘어온 첨부파일을 삭제
 		
 		// 반복을 돌리면서 검사 => 0 ~ 3번째 인덱스까지 filename 에 제대로된 값이 있는지 (일반포문)
@@ -93,7 +94,9 @@ public class NSJ_ProductController {
 				String originFileName = reupfile[i].getOriginalFilename();// 원본 파일 명
 				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 				String ext = originFileName.substring(originFileName.lastIndexOf("."));
-				String saveFileName = String.format("%s%s", currentTime, ext);
+				
+				// 매 파일마다 새로운 파일명이 되도록
+				String saveFileName = String.format("%s%d%s", currentTime, i, ext);
 				
 				reupfile[i].transferTo(new File(path, saveFileName));
 				switch(i) {
@@ -115,15 +118,53 @@ public class NSJ_ProductController {
 				new File(path + originfile[i]).delete();
 			}
 		}
+	
+		
+		/*
+		String path = session.getServletContext().getRealPath("/resources/uploadFiles/");
+		
+		for(int i = 0; i < reupfile.length; i++) {
+			
+			if (!reupfile[i].getOriginalFilename().equals("")) {
+							
+				String originFileName = reupfile[i].getOriginalFilename();// 원본 파일 명
+				String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+				String ext = originFileName.substring(originFileName.lastIndexOf("."));
+				String saveFileName = String.format("%s%d%s", currentTime, i, ext);
+				
+				if (i == 0) {
+					reupfile[i].transferTo(new File(path, saveFileName));
+					p.setAttachment1(saveFileName);
+					new File(path + reupfile[i].getOriginalFilename()).delete();
+
+				} else if (i == 1) {
+					reupfile[i].transferTo(new File(path, saveFileName));
+					p.setAttachment2(saveFileName);
+					new File(path + reupfile[i].getOriginalFilename()).delete();
+					
+				} else if (i == 2) {
+					reupfile[i].transferTo(new File(path, saveFileName));
+					p.setAttachment3(saveFileName);
+					new File(path + reupfile[i].getOriginalFilename()).delete();
+					
+				} else {
+					
+					reupfile[i].transferTo(new File(path, saveFileName));
+					p.setAttachment4(saveFileName);
+					new File(path + reupfile[i].getOriginalFilename()).delete();
+				}
+				
+			}
+		}
+		*/ // 검증용 로직 (어제랑 같은 거라 무시해도됨)
 		
 		int result = productService.updateProduct(p);
 
-		System.out.println(result);
 		if (result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 상품정보가 수정되었습니다.");
 		}
 
-		return "redirect:/show.pro";
+		return "redirect:/show.pro";		
 	}
 
 	
@@ -228,7 +269,7 @@ public class NSJ_ProductController {
 	  public String countProduct(Model model,int sellerNo) {
 		  
 		  Product p = productService.countProduct(sellerNo); 
-		  System.out.println(p);
+		  // System.out.println(p);
 		   return new Gson().toJson(p);
 	  }
 		 
@@ -239,7 +280,7 @@ public class NSJ_ProductController {
 	 */
 	@RequestMapping("select.pro")
 	public String selectProduct(Product p, Model model, String productName,HttpSession session) {
-		System.out.println(productName);
+		// System.out.println(productName);
 		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
 		p.setSellerNo(sellerNo);
 		ArrayList<Product> list = null;
