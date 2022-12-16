@@ -59,6 +59,7 @@ public class SettlementController {
 		ArrayList<Withdraw> list = settlementService.selectWithdrawRequestList(w);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("w", w);
 		
 		return "po/poSettlement/poKmoneyList";
 	}
