@@ -29,6 +29,9 @@
 	position: sticky;
 	top: 0;
 }
+#btnarea {
+	width: 97%;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -48,6 +51,13 @@
       <div class="col-m-6">
         <h1 class="m-0" id="conTitle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-MONEY 출금신청내역</h1>
       </div><!-- /.col -->
+      <div id="btnarea">
+      	<form action="excelDownload.kmoney">
+      		<input type="hidden" name="startDate" value="${ w.startDate }">
+      		<input type="hidden" name="endDate" value="${ w.endDate }">
+      		<button type="submit" class="btn btn-secondary" style="float:right;">엑셀 다운로드</button>
+      	</form>
+      </div>
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
 </div>
