@@ -1,7 +1,7 @@
 package com.kh.kmanager.po.settlement.model.service;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
@@ -38,4 +38,7 @@ public interface SettlementService {
 	
 	// 정산내역 기간조회 엑셀다운로드 -장미
 	ArrayList<Settlement> searchSettleExcelList(Settlement set);
+	
+	// PO 수수료 내역 조회 - 백성현
+	Settlement selectCommissionList(HashMap<String, String> optionDefault); 
 }

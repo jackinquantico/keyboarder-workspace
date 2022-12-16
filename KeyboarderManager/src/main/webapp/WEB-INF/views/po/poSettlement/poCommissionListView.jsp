@@ -64,16 +64,20 @@
 				<div id="table_div">
 					<table id="result_table" border="1">
 						<thead>
-							<th width="25%">기간</th>
-							<th width="25%">수수료 합계 (a+b)</td>
-							<th width="25%">판매 수수료 (a)</th>
-							<th width="25%">수수료 할인액 (b)</th>
+							<tr>
+								<th width="25%">기간</th>
+								<th width="25%">수수료 합계 (a-b)</td>
+								<th width="25%">판매 수수료 (a)</th>
+								<th width="25%">수수료 할인액 (b)</th>
+							</tr>
 						</thead>
 						<tbody>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<tr>
+								<td>${ commission.settleDate }</td>
+								<td>${ commission.commition - commission.keyCouponPrice }</td>
+								<td>${ commission.commition }</td>
+								<td>${ commission.keyCouponPrice }</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

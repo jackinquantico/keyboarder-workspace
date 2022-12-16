@@ -37,6 +37,12 @@
 		<result column="SUPPLY_VALUE" property="supplyValue" />
 	</resultMap>
 	
+	<resultMap id="commissionResultSet" type="settlement">
+		<result column="MONTHLY" property="settleDate" />
+		<result column="MONTHLY_COMMITION" property="commition" />
+		<result column="MONTHLY_DISCOUNT" property="keyCouponPrice" />
+	</resultMap>
+	
 	<insert id="insertWithdraw" parameterType="withdraw">
 		INSERT INTO WITHDRAW (SELLER_NO
 							, WITHDRAW_MONEY
@@ -213,6 +219,21 @@
 				AND SUBSTR (SETTLE_DATE, 1, 7) =SUBSTR(#{searchDate}, 1, 7)
 		ORDER BY ORDER_NO DESC
 	</select>
+	
+	<select id="selectCommissionList" parameterType="hashmap" resultMap="commissionResultSet">
+		SELECT DISTINCT TO_CHAR(SETTLE_DATE, 'YYYY-MM') "MONTHLY"
+		              , SUM(S.COMMITION) "MONTHLY_COMMITION"
+		              , SUM(C_KEY.COUPON_PRICE) "MONTHLY_DISCOUNT"
+		  FROM SETTLEMENT S
+		  JOIN ORDERS O ON (S.ORDER_NO = O.ORDER_NO)
+		  LEFT JOIN KEYBOARDER_USE KEY_U ON (KEY_U.ORDER_NO = O.ORDER_NO)
+		  LEFT JOIN COUPON_KEYBOARDER C_KEY ON (C_KEY.COUPON_NO = KEY_U.COUPON_NO)
+		 WHERE S.SELLER_NO = #{sellerNo}
+		   AND TO_CHAR(SETTLE_DATE, 'YYYY-MM') = #{nowMonth}
+		 GROUP BY TO_CHAR(SETTLE_DATE, 'YYYY-MM')
+	</select>
+	
+	
 </mapper>
 
 

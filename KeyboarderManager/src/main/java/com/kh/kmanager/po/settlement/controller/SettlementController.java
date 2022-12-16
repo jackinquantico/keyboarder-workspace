@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.kh.kmanager.bo.order.model.vo.Order;
 import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.service.SettlementService;
@@ -80,7 +80,18 @@ public class SettlementController {
 	 * @return : PO 수수료 내역 조회 페이지 이동
 	 */
 	@RequestMapping("commissionList.po")
-	public String selectCommissionList() {
+	public String selectCommissionList(HttpSession session, Model model) {
+		
+		String sellerNo = Integer.toString(((Member)session.getAttribute("loginUser")).getSellerNo());
+		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+		
+		HashMap<String, String> optionDefault = new HashMap<String, String>();
+		optionDefault.put("sellerNo", sellerNo);
+		optionDefault.put("nowMonth", nowMonth);
+		
+		Settlement commission = settlementService.selectCommissionList(optionDefault);
+		
+		model.addAttribute("commission", commission);
 		
 		return "po/poSettlement/poCommissionListView";
 	}
@@ -536,37 +547,5 @@ public class SettlementController {
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

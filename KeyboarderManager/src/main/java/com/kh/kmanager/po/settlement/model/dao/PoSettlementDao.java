@@ -1,13 +1,11 @@
 package com.kh.kmanager.po.settlement.model.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.kmanager.bo.order.model.vo.Order;
 import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
@@ -59,6 +57,10 @@ public class PoSettlementDao {
 	// 정산내역 기간조회 엑셀다운로드 -장미
 	public ArrayList<Settlement> searchSettleExcelList(SqlSessionTemplate sqlSession, Settlement set) {
 		return (ArrayList)sqlSession.selectList("settlementMapper.searchSettleExcelList", set);
+	}
+	
+	public Settlement selectCommissionList(SqlSessionTemplate sqlSession, HashMap<String, String> optionDefault) {
+		return sqlSession.selectOne("settlementMapper.selectCommissionList", optionDefault);
 	}
 
 }

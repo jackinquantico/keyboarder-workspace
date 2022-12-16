@@ -1,6 +1,7 @@
 package com.kh.kmanager.po.settlement.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,15 @@ public class SettlementServiceImpl implements SettlementService {
 	public ArrayList<Settlement> searchSettleExcelList(Settlement set) {
 		return settlementDao.searchSettleExcelList(sqlSession, set);
 	}
+	
+	/**
+	 * PO 수수료 내역 조회 - 백성현
+	 */
+	@Override
+	public Settlement selectCommissionList(HashMap<String, String> optionDefault) {
+		return settlementDao.selectCommissionList(sqlSession, optionDefault);
+	}
+
 
 
 	
