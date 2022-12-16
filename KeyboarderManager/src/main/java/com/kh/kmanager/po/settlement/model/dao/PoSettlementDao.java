@@ -34,11 +34,6 @@ public class PoSettlementDao {
 		return (ArrayList)sqlSession.selectList("poorderMapper.selectSettleSumList", o);
 	}
 	
-	public ArrayList<Settlement> selectElectronicList(SqlSessionTemplate sqlSession, int selNo) {
-		
-		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
-	}
-	
 	// 정산내역 전체조회(당월) -장미
 	public ArrayList<Settlement> selectSettleTotalList(SqlSessionTemplate sqlSession, Settlement set) {
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectSettleTotalList", set);
@@ -61,6 +56,18 @@ public class PoSettlementDao {
 	
 	public Settlement selectCommissionList(SqlSessionTemplate sqlSession, HashMap<String, String> optionDefault) {
 		return sqlSession.selectOne("settlementMapper.selectCommissionList", optionDefault);
+	}
+	
+	public ArrayList<Settlement> selectElectronicList(SqlSessionTemplate sqlSession, int selNo) {
+		
+		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
+	}
+	
+	public Settlement sellerBillModal(SqlSessionTemplate sqlSession, Settlement modalRequest) {
+		
+		Settlement result = sqlSession.selectOne("settlementMapper.sellerBillModal", modalRequest);
+
+		return result;
 	}
 
 }

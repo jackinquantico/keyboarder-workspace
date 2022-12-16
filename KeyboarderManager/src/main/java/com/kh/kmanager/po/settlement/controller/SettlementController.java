@@ -229,20 +229,6 @@ public class SettlementController {
 		
 		return "po/poSettlement/poSettlementDetailList";
 	}
-
-	@RequestMapping("electronicTaxInvoice.po")
-	public String electronicTaxInvoice(HttpSession session, Model model) {
-		
-		Member m = (Member)session.getAttribute("loginUser");
-		
-		int selNo = m.getSellerNo();
-		
-		ArrayList<Settlement> elecList = settlementService.selectElectronicList(selNo);
-		
-		model.addAttribute("elecList", elecList);
-		
-		return "po/poSettlement/poElectronicTaxInvoice";
-	}
 	
 	// 정산내역 전체조회 엑셀다운로드 - 장미
 		@RequestMapping("excelDownloadTotal.se")
@@ -548,6 +534,40 @@ public class SettlementController {
 		    response.getOutputStream().close();
 			
 		}
+		
+		@ResponseBody
+		@RequestMapping(value="poSellerBillModal.bo")
+		public Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate, int commition) {
+			
+			String requestDate = settleDate.substring(0, 7); // 'yyyy-mm'
+			
+			Settlement modalRequest = new Settlement(sellerName, requestDate);
+			
+			Settlement result = settlementService.sellerBillModal(modalRequest);
+			
+	        result.setSettleDate(settleDate); // 테이블의 값(해당 달의 말일)을 그대로 넣어주기
+	        result.setModalWriteDate(settleDate);
+	        result.setCommition(commition);
+	        result.setSupplyValue((int)(commition/1.1));
+	        result.setTaxAmount(commition - (int)(commition/1.1));
+	                
+			return result;		
+		}
+
+		@RequestMapping("electronicTaxInvoice.po")
+		public String electronicTaxInvoice(HttpSession session, Model model) {
+			
+			Member m = (Member)session.getAttribute("loginUser");
+			
+			int selNo = m.getSellerNo();
+			
+			ArrayList<Settlement> elecList = settlementService.selectElectronicList(selNo);
+			
+			model.addAttribute("elecList", elecList);
+			
+			return "po/poSettlement/poElectronicTaxInvoice";
+		}
+		
 }
 
 

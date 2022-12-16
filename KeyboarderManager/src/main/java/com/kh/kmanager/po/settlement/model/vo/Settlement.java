@@ -38,6 +38,33 @@ public class Settlement {
 	
 	private String searchSettleDate; // 기간조회검색
 	private String searchDate;
+	
+	private String sellerName; // 입점사명
+	private int orderPrice; // 주문금액
+	private int totalOrderPrice; // 총 주문 금액 (주문금액 - 쿠폰할인합계)
+	private String modalWriteDate; // 세금계산서 작성일
+	private String searchSettleDate2; // 입점업체 정산금 검색용 필드
+
+	private int billPublishAmount; // 계산서발행액
+	private int sales; // 매출액
+	private String corpNo; // 입점업체 사업자등록번호
+	private String repName; // 입점업체 대표자명
+	private String sellerEmail; // 입점업체 이메일
+	private String sellerPhone; // 입점업체 연락처
+	private String location; // 입점업체 본사 주소
+	private String productName; // 정산 제품명
+	private int kcouponPrice; // 키보더 쿠폰 할인액 = 수수료 할인액
+	private int scouponPrice; // 스토어 쿠폰 할인액
+	private int totalCouponPrice;
+ 	private int realPayPrice; // 결제 금액
+	private int totalDeductible; // 총 공제액
+	
+	public Settlement(String sellerName, String settleDate) {
+		super();
+		this.sellerName = sellerName;
+		this.settleDate = settleDate;
+	}
+		
 		
 
 }

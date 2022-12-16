@@ -33,6 +33,9 @@ public interface SettlementService {
 	// 전자세금계산서 조회 - 건우
 	ArrayList<Settlement> selectElectronicList(int selNo);
 	
+	// 전자세금계산서 모달 팝업
+	Settlement sellerBillModal(Settlement modalRequest);
+	
 	// 정산내역 전체조회 (당월) 엑셀다운로드 -장미
 	ArrayList<Settlement> settleExcelTotalList(Settlement set);
 	

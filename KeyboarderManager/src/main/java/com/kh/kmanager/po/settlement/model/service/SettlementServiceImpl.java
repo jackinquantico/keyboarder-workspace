@@ -74,16 +74,6 @@ public class SettlementServiceImpl implements SettlementService {
 	public ArrayList<Settlement> searchSettleList(Settlement set) {
 		return settlementDao.searchSettleList(sqlSession, set);
 	}
-	
-	
-	/**
-	 * 전자세금계산서 조회 - 건우
-	 */
-	@Override
-	public ArrayList<Settlement> selectElectronicList(int selNo) {
-		
-		return settlementDao.selectElectronicList(sqlSession, selNo);
-	}
 
 	/**
 	 * 정산내역 전체(당월)조회 엑셀다운로드 - 장미
@@ -109,7 +99,23 @@ public class SettlementServiceImpl implements SettlementService {
 		return settlementDao.selectCommissionList(sqlSession, optionDefault);
 	}
 
-
+	/**
+	 * 전자세금계산서 조회 - 건우
+	 */
+	@Override
+	public ArrayList<Settlement> selectElectronicList(int selNo) {
+		
+		return settlementDao.selectElectronicList(sqlSession, selNo);
+	}
+	
+	@Override
+	public Settlement sellerBillModal(Settlement modalRequest) {
+		
+		Settlement result = settlementDao.sellerBillModal(sqlSession, modalRequest);
+		
+		return result;
+	}
+	
 
 	
 	}

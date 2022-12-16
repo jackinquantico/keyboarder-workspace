@@ -35,6 +35,22 @@
 		<result column="SETTLE_DATE" property="settleDate" />
 		<result column="TAX_AMOUNT" property="taxAmount" />
 		<result column="SUPPLY_VALUE" property="supplyValue" />
+		<result column ="SELLER_NAME" property="sellerName" />
+		<result column="COMMISSION" property="commission" />
+		<result column ="SELLER_NO" property="sellerNo" />
+	</resultMap>
+	
+	<resultMap id="modalResultSet" type="settlement">
+		<result column="PRICE" property="price" />
+		<result column="CORP_NO" property="corpNo" />
+		<result column="SELLER_NAME" property="sellerName" />
+		<result column="REP_NAME" property="repName" />
+		<result column="LOCATION" property="location" />
+		<result column="SELLER_EMAIL" property="sellerEmail" />
+		<result column="SELLER_PHONE" property="sellerPhone" />
+		<result column="SUPPLY_VALUE" property="supplyValue" />
+		<result column="TAX_AMOUNT" property="taxAmount" />
+		<result column="SETTLE_DATE" property="settleDate" /> 
 	</resultMap>
 	
 	<resultMap id="commissionResultSet" type="settlement">
@@ -99,17 +115,6 @@
 		from withdraw
 		where seller_no = #{sellerNo}
 		and req_result = 'N') d
-	</select>
-	
-	<select id="selectElectronicList" parameterType="_int" resultMap="settlementElectronicResultSet">
-		SELECT SETTLE_DATE, SUM(TAX_AMOUNT) TAX_AMOUNT, SUM(SUPPLY_VALUE) SUPPLY_VALUE
-		FROM(SELECT TO_CHAR(SETTLE_DATE, 'YYYY-MM') SETTLE_DATE
-		     , TAX_AMOUNT
-		     , SUPPLY_VALUE
-		FROM SETTLEMENT
-		WHERE SELLER_NO = #{selNo})
-		GROUP BY SETTLE_DATE
-		ORDER BY SETTLE_DATE DESC
 	</select>
 	
 	<!-- 정산전체내역 조회 -장미  -->
@@ -233,6 +238,44 @@
 		 GROUP BY TO_CHAR(SETTLE_DATE, 'YYYY-MM')
 	</select>
 	
+	<select id="sellerBillModal" parameterType="settlement" resultMap="modalResultSet">
+		SELECT SUM(PRICE) PRICE, CORP_NO, SELLER_NAME, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, SUM(SUPPLY_VALUE) SUPPLY_VALUE, SUM(TAX_AMOUNT) TAX_AMOUNT, TO_CHAR(SETTLE_DATE, 'yyyy-mm') SETTLE_DATE
+		FROM (SELECT  CORP_NO
+					 , SELLER_NAME
+					 , REP_NAME
+					 , LOCATION
+					 , SELLER_EMAIL
+					 , SELLER_PHONE
+					 , SUPPLY_VALUE
+					 , TAX_AMOUNT
+					 , SETTLE_DATE
+					 , PRODUCT_NO
+				FROM SETTLEMENT
+		        JOIN ORDERS USING (ORDER_NO)
+				JOIN SELLER USING (SELLER_NO)) S
+		JOIN PRODUCT USING (PRODUCT_NO)
+         WHERE SELLER_NAME = #{sellerName}
+           AND TO_CHAR(SETTLE_DATE, 'yyyy-mm') = #{settleDate}
+        GROUP BY SELLER_NAME, CORP_NO, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, TO_CHAR(SETTLE_DATE, 'yyyy-mm')
+	</select>
+
+	<select id="selectElectronicList" parameterType="_int" resultMap="settlementElectronicResultSet">
+			SELECT SETTLE_DATE
+			     , (SUM(COMMITION) - (SUM(COMMITION) / 1.1)) TAX_AMOUNT
+			     , SUM(COMMITION) / 1.1 SUPPLY_VALUE
+			     , SUM(COMMITION) COMMITION
+			     , SELLER_NAME
+			FROM(SELECT TO_CHAR(SETTLE_DATE, 'YYYY-MM') SETTLE_DATE
+			     , TAX_AMOUNT
+			     , SUPPLY_VALUE
+			     , SELLER_NAME
+			     , COMMITION
+			FROM SETTLEMENT
+			JOIN SELLER SL USING(SELLER_NO)
+			WHERE SELLER_NO = #{selNo})
+			GROUP BY SETTLE_DATE, SELLER_NAME 
+			ORDER BY SETTLE_DATE DESC
+		</select>
 	
 </mapper>
 

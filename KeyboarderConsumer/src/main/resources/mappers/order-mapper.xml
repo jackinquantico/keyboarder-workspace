@@ -53,6 +53,7 @@
 		WHERE CON_NO = #{conNo}
 		  AND EXTRACT (YEAR FROM ORDER_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 		  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+		ORDER BY ORDER_DATE DESC
 	</select>
 	
 	<select id="foDetailViewList" parameterType="string" resultMap="orderResultSet">
