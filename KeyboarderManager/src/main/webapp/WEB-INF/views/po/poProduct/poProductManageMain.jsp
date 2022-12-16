@@ -26,17 +26,20 @@
     }
     #productList {
 		width: 100%;
-        height: 450px;
+        height: 550px;
         overflow-y: scroll;
         overflow-x:hidden; 
         overflow-y:auto;
     }
 
-    #productList_1 { width: 100%; }
+    #productList_1 { 
+    	width: 100%; 
+    	margin: 0px 20px;
+    }
 
-    #productone { width: 100%; height: auto; }
+    #productone { width: 100%; height: auto; padding-left: 90px; }
 
-    #pro { width: 300px; height: 400px; float: left; }
+    #pro { width: 300px; float: left; margin-bottom: 50px; margin-right: 10px; }
 
     #pro p { margin: 0px; padding: 15px; font-size: 15px; }
 
@@ -44,7 +47,28 @@
 		width: 95%;
 		margin: auto;
 	}
-
+	
+	.left div {
+		padding-left: 60px;
+		text-align: left;
+		font-size: 22px;
+		font-weight: 600;
+	}
+	
+	.label p {
+		height: 30px;
+		line-height: 5px;
+	}
+	.proName p {
+		width: 90%;
+		height: 50px;
+		line-height: 15px;	}
+	#pro img {
+		width: 100%;
+		height: 100%;
+		padding: 10px;
+	}
+	
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -77,21 +101,20 @@
  
 
             <div id="productCount" class="card">
-                <table width="100%">
+                <table style="margin: 0px 10px 0px 80px; width=100%;">
                    <tr>
-                      <td><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
-                      <td>전체</td>
-                      <td><div id="all"></div></td>
-                      <td><img src="resources/uploadFiles/shop.png" style="width:35px; hieght:35px;"></td>
-                      <td>판매중</td>
-                      <td><div id="onsale">${p.onSale}</div></td>
-                      <td><img src="resources/uploadFiles/minus.png" style="width:35px; hieght:35px;"></td>
-                      <td>품절</td>
-                      <td><div id="soldout">${p.soldOut}</div></td>
-                      <td><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
-                      <td>판매종료</td>
-                      <td></td>
-                      <td><div id="noSale">${p.soldOut}</div></td>
+                      <td width="5%"><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
+                      <td width="5%">전체</td>
+                      <td width="15%" class="left"><div id="all"></div></td>
+                      <td width="5%"><img src="resources/uploadFiles/shop.png" style="width:35px; hieght:35px;"></td>
+                      <td width="5%">판매중</td>
+                      <td width="15%" class="left"><div id="onsale">${p.onSale}</div></td>
+                      <td width="5%"><img src="resources/uploadFiles/minus.png" style="width:35px; hieght:35px;"></td>
+                      <td width="5%">품절</td>
+                      <td width="15%" class="left"><div id="soldout">${p.soldOut}</div></td>
+                      <td width="5%"><img src="resources/uploadFiles/invoices.png" style="width:35px; hieght:35px;"></td>
+                      <td width="5%">판매종료</td>
+                      <td width="15%" class="left"><div id="noSale">${p.soldOut}</div></td>
                    </tr>
                 </table>
             </div>
@@ -116,32 +139,34 @@
           
             <div id="productList" class="card">
              
-                <div id="productList_1" class=" px-2 px-lg-1 mt-5" style="margin: 0px 20px;">
+                <div id="productList_1" class=" px-2 px-lg-1 mt-5">
                     <div id="productone">
                  
 						<c:forEach var="p" items="${ list }">
 						 	<c:if test="${ p.productStatus eq 1 }">
                        			<div id="pro" align="center">
-                            	<div style="height: 250px">
-                            	<img class="card-img-top"
-                            	src="resources/uploadFiles/${ p.attachment1}"
-                            	alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
-                            	</div>
-                           		<div><p>판매중</p></div>
-                           		<div><p>${p.productName}</p></div>
-                            	<div>${p.price}</div>
+	                            	<div style="width: 100%; height: 300px">
+		                            	<img class="card-img-top"
+		                            	src="resources/uploadFiles/${ p.attachment1}"
+		                            	alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" />
+	                            	</div>
+	                           		<div class="label"><p>판매중</p></div>
+	                           		<div class="proName"><p>${p.productName}</p></div>
+	                            	<div class="proPrice">${p.price}</div>
                             	</div>
                             </c:if>
                             
                             
                             <c:if test="${ p.productStatus eq 0 }">
 								<div id="pro" align="center">
-	                            <img class="card-img-top"
-	                            src="resources/uploadFiles/${ p.attachment1}"
-	                            alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" style="width: 250px; height: 250px;"/>
-	                             <div><p>품절</p></div>
-	                            <div><p>${p.productName }</p></div>
-	                            <div>${p.price}</div>
+									<div style="width: 100%; height: 300px;">
+			                            <img class="card-img-top"
+			                            src="resources/uploadFiles/${ p.attachment1}"
+			                            alt="..." onclick="location.href='detail.pro?productNo=${p.productNo}'" />
+	                            	</div>
+		                            <div class="label"><p>품절</p></div>
+		                            <div class="proName"><p>${p.productName }</p></div>
+		                            <div class="proPrice">${p.price}</div>
 	                            </div>
                             </c:if>
 					 </c:forEach>

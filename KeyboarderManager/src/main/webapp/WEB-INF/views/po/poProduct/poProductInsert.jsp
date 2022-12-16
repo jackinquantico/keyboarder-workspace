@@ -39,7 +39,6 @@ td {
 
 #productList {
 	height: 350px;
-	border: 1px solid black;
 }
 
 #title_sub {
@@ -48,7 +47,6 @@ td {
 }
 
 #productPic {
-	border: 1px solid black;
 	width: 95%;
 	margin: auto;
 }
@@ -85,7 +83,9 @@ height:150px;
 					<div class="row mb-2">
 						<div class="col-sm-6">
 							<h1 class="m-0" style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품등록/수정</h1>
-							<button type="submit" style="float: right;">등록하기</button>
+						</div>
+						<div style="width: 97.5%; align: right;">
+							<button type="submit" style="float: right;" class="btn btn-secondary">등록하기</button>
 						</div>
 					</div>
 					<!-- /.row -->
@@ -95,7 +95,7 @@ height:150px;
 
 			<div class="content">
 
-				<div id="productPic">
+				<div id="productPic" class="card">
 
 					<br>
 					<h4 style="margin-left: 20px;">
@@ -179,7 +179,7 @@ height:150px;
 
 				<br>
 
-				<div id="productList">
+				<div id="productList" class="card">
 					<div id="productdetail">
 						<table width="100%">
 
