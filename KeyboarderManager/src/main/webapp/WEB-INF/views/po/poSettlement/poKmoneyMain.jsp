@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: K-MONEY</title>
 <style>
 #conTitle, input[type=date] {
 	display : inline-block;

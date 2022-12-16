@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 쿠폰 상세</title>
 <style>
 #listArea {
 	width: 95%;

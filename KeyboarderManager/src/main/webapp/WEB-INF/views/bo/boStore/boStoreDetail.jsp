@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 입점업체 상세 조회</title>
 <style>
 #btnarea {
 	width: 97%;

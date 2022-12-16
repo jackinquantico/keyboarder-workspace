@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 공지사항</title>
 <link href="resources/css/boNotice.css" rel="stylesheet">
 <style>
 #noticeArea {
