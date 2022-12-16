@@ -88,8 +88,8 @@
        	<form action="searchDecision.po">
        		<div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
-                <input type="month" style="height: 35px;" id="searchDecisionDate" name="searchDecisionDate">
-                <input type="submit" class="btn btn-dark" value="검색" id="searchbtn" onclick="selectDecisionDate">
+                <input type="month" style="height: 35px;" id="searchDecisionDate" name="searchDecisionDate" value="${ searchDecisionDate }">
+                <input type="submit" class="btn btn-dark" value="검색" id="searchbtn">
                 <input type="button" class="btn btn-outline-secondary" value="초기화" id="resetbtn" onclick="selectDecisionDate">
             </div>
        	</form>
@@ -98,22 +98,22 @@
        <br><br>
        
         <div id="decisionList">
-        	<c:choose>
-        		<c:when test="${ not empty searchDate }">
-        			<a href="excelDownloadSearch.po">
+        <c:choose>
+        <c:when test="${ not empty searchDecisionDate  }">
+        			<a href="excelDownloadSearch.po?searchDecisionDate=${ searchDecisionDate }">
         				 <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
 				                    	엑셀다운로드
 				         </button>
         			</a>
-        		</c:when>
-        		<c:otherwise>
-        			 <a href="excelDownloadDecision.po">
-		           		<button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
-		           				엑셀다운로드
-						</button>
-					</a>
-        		</c:otherwise>
-        	</c:choose>
+        </c:when>
+        <c:otherwise>
+        	        <a href="excelDownloadDecision.po">
+        				 <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+				                    	엑셀다운로드
+				         </button>
+        			</a>
+        </c:otherwise>
+        </c:choose>
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
@@ -157,6 +157,8 @@
 		$("#resetbtn").click(funtion() {
 			location.href="decision.po";
 		});
+		
+		console.log(location.href);
 	})
 </script>
 </div> <!-- /.content-wrapper -->

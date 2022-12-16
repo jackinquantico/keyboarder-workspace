@@ -152,6 +152,7 @@ public class SettlementController {
 		ArrayList<Settlement> list = settlementService.selectSettleTotalList(set);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("searchSettleDate", nowMonth);
 		return "po/poSettlement/poSettlementTotalListView";
 	}
 	
@@ -170,10 +171,11 @@ public class SettlementController {
 		set.setSellerNo(sellerNo);
 		// System.out.println(sellerNo);
 		set.setSearchDate(searchDate);
-		System.out.println(searchDate);
+		//System.out.println(searchDate);
 		ArrayList<Settlement> list = settlementService.searchSettleList(set);
-		System.out.println(list);
+		//System.out.println(list);
 		model.addAttribute("list", list);
+		model.addAttribute("searchSettleDate", searchSettleDate);
 		return "po/poSettlement/poSettlementTotalListView";
 	}
 	
@@ -243,309 +245,309 @@ public class SettlementController {
 	}
 	
 	// 정산내역 전체조회 엑셀다운로드 - 장미
-	@RequestMapping("excelDownloadTotal.se")
-	public void excelDownloadSettlement(HttpSession session, Model model, HttpServletResponse response) throws IOException {
+		@RequestMapping("excelDownloadTotal.se")
+		public void excelDownloadSettlement(HttpSession session, Model model, HttpServletResponse response) throws IOException {
+			
+			int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+			String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+			Settlement set = new Settlement();
+			set.setNowMonth(nowMonth);
+			set.setSellerNo(sellerNo);
+			
+			ArrayList<Settlement> list = settlementService.settleExcelTotalList(set);
+			
+			// 셀 생성
+		    HSSFWorkbook objWorkBook = new HSSFWorkbook();
+	        HSSFSheet objSheet = null;
+	        HSSFRow objRow = null;
+	        HSSFCell objCell = null;
+	        
+	        //제목폰트 
+	        HSSFFont font = objWorkBook.createFont();
+	        font.setFontHeightInPoints((short)10);
+	        font.setFontName("맑은 고딕");
+	        
+	        //제목 스타일에 폰트 적용, 정렬</span>
+	        HSSFCellStyle styleHd = objWorkBook.createCellStyle(); // 제목 스타일
+	        styleHd.setFont(font);
+	        
+	        objSheet = objWorkBook.createSheet("첫번째 시트"); // 워크 시트 생성
+	        
+	        // Header
+	        objRow = objSheet.createRow(0);
+	        objRow.setHeight ((short)0x150);
+	        
+	        objCell = objRow.createCell(0);
+	        objCell.setCellValue("주문번호");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(1);
+	        objCell.setCellValue("정산일");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(2);
+	        objCell.setCellValue("상품번호");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(3);
+	        objCell.setCellValue("상품금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(4);
+	        objCell.setCellValue("배송비");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(5);
+	        objCell.setCellValue("총 판매금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(6);
+	        objCell.setCellValue("판매수수료");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(7);
+	        objCell.setCellValue("KEYBOAR-DER 쿠폰금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(8);
+	        objCell.setCellValue("입점사 쿠폰금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(9);
+	        objCell.setCellValue("정산 확정금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	      //body
+	        for(int i=0; i<list.size(); i++) {
+	        	 objRow = objSheet.createRow(i + 1);
+	 	        objRow.setHeight ((short)0x150);
+	 	        	
+	         	int count = 0;
+	         	
+	         	// 주문번호
+	         	objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getOrderNo());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 정산일
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getSettleDate());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 상품번호
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getProductNo());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 상품금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getPrice());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 배송비
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue("2500");
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 총판매금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getPaymentBill());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 판매수수료
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getCommition());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // KEYBOAR-DER쿠폰금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getKeyCouponPrice());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 입점사 쿠폰금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getStoCouponPrice());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 정산 확정금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getSettleDept());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+	        }
+	        
+	        response.setContentType("Application/Msexcel");
+	        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
+	        				+ URLEncoder.encode("정산내역전체조회", "UTF-8") + ".xls");
+		 
+	        OutputStream fileOut  = response.getOutputStream();
+		    objWorkBook.write(fileOut);
+		    fileOut.close();
 		
-		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
-		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
-		Settlement set = new Settlement();
-		set.setNowMonth(nowMonth);
-		set.setSellerNo(sellerNo);
+		    response.getOutputStream().flush();
+		    response.getOutputStream().close();
+		}
 		
-		ArrayList<Settlement> list = settlementService.settleExcelTotalList(set);
+		// 정산내역 기간조회 엑셀다운로드 -장미
+		@RequestMapping("excelDownloadSearch.se")
+		public void excelSearchDownloadSettlement(HttpSession session, Model model, HttpServletResponse response, String searchSettleDate) throws IOException {
+			int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+			String searchDate =  searchSettleDate+"-01";
+			Settlement set = new Settlement();
+			set.setSellerNo(sellerNo);
+			set.setSearchDate(searchDate);
+			ArrayList<Settlement> list = settlementService.searchSettleExcelList(set);
+			
+			// 셀 생성
+		    HSSFWorkbook objWorkBook = new HSSFWorkbook();
+	        HSSFSheet objSheet = null;
+	        HSSFRow objRow = null;
+	        HSSFCell objCell = null;
+	        
+	        //제목폰트 
+	        HSSFFont font = objWorkBook.createFont();
+	        font.setFontHeightInPoints((short)10);
+	        font.setFontName("맑은 고딕");
+	        
+	        //제목 스타일에 폰트 적용, 정렬</span>
+	        HSSFCellStyle styleHd = objWorkBook.createCellStyle(); // 제목 스타일
+	        styleHd.setFont(font);
+	        
+	        objSheet = objWorkBook.createSheet("첫번째 시트"); // 워크 시트 생성
+	        
+	        // Header
+	        objRow = objSheet.createRow(0);
+	        objRow.setHeight ((short)0x150);
+	        
+	        objCell = objRow.createCell(0);
+	        objCell.setCellValue("주문번호");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(1);
+	        objCell.setCellValue("정산일");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(2);
+	        objCell.setCellValue("상품번호");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(3);
+	        objCell.setCellValue("상품금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(4);
+	        objCell.setCellValue("배송비");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(5);
+	        objCell.setCellValue("총 판매금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(6);
+	        objCell.setCellValue("판매수수료");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(7);
+	        objCell.setCellValue("KEYBOAR-DER 쿠폰금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(8);
+	        objCell.setCellValue("입점사 쿠폰금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	        objCell = objRow.createCell(9);
+	        objCell.setCellValue("정산 확정금액");
+	        objCell.setCellStyle(styleHd);
+	        
+	      //body
+	        for(int i=0; i<list.size(); i++) {
+	        	 objRow = objSheet.createRow(i + 1);
+	 	        objRow.setHeight ((short)0x150);
+	 	        	
+	         	int count = 0;
+	         	
+	         	// 주문번호
+	         	objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getOrderNo());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 정산일
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getSettleDate());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 상품번호
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getProductNo());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 상품금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getPrice());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 배송비
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue("2500");
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 총판매금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getPaymentBill());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 판매수수료
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getCommition());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // KEYBOAR-DER쿠폰금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getKeyCouponPrice());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 입점사 쿠폰금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getStoCouponPrice());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+		        
+		        // 정산 확정금액
+		        objCell = objRow.createCell(count);
+		        objCell.setCellValue(list.get(i).getSettleDept());
+		        objCell.setCellStyle(styleHd);
+		        count++;
+	        }
+	        
+	        response.setContentType("Application/Msexcel");
+	        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
+	        				+ URLEncoder.encode("정산내역기간별조회", "UTF-8") + ".xls");
+		 
+	        OutputStream fileOut  = response.getOutputStream();
+		    objWorkBook.write(fileOut);
+		    fileOut.close();
 		
-		// 셀 생성
-	    HSSFWorkbook objWorkBook = new HSSFWorkbook();
-        HSSFSheet objSheet = null;
-        HSSFRow objRow = null;
-        HSSFCell objCell = null;
-        
-        //제목폰트 
-        HSSFFont font = objWorkBook.createFont();
-        font.setFontHeightInPoints((short)10);
-        font.setFontName("맑은 고딕");
-        
-        //제목 스타일에 폰트 적용, 정렬</span>
-        HSSFCellStyle styleHd = objWorkBook.createCellStyle(); // 제목 스타일
-        styleHd.setFont(font);
-        
-        objSheet = objWorkBook.createSheet("첫번째 시트"); // 워크 시트 생성
-        
-        // Header
-        objRow = objSheet.createRow(0);
-        objRow.setHeight ((short)0x150);
-        
-        objCell = objRow.createCell(0);
-        objCell.setCellValue("주문번호");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(1);
-        objCell.setCellValue("정산일");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(2);
-        objCell.setCellValue("상품번호");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(3);
-        objCell.setCellValue("상품금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(4);
-        objCell.setCellValue("배송비");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(5);
-        objCell.setCellValue("총 판매금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(6);
-        objCell.setCellValue("판매수수료");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(7);
-        objCell.setCellValue("KEYBOAR-DER 쿠폰금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(8);
-        objCell.setCellValue("입점사 쿠폰금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(9);
-        objCell.setCellValue("정산 확정금액");
-        objCell.setCellStyle(styleHd);
-        
-      //body
-        for(int i=0; i<list.size(); i++) {
-        	 objRow = objSheet.createRow(i + 1);
- 	        objRow.setHeight ((short)0x150);
- 	        	
-         	int count = 0;
-         	
-         	// 주문번호
-         	objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getOrderNo());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 정산일
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getSettleDate());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 상품번호
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getProductNo());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 상품금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getPrice());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 배송비
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue("2500");
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 총판매금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getPaymentBill());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 판매수수료
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getCommition());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // KEYBOAR-DER쿠폰금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getKeyCouponPrice());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 입점사 쿠폰금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getStoCouponPrice());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 정산 확정금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getSettleDept());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-        }
-        
-        response.setContentType("Application/Msexcel");
-        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
-        				+ URLEncoder.encode("정산내역전체조회", "UTF-8") + ".xls");
-	 
-        OutputStream fileOut  = response.getOutputStream();
-	    objWorkBook.write(fileOut);
-	    fileOut.close();
-	
-	    response.getOutputStream().flush();
-	    response.getOutputStream().close();
-	}
-	
-	// 정산내역 기간조회 엑셀다운로드 -장미
-	@RequestMapping("excelDownloadSearch.se")
-	public void excelSearchDownloadSettlement(HttpSession session, Model model, HttpServletResponse response, String searchSettleDate) throws IOException {
-		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
-		String searchDate =  searchSettleDate+"-01";
-		Settlement set = new Settlement();
-		set.setSellerNo(sellerNo);
-		set.setSearchDate(searchDate);
-		ArrayList<Settlement> list = settlementService.searchSettleExcelList(set);
-		
-		// 셀 생성
-	    HSSFWorkbook objWorkBook = new HSSFWorkbook();
-        HSSFSheet objSheet = null;
-        HSSFRow objRow = null;
-        HSSFCell objCell = null;
-        
-        //제목폰트 
-        HSSFFont font = objWorkBook.createFont();
-        font.setFontHeightInPoints((short)10);
-        font.setFontName("맑은 고딕");
-        
-        //제목 스타일에 폰트 적용, 정렬</span>
-        HSSFCellStyle styleHd = objWorkBook.createCellStyle(); // 제목 스타일
-        styleHd.setFont(font);
-        
-        objSheet = objWorkBook.createSheet("첫번째 시트"); // 워크 시트 생성
-        
-        // Header
-        objRow = objSheet.createRow(0);
-        objRow.setHeight ((short)0x150);
-        
-        objCell = objRow.createCell(0);
-        objCell.setCellValue("주문번호");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(1);
-        objCell.setCellValue("정산일");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(2);
-        objCell.setCellValue("상품번호");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(3);
-        objCell.setCellValue("상품금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(4);
-        objCell.setCellValue("배송비");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(5);
-        objCell.setCellValue("총 판매금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(6);
-        objCell.setCellValue("판매수수료");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(7);
-        objCell.setCellValue("KEYBOAR-DER 쿠폰금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(8);
-        objCell.setCellValue("입점사 쿠폰금액");
-        objCell.setCellStyle(styleHd);
-        
-        objCell = objRow.createCell(9);
-        objCell.setCellValue("정산 확정금액");
-        objCell.setCellStyle(styleHd);
-        
-      //body
-        for(int i=0; i<list.size(); i++) {
-        	 objRow = objSheet.createRow(i + 1);
- 	        objRow.setHeight ((short)0x150);
- 	        	
-         	int count = 0;
-         	
-         	// 주문번호
-         	objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getOrderNo());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 정산일
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getSettleDate());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 상품번호
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getProductNo());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 상품금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getPrice());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 배송비
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue("2500");
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 총판매금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getPaymentBill());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 판매수수료
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getCommition());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // KEYBOAR-DER쿠폰금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getKeyCouponPrice());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 입점사 쿠폰금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getStoCouponPrice());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-	        
-	        // 정산 확정금액
-	        objCell = objRow.createCell(count);
-	        objCell.setCellValue(list.get(i).getSettleDept());
-	        objCell.setCellStyle(styleHd);
-	        count++;
-        }
-        
-        response.setContentType("Application/Msexcel");
-        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
-        				+ URLEncoder.encode("정산내역전체조회", "UTF-8") + ".xls");
-	 
-        OutputStream fileOut  = response.getOutputStream();
-	    objWorkBook.write(fileOut);
-	    fileOut.close();
-	
-	    response.getOutputStream().flush();
-	    response.getOutputStream().close();
-		
-	}
+		    response.getOutputStream().flush();
+		    response.getOutputStream().close();
+			
+		}
 }
 
 

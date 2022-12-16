@@ -81,8 +81,8 @@
          <form action="searchSettlementTotal.po">
         	 <div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
-                <input type="month" style="height: 35px;" id="searchSettleDate" name="searchSettleDate">
-                <input type="submit" class="btn btn-dark" value="검색" id="searchbtn" onclick="selectSettleDate" >
+                <input type="month" style="height: 35px;" id="searchSettleDate" name="searchSettleDate" value="${ searchSettleDate }">
+                <input type="submit" class="btn btn-dark" value="검색" id="searchbtn">
                  <input type="button" class="btn btn-outline-secondary" value="초기화" id="resetbtn" onclick="selectSettleDate">
             </div>
         </form>
@@ -91,11 +91,23 @@
 
         <div id="orderConfirmList" >
             <br>
-            <a href="excelDownloadTotal.se">
-	            <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+            <c:choose>
+            	<c:when test="${ not empty  searchSettleDate }">
+            		<a href="excelDownloadSearch.se?searchSettleDate=${ searchSettleDate }">
+            			 <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
 			           				엑셀다운로드
-				</button>
-			</a>
+						</button>
+            		</a>
+            	</c:when>
+            	<c:otherwise>
+            		<a href="excelDownloadTotal.se">
+			            <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+					           				엑셀다운로드
+						</button>
+					</a>
+            	</c:otherwise>
+            </c:choose>
+            
             <br><br><br>
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">

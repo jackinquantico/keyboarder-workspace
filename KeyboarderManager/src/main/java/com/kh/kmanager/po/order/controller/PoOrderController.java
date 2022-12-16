@@ -69,6 +69,7 @@ public class PoOrderController {
 		
 		ArrayList<PoOrder> list = orderService.selectDecisionOrder(poOrder);
 		model.addAttribute("list", list);
+		model.addAttribute("searchDecisionDate", nowMonth);
 		//System.out.println(list);
 		return "po/poOrder/poOrderDecisionListView";
 	}
@@ -86,6 +87,7 @@ public class PoOrderController {
 		 
 		 ArrayList<PoOrder> list = orderService.searchPoOrderDecision(poOrder);
 		 model.addAttribute("list", list);
+		 model.addAttribute("searchDecisionDate", searchDecisionDate);
 		 return "po/poOrder/poOrderDecisionListView";
 	 }
 	 
@@ -97,6 +99,10 @@ public class PoOrderController {
 		PoOrder poOrder = new PoOrder();
 		poOrder.setSellerNo(sellerNo);
 		poOrder.setNowMonth(nowMonth);
+
+//		 System.out.println("기간설정X");
+//		 System.out.println(nowMonth);
+		
 		 ArrayList<PoOrder> list = orderService.orderDecisionList(poOrder);
 
 		// 셀 생성
@@ -342,7 +348,7 @@ public class PoOrderController {
 	        
 	        response.setContentType("Application/Msexcel");
 	        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
-	        				+ URLEncoder.encode(list.get(0).getSearchDate()+"구매확정내역", "UTF-8") + ".xls");
+	        				+ URLEncoder.encode("기간별구매확정내역", "UTF-8") + ".xls");
 		 
 	        OutputStream fileOut  = response.getOutputStream();
 		    objWorkBook.write(fileOut);
