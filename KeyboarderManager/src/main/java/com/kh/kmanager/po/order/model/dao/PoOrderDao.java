@@ -47,4 +47,12 @@ public class PoOrderDao {
 		return (ArrayList)sqlSession.selectList("poorderMapper.searchExcelDecisionList", poOrder);
 	}
 	
+	public int refundOrder(SqlSessionTemplate sqlSession, PoOrder pgd) {
+		return sqlSession.update("poorderMapper.refundOrder", pgd);
+	}
+
+	public int refundPayment(SqlSessionTemplate sqlSession, PoOrder pgd) {
+		return sqlSession.update("poorderMapper.refundPayment", pgd);
+	}
+	
 }

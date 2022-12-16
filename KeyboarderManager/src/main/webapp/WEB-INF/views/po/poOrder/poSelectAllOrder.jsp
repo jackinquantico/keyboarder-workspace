@@ -106,7 +106,9 @@
 											<td>${ o.orderPrice }</td>
 											<td>${ o.conId }</td>
 											<td>${ o.conName }</td>
-											<td><input type="button" value="환불"></td>
+											<td>
+												<button type="button" onclick="refundPay('${ o.orderNo }', '${ o.paymentNo }');" class="btn btn-secondary">환불</button>
+											</td>
 										</tr>
 										
 									</c:forEach>
@@ -224,7 +226,14 @@
 	
 	</div> <!-- /.content-wrapper -->
 
+<script>
 
+function refundPay(orderNo, paymentNo) {
+	
+	location.href = "refundPay.fo?orderNo=" + orderNo + "&paymentNo=" + paymentNo;
+}
+
+</script>
 
 
 

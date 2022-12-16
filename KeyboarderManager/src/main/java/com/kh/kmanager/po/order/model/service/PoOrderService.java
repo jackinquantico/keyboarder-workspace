@@ -1,5 +1,6 @@
 package com.kh.kmanager.po.order.model.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,4 +23,11 @@ public interface PoOrderService {
 	
 	// 구매확정내역 기간별조회 엑셀다운로드
 	ArrayList<PoOrder> searchExcelDecisionList(PoOrder poOrder);
+
+	// 환불 관련 메소드
+	String getToken() throws IOException;
+	int paymentInfo(String paymentNo, String token) throws IOException;
+	int orderCancel(PoOrder pgd);
+	public void payMentCancel(String access_token, String imp_uid, int amount, String reason) throws IOException;
+	
 }

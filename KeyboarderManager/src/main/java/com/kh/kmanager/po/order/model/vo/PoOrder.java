@@ -58,6 +58,8 @@ public class PoOrder {
 	private int paymentBill; // 정산기준금액(결제금액)
 	private String excelDate;
 	
+	private String paymentNo;
+	
 	public PoOrder(int sellerNo, String searchDate) {
 		super();
 		this.sellerNo = sellerNo;

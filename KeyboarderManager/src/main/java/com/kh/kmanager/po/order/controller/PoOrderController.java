@@ -353,4 +353,32 @@ public class PoOrderController {
 		 
 	 }
 	 
+	/**
+	 * 환불처리 기능 - 채영
+	 * @param pgd
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="refundPay.fo")
+	public String refundPay(PoOrder pgd, HttpSession session) throws IOException {
+		
+		// System.out.println(pgd);
+		
+		//int amount = service.selectRefundAmount(pgd);		
+		String token = orderService.getToken();
+		int amount = orderService.paymentInfo(pgd.getPaymentNo(), token);
+		
+		orderService.payMentCancel(token, pgd.getPaymentNo(), amount, "단순 변심 취소");
+		
+		int result = orderService.orderCancel(pgd);
+		
+		if (result > 0) {
+			session.setAttribute("alertMsg", "결제 취소 완료");
+			return "redirect:/allOrderList.po";
+		} else {
+			session.setAttribute("alertMsg", "결제 취소 실패");
+			return "redirect:/allOrderList.po";
+		}
+	}
 }

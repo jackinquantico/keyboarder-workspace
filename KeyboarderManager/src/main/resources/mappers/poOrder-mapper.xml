@@ -26,6 +26,8 @@
 		<result column="SUPPLY_VALUE" property="supplyValue" />
 		<result column="COUPON_TYPE" property="couponType" />
 		<result column="PAYMENT_BILL" property="paymentBill" />
+		
+		<result column="PAYMENT_NO" property="paymentNo" />
 	</resultMap>
 	
 	<resultMap id="deliveryOrderResultSet" type="poOrder">
@@ -331,6 +333,7 @@
 			                      , PAY.PAYMENT_BILL "PAYMENT_BILL" <!-- 정산기준금액(결제금액) -->
 			                      , S.SELLER_NO "SELLER_NO" <!-- WHERE절의 판매자 비교를 위한 데이터 추출 -->
 			                      , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH" <!-- WHERE절의 날짜 비교를 위한 데이터 추출 -->
+			                      , PAY.PAYMENT_NO
 			                   FROM ORDERS O
 			                   JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
 			                   JOIN CONSUMER C ON (O.CON_NO = C.CON_NO)
@@ -391,4 +394,24 @@
 			ORDER BY ORDER_NO DESC
 		</select>
 
+	<select id="selectRefundAmount" parameterType="poOrder" resultType="_int">
+		SELECT PAYMENT_BILL
+		FROM PAYMENT
+		WHERE PAYMENT_NO = #{paymentNo}
+		AND ORDER_NO = #{orderNo}
+	</select>
+	
+	<update id="refundOrder" parameterType="poOrder">
+		UPDATE ORDERS
+		SET ORDER_STATUS = 4
+		WHERE ORDER_NO = #{orderNo}
+	</update>
+	
+	<update id="refundPayment" parameterType="poOrder">
+		UPDATE PAYMENT
+		SET PAYMENT_STATUS = 'N'
+		  , REFUND_DATE = SYSDATE
+		WHERE PAYMENT_NO = #{paymentNo}
+		AND ORDER_NO = #{orderNo}
+	</update>
 </mapper>
