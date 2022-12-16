@@ -24,12 +24,18 @@
 }
 #noticeList_table td {
 	text-align: center;
-	height: 50px;
+	height: 70px;
 }
 #noticeList_table thead {
 	height: 50px;
 	background-color: gray;
 	color: white;
+}
+.pagination {
+	margin: auto;
+	float: right;
+	background-color: white;
+	border: 1px solid gray;
 }
 </style>
 </head>
@@ -101,17 +107,24 @@
 			<br>
 
 			<div id="pagingArea">
+				<ul class="pagination">
 				<c:choose>
 					<c:when test="${ pi.currentPage eq 1 }">
-						<button class="btn btn-secondary" disabled>&lt;</button>&nbsp;
+						<li class="page-item disabled">
+							<a class="btn">&lt;</a>
+						</li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ loginUser.sellerId eq 'admin' }">
-								<button class="btn btn-secondary" onclick="location.href='noticeList.bo?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+								<li class="page-item">
+								<button class="btn" onclick="location.href='noticeList.bo?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+								</li>
 							</c:when>
 							<c:otherwise>
-								<button class="btn btn-secondary" onclick="location.href='noticeList.po?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+								<li class="page-item">
+								<button class="btn" onclick="location.href='noticeList.po?cpage=${ pi.currentPage - 1 }'">&lt;</button>&nbsp;
+								</li>
 							</c:otherwise>
 						</c:choose>
 					
@@ -121,29 +134,40 @@
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:choose>
 						<c:when test="${ loginUser.sellerId eq 'admin' }">
-							<button class="btn btn-secondary" onclick="location.href='noticeList.bo?cpage=${ p }'">${ p }</button>&nbsp;
+						<li class="page-item">
+							<button class="btn" onclick="location.href='noticeList.bo?cpage=${ p }'">${ p }</button>&nbsp;
+						</li>
 						</c:when>
 						<c:otherwise>
-							<button class="btn btn-secondary" onclick="location.href='noticeList.po?cpage=${ p }'">${ p }</button>&nbsp;
+						<li class="page-item">
+							<button class="btn" onclick="location.href='noticeList.po?cpage=${ p }'">${ p }</button>&nbsp;
+						</li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				
 				<c:choose>
 					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<button class="btn btn-secondary" disabled>&gt;</button>
+					<li class="page-item disabled">
+						<button class="btn">&gt;</button>
+					</li>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${ loginUser.sellerId eq 'admin' }">
-								<button class="btn btn-secondary" onclick="location.href='noticeList.bo?cpage=${ pi.currentPage + 1}'">&gt;</button>
+							<li class="page-item">
+								<button class="btn" onclick="location.href='noticeList.bo?cpage=${ pi.currentPage + 1}'">&gt;</button>
+							</li>
 							</c:when>
 							<c:otherwise>
-								<button class="btn btn-secondary" onclick="location.href='noticeList.po?cpage=${ pi.currentPage + 1}'">&gt;</button>
+							<li class="page-item">
+								<button class="btn" onclick="location.href='noticeList.po?cpage=${ pi.currentPage + 1}'">&gt;</button>
+							</li>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
 				</c:choose>
+				</ul>
 			</div>
 
 		</div>

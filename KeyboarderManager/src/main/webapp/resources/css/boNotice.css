@@ -35,13 +35,16 @@
 }
 
 #pagingArea {
-    text-align : center;
+    align : center;
+    width: 55%;
 }
 
-#pagingArea>button {
+#pagingArea button {
     width : 30px;
     height : 30px;
 }
+
+
 
 
 /* -------------- BO 공지사항 작성 페이지 적용 CSS ------------------ */
