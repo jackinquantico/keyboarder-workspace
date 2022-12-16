@@ -107,7 +107,14 @@
 											<td>${ o.conId }</td>
 											<td>${ o.conName }</td>
 											<td>
-												<button type="button" onclick="refundPay('${ o.orderNo }', '${ o.paymentNo }');" class="btn btn-secondary">환불</button>
+												<c:choose>
+													<c:when test="${ o.orderStatus eq '구매확정' or o.orderStatus eq '환불'  }">
+														<button type="button" class="btn btn-secondary" disabled>환불</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" onclick="refundPay('${ o.orderNo }', '${ o.paymentNo }');" class="btn btn-secondary">환불</button>
+													</c:otherwise>
+												</c:choose>
 											</td>
 										</tr>
 										
