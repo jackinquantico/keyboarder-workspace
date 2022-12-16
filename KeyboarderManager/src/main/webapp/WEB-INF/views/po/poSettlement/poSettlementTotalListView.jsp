@@ -91,19 +91,23 @@
 
         <div id="orderConfirmList" >
             <br>
-            <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px;">
+            <a href="excelDownloadTotal.se">
+	            <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+			           				엑셀다운로드
+				</button>
+			</a>
             <br><br><br>
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
-                    	<th width="10%">주문번호</th>
+                    	<th width="13%">주문번호</th>
                         <th width="10%">정산일</th>
-                        <th width="10%">상세내역</th>
-                        <th width="10%">상품금액</th>
+                        <th width="8%">상품번호</th>
+                        <th width="8%">상품금액</th>
                         <th width="7%">배송비</th>
                         <th width="10%">총 판매금액</th>
                         <th width="10%">판매수수료</th>
-                        <th width="13%">KEYBOAR-DER 쿠폰</th>
+                        <th width="14%">KEYBOAR-DER 쿠폰</th>
                         <th width="10%">입점사 쿠폰</th>
                         <th width="10%">정산확정금액</th>
                     </tr>
@@ -113,7 +117,7 @@
                 		<tr align="center">
 	                        <td>${ s.orderNo }</td>
 	                        <td>${ s.settleDate }</td>
-	                        <td><input type="button" class="btn btn-outline-dark" value="내역확인" style="height:30px; font-size :90%"></td>
+	                        <td>${ s.productNo }
 	                        <td>${s.price } 원</td>
 	                        <td>2500원</td>
 	                        <td>${ s.paymentBill } 원</td>

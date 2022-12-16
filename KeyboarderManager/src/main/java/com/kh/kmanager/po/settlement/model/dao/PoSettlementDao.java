@@ -41,7 +41,7 @@ public class PoSettlementDao {
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
 	}
 	
-	// 정산내역 전체조회(해당월) -장미
+	// 정산내역 전체조회(당월) -장미
 	public ArrayList<Settlement> selectSettleTotalList(SqlSessionTemplate sqlSession, Settlement set) {
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectSettleTotalList", set);
 	}
@@ -49,6 +49,16 @@ public class PoSettlementDao {
 	// 정산내역 기간조회 -장미
 	public ArrayList<Settlement> searchSettleList(SqlSessionTemplate sqlSession, Settlement set) {
 		return (ArrayList)sqlSession.selectList("settlementMapper.searchSettleList", set);
+	}
+	
+	// 정산내역 전체(당월)조회 엑셀다운로드 -장미
+	public ArrayList<Settlement> settleExcelTotalList(SqlSessionTemplate sqlSession, Settlement set) {
+		return (ArrayList)sqlSession.selectList("settlementMapper.settleExcelTotalList", set);
+	}
+	
+	// 정산내역 기간조회 엑셀다운로드 -장미
+	public ArrayList<Settlement> searchSettleExcelList(SqlSessionTemplate sqlSession, Settlement set) {
+		return (ArrayList)sqlSession.selectList("settlementMapper.searchSettleExcelList", set);
 	}
 
 }

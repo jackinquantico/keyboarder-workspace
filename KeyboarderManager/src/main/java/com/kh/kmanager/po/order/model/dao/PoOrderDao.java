@@ -16,14 +16,8 @@ import com.kh.kmanager.po.order.model.vo.PoOrder;
 public class PoOrderDao {
 	
 	// 구매확정 전체 조회
-	public ArrayList<PoOrder> selectDecisionOrder(SqlSessionTemplate sqlSession, int sellerNo) {
-		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
-		PoOrder poOrder = new PoOrder();
-		poOrder.setNowMonth(nowMonth);
-		poOrder.setSellerNo(sellerNo);
-//		nowMonth = "2022-09"; // 9월 더미밖에 없어서 일단 9월달로만 해놓음
-//		System.out.println(nowMonth);
-//		System.out.println("오니?");
+	public ArrayList<PoOrder> selectDecisionOrder(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		
 		return (ArrayList)sqlSession.selectList("poorderMapper.selectDecisionOrder", poOrder);
 	}
 	
@@ -44,9 +38,13 @@ public class PoOrderDao {
 	}
 	
 	// 구매확정내역 엑셀다운로드
-	public ArrayList<PoOrder> orderDecisionList(SqlSessionTemplate sqlSession, int sellerNo) {
-		return (ArrayList)sqlSession.selectList("poorderMapper.orderDecisionList", sellerNo);
+	public ArrayList<PoOrder> orderDecisionList(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.orderDecisionList", poOrder);
 	}
 	
+	// 구매확정내역 기간별조회 엑셀다운로드
+	public ArrayList<PoOrder> searchExcelDecisionList(SqlSessionTemplate sqlSession, PoOrder poOrder) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.searchExcelDecisionList", poOrder);
+	}
 	
 }

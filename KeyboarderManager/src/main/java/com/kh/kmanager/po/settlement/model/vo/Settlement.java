@@ -29,6 +29,7 @@ public class Settlement {
 	private int supplyValue; // 공급가액
 	private String paymentNo; // 결제번호
 	private String nowMonth;
+	private int productNo; // 조인할 상품코드
 	private int price; // 조인할 상품가격
 	private int keyCouponPrice; // 조인할 키보더쿠폰가격
 	private int stoCouponPrice; // 조인할 스토어쿠폰가격

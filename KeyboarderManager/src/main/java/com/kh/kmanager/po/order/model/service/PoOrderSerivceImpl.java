@@ -23,8 +23,8 @@ public class PoOrderSerivceImpl implements PoOrderService{
 	 * 구매확정조회-장미
 	 */
 	@Override
-	public ArrayList<PoOrder> selectDecisionOrder(int sellerNo) {
-		return orderDao.selectDecisionOrder(sqlSession, sellerNo);
+	public ArrayList<PoOrder> selectDecisionOrder(PoOrder poOrder) {
+		return orderDao.selectDecisionOrder(sqlSession, poOrder);
 	}
 
 	/**
@@ -45,9 +45,17 @@ public class PoOrderSerivceImpl implements PoOrderService{
 		return orderDao.selectAllOrderList(sqlSession, optionDefault);
 	}
 
+	// 구매확정내역 해당월 엑셀다운로드 - 장미
 	@Override
-	public ArrayList<PoOrder> orderDecisionList(int sellerNo) {
-		return orderDao.orderDecisionList(sqlSession, sellerNo);
+	public ArrayList<PoOrder> orderDecisionList(PoOrder poOrder) {
+		return orderDao.orderDecisionList(sqlSession, poOrder);
+	}
+
+	
+	// 구매확정내역 기간별조회 엑셀다운로드 - 장미
+	@Override
+	public ArrayList<PoOrder> searchExcelDecisionList(PoOrder poOrder) {
+		return orderDao.searchExcelDecisionList(sqlSession, poOrder);
 	}
 	
 

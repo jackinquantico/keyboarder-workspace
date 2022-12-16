@@ -33,8 +33,8 @@ public class InquiryController {
 	@RequestMapping("list.iq")
 	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
 		int listCount = inquiryService.selectListCount();
-		int pageLimit = 10;
-		int boardLimit = 5;
+		int pageLimit = 5;
+		int boardLimit = 10;
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		ArrayList<Inquiry> list = inquiryService.selectList(pi);

@@ -49,26 +49,28 @@
 	</resultMap>
 	
 	<!-- 구매확정내역 전체조회(해당월)-장미 -->
-	<select id="selectDecisionOrder"  parameterType="string" resultMap="poorderResultSet">
-		SELECT *
-		FROM (SELECT O.ORDER_NO "ORDER_NO"
-		                , S.SETTLE_DATE "SETTLE_DATE"
-		                , TO_CHAR((S.SETTLE_DATE)+1) "KMONEY_DATE"
-		                , O.PRODUCT_NO "PRODUCT_NO"
-		                , P.PRODUCT_NAME "PRODUCT_NAME"
-		                , O.ORDER_PRICE "ORDER_PRICE"
-		                , C.CON_ID "CON_ID"
-		                , C.CON_NAME "CON_NAME"
-		                , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH"
-		        FROM ORDERS O
-		        JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
-		        JOIN CONSUMER C ON (C.CON_NO = O.CON_NO)
-		        JOIN SETTLEMENT S ON (S.ORDER_NO = O.ORDER_NO)
-		        ORDER BY O.ORDER_DATE DESC)
-		<if test=' #{nowMonth} != null '>
-			WHERE MONTH = #{nowMonth}
-		</if>
+	<select id="selectDecisionOrder"  parameterType="poOrder" resultMap="poorderResultSet">
+		    SELECT *
+	        FROM (SELECT O.ORDER_NO "ORDER_NO"
+						                      , S.SETTLE_DATE "SETTLE_DATE"
+						                      , TO_CHAR((S.SETTLE_DATE)+1, 'YYYY-MM-DD') "KMONEY_DATE"
+						                      , O.PRODUCT_NO "PRODUCT_NO"
+						                      , P.PRODUCT_NAME "PRODUCT_NAME"
+						                      , O.ORDER_PRICE "ORDER_PRICE"
+						                      , C.CON_ID "CON_ID"
+						                      , C.CON_NAME "CON_NAME"
+						                      , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH"
+			              FROM ORDERS O
+			              LEFT JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+			              LEFT JOIN CONSUMER C ON (C.CON_NO = O.CON_NO)
+			              LEFT JOIN SETTLEMENT S ON (S.ORDER_NO = O.ORDER_NO)
+			              WHERE P.SELLER_NO = #{sellerNo}
+			              ORDER BY O.ORDER_DATE DESC)
+	         WHERE MONTH = #{nowMonth}
+	        ORDER BY ORDER_NO DESC
 	</select>
+	
+	
 		<!-- 정산 상세내역 조회 -->
 	<select id="selectSettleDetailList" parameterType="_int" resultMap="poorderResultSet">
 				  SELECT 
@@ -125,12 +127,12 @@
 				</if> 
 			</select>
 		
-		<!-- 구매확정내역 기간별 조회 - 장미 -->
+				<!-- 구매확정내역 기간별 조회 - 장미 -->
 		<select id="searchPoOrderDecision" parameterType="poOrder" resultMap="poorderResultSet">
 				SELECT *
 				FROM (SELECT O.ORDER_NO "ORDER_NO"
 											, S.SETTLE_DATE "SETTLE_DATE"
-											, TO_CHAR((S.SETTLE_DATE)+1) "KMONEY_DATE"
+											, TO_CHAR((S.SETTLE_DATE)+1, 'YYYY-MM-DD') "KMONEY_DATE"
 											, O.PRODUCT_NO "PRODUCT_NO"
 											, P.PRODUCT_NAME "PRODUCT_NAME"
 											, O.ORDER_PRICE "ORDER_PRICE"
@@ -145,7 +147,7 @@
 				WHERE SELLER_NO = #{sellerNo}
 					AND EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 					AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE (#{searchDate}, 'YYYY-MM-DD'))	
-				ORDER BY ORDER_NO
+				ORDER BY ORDER_NO DESC
 		</select>
 		
 		<select id="orderStatus1" parameterType="_int" resultType="_int">
@@ -342,6 +344,51 @@
 			                    ORDER BY ORDER_DATE DESC) A
 			WHERE A.SELLER_NO = #{sellerNo}
 			  AND A.MONTH = #{nowMonth}
+		</select>
+		
+		<!-- 엑셀다운로드 해당월(기본) -->
+		<select id="orderDecisionList" parameterType="poOrder" resultMap="poorderResultSet">
+			SELECT *
+	        FROM (SELECT O.ORDER_NO "ORDER_NO"
+						                      , S.SETTLE_DATE "SETTLE_DATE"
+						                      , TO_CHAR((S.SETTLE_DATE)+1) "KMONEY_DATE"
+						                      , O.PRODUCT_NO "PRODUCT_NO"
+						                      , P.PRODUCT_NAME "PRODUCT_NAME"
+						                      , O.ORDER_PRICE "ORDER_PRICE"
+						                      , C.CON_ID "CON_ID"
+						                      , C.CON_NAME "CON_NAME"
+						                      , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH"
+			              FROM ORDERS O
+			              LEFT JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+			              LEFT JOIN CONSUMER C ON (C.CON_NO = O.CON_NO)
+			              LEFT JOIN SETTLEMENT S ON (S.ORDER_NO = O.ORDER_NO)
+			              WHERE P.SELLER_NO = #{sellerNo}
+			              ORDER BY O.ORDER_DATE DESC)
+	         WHERE MONTH = #{nowMonth}
+	        ORDER BY ORDER_NO DESC
+		</select>
+		
+		<!--  엑셀다운로드 기간별조회 - 장미 -->
+		<select id="searchExcelDecisionList" parameterType="poOrder" resultMap="poorderResultSet">
+			SELECT *
+			FROM (SELECT O.ORDER_NO "ORDER_NO"
+										, S.SETTLE_DATE "SETTLE_DATE"
+										, TO_CHAR((S.SETTLE_DATE)+1) "KMONEY_DATE"
+										, O.PRODUCT_NO "PRODUCT_NO"
+										, P.PRODUCT_NAME "PRODUCT_NAME"
+										, O.ORDER_PRICE "ORDER_PRICE"
+										, C.CON_ID "CON_ID"
+										, C.CON_NAME "CON_NAME"
+										, P.SELLER_NO "SELLER_NO"
+							FROM ORDERS O
+							JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+							JOIN CONSUMER C ON (C.CON_NO = O.CON_NO)
+							JOIN SETTLEMENT S ON (S.ORDER_NO = O.ORDER_NO)
+							ORDER BY O.ORDER_DATE DESC)
+			WHERE SELLER_NO = #{sellerNo}
+				AND EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
+				AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE (#{searchDate}, 'YYYY-MM-DD'))	
+			ORDER BY ORDER_NO DESC
 		</select>
 
 </mapper>

@@ -28,6 +28,7 @@
 		<result column="SETTLE_DEPT" property="settleDept"/>
 		<result column="PAYMENT_BILL" property="paymentBill"/>
 		<result column ="SELLER_NO" property="sellerNo" />
+		<result column="PRODUCT_NO" property="productNo" />
 	</resultMap>
 	
 	<resultMap id="settlementElectronicResultSet" type="settlement">
@@ -110,6 +111,7 @@
 		SELECT DISTINCT * 
 		FROM (SELECT S.ORDER_NO
 		                    , TO_CHAR(S.SETTLE_DATE , 'YY/MM/DD') "SETTLE_DATE"
+		                    , P.PRODUCT_NO "PRODUCT_NO"
 		                    , P.PRICE "PRICE"
 		                    , PAY.PAYMENT_BILL "PAYMENT_BILL"
 		                    , S.COMMITION "COMMITION"                   
@@ -136,12 +138,14 @@
 		SELECT DISTINCT * 
 		FROM (SELECT S.ORDER_NO
 		                    , TO_CHAR(S.SETTLE_DATE , 'YYYY-MM-DD') "SETTLE_DATE"
+		                    , P.PRODUCT_NO "PRODUCT_NO"
 		                    , P.PRICE "PRICE"
 		                    , PAY.PAYMENT_BILL "PAYMENT_BILL"
 		                    , S.COMMITION "COMMITION"                   
 		                     , KEY.COUPON_PRICE "KEYBOARDER_COUPON_PRICE"
                     		, M.COUPON_PRICE "STORE_COUPON_PRICE"
 		                    , S.SETTLE_DEPT "SETTLE_DEPT"
+		                    , S.SELLER_NO "SELLER_NO"
 			            FROM SETTLEMENT S
 			            LEFT JOIN ORDERS O ON (S.ORDER_NO = O.ORDER_NO)
 			            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
@@ -150,14 +154,65 @@
 			            LEFT JOIN COUPON_KEYBOARDER KEY ON (K.COUPON_NO = KEY.COUPON_NO)
 			            LEFT JOIN STORE_USE SU ON (S.ORDER_NO = SU.ORDER_NO)
 			            LEFT JOIN COUPON_STORE M ON (SU.COUPON_NO = M.COUPON_NO)		
-			            WHERE S.SELLER_NO = #{sellerNo}	
 			            ORDER BY S.SETTLE_DATE DESC )
-				WHERE EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
-				AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE (#{searchDate}, 'YYYY-MM-DD'))	
+			    WHERE SELLER_NO = #{sellerNo}	
+				AND SUBSTR (SETTLE_DATE, 1, 7) =SUBSTR(#{searchDate}, 1, 7)
 		ORDER BY ORDER_NO DESC
-		
 	</select>
 	
+	<!-- 정산내역 전체(당월)조회 엑셀다운로드 -장미 -->
+	<select id="settleExcelTotalList" parameterType="settlement" resultMap="settlementResultSet">
+		SELECT DISTINCT * 
+		FROM (SELECT S.ORDER_NO
+		                    , TO_CHAR(S.SETTLE_DATE , 'YY/MM/DD') "SETTLE_DATE"
+		                    , P.PRODUCT_NO "PRODUCT_NO"
+		                    , P.PRICE "PRICE"
+		                    , PAY.PAYMENT_BILL "PAYMENT_BILL"
+		                    , S.COMMITION "COMMITION"                   
+		                     , KEY.COUPON_PRICE "KEYBOARDER_COUPON_PRICE"
+                    		, M.COUPON_PRICE "STORE_COUPON_PRICE"
+		                    , S.SETTLE_DEPT "SETTLE_DEPT"
+		                    , TO_CHAR(S.SETTLE_DATE, 'YYYY-MM') "MONTH"
+		            FROM SETTLEMENT S
+		            LEFT JOIN ORDERS O ON (S.ORDER_NO = O.ORDER_NO)
+		            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+		            LEFT JOIN PAYMENT PAY ON (S.ORDER_NO = PAY.ORDER_NO)
+		            LEFT JOIN KEYBOARDER_USE K ON (S.ORDER_NO = K.ORDER_NO)
+		            LEFT JOIN COUPON_KEYBOARDER KEY ON (K.COUPON_NO = KEY.COUPON_NO)
+		            LEFT JOIN STORE_USE SU ON (S.ORDER_NO = SU.ORDER_NO)
+		            LEFT JOIN COUPON_STORE M ON (SU.COUPON_NO = M.COUPON_NO)
+		            WHERE S.SELLER_NO = #{sellerNo}
+		            ORDER BY S.SETTLE_DATE DESC )
+		WHERE MONTH = #{nowMonth}
+		ORDER BY ORDER_NO DESC
+	</select>
+	
+	<!--  정산내역 기간조회 엑셀다운로드 -장미 -->
+	<select id="searchSettleExcelList" parameterType="settlement" resultMap="settlementResultSet">
+		SELECT DISTINCT * 
+		FROM (SELECT S.ORDER_NO
+		                    , TO_CHAR(S.SETTLE_DATE , 'YYYY-MM-DD') "SETTLE_DATE"
+		                    , P.PRODUCT_NO "PRODUCT_NO"
+		                    , P.PRICE "PRICE"
+		                    , PAY.PAYMENT_BILL "PAYMENT_BILL"
+		                    , S.COMMITION "COMMITION"                   
+		                     , KEY.COUPON_PRICE "KEYBOARDER_COUPON_PRICE"
+                    		, M.COUPON_PRICE "STORE_COUPON_PRICE"
+		                    , S.SETTLE_DEPT "SETTLE_DEPT"
+		                    , S.SELLER_NO "SELLER_NO"
+			            FROM SETTLEMENT S
+			            LEFT JOIN ORDERS O ON (S.ORDER_NO = O.ORDER_NO)
+			            LEFT JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
+			            LEFT JOIN PAYMENT PAY ON (S.ORDER_NO = PAY.ORDER_NO)
+			            LEFT JOIN KEYBOARDER_USE K ON (S.ORDER_NO = K.ORDER_NO)
+			            LEFT JOIN COUPON_KEYBOARDER KEY ON (K.COUPON_NO = KEY.COUPON_NO)
+			            LEFT JOIN STORE_USE SU ON (S.ORDER_NO = SU.ORDER_NO)
+			            LEFT JOIN COUPON_STORE M ON (SU.COUPON_NO = M.COUPON_NO)		
+			            ORDER BY S.SETTLE_DATE DESC )
+			    WHERE SELLER_NO = #{sellerNo}	
+				AND SUBSTR (SETTLE_DATE, 1, 7) =SUBSTR(#{searchDate}, 1, 7)
+		ORDER BY ORDER_NO DESC
+	</select>
 </mapper>
 
 

@@ -98,9 +98,22 @@
        <br><br>
        
         <div id="decisionList">
-            <form action="excelDownloadDecision.po">
-                <input type="button" class="btn btn-outline-secondary" value="엑셀다운로드" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
-            </form>
+        	<c:choose>
+        		<c:when test="${ not empty searchDate }">
+        			<a href="excelDownloadSearch.po">
+        				 <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+				                    	엑셀다운로드
+				         </button>
+        			</a>
+        		</c:when>
+        		<c:otherwise>
+        			 <a href="excelDownloadDecision.po">
+		           		<button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
+		           				엑셀다운로드
+						</button>
+					</a>
+        		</c:otherwise>
+        	</c:choose>
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
@@ -141,7 +154,7 @@
 		var month = date.getMonth()+1;
 		
 		document.getElementById("searchDecisionDate").value = year+"-"+month;
-		$("#resetButton").click(funtion() {
+		$("#resetbtn").click(funtion() {
 			location.href="decision.po";
 		});
 	})

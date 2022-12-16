@@ -32,4 +32,10 @@ public interface SettlementService {
 	
 	// 전자세금계산서 조회 - 건우
 	ArrayList<Settlement> selectElectronicList(int selNo);
+	
+	// 정산내역 전체조회 (당월) 엑셀다운로드 -장미
+	ArrayList<Settlement> settleExcelTotalList(Settlement set);
+	
+	// 정산내역 기간조회 엑셀다운로드 -장미
+	ArrayList<Settlement> searchSettleExcelList(Settlement set);
 }
