@@ -412,9 +412,13 @@
 			   $.ajax ({
 				   url : "secession.po",
 				   data : {sellerName:sellerName},
-				   success : function(result) {					  
-					  alert("탈퇴 처리가 완료되었습니다.");
-					  location.href = "afterSecession.po";
+				   success : function(result) {	
+					  if(result == "true"){
+	 					  alert("탈퇴 처리가 완료되었습니다.");
+						  location.href = "afterSecession.po";
+					  } else {
+						  alert("탈퇴 처리 요청이 이루어지지 않았습니다.");
+					  }
 				   },
 				   error : function(result) {
 					  alert("판매자 정보 수정용 ajax 통신 실패!");

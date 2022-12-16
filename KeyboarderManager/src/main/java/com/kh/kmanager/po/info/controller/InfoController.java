@@ -52,16 +52,17 @@ public class InfoController {
 		
 	}
 	
-	@RequestMapping("secession.po")
+	@ResponseBody
+	@RequestMapping(value="secession.po")
 	public String secession(HttpSession session, String sellerName) {
 		
 		int num = infoService.secession(sellerName);
 		String result;
 		
 		if(num > 0) {
-			result = "/common/login";
+			result = "true";
 		} else {
-			result = "redirect:/";
+			result = "false";
 		};
 		
 		return result;
