@@ -30,4 +30,9 @@ public class InfoServiceImpl implements InfoService {
 	public Member refreshInfo(String sellerName) {
 		return infoDao.refreshInfo(sqlSession, sellerName);
 	}
+
+	@Override
+	public int secession(String sellerName) {
+		return infoDao.secession(sqlSession, sellerName);
+	}
 }

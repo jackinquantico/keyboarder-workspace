@@ -33,6 +33,7 @@
 		FROM SELLER
 		WHERE SELLER_ID = #{sellerId}
 			AND SELLER_PWD = #{sellerPwd}
+			AND SELLER_STATUS = 'Y'
 	</select>
 	
 	<select id="loginAdmin" parameterType="member" resultMap="adminResultSet">

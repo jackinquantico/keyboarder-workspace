@@ -44,4 +44,10 @@
 		WHERE SELLER_NAME = #{sellerName}
 	</select>
 
+	<select id="secession" parameterType="string">
+		UPDATE SELLER
+		   SET SELLER_STATUS = 'N'
+		 WHERE SELLER_NAME = #{sellerName}
+	</select>
+
 </mapper>

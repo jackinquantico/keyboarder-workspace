@@ -52,4 +52,27 @@ public class InfoController {
 		
 	}
 	
+	@RequestMapping("secession.po")
+	public String secession(HttpSession session, String sellerName) {
+		
+		int num = infoService.secession(sellerName);
+		String result;
+		
+		if(num > 0) {
+			result = "/common/login";
+		} else {
+			result = "redirect:/";
+		};
+		
+		return result;
+		
+	}
+	
+	@RequestMapping("afterSecession.po")
+	public String afterSecession(HttpSession session) {
+		
+		session.invalidate();
+		
+		return "common/login";
+	}
 }

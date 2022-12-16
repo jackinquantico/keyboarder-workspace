@@ -12,4 +12,7 @@ public interface InfoService {
 	
 	// 정보 수정 후 세션 새로고침
 	Member refreshInfo(String sellerName);
+	
+	// 탈퇴하기
+	int secession(String sellerName);
 }

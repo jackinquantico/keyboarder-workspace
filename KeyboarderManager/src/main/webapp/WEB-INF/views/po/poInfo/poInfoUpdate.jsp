@@ -121,7 +121,7 @@
                     <div id="text1">판매자 정보 수정</div>
                     <div id="buttons">
                         <button type="submit" id="updateButton" name="updateButton" class="disabledBtn" disabled>수정하기</button>
-                        <button type="button" class="btn-danger">탈퇴하기</button>
+                        <button type="button" id="secessionButton" class="btn-danger">탈퇴하기</button>
                     </div>                    
                 </div>
                 <div id="poInfo">
@@ -403,37 +403,27 @@
 		   
 	   })
 	   
-	   /*
-	   $("#updateButton").click(function() {
-		   
+	   $("#secessionButton").click(function() {
 		   
 		   var sellerName = $("#sellerName").val();
-		   var updateRepName = $("#updateRepName").val();
-		   var updateLocation = address;
-		   var updateEmail = $("#updateSellerEmail").val();
-		   var updatePhone = $("#updateSellerPhone").val();
-		   var updateAccountNo = $("#updateAccountNo").val();
-		 
 		   
-		   
-		   $.ajax ({
-			   url : "updateInfo.po",
-			   data : {sellerName:sellerName
-				   , updateRepName:updateRepName
-				   , updateLocation:updateLocation
-				   , updateEmail:updateEmail
-				   , updatePhone:updatePhone
-				   , updateAccountNo:updateAccountNo},
-			   success : function(result) {
-				  alert("됐나?");				  				 
-			   },
-			   error : function(result) {
-				  alert("판매자 정보 수정용 ajax 통신 실패!")
-			   }
-		   })
-		   
+		   if(confirm("정말 탈퇴하시겠습니까?")){
+			   
+			   $.ajax ({
+				   url : "secession.po",
+				   data : {sellerName:sellerName},
+				   success : function(result) {					  
+					  alert("탈퇴 처리가 완료되었습니다.");
+					  location.href = "afterSecession.po";
+				   },
+				   error : function(result) {
+					  alert("판매자 정보 수정용 ajax 통신 실패!");
+				   }
+			   })
+			   
+		   }
+		     
 	   })
-	   */
 	</script>
 
 </body>

@@ -22,4 +22,9 @@ public class InfoDao {
 	public Member refreshInfo(SqlSessionTemplate sqlSession, String sellerName) {
 		return sqlSession.selectOne("poInfoMapper.refreshInfo", sellerName);
 	}
+	
+	// 탈퇴하기
+	public int secession(SqlSessionTemplate sqlSession, String sellerName) {
+		return sqlSession.update("poInfoMapper.secession", sellerName);
+	}
 }
