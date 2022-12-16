@@ -15,7 +15,7 @@ public class SalesGraph {
 	private int settleDept;
 	private String productName;
 	private int price;
-	private String attachment;
+	private String attachment1;
 	private String orderCount;
 	
 }

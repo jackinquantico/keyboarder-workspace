@@ -24,8 +24,8 @@ public class BoGraphDao {
 		return (ArrayList)sqlSession.selectList("graphMapper.selectopProduct");
 	}
 
-	public ArrayList<Product> showProductImages(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("graphMapper.showProductImages");
+	public ArrayList<SalesGraph> showProductImages(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("graphMapper.productImg");
 	}
 
 	

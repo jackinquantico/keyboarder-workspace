@@ -43,7 +43,7 @@ public class BoGraphServiceImpl implements BoGraphService {
 	}
 
 	@Override
-	public ArrayList<Product> showProductImages() {
+	public ArrayList<SalesGraph> showProductImages() {
 		return graphDao.showProductImages(sqlSession);
 	}
 

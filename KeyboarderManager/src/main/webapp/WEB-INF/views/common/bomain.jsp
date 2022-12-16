@@ -86,7 +86,7 @@
 		<div id="btm-content" class="card">		
 			<div class="card-header border-0">
 				상품 통계
-				<a href="" class="atag">전체보기</a>
+				<a href="SalesProduct.bo" class="atag">전체보기</a>
 			</div>
 			<div class="card-body">
 			
@@ -100,7 +100,7 @@
 							<td align="center">
 								<div id="attachment0">
 									<img class="card-img-top" style="width: 150px; height: 150px"
-									src="https://dummyimage.com/150x150/dee2e6/6c757d.jpg"
+									src="resources/uploadFiles/202212161804190.jpg"
 									alt="..." />
 								</div>
 								<div id="productName0">상품명</div>
@@ -233,7 +233,7 @@ function productChart(){
 		url: "topProduct.bo",
 		success: function(plist){			
 			
-			console.log(plist);
+			
 			
 			// var tlist = data.map.tlist;
 			// var llist = data.map.llist;
@@ -288,18 +288,21 @@ function productChart(){
 		
 		function productImages(){
         $.ajax({
-        	url:"productImg.bo",
-            data:data,
+        	url:"MainproductImg.bo",
             success:function(data) {
             	for(var i = 0; i < data.length; i++){
 
-	          		$("#attachment1"+i).attr("src", data[i].productAttachment);
+	          		$("#attachment"+i + " img").attr("src", "resources/uploadFiles/"+ data[i].attachment1);
 	          		$("#productName" + i).text(data[i].productName);
-	          		$("#price" + i).text(data[i].productPrice);
+	          		$("#price" + i).text(data[i].price);
             	}
+            },
+            error:function(){
+            	console.log("에러")
             }
+        
         });
-    };
+    }
 
 
 $(function() {
@@ -308,6 +311,7 @@ $(function() {
 
 $(function(){
 	productChart();
+	productImages();
 });
 
 setInterval(function() {

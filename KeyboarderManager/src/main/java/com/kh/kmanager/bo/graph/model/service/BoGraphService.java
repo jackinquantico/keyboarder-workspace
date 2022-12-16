@@ -18,5 +18,5 @@ public interface BoGraphService {
 	ArrayList<SalesGraph> selectopProduct();
 
 	//상품 가져오기
-	ArrayList<Product> showProductImages();
+	ArrayList<SalesGraph> showProductImages();
 }

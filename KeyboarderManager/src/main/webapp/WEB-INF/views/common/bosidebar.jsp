@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-MANAGER</title>
+    <title>Document</title>
 </head>
 <body>
 
@@ -143,7 +144,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="SalesProduct.bo" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>전체 상품 통계</p>
                 </a>
