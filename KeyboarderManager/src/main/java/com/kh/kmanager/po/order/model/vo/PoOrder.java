@@ -56,7 +56,7 @@ public class PoOrder {
 	private int supplyValue; // 품목 판매단가(공급가액) -> 상품금액 / 1.1
 	private String couponType; // 사용한 쿠폰 종류
 	private int paymentBill; // 정산기준금액(결제금액)
-	private int selNo;
+	private String excelDate;
 	
 	public PoOrder(int sellerNo, String searchDate) {
 		super();

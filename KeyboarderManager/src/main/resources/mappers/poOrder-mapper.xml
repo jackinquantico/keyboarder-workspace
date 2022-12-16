@@ -45,6 +45,7 @@
 		<result column="CON_PHONE" property="conPhone" />
 		<result column="COMMITION" property="commition" />
 		<result column="SELLER_NAME" property="sellerName" />
+		<result column="EXCEL_DATE" property="excelDate" />
 	</resultMap>
 	
 	<!-- 구매확정내역 전체조회(해당월)-장미 -->
@@ -228,6 +229,7 @@
 			     , SCOU.COUPON_PRICE AS "S_COUPON_PRICE"
 			     , ORD.ORDER_PRICE * 0.15 AS "COMMISSION"
 			     , SEL.SELLER_NAME
+			     , TO_CHAR(ORD.ORDER_DATE, 'MM') AS "EXCEL_DATE"
 			FROM ORDERS ORD
 			LEFT JOIN PRODUCT PRO ON (ORD.PRODUCT_NO = PRO.PRODUCT_NO)
 			LEFT JOIN CONSUMER CONS ON (ORD.CON_NO = CONS.CON_NO)
