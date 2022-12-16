@@ -63,16 +63,17 @@
 					<tr>
 						<th style="padding-left: 20px;">검색어</th>
 						<td>
-							<select>
-								<option>입점사코드</option>
-								<option>상품명</option>
+							<select id="selectbox_keyword">
+								<option value="keyword_sellerName">입점업체명</option>
+								<option value="keyword_productName">상품명</option>
+								<option value="keyword_conName">주문자명</option>
 							</select>
 						</td>
 						<td colspan="3">
-							<input type="text" style="width:100%" placeholder="상품명 또는 모델명을 입력해주세요">
+							<input type="text" style="width:100%" id="search_keyword" placeholder="업체명을 입력해주세요">
 						</td>
 						<td>
-							<button id="search_btn">검색</button>
+							<button id="search_btn" onclick="searchFormSubmit();">검색</button>
 						</td>
 					</tr>
 				</table>
@@ -91,7 +92,7 @@
 					<table id="result_table" border="1">
 						<thead>
 						<tr>
-							<td width="2%"><input type="checkbox"></td>
+							<td width="2%"><input type="checkbox" onclick="checkAll();"></td>
 							<td width="6%">구매확정일시</td>
 							<td width="6%">주문일시</td>
 							<td width="8%">주문번호</td>
@@ -139,6 +140,22 @@
 		</div>
 		
 		<script>
+			function checkAll() {
+				
+				if("#result_table>tbody input[type=checkbox]".checked != true) {
+					
+					$("#result_table>tbody input[type=checkbox]").attr("checked", true);
+					
+				} else if("#result_table>tbody input[type=checkbox]".checked == true) {
+					
+					$("#result_table>tbody input[type=checkbox]").attr("checked", false);
+				}
+				
+								
+			}
+		</script>
+		
+		<script>
 			var today = new Date();
 			var today_str = today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2);
 			
@@ -174,53 +191,70 @@
 					
 				}
 			});
+			
+			
+			$("#selectbox_keyword").change(function() {
+				
+				if($(this).val() == "keyword_sellerName") {
+					$("#search_keyword").attr("placeholder", "업체명을 입력해주세요");
+					
+				} else if($(this).val() == "keyword_productName") {
+					$("#search_keyword").attr("placeholder", "상품명을 입력해주세요");
+					
+				} else {
+					$("#search_keyword").attr("placeholder", "주문자명을 입력해주세요");
+					
+				}
+			});
 		</script>
 		
 		<script>
 			function searchFormSubmit() {
-				
-				if($("#currentDate").val() != "" && $("#endDate").val() != "") {
 					
-					$.ajax({
-						url : "option_date.bo",
-						data : {currentDate:$("#currentDate").val(),
-								endDate:$("#endDate").val(),
-								search_orderNo:$("#search_orderNo").val()
-								},
-						success : function(result) {
-							
-							var resultStr = "";
-							
-							for(var i = 0; i < result.length; i++) {
+					if($("#currentDate").val() != "" && $("#endDate").val() != "") {
+						
+						$.ajax({
+							url : "optionSearch.bo",
+							data : {currentDate:$("#currentDate").val(),
+									endDate:$("#endDate").val(),
+									search_orderNo:$("#search_orderNo").val(),
+									search_keyword:$("#search_keyword").val(),
+									keywordType:$("#selectbox_keyword").val()
+									},
+							success : function(result) {
 								
-								resultStr += "<tr>"
-												+ "<td><input type='checkbox'></td>"
-												+ "<td>" + result[i].buyConfirmDate + "</td>"
-												+ "<td>" + result[i].orderDate + "</td>"
-												+ "<td>" + result[i].orderNo + "</td>"
-												+ "<td>" + result[i].productName + "</td>"
-												+ "<td>" + result[i].sellerName + "</td>"
-												+ "<td>" + result[i].conName + "</td>"
-												+ "<td>" + result[i].orderPrice + "</td>"
-												+ "<td>" + result[i].poCouponPrice + "</td>"
-												+ "<td>" + result[i].boCouponPrice + "</td>"
-												+ "<td>" + result[i].paymentBill + "</td>"
-												+ "<td>" + result[i].commission + "</td>"
-												+ "<td>카드</td>"
-											+ "</tr>"
+								var resultStr = "";
+								
+								for(var i = 0; i < result.length; i++) {
+									
+									resultStr += "<tr>"
+													+ "<td><input type='checkbox'></td>"
+													+ "<td>" + result[i].buyConfirmDate + "</td>"
+													+ "<td>" + result[i].orderDate + "</td>"
+													+ "<td>" + result[i].orderNo + "</td>"
+													+ "<td>" + result[i].productName + "</td>"
+													+ "<td>" + result[i].sellerName + "</td>"
+													+ "<td>" + result[i].conName + "</td>"
+													+ "<td>" + result[i].orderPrice + "</td>"
+													+ "<td>" + result[i].poCouponPrice + "</td>"
+													+ "<td>" + result[i].boCouponPrice + "</td>"
+													+ "<td>" + result[i].paymentBill + "</td>"
+													+ "<td>" + result[i].commission + "</td>"
+													+ "<td>카드</td>"
+												+ "</tr>"
+								}
+								
+								$("#result_table>tbody").html(resultStr);
+								$("#result_count").html("주문건&nbsp;&nbsp;" + result.length);
+							},
+							error : function() {
+								console.log("에러");
 							}
-							
-							$("#result_table>tbody").html(resultStr);
-							$("#result_count").html("주문건&nbsp;&nbsp;" + result.length);
-						},
-						error : function() {
-							console.log("에러");
-						}
-					});
-				}
-				else {
-					alert("조회기간을 입력해주세요");
-				}
+						});
+					}
+					else {
+						alert("조회기간을 입력해주세요");
+					}
 			}
 		</script>
 	

@@ -44,19 +44,18 @@ public class Bo_OrderController {
 	 * @return : ajax 데이터
 	 */
 	@ResponseBody
-	@RequestMapping(value="option_date.bo", produces="application/json; charset=UTF-8")
-	public String selectOrder_Option(String currentDate, String endDate, String search_orderNo, Model model) {
+	@RequestMapping(value="optionSearch.bo", produces="application/json; charset=UTF-8")
+	public String selectOrder_Option(String currentDate, String endDate, String search_orderNo, String search_keyword, String keywordType) {
 		
 		HashMap<String, String> option = new HashMap<String, String>();
 		option.put("currentDate", currentDate);
 		option.put("endDate", endDate);
 		option.put("orderNo", search_orderNo);
-		
-		int listCount = orderService.selectListCount(option);
+		option.put("keyword", search_keyword);
+		option.put("keywordType", keywordType);
 		
 		ArrayList<Order> list = orderService.selectOrderList(option);
 		
-		model.addAttribute("listCount", listCount);
 		return new Gson().toJson(list);
 	}
 }

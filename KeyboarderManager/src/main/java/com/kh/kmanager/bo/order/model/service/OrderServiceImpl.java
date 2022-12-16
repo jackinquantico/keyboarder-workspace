@@ -31,11 +31,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int selectListCount(HashMap<String, String> option) {
-		return orderDao.selectListCount(sqlSession, option);
-	}
-
-	@Override
 	public ArrayList<Order> selectOrderList(HashMap<String, String> option) {
 		return orderDao.selectOrderList(sqlSession, option);
 	}

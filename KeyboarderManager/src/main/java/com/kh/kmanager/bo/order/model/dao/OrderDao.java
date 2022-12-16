@@ -23,11 +23,6 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("boOrderMapper.selectAllOrderList", nowMonth);
 	}
 	
-	public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, String> option) {
-		
-		return sqlSession.selectOne("boOrderMapper.selectListCount", option);
-	}
-	
 	public ArrayList<Order> selectOrderList(SqlSessionTemplate sqlSession, HashMap<String, String> option) {
 		
 		return (ArrayList)sqlSession.selectList("boOrderMapper.selectOrderList", option);

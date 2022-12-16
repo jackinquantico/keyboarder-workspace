@@ -12,6 +12,5 @@ public interface OrderService {
 	ArrayList<Order> selectAllOrderList(String nowMonth);
 	
 	// 검색 옵션 있을때 주문내역 리스트 조회 서비스
-	int selectListCount(HashMap<String, String> option);
 	ArrayList<Order> selectOrderList(HashMap<String, String> option);
 }

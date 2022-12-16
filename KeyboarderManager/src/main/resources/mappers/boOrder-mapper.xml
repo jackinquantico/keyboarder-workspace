@@ -53,16 +53,6 @@
 		 WHERE A.MONTH = #{nowMonth}
 	</select>
 	
-	<select id="selectListCount" parameterType="hashmap" resultType="_int">
-		SELECT COUNT(*)
-		  FROM ORDERS
-		 WHERE TO_DATE(TO_CHAR(ORDER_DATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')
-		 	   BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
-			<if test="orderNo != ''">
-				AND ORDER_NO LIKE '%' || #{orderNo} || '%'
-			</if>
-	</select>
-	
 	<select id="selectOrderList" parameterType="hashmap" resultMap="boOrderResultSet">
 		SELECT A.*
 		  FROM (SELECT TO_CHAR(SETT.SETTLE_DATE, 'YYYY-MM-DD') "CONFIRMDATE_BUY"
@@ -92,9 +82,40 @@
 		          ORDER BY O.ORDER_DATE DESC) A
 		 WHERE TO_DATE(ORDER_DATE, 'YYYY-MM-DD')
 		 	   BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
-			<if test="orderNo != ''">
-				AND ORDER_NO LIKE '%' || #{orderNo} || '%'	
-			</if>
+	 	   <choose>
+		 	   <when test="orderNo != '' and keyword != ''">
+		 	   		<choose>
+		 	   			<when test="keywordType == 'keyword_sellerName'">
+		 	   				AND ORDER_NO LIKE '%' || #{orderNo} || '%'
+		 	   				AND SELLER_NAME LIKE '%' || #{keyword} || '%'
+		 	   			</when>
+		 	   			<when test="keywordType == 'keyword_productName'">
+		 	   				AND ORDER_NO LIKE '%' || #{orderNo} || '%'
+		 	   				AND PRODUCT_NAME LIKE '%' || #{keyword} || '%'
+		 	   			</when>
+		 	   			<when test="keywordType == 'keyword_conName'">
+		 	   				AND ORDER_NO LIKE '%' || #{orderNo} || '%'
+		 	   				AND CON_NAME LIKE '%' || #{keyword} || '%'
+		 	   			</when>
+		 	   		</choose>
+		 	   </when>
+		 	   <when test="orderNo != '' and keyword == ''">
+		 	   		AND ORDER_NO LIKE '%' || #{orderNo} || '%'	
+		 	   </when>
+		 	   <when test="orderNo == '' and keyword != ''">
+					<choose>
+	 	   				<when test="keywordType == 'keyword_sellerName'">
+		 	   				AND SELLER_NAME LIKE '%' || #{keyword} || '%'
+		 	   			</when>
+		 	   			<when test="keywordType == 'keyword_productName'">
+		 	   				AND PRODUCT_NAME LIKE '%' || #{keyword} || '%'
+		 	   			</when>
+		 	   			<when test="keywordType == 'keyword_conName'">
+		 	   				AND CON_NAME LIKE '%' || #{keyword} || '%'
+		 	   			</when>
+		 	   		</choose>
+		 	   </when>
+	 	   </choose>
 	</select>
 
 
