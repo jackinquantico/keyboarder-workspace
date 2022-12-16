@@ -15,7 +15,7 @@
         }
 
         .delivery-view-main{
-            width: 100%;
+            width: 97%;
             height: 863px;
         }
 
@@ -28,10 +28,6 @@
             width: 100%;
             height: 10%;
             margin-bottom: 20px;
-        }
-        
-        .delivery-status-main{
-        	border: 2px solid black;
         }
 
         .delivery-date-tracking{
@@ -103,7 +99,7 @@
         }
 
         .delivery-information-notice{
-            width: 100%;
+            width: 98%;
             height: 85%;
             overflow: scroll;
         }
@@ -181,7 +177,7 @@
 				        </div>
 				
 				        <!-- 배송 현황 조회 -->
-				        <div class="delivery-tracking">
+				        <div class="delivery-tracking card">
 				            <div id="delivery-tracking-main">
 				                <div class="delivery-status-main">
 				                    <div class="delivery-status">배송중</div>
@@ -203,7 +199,7 @@
 				        </div>
 				
 				        <!-- 배송 날짜별 조회 -->
-				        <div class="delivery-date-tracking" style="border: 2px solid black;">
+				        <div class="delivery-date-tracking card">
 				            <br>
 				            <form action="SearchDate.poOrder">
 				                <div id="delivery-lookup">
@@ -228,9 +224,9 @@
 				        </div>
 				        		
 				        <!-- 배송 정보 조회 -->
-				        <div class="delivery-information" style="border: 2px solid black;">
+				        <div class="delivery-information card">
 				            <div id="delivery-information-header">
-				                <div id="delivery-information-main" style="border: 2px solid black;">
+				                <div id="delivery-information-main">
 				                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>      
 			                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ dateOrderCount }&nbsp</div>
 				                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='dateExcelDownload.poOrder?searchDate=${ searchDate }'">
@@ -238,7 +234,7 @@
 				                    </button>
 				                </div>
 				            </div>
-				            <div class="delivery-information-notice" style="border: 2px solid black;">
+				            <div class="delivery-information-notice">
 			                    <table border="1" width="100%" id="delivery-list">
 			                        <thead>
 			                            <tr>
@@ -508,7 +504,7 @@
 				        </div>
 			    	</div>
 	    		</c:when>
-	    		<c:when test="${ empty dateList and not empty ordList }">
+	    		<c:when test="${ empty dateList }">
 	    			<!-- 가운데만 만들어 보자구! -->
 				    <div class="delivery-view-main">
 				
@@ -519,7 +515,7 @@
 				        </div>
 				
 				        <!-- 배송 현황 조회 -->
-				        <div class="delivery-tracking">
+				        <div class="delivery-tracking cardS">
 				            <div id="delivery-tracking-main">
 				                <div class="delivery-status-main">
 				                    <div class="delivery-status">배송중</div>
@@ -541,7 +537,7 @@
 				        </div>
 				
 				        <!-- 배송 날짜별 조회 -->
-				        <div class="delivery-date-tracking" style="border: 2px solid black;">
+				        <div class="delivery-date-tracking card">
 				            <br>
 				            <form action="SearchDate.poOrder">
 				                <div id="delivery-lookup">
@@ -566,17 +562,26 @@
 				        </div>
 				        		
 				        <!-- 배송 정보 조회 -->
-				        <div class="delivery-information" style="border: 2px solid black;">
+				        <div class="delivery-information card">
 				            <div id="delivery-information-header">
-				                <div id="delivery-information-main" style="border: 2px solid black;">
+				                <div id="delivery-information-main">
 				                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>      
 			                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ orderCount }&nbsp</div>
-				                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
-				                    	엑셀다운로드
-				                    </button>
+			                    	<c:choose>
+			                    		<c:when test="${ empty ordList }">
+						                    <button type="button" class="btn btn-dark" disabled style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
+						                    	엑셀다운로드
+						                    </button>
+				                    	</c:when>
+				                    	<c:otherwise>
+						                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
+						                    	엑셀다운로드
+						                    </button>
+				                    	</c:otherwise>
+				                    </c:choose>
 				                </div>
 				            </div>
-				            <div class="delivery-information-notice" style="border: 2px solid black;">
+				            <div class="delivery-information-notice">
 			                    <table border="1" width="100%" id="delivery-list">
 			                        <thead>
 			                            <tr>

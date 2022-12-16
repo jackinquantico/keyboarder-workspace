@@ -40,6 +40,10 @@
 		    top: 0px;
 		    background-color: lightgray !important;	
 		}
+		
+		.electronic-view-all{
+			width: 97%;
+		}
         
     </style>
     
@@ -64,34 +68,33 @@
 		            <h1 style="padding: 20px 50px; margin: 0px;">전자세금계산서 관리</h1>
 		        </div>
 		
-		        <div class="electronic-date-tracking">
+		        <div class="electronic-date-tracking card" style="height: 180px;">
 		            <br>
-		            <form action="" method="">
+		            <form action="">
 		                <div id="electronic-lookup">
-		                    <div style="display: inline-block; padding: 20px 50px; margin: 0px; font-size: 20px; width: 20%;">
+		                    <div style="display: inline-block; padding: 12px 50px; margin: 0px; margin-left: 34%; font-size: 25px; width: 18%;">
 		                       	 조회기간
 		                    </div>
-		                    <input type="date" style="margin-left: 4%;">
-		                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~
-		                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		                    <input type="date">
+		                    <input type="month">
 		                </div>
-		                <hr style="background-color: orange; width: 92%;">
 		                <div id="electronic-button" align="center">
-		                    <button type="button" class="btn btn-outline-success" style="margin-top: 17px; width: 20%; font-size: 17px;">
+		                    <button type="button" class="btn btn-dark" style="margin-top: 25px; width: 15%; font-size: 17px;">
 		                        	검색하기
 		                    </button>
+		                    &nbsp;&nbsp;
+			                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="margin-top: 25px; width: 15%; font-size: 17px;" onclick="location.href='electronicTaxInvoice.po'">
+			                 		초기화
+			                 </button>
 		                </div>
 		            </form>        
 		        </div>
 		
-		        <br><br>
+		        <br>
 		
-		        <div>
+		        <div class="card">
 		            <div>
-		                <h3 style="padding: 20px 50px; margin: 0px;">전자세금계산서 조회</h3>
+		                <h3 style="padding: 20px 30px; margin: 0px;">전자세금계산서 조회</h3>
 		            </div>
-		            <hr style="height: 3px; background-color: green; width: 92%;">
 		            <div class="electronic-information-notice">
 	                    <table border="1" width="100%" id="electronic-list" align="center">
 	                        <thead>
