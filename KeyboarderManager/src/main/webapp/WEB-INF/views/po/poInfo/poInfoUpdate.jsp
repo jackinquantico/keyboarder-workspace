@@ -50,7 +50,7 @@
             top : -50px;
         }
 
-        #buttons>button {
+        #buttons button {
             margin-top: 10px;
             font-size: 20px;
             border-radius: 3px;
@@ -84,6 +84,27 @@
          	font-size : 15px;
          }
          
+        .disabledBtn {
+            cursor : default;
+            background-color: #a7a7a7;
+        }
+
+        .enabledBtn {
+            cursor : pointer;
+            background-color: #323232;
+            color : white;
+        }
+        
+        input[type=text] {
+        	border-radius : 3px;
+        } 
+        
+        #email1 {
+        	background-color : white;        	
+        }
+        #email2 {
+        	bakcground-color : white;
+        }
     </style>
 </head>
 <body>
@@ -94,20 +115,23 @@
     
     <div id="wrap">
 
-        <form>
+        <form action="updateInfo.po">
             <div id="updateContent">
                 <div id="textAndButtons">
                     <div id="text1">판매자 정보 수정</div>
                     <div id="buttons">
-                        <button type="button" name="updateButton" class="btn-secondary" onclick="updateSeller()" disabled>수정하기</button>
-                        <button type="submit" class="btn-danger">탈퇴하기</button>
+                        <button type="submit" id="updateButton" name="updateButton" class="disabledBtn" disabled>수정하기</button>
+                        <button type="button" class="btn-danger">탈퇴하기</button>
                     </div>                    
                 </div>
                 <div id="poInfo">
                     <table id="infoTable">
                         <tr>
                             <th>상호명 <h6 style="display: inline; color : red;">*</h6></th>                    
-                            <td id="sellerName">${ loginUser.sellerName }</td>
+                            <td>
+                            	${ loginUser.sellerName }
+                            	<input type="hidden" id="sellerName" name="sellerName" value="${ loginUser.sellerName }">
+                            </td>
                         </tr>
                         <tr>
                             <th>사업자 등록번호 <h6 style="display: inline; color : red;">*</h6></th>
@@ -125,7 +149,7 @@
                         </tr>
                         <tr>
                             <th>업체 서류 인증일 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td></td>
+                            <td>${ loginUser.joinDate }</td>
                         </tr>
                         <tr>
                             <th style="border:none;">본사 소재지(기존 주소) <h6 style="display: inline; color : red;">*</h6></th>
@@ -134,17 +158,18 @@
                         <tr>
                         	<th style="border:none; text-align: center;">우편번호 <h6 style="display: inline; color : red;">*</h6></th>
                         	<td style="border:none;">
-                        	<input type="text" class="form-control" name="zip" id="sample6_postcode" maxlength="5" placeholder="우편번호" style="width:154px; display:inline-block;" required>&nbsp;&nbsp;&nbsp;
-                            <input type="button" name="address_search" class="btn btn-dark" style="display:inline-block;  vertical-align: top; background-color: black;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                        	<input type="text" id="postCode" class="form-control" name="zip" id="sample6_postcode" maxlength="5" placeholder="우편번호" style="width:154px; display:inline-block;" required>&nbsp;&nbsp;&nbsp;
+                            <input type="button" id="findPostCode" name="address_search" class="btn btn-dark" style="display:inline-block;  vertical-align: top; background-color: black;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                         </td>
                         </tr>
                         <tr>
                         	<th style="text-align: center;">상세주소 <h6 style="display: inline; color : red;">*</h6></th>
-                        	<td>
+                        	<td style="padding-bottom:22px;">
                         	<input type="text" class="form-control" name="address1" id="sample6_address" placeholder="주소" style="width:300px;" required>
                        	    <input type="text" class="form-control" name="address2" id="sample6_detailAddress" placeholder="상세주소" style="width:300px; display:inline-block;" required>
                             <input type="text" class="form-control" id="sample6_extraAddress" style="width:150px; display:inline-block;" placeholder="참고항목">
-                            <input type="hidden" id="location" name="location" value="" />
+                            <input type="hidden" id="updateLocation" name="updateLocation" value="" />
+                            <input type="button" id="confirmLocation" class="btn btn-dark" value="주소 확정" style="width:100px; height:40px; font-size: 75%; margin-left:10px;">
                        </td>                       
                         </tr>
                         <tr>
@@ -159,22 +184,19 @@
                                 <input type="text" id="email1" name="email1" style="width:200px;"> @
                                 <input type="text" id="email2" name="email2" style="width:200px;">
                                 <input type="hidden" name="updateSellerEmail" id="updateSellerEmail" value="">
+                                <button type="button" id="checkbutton" style="width:100px; height:40px; font-size: 75%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">중복체크</button>
                             </td>
                         </tr>
                         <tr>
                             <th style="text-align:center;">전화번호 <h6 style="display: inline; color : red;">*</h6></th>
                             <td>
-                            	<input type="hidden" id="sellerPhone" value="${ loginUser.sellerPhone }">
-                                <input type="text" id="phone1" name="phone1" style="width:80px;"> - 
-                                <input type="text" id="phone2" name="phone2" style="width:100px;"> - 
-                                <input type="text" id="phone3" name="phone3" style="width:100px;">
-                                <input type="hidden" id="updateSellerPhone" name="updateSellerPhone" value="">
+                                <input type="text" id="updateSellerPhone" name="updateSellerPhone" value="${ loginUser.sellerPhone }">
                             </td>
                         </tr>
                         <tr>
                             <th>계좌번호 <h6 style="display: inline; color : red;">*</h6></th>
                             <td>
-                                <input type="text" id="accountNo" name="accountNo" style="width:400px;" placeholder=" - 포함" value="${ loginUser.accountNo }">
+                                <input type="text" id="updateAccountNo" name="updateAccountNo" style="width:400px;" placeholder=" - 포함" value="${ loginUser.accountNo }">
                             </td>
                         </tr>
                     </table>
@@ -200,30 +222,15 @@
 			$("#email1").val(email1);
 			$("#email2").val(email2);
 			
-			// 전화번호 칸 채우기
-			var sellerPhone = $("#sellerPhone").val();
-			
-			var barIndex1 = sellerPhone.indexOf("-");
-			var barIndex2 = sellerPhone.lastIndexOf("-");
-			
-			var phone1 = sellerPhone.substring(0, barIndex1);
-			var phone2 = sellerPhone.substring(barIndex1 + 1, barIndex2);
-			var phone3 = sellerPhone.substring(barIndex2 + 1);
-			
-			$("#phone1").val(phone1);
-			$("#phone2").val(phone2);
-			$("#phone3").val(phone3);	
-			
 		})
 		
 		// 이메일 중복 및 유효성 검사
         function emailCheck() {
 			// 기존 이메일 가져오기
-			var sellerEmail = $("#sellerEmail").val();
-			
-            var updateSellerEmail = "" + $("#email1").val() + "@" + $("#email2").val();
-            $("#updateSellerEmail").val(updateSellerEmail);
+			var sellerEmail = $("#sellerEmail").val();		
 
+			var updateSellerEmail = "" + $("#email1").val() + "@" + $("#email2").val();
+			
             var $email1 = $("input[name=email1]");
             var $email2 = $("input[name=email2]");
             
@@ -232,22 +239,30 @@
             // 이메일 첫째자리 뒤에는 _- 포함할 수 있음.
             var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-            if(!regExp.test($("#updateSellerEmail").val())) {
+            if(!regExp.test(updateSellerEmail)) {
                 alert("유효한 이메일을 입력해주세요.");
                 $("#email2").select(); //재입력유도
                 return false;
             }
             else {
-            	if($("#updateSellerEmail").val() == sellerEmail) {
-            		alert("기존 이메일 주소를 사용합니다");
+            	if(updateSellerEmail == sellerEmail) {
             		
-                    //이메일값 확정 => 다시 수정못하게 readonly 속성 추가
-                    $email1.attr("readonly", true);
-                    $email2.attr("readonly",true);
+            		if(confirm("기존 이메일 주소를 사용하시겠습니까?")){
+                        //이메일값 확정 => 다시 수정못하게 readonly 속성 추가
+                        $("input[name=email1]").attr("readonly", true);
+                        $("input[name=email2]").attr("readonly", true);
+                        
+                        $("input[name=email1]").css("backgroundColor", "lightgray");
+                        $("input[name=email2]").css("backgroundColor", "lightgray"); 
+                        
+                		// 수정하기버튼 활성화
+                        $("button[name=updateButton]").removeAttr("disabled");
+                        $("button[name=updateButton]").addClass("enabledBtn");
+                        $("button[name=updateButton]").removeClass("disabledBtn");
+                		            		                    
+                        $("#updateSellerEmail").val(updateSellerEmail);
+            		}
                     
-            		// 수정하기버튼 활성화
-                    $("button[name=updateButton]").removeAttr("disabled");
-            		
             	} else {
                     $.ajax({
                         url :"emailCheck.me",
@@ -260,11 +275,19 @@
                             } else{
                                 if(confirm("사용가능한 이메일입니다. 사용하시겠습니까?")) { //사용하겠다.
                                     //이메일값 확정 => 다시 수정못하게 readonly 속성 추가
-                                    $email1.attr("readonly", true);
-                                    $email2.attr("readonly",true);
+                                    $("input[name=email1]").attr("readonly", true);
+                                    $("input[name=email2]").attr("readonly",true);
 
-                                    // 수정하기버튼 활성화
+                                    $("input[name=email1]").css("backgroundColor", "lightgray");
+                                    $("input[name=email2]").css("backgroundColor", "lightgray");                                   
+                                    
+                              		// 수정하기버튼 활성화
                                     $("button[name=updateButton]").removeAttr("disabled");
+                                    $("button[name=updateButton]").addClass("enabledBtn");
+                                    $("button[name=updateButton]").removeClass("disabledBtn");
+                            		                               
+                                    $("#updateSellerEmail").val(updateSellerEmail);
+                                    
                                 } else {
                                     $email1.focus();
                                 }
@@ -283,11 +306,7 @@
             
             var ceoName = document.getElementById("ceoName");
             var sellerPhone = document.getElementById("updateSellerPhone");		
-            var accountNo = document.getElementById("accountNo");
-            
-			var phone1 = $("#phone1").val();
-			var phone2 = $("#phone2").val();
-			var phone3 = $("#phone3").val();	
+            var accountNo = document.getElementById("accountNo");          
             
             // 대표자명 검사 2~6자리 한글만 들어갈수 있게
             regExp = /^[가-힣]{2,10}$/;
@@ -298,10 +317,10 @@
             }
             
             // 전화 번호 정규식(다시해야함)
-            var regExp = /^(010)-[0-9]{4}-[0-9]{4}$/;
+            var regExp = /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))-(\d{3,4})-(\d{4})$/;
             if(!regExp.test(sellerPhone.value)) {
                 alert("유효한 전화번호를 입력해주세요.");
-                $("#phone3").select(); // 재입력 유도
+                $("#updateSellerPhone").select(); // 재입력 유도
                 return false;
             }
             
@@ -362,14 +381,59 @@
 	           }
 	       }).open();
 	   }
-	   
-	   // 수정 함수
-	   function updateSeller () {
+		
+	   $("#confirmLocation").click(function() {
 		   
-		   // 주소 합쳐주기
-           var address = $("#sample6_postcode").val() + " " + $("#sample6_address").val() + $("#sample6_detailAddress").val();
-           $("#location").val(address);
-	   }
+		   if(confirm("주소를 확정하시겠습니까?")) {
+	           var address = "(" + $("#sample6_postcode").val() +")"+ " "+ $("#sample6_address").val() + " " + $("#sample6_detailAddress").val();
+	           
+	           $("#findPostCode").attr("disabled", true);
+	           $("#postCode").attr("readonly", true);
+	           $("#sample6_address").attr("readonly", true);
+	           $("#sample6_detailAddress").attr("readonly", true);
+	           $("#sample6_extraAddress").attr("readonly", true);
+	           
+	           $("#postCode").css("backgroundColor", "lightgray");
+	           $("#sample6_address").css("backgroundColor", "lightgray");
+	           $("#sample6_detailAddress").css("backgroundColor", "lightgray");
+	           $("#sample6_extraAddress").css("backgroundColor", "lightgray");
+               
+	           $("#updateLocation").val(address);
+		   }		   
+		   
+	   })
+	   
+	   /*
+	   $("#updateButton").click(function() {
+		   
+		   
+		   var sellerName = $("#sellerName").val();
+		   var updateRepName = $("#updateRepName").val();
+		   var updateLocation = address;
+		   var updateEmail = $("#updateSellerEmail").val();
+		   var updatePhone = $("#updateSellerPhone").val();
+		   var updateAccountNo = $("#updateAccountNo").val();
+		 
+		   
+		   
+		   $.ajax ({
+			   url : "updateInfo.po",
+			   data : {sellerName:sellerName
+				   , updateRepName:updateRepName
+				   , updateLocation:updateLocation
+				   , updateEmail:updateEmail
+				   , updatePhone:updatePhone
+				   , updateAccountNo:updateAccountNo},
+			   success : function(result) {
+				  alert("됐나?");				  				 
+			   },
+			   error : function(result) {
+				  alert("판매자 정보 수정용 ajax 통신 실패!")
+			   }
+		   })
+		   
+	   })
+	   */
 	</script>
 
 </body>

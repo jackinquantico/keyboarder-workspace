@@ -302,7 +302,7 @@
                     }
                     
                     // 전화 번호 정규식
-                    var regExp = /^(010)-[0-9]{4}-[0-9]{4}$/;
+                    var regExp = /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))-(\d{3,4})-(\d{4})$/;
                     if(!regExp.test(sellerPhone.value)) {
                         alert("-포함 유효한 전화번호를 입력해주세요.");
                         sellerPhone.select(); // 재입력 유도

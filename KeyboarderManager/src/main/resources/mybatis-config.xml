@@ -37,6 +37,7 @@
 		<mapper resource="/mappers/poCoupon-mapper.xml"/>
 		<mapper resource="/mappers/mainPage-mapper.xml"/>
 		<mapper resource="/mappers/poOrder-mapper.xml" />
+		<mapper resource="/mappers/poInfo-mapper.xml" />
 	</mappers>
 	
 

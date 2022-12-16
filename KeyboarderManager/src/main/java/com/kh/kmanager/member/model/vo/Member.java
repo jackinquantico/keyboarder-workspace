@@ -53,6 +53,17 @@ public class Member {
 		this.location = location;	
 		this.logoAttachment = logoAttachment;
 	}
+
+	public Member(String sellerName, String repName, String sellerEmail, String sellerPhone, String accountNo,
+			String location) {
+		super();
+		this.sellerName = sellerName;
+		this.repName = repName;
+		this.sellerEmail = sellerEmail;
+		this.sellerPhone = sellerPhone;
+		this.accountNo = accountNo;
+		this.location = location;
+	}
 	
 	
 	
