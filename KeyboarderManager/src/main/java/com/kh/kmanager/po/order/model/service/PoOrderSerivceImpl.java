@@ -188,4 +188,9 @@ public class PoOrderSerivceImpl implements PoOrderService{
 		br.close();
 		conn.disconnect();
 	}
+
+	@Override
+	public ArrayList<PoOrder> selectOrderList(HashMap<String, String> option) {
+		return orderDao.selectOrderList(sqlSession, option);
+	}
 }

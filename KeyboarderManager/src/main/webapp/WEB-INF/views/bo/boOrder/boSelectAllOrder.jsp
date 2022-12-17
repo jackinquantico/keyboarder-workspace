@@ -140,6 +140,7 @@
 		</div>
 		
 		<script>
+			/*
 			function checkAll() {
 				
 				if("#result_table>tbody input[type=checkbox]".checked != true) {
@@ -149,10 +150,9 @@
 				} else if("#result_table>tbody input[type=checkbox]".checked == true) {
 					
 					$("#result_table>tbody input[type=checkbox]").attr("checked", false);
-				}
-				
-								
+				}				
 			}
+			*/
 		</script>
 		
 		<script>

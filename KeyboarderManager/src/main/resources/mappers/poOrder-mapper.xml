@@ -349,6 +349,63 @@
 			  AND A.MONTH = #{nowMonth}
 		</select>
 		
+		<select id="selectOrderList" parameterType="hashmap" resultMap="poorderResultSet">
+			SELECT A.*
+			  FROM (SELECT DISTINCT CASE WHEN O.ORDER_STATUS = '1' THEN '결제완료'
+			                             WHEN O.ORDER_STATUS = '2' THEN '배송완료'
+			                             WHEN O.ORDER_STATUS = '3' THEN '구매확정'
+			                             ELSE '환불'
+			                         END "ORDER_STATUS" <!-- 주문상태 -->
+			                      , TO_CHAR(O.ORDER_DATE, 'YYYY-MM-DD') "ORDER_DATE" <!-- 주문일시 -->
+			                      , O.ORDER_NO "ORDER_NO" <!-- 주문번호 -->
+			                      , P.PRODUCT_NAME "PRODUCT_NAME" <!-- 상품명 -->
+			                      , O.ORDER_PRICE "ORDER_PRICE" <!-- 주문금액 -->
+			                      , C.CON_ID "CON_ID" <!-- 구매자ID -->
+			                      , C.CON_NAME "CON_NAME" <!-- 구매자명 -->
+			                      , SETT.SETTLE_DATE "SETTLE_DATE" <!-- 구매확정일자 -->
+			                      , P.PRODUCT_NO "PRODUCT_NO" <!-- 상품번호 -->
+			                      , P.PRICE "PRICE" <!-- 실상품판매금액 -->
+			                      , ROUND(P.PRICE / 1.1) "SUPPLY_VALUE" <!-- 판매단가(공급가액) -> 상품금액 / 1.1 -->
+			                      , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN S.SELLER_NAME || ' 쿠폰' <!-- 스토어쿠폰을 사용한경우 -->
+			                             WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN 'KEYBOAR-DER 쿠폰' <!-- 키보더쿠폰을 사용한경우 -->
+			                             ELSE '사용안함' <!-- 아무것도 안쓴경우 -->
+			                         END "COUPON_TYPE" <!-- 할인쿠폰종류 -->
+			                      , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN C_STO.COUPON_PRICE <!-- 스토어쿠폰을 사용한경우 -->
+			                             WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN C_KEY.COUPON_PRICE <!-- 키보더쿠폰을 사용한경우 -->
+			                             ELSE 0 <!-- 아무것도 안쓴경우 -->
+			                         END "COUPON_PRICE" <!-- 할인금액 -->
+			                      , PAY.PAYMENT_BILL "PAYMENT_BILL" <!-- 정산기준금액(결제금액) -->
+			                      , S.SELLER_NO "SELLER_NO" <!-- WHERE절의 판매자 비교를 위한 데이터 추출 -->
+			                      , PAY.PAYMENT_NO
+			                   FROM ORDERS O
+			                   JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
+			                   JOIN CONSUMER C ON (O.CON_NO = C.CON_NO)
+			                   JOIN PAYMENT PAY ON (O.ORDER_NO = PAY.ORDER_NO)
+			                   JOIN SETTLEMENT SETT ON (O.ORDER_NO = SETT.ORDER_NO)
+			                   JOIN SELLER S ON (P.SELLER_NO = S.SELLER_NO)
+			                   LEFT JOIN STORE_USE STO_U ON (O.ORDER_NO = STO_U.ORDER_NO) 
+			                   LEFT JOIN COUPON_STORE C_STO ON (STO_U.COUPON_NO = C_STO.COUPON_NO)
+			                   LEFT JOIN KEYBOARDER_USE KEY_U ON (O.ORDER_NO = KEY_U.ORDER_NO)
+			                   LEFT JOIN COUPON_KEYBOARDER C_KEY ON (KEY_U.COUPON_NO = C_KEY.COUPON_NO)
+			                    ORDER BY ORDER_DATE DESC) A
+			WHERE A.SELLER_NO = #{sellerNo}
+			  AND TO_DATE(ORDER_DATE, 'YYYY-MM-DD')
+			      BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+			      <if test="keyword != ''">
+			      	<choose>
+			      		<when test="keywordType == 'keyword_orderNo'">
+			      			AND ORDER_NO LIKE '%' || #{keyword} || '%'
+			      		</when>
+			      		<when test="keywordType == 'keyword_productName'">
+			      			AND PRODUCT_NAME LIKE '%' || #{keyword} || '%'
+			      		</when>
+			      		<when test="keywordType == 'keyword_conName'">
+			      			AND CON_NAME LIKE '%' || #{keyword} || '%'
+			      		</when>
+			      	</choose>
+			      </if>
+		</select>
+		
 		<!-- 엑셀다운로드 해당월(기본) -->
 		<select id="orderDecisionList" parameterType="poOrder" resultMap="poorderResultSet">
 			SELECT *

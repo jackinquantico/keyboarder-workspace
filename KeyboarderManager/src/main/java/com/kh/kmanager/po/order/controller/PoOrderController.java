@@ -21,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.order.model.service.PoOrderService;
 import com.kh.kmanager.po.order.model.vo.PoOrder;
@@ -52,6 +54,28 @@ public class PoOrderController {
 		model.addAttribute("list", list);
 		
 		return "po/poOrder/poSelectAllOrder";
+	}
+	
+	/**
+	 * PO 전체 주문내역 조회 페이지의 검색옵션으로 검색해주는 메소드 - 백성현
+	 * @return : ajax 데이터
+	 */
+	@ResponseBody
+	@RequestMapping(value="optionSearch.po", produces="application/json; charset=UTF-8")
+	public String selectOrder_Option(HttpSession session, String currentDate, String endDate, String keyword, String keywordType) {
+		
+		String sellerNo = Integer.toString(((Member)session.getAttribute("loginUser")).getSellerNo());
+		
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("sellerNo", sellerNo);
+		option.put("currentDate", currentDate);
+		option.put("endDate", endDate);
+		option.put("keyword", keyword);
+		option.put("keywordType", keywordType);
+		
+		ArrayList<PoOrder> list = orderService.selectOrderList(option);
+		
+		return new Gson().toJson(list);
 	}
 	
 	/**
