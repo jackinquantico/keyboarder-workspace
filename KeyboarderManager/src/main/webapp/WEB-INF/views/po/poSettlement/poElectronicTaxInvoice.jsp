@@ -65,7 +65,7 @@
 
 			<div class="electronic-view-all">
 		        <div class="electronic-header">
-		            <h1 style="padding: 20px 50px; margin: 0px;">전자세금계산서 관리</h1>
+		            <p style="padding: 20px 2%; margin: 0px; font-size: 35px;">전자세금계산서 관리</p>
 		        </div>
 		
 		        <div class="electronic-date-tracking card" style="height: 180px;">

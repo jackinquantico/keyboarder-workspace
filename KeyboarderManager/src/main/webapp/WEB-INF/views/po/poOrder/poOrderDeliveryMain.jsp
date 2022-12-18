@@ -110,7 +110,7 @@
         }
 
         #delivery-list>thead>tr{
-            font-size: 16px;
+            font-size: 15px;
             height: 30px;
             text-align: center;
             position: sticky;
@@ -119,7 +119,7 @@
         }
 
         #delivery-list>tbody>tr>td{
-            font-size: 16px;
+            font-size: 15px;
             text-align: center;
         }
 
@@ -515,7 +515,7 @@
 				        </div>
 				
 				        <!-- 배송 현황 조회 -->
-				        <div class="delivery-tracking cardS">
+				        <div class="delivery-tracking card">
 				            <div id="delivery-tracking-main">
 				                <div class="delivery-status-main">
 				                    <div class="delivery-status">배송중</div>
