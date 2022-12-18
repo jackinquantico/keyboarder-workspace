@@ -82,7 +82,7 @@
 					<table id="result_table" border="1">
 						<thead>
 							<tr>
-								<td width="2%"><input type="checkbox"></td>
+								<td width="2%"><input type="checkbox" id="chkAll" onclick="checkAll('chk[]', this.checked);"></td>
 								<td width="7%">상태</td>
 								<td width="8%">주문일시</td>
 								<td width="10%">주문번호</td>
@@ -99,7 +99,7 @@
 								<c:when test="${ not empty list }">
 									<c:forEach var="o" items="${ list }">
 										<tr>
-											<td><input type="checkbox"></td>
+											<td><input type="checkbox" name="chk[]" onclick="isAllCheck(this.name, 'chkAll');"></td>
 											<td>${ o.orderStatus }</td>
 											<td>${ o.orderDate }</td>
 											<td data-toggle="modal" data-target="#orderDetailModal_${ o.orderNo }">${ o.orderNo }</td>
@@ -245,6 +245,47 @@
 
 
 	<script>
+		// 체크박스 전체 선택/해제
+		function checkAll(boxNames, chkMode) {
+			
+			const el = document.getElementsByName(boxNames);
+			for(let i = 0; i < el.length; i++) {
+				
+				if(!el[i].disabled) {
+					el[i].checked = chkMode;
+				}
+			}
+		}
+		
+		// 전체 체크 여부
+		function isAllCheck(boxNames, allChkName) {
+			const el = document.getElementsByName(boxNames);
+			let checkboxCnt = 0;
+			let checkedCnt = 0;
+			
+			for(let i = 0; i < el.length; i++) {
+				if(!el[i].disabled) {
+					checkboxCnt += 1;
+				} else if(el[i].checked) {
+					checkedCnt += 1;
+				}
+			}
+			
+			let chkMode = false;
+			
+			// 체크박스 개수와 체크 된 체크박스 개수와 일치할 경우
+			if(checkboxCnt == checkedCnt) {
+				chkMode = true;
+			} else {
+				chkMode = false;
+			}
+			
+			// 일치할 경우 전체 체크박스는 체크, 일치하지 않을 경우 해제
+			document.getElementById(allChkName).checked = chkMode;
+		}
+	</script>
+		
+	<script>
 		var today = new Date();
 		var today_str = today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2);
 		
@@ -316,7 +357,7 @@
 						for(var i = 0; i < result.length; i++) {
 							
 							resultStr += "<tr>"
-											+ "<td><input type='checkbox'></td>"
+											+ "<td><input type='checkbox' name='chk[]' onclick='isAllCheck(this.name, 'chkAll');'></td>"
 											+ "<td>" + result[i].orderStatus + "</td>"
 											+ "<td>" + result[i].orderDate + "</td>"
 											+ "<td data-toggle='modal' data-target='#orderDetailModal_" + result[i].orderNo + "'>" + result[i].orderNo + "</td>"
