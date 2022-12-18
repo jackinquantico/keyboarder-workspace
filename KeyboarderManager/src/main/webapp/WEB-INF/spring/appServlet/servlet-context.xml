@@ -43,6 +43,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/commitionSales.bo" />
 			<mapping path="/storeSettlement.bo" />
 			
+			
 			<!-- BO - 입점업체관리 관련 페이지 -->
 			<mapping path="/store.bo" />
 			<mapping path="/storeDetail.bo" />
@@ -75,6 +76,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/searchSettlementTotal.po"/>
 			<mapping path="/excelDownloadTotal.se" />
 			<mapping path="/excelDownloadSearch.se" />
+			<mapping path="/settleView.po"/>
+			<mapping path="/searchSettle.po"/>
 			
 			<!-- BO - 쿠폰 관리 관련 페이지 -->
 			<mapping path="/coupon.bo" />
@@ -90,9 +93,42 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/couponDetail.bo" />
 			<mapping path="/updateCoupon.bo" />
 			
+			<!-- PO - 쿠폰 관리 관련 페이지 -->
+			<mapping path="/mainCoupon.po" />
+			<mapping path="/insertCoupon.po" />
+			<mapping path="/able.co"/>
+			<mapping path="/SearchAble.co" />
+			<mapping path="/ableCoupon.po" />
+			<mapping path="/expireCoupon.po" />
+			<mapping path="/Searchexpire.co" />
+			<mapping path="/usedCList.po" />
+			<mapping path="/searchCUsed.po" />
+			<mapping path="/CouponList.po" />
+			<mapping path="/SearchCoupon.po" />
+			<mapping path="/updateCoupon.po" />
+			<mapping path="/detailCoupon.po" />
+			
+			<!-- PO - 상품 관리 관련 페이지 -->
+			<mapping path="/show.pro" />
+			<mapping path="/detail.pro" />
+			<mapping path="/update.pro" />
+			<mapping path="/insert.pro" />
+			<mapping path="/delete.pro" />
+			<mapping path="/count.pro" />
+			<mapping path="/select.pro" />
+			<mapping path="/change.pro" />
+			
+		
+			
 			<!-- BO - 매출 통계 관련 페이지 -->
 			<mapping path="/salesStatics.bo" />
 			<mapping path="/mainBarGraph.bo" />
+			
+			<mapping path="/topProduct.bo" />
+			<mapping path="/SalesProduct.bo" />
+			<mapping path="/productImg.bo" />
+			<mapping path="/MainproductImg.bo" />
+			
 			
 			<!-- beans:bean : 어느 타입의 객체를 어느 이름으로 생성할지 bean을 등록 -->
 			<!-- class : 등록할 풀 클래스명, id : 객체명 -->

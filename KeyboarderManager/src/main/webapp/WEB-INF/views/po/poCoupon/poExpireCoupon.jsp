@@ -62,7 +62,7 @@ input[type=date] {
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
 		        <h1 class="m-0">
-		        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYBOAR-DER 쿠폰 관리
+		         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.sellerName}&nbsp;만료쿠폰 조회
 		        </h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->

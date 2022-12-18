@@ -156,7 +156,7 @@ public class NSJ_ProductController {
 				
 			}
 		}
-		*/ // 검증용 로직 (어제랑 같은 거라 무시해도됨)
+		*/ // 검증용 로직
 		
 		int result = productService.updateProduct(p);
 
