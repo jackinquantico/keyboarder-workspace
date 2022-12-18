@@ -2,13 +2,14 @@
 
 /* -------------- PO 수수료 내역 조회 CSS 설정 ------------------ */
 .content {
-    width : 100%;
     height : 800px;
 }
 
 #selectOption{
     /*border : 1px solid black;*/
-    margin : 0px 10px 10px 10px;
+    /* margin : 0px 10px 10px 10px; */
+    width : 95%;
+    margin: auto;
     padding : 10px 30px 10px 30px;
     height : 120px;
 }
@@ -54,14 +55,16 @@
 }
 
 #allCommission_result{
+	width : 95%;
+	margin: auto;
     height : 600px;
-    margin : 0px 10px 10px 10px;
     padding : 10px 10px 10px 10px;
 }
 
 #result_div {
     width : 100%;
     height : 40px;
+    margin: 10px 10px;
 }
 
 #allCommission_result>hr {
@@ -74,7 +77,6 @@
 }
 
 #result_table{
-    border : 1px solid black;
     text-align : center;
     width:100%;
     /*height:500px;*/

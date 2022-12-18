@@ -18,7 +18,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-
+<style>
+.content {
+	width: 95%;
+	margin: auto;
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini"> <!-- 모든 body 태그에 적용 -->
 
@@ -28,13 +33,13 @@
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
-
+<br>
 <!-- 콘텐츠 영역 제목 -->
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;1:1 문의작성하기</h1>
+        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:1 문의작성하기</h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->

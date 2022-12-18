@@ -16,13 +16,13 @@
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
-	
+	<br>
 		<!-- 콘텐츠 영역 제목 -->
 		<div class="content-header">
 		  <div class="container-fluid">
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
-		        <h1 class="m-0">&nbsp;전체 주문내역 조회</h1>
+		        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체 주문내역 조회</h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
@@ -30,40 +30,41 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<div id="selectOption" class="card">
+			<div id="selectOption" class="card" style="width:95%; margin:auto; border: none;">
 				<table id="option_table">
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간 *</th>
 						<td width="10%">
-							<select id="selectbox_date">
-								<option selected></option>
+							<select id="selectbox_date" class="form-control">
+								<option selected disabled>선택 안 함</option>
 								<option value="1week">1주일</option>
 								<option value="1month">1개월</option>
 								<option value="3month">3개월</option>
 							</select>
 						</td>
 						<td width="10%">
-							<input type="date" id="currentDate" name="currentDate" value="">
+							<input type="date" id="currentDate" name="currentDate" value="" class="form-control">
 						</td>
 						<td width="3px" style="text-align:center">~</td>
 						<td width="10%">
-							<input type="date" id="endDate" name="endDate" value="">
+							<input type="date" id="endDate" name="endDate" value="" class="form-control">
 						</td>
 						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<th style="padding-left: 20px;">검색어</th>
 						<td>
-							<select id="selectbox_keyword">
+							<select id="selectbox_keyword" class="form-control">
 								<option value="keyword_orderNo">주문번호</option>
 								<option value="keyword_productName">상품명</option>
 								<option value="keyword_conName">구매자명</option>
 							</select>
 						</td>
-						<td colspan="4">
-							<input type="text" style="width:1000px;" id="search_keyword" placeholder="주문번호를 입력해주세요">
-							&nbsp;&nbsp;
-							<button id="search_btn" onclick="searchFormSubmit();">검색</button>
+						<td colspan="3">
+							<input type="text" style="width:100%;" id="search_keyword" placeholder="주문번호를 입력해주세요" class="form-control">
+						</td>
+						<td>
+							<button id="search_btn" onclick="searchFormSubmit();" class="btn btn-secondary">검색</button>
 						</td>
 					</tr>
 				</table>
@@ -71,15 +72,15 @@
 
 			<br>
 
-			<div id="allOrder_result" class="card">
-				<div id="result_div">
+			<div id="allOrder_result" class="card" style="width:95%; margin:auto; border: none;">
+				<div id="result_div" style="height: 50px;">
 					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">
-						<button>엑셀 다운로드</button>
+						<button class="btn btn-outline-secondary">엑셀 다운로드</button>
 					</div>
 				</div>
 				<div id="table_div" style="overflow:scroll;">
-					<table id="result_table" border="1">
+					<table id="result_table" border="1" class="table-bordered">
 						<thead>
 							<tr>
 								<td width="2%"><input type="checkbox" id="chkAll" onclick="checkAll('chk[]', this.checked);"></td>

@@ -19,14 +19,14 @@
 <style>
 
 	#inquiryDetail { 
-		width:90%;
-		height: 600px;
+		width:95%;
+		height: 700px;
 		overflow-y: scroll;
 		margin: auto;
 	}
 	
-	 #inquiryDetailContent_1 {
-            width : 95%;
+	#inquiryDetailContent_1 {
+            width : 100%;
             margin: auto;
         }
 
@@ -66,13 +66,13 @@
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
-
+<br>
 <!-- 콘텐츠 영역 제목 -->
     <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;1:1 문의내역</h1>
+            <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:1 문의내역</h1>
         </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -82,7 +82,6 @@
     <div class="content">
         <div id="inquiryDetail">
             <div id="inquiryDetailContent_1">
-            <br><br>
             <input type="button" class="btn btn-dark" value="목록" onclick="location.href='list.iq'" style="background-color:black; float: right; margin-left: 5px;">
             <br><br><br>
             <div id="inquiryDetailContent_2">

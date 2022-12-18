@@ -9,13 +9,10 @@
 	<style>
 	@charset "UTF-8";
 
-.content {
-    width : 80%;
-    height : 800px;
-}
-
 #selectOption{
-    margin : 0px 10px 10px 10px;
+	width: 95%;
+	margin: auto;
+    /* margin : 0px 10px 10px 10px; */
     padding : 10px 30px 10px 30px;
     height : 120px;
 }
@@ -30,39 +27,36 @@
 }
 
 #submitButton {
-	background-color : #323232;
-	color : white;
+	/* background-color : #323232;
+	color : white; */
 	width : 100px;
 }
 
 #resetButton {
-	background-color : white;
+	/* background-color : white; */
 	width : 100px;
 }
 
-#option_table select {
-    width : 150px;
-    height : 60%;
-}
 
 #option_table input {
     width : 180px;
-    height : 60%;
 }
 
 #search_btn {
-    width : 100px;
+    width : 100px;/* 
     background-color: #323232;
     color : white;
     border : none;
-    text-align : center;
+    text-align : center; */
 }
 
 
 #allOrder_result{
-    height : 600px;
-    margin : 0px 10px 10px 10px;
-    padding : 10px 10px 10px 10px;
+    width: 95%;
+    height : 650px;
+    margin: auto;
+    /* margin : 0px 10px 10px 10px; */
+    padding : 20px 10px 10px 10px;
 }
 
 #result_div {
@@ -71,7 +65,7 @@
 }
 
 #result_count {
-    padding : 0px 10px 0px 10px;
+    padding : 10px 10px 0px 10px;
     width : 50%;
     height : 100%;
     position : absolute;
@@ -123,13 +117,13 @@ th {
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
-	
+		<br>
 		<!-- 콘텐츠 영역 제목 -->
 		<div class="content-header">
 		  <div class="container-fluid">
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
-		        <h1 class="m-0">&nbsp;입점업체 정산관리</h1>
+		        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;입점업체 정산관리</h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
@@ -149,7 +143,7 @@ th {
 										<input type="hidden" id="conditionName" value="${ searchCondition.sellerName }">
 										<input type="hidden" id="conditionDate1" value="${ searchCondition.settleDate }">
 										<input type="hidden" id="conditionDate2" value="${ searchCondition.searchSettleDate2 }">									
-										<select id="sellerList" name="seller">
+										<select id="sellerList" name="seller" class="form-control">
 											<c:forEach var="sl" items="${ sellerList }">
 												<option id="${ sl.sellerName }" value="${ sl.sellerName }">${ sl.sellerName }</option> 
 											</c:forEach>
@@ -157,25 +151,25 @@ th {
 									</td>
 									<td></td>
 									<td></td>
-									<td><button type="submit" id="submitButton">검색</button></td>
+									<td><button type="submit" id="submitButton" class="btn btn-secondary">검색</button></td>
 								</tr>
 								<tr>
 									<th width="10%" style="padding-left: 20px;">조회기간</th>
 									<td width="10%">
-										<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);" value="${ searchCondition.settleDate }">
+										<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);" value="${ searchCondition.settleDate }" class="form-control">
 									</td>
 									<td width="3px" style="text-align:center">~</td>
 									<td width="10%">
-										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);" value="${ searchCondition.searchSettleDate2 }">
+										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);" value="${ searchCondition.searchSettleDate2 }" class="form-control">
 									</td>
-									<td><a href="resetStoreSettlement.bo"><button type="button" id="resetButton">초기화 </button></a></td>
+									<td><a href="resetStoreSettlement.bo"><button type="button" id="resetButton" class="btn btn-outline-secondary">초기화 </button></a></td>
 								</tr>									
 							</c:when>
 							<c:otherwise>
 								<tr>
 									<th style="padding-left: 20px;">입점업체</th>							
 									<td>
-										<select id="sellerList" name="seller">
+										<select id="sellerList" name="seller" class="form-control">
 											<c:forEach var="sl" items="${ sellerList }">
 												<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
 											</c:forEach>
@@ -183,18 +177,18 @@ th {
 									</td>
 									<td></td>
 									<td></td>
-									<td><button type="submit" id="submitButton">검색</button></td>
+									<td><button type="submit" id="submitButton" class="btn btn-secondary">검색</button></td>
 								</tr>
 								<tr>
 									<th width="10%" style="padding-left: 20px;">조회기간</th>
 									<td width="10%">
-										<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);">
+										<input type="date" id="settleDate1" name="searchSettlementDate1" onchange="handler1(event);" class="form-control">
 									</td>
 									<td width="3px" style="text-align:center">~</td>
 									<td width="10%">
-										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);">
+										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);" class="form-control">
 									</td>
-									<td><a href="storeSettlement.bo"><button type="button" id="resetButton">초기화 </button></a></td>
+									<td><a href="storeSettlement.bo"><button type="button" id="resetButton" class="btn btn-outline-secondary">초기화 </button></a></td>
 								</tr>							
 							</c:otherwise>				
 						</c:choose>	
@@ -232,7 +226,7 @@ th {
 					</div>
 				</div>
 				<br>
-				<div id="table_div" style="overflow:scroll; height:530px;">
+				<div id="table_div" style="overflow:scroll; height:600px;">
 					<table id="result_table" border="1">
 						<thead>
 							<tr>

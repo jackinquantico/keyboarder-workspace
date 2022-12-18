@@ -8,38 +8,37 @@
 <title>Insert title here</title>
 	<style>
 		
-		.content {
-			margin-top : 10px;
-			margin-left : 10px;
+		.card {
+			width: 95%;
+			margin: auto;
 		}
 		
 		#searchConditions>div {
 			float : left;
-			font-size : 20px;
+			/* font-size : 20px; */
 			font-weight : 600;
 		}
 		
 		#conditionTable {
-			width : 700px;
 			height: 130px;
-			font-size : 22px;
+			/* font-size : 22px; */
 		}
 		
-		#conditionTalbe>td {
+		/* #conditionTalbe>td {
 			width : 200px;
-		}
+		} */
 		
 		#conditionTalbe>td>div {
 			width : 200px;
 		}
 		
 		#searchCondition2 select {
-			width : 170px;
-			font-size : 20px;
+			/* width : 170px; */
+			/* font-size : 20px; */
 		}
 		
 						
-		#searchButton {
+		/* #searchButton {
 			background-Color : #323232;
 			color : white;
 			font-size : 20px;
@@ -52,6 +51,10 @@
 			font-size : 20px;
 			padding : 5px 20px 5px 20px;
 			border-radius : 5px;			
+		} */
+		
+		input[type=button], input[type=submit] {
+			width: 100px;
 		}
 		
 		#result_div {
@@ -105,13 +108,13 @@
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
-	
+		<br>
 		<!-- 콘텐츠 영역 제목 -->
 		<div class="content-header">
 		  <div class="container-fluid">
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
-		        <h1 class="m-0">&nbsp;수수료 매출내역 조회</h1>
+		        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수수료 매출내역 조회</h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
@@ -121,13 +124,13 @@
 		<div class="content">
 		
 			<form id="searchSettlementForm" action="searchSettlement.bo">
-				<div id="searchConditions" class="card" style="width : 76%;">
+				<div id="searchConditions" class="card">
 					<table id="conditionTable">
 						<tr>
-							<td><div id="searchCondition1" style="margin-left : 20px;">입점사</div></td>
-							<td>
-								<div id="searchCondition2" style="margin-left : 20px;">
-									<select id="sellerList" name="seller" style="font-size : 23px;">
+							<td width="15%"><div id="searchCondition1" style="margin-left : 20px;">입점사</div></td>
+							<td width="35%">
+								<div id="searchCondition2" style="padding-right : 20px; width:100%;">
+									<select id="sellerList" name="seller" class="form-control">
 										<option value="allStore">전체</option>
 										<c:forEach var="sl" items="${ sellerList }">
 											<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
@@ -135,44 +138,52 @@
 									</select>							
 								</div>							
 							</td>
-							<td style="margin-left : 20px;"><input type="submit" id="searchButton" value="조회"></td>
+							<td width="50%">
+								<input type="submit" id="searchButton" value="조회" class="btn btn-secondary">
+							</td>
 						</tr>
 						<tr>					
 							<td><div id="searchCondition3" style="margin-left : 20px;">정산년월</div></td>
 							<td>
-								<div id="searchCondition4" style="margin-left : 20px;">
-									<input type="month" id="settleDate" name="searchSettlementDate">
+								<div id="searchCondition4" style="margin-right : 20px;">
+									<input type="month" id="settleDate" name="searchSettlementDate" class="form-control">
 								</div>							
 							</td>
-							<td style="margin-left : 20px;"><input type="button" id="resetButton" value="초기화">	</td>
+							<td>
+								<input type="button" id="resetButton" value="초기화" class="btn btn-outline-secondary">
+							</td>
 						</tr>
 					</table>																	
 				</div>					
 			</form>
 						
-			<div id="allOrder_result" class="card" style="width : 76%;">
+			<div id="allOrder_result" class="card">
 				<div id="result_div">
-					<div style="font-size : 25px; margin-top: 10px; margin-left : 10px;">지불내역&nbsp;&nbsp;</div>
-					<div id="result_count" style="font-size : 25px; margin-top: 10px; margin-left : 10px;">총<div id="result_count_content" style="color:red;"> <c:out value="${ list.size() }"/></div> 건</div>
+					<div style="font-size : 25px; margin: 20px 0px 30px 20px;">지불내역&nbsp;&nbsp;</div>
+					<div id="result_count" style="font-size : 25px; margin: 20px 0px 30px 20px;">
+						총<div id="result_count_content" style="color:red;"> <c:out value="${ list.size() }"/></div> 건
+					</div>
 				</div>
-				<div id="table_div" style="overflow:scroll; width:1590px; height:600px; text-align:center; margin-left : 10px;">
-					<table id="result_table" border="1" width="1580px;">
+				<div id="table_div" style="overflow:scroll; width:99%; height:600px; text-align:center; margin-left : 10px;">
+					<table id="result_table" border="1" width="99%" class="table-bordered">
 						<thead style="background-color:darkgray; font-weight:bold;">
-							<td width="%">협력사번호</td>
-							<td width="%">협력사명</td>
-							<td width="%">정산일</td>
-							<td width="%">
-							입점사 실결제금액<br>
-							(주문금액 - 입점사 쿠폰금액)
-							</td>
-							<td>주문금액</td>
-							<td>입점사 쿠폰금액</td>
-							<td width="%">
-							KEYBOAR-DER<br>
-							할인액	
-							</td>							
-							<td width="%">KEYBOAR-DER<br>매출액</td>
-							<td width="%">계산서발행액</td>
+							<tr>
+								<td>협력사번호</td>
+								<td>협력사명</td>
+								<td>정산일</td>
+								<td>
+								입점사 실결제금액<br>
+								(주문금액 - 입점사 쿠폰금액)
+								</td>
+								<td>주문금액</td>
+								<td>입점사 쿠폰금액</td>
+								<td>
+								KEYBOAR-DER<br>
+								할인액	
+								</td>							
+								<td>KEYBOAR-DER<br>매출액</td>
+								<td>계산서발행액</td>
+							</tr>
 						</thead>
 						<tbody>
 							<c:choose>
@@ -310,10 +321,12 @@
 				                        </table>
 				                        <div style="text-align:center; margin-top:5px; font-weight : bold;">본 인쇄물은 키보더(www.keyboarder.com)에서 발급 또는 전송 입력된 전자 (세금) 계산서 입니다.</div>
 				                    </div>
-				            </div>
+				            	</div>
 				            </div>
 				        </div>
-	
+				</div>
+			</div>
+		</div>
 	</div> <!-- /.content-wrapper -->
 
 <script>

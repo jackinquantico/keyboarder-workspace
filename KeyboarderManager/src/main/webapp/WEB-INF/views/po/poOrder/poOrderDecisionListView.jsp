@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <style>
         #orderConfirmForm {
-            width: 90%;
+            width: 95%;
             margin: auto;
             margin-top: 30px;
         }
@@ -62,13 +62,13 @@
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
-
+<br>
 <!-- 콘텐츠 영역 제목 -->
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;구매확정 내역조회</h1>
+        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;구매확정 내역조회</h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -84,7 +84,7 @@
                 ⦁ &nbsp;&nbsp;개인정보보호 목적으로 개인정보는 상당 기간 경과 후 블라인드 처리되며, A/S 목적으로 확인이 필요한 경우 고객센터로 문의바랍니다.
             </p>
         </div>
-        <br><br>
+        <br>
        <div id="date" class="card">
        	<form action="searchDecision.po">
        		<div style="line-height: 70px; margin-left: 20px;">
@@ -96,7 +96,7 @@
        	</form>
             
         </div>
-       <br><br>
+       <br>
        
         <div id="decisionList" class="card">
             <div id="excelbtn">

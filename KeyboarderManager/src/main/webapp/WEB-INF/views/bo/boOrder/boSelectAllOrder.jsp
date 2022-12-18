@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<link href="resources/css/boOrder.css" rel="stylesheet">
+<style>
+.card {
+	width: 95%;
+	margin: auto;
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -16,13 +22,13 @@
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
-	
+		<br>
 		<!-- 콘텐츠 영역 제목 -->
 		<div class="content-header">
 		  <div class="container-fluid">
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
-		        <h1 class="m-0">&nbsp;전체 주문내역 조회</h1>
+		        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체 주문내역 조회</h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
@@ -36,7 +42,7 @@
 						<th width="10%" style="padding-left: 20px;">조회기간 *</th>
 						<td width="10%">
 							<select id="selectbox_date">
-								<option selected></option>
+								<option selected disabled>선택 안 함</option>
 								<option value="1week">1주일</option>
 								<option value="1month">1개월</option>
 								<option value="3month">3개월</option>
@@ -57,7 +63,7 @@
 							<input type="text" style="width:100%" placeholder="주문번호를 입력해주세요" id="search_orderNo">
 						</td>
 						<td>
-							<button id="search_btn" onclick="searchFormSubmit();">검색</button>
+							<button id="search_btn" onclick="searchFormSubmit();" class="btn">검색</button>
 						</td>
 					</tr>
 					<tr>
@@ -73,7 +79,7 @@
 							<input type="text" style="width:100%" id="search_keyword" placeholder="업체명을 입력해주세요">
 						</td>
 						<td>
-							<button id="search_btn" onclick="searchFormSubmit();">검색</button>
+							<button id="search_btn" onclick="searchFormSubmit();" class="btn">검색</button>
 						</td>
 					</tr>
 				</table>
@@ -85,11 +91,11 @@
 				<div id="result_div">
 					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">
-						<button onclick="excelDownloadSubmit();">엑셀 다운로드</button>
+						<button onclick="excelDownloadSubmit();" class="btn btn-outline-secondary">엑셀 다운로드</button>
 					</div>
 				</div>
 				<div id="table_div" style="overflow-x:scroll;">
-					<table id="result_table" border="1">
+					<table id="result_table" border="1" class="table-bordered">
 						<thead>
 						<tr>
 							<td width="2%"><input type="checkbox" id="chkAll" onclick="checkAll('chk[]', this.checked);"></td>

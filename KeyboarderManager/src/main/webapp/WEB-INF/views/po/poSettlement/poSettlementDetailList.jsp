@@ -18,7 +18,7 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
-    .content {margin : auto;}   
+.content {margin : auto;}   
     
  td{
   padding-left:15px;
@@ -48,20 +48,21 @@ height:500px;
 <!-- 콘텐츠 영역 전체 래퍼 -->
 	<form id="selectSettleDetailList" action="searchSettle.po" method="post">   
 	<div class="content-wrapper">
-			<!-- 콘텐츠 영역 제목 -->
-			<div class="content-header">
-			  <div class="container-fluid">
-			    <div class="row mb-2">
-			      <div class="col-sm-6">
-			        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;정산 상세내역</h1>
-			      </div><!-- /.col -->
-			    </div><!-- /.row -->
-			  </div><!-- /.container-fluid -->
-			</div>
+		<br>
+		<!-- 콘텐츠 영역 제목 -->
+		<div class="content-header">
+		  <div class="container-fluid">
+		    <div class="row mb-2">
+		      <div class="col-sm-6">
+		        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;정산 상세내역</h1>
+		      </div><!-- /.col -->
+		    </div><!-- /.row -->
+		  </div><!-- /.container-fluid -->
+		</div>
 			
 			<!-- 실제 콘텐츠 영역 -->
 			
-	<div class="content" style="width:95%;" >
+		<div class="content" style="width:95%;" >
 		 <div class="card" style="padding:30px;">
 			 <div>
 			 	<span style="font-size :25px; margin-left:20px; margin-right:50px;">조회기간</span>
@@ -72,12 +73,12 @@ height:500px;
 			     <button class="btn btn-outline-secondary" style="width:100px;">초기화</button>    
 			 </div>
 	    </div>  
-			  <br> <br>  <br>
+			  <br>
 			   
 	<div class="card">
-		<table align="center"; width="100%" class="table-bordered">
+		<table width="100%" class="table-bordered">
 		       <thead>
-		        <tr>
+		        <tr align="center">
 		           <th rowspan="2">판매량</th>
 		           <th rowspan="2">실 상품 판매금액</th>
 		           <th rowspan="2">배송비</th>
@@ -94,8 +95,8 @@ height:500px;
 		           <th>최종수수료</th>
 		    	</tr>
 		    <tbody>
-		        <tr>
 		       	<c:forEach var="o" items="${list2}">
+		        <tr align="center">
 		            <td>${o.orderNo }</td>
 		            <td>${o.orderPrice}</td>
 		            <td>${o.orderNo*2500}</td>
@@ -110,7 +111,7 @@ height:500px;
 		    </tbody>
 		</table>
 	</div>
-	<br> <br>  <br>
+	<br>
 		
 	<div id="settementList" class="card">
 	<table  id="coupone_view" class="table table-bordered" align="center" style="width:100%;">

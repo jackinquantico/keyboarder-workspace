@@ -65,17 +65,17 @@
 
 			<div class="electronic-view-all">
 		        <div class="electronic-header">
-		            <p style="padding: 20px 2%; margin: 0px; font-size: 35px;">전자세금계산서 관리</p>
+		            <h2 style="padding: 20px 50px; margin: 0px;">전자세금계산서 관리</h2>
 		        </div>
 		
 		        <div class="electronic-date-tracking card" style="height: 180px;">
 		            <br>
 		            <form action="">
 		                <div id="electronic-lookup">
-		                    <div style="display: inline-block; padding: 12px 50px; margin: 0px; margin-left: 34%; font-size: 25px; width: 18%;">
+		                    <div style="display: inline-block; padding: 12px 50px; margin: 0px; margin-left: 34%; font-size: 25px; width: 16.2%;">
 		                       	 조회기간
 		                    </div>
-		                    <input type="month">
+		                    <input type="month" style="width:15%">
 		                </div>
 		                <div id="electronic-button" align="center">
 		                    <button type="button" class="btn btn-dark" style="margin-top: 25px; width: 15%; font-size: 17px;">

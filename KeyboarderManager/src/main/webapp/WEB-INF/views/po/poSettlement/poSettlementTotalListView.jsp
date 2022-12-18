@@ -18,10 +18,9 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
         #orderConfirmForm {
-            width: 90%;
+            width: 95%;
             height: 480px;
             margin: auto;
-            margin-top: 30px;
         }
         #date{ 
             height : 70px;
@@ -34,7 +33,7 @@
         	margin-left: 30px;
         }
         #orderConfirmList {
-            height : 500px;
+            height : 600px;
             margin :auto; 
 	       	margin-bottom: 30px; 
 	       	font-size: 13px;
@@ -51,13 +50,13 @@
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
-
+<br>
 <!-- 콘텐츠 영역 제목 -->
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;정산내역 전체조회</h1>
+        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정산내역 전체조회</h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -72,7 +71,7 @@
                 ⦁ &nbsp;&nbsp;지급된 K-Money 는 판매자님의 출금 요청 후 영업일 기준 3일 이내에 입금됩니다.
             </p>
         </div>
-        <br><br>
+        <br>
         
         <div id="date" class="card">
          <form action="searchSettlementTotal.po">
@@ -84,7 +83,7 @@
             </div>
         </form>
         </div>
-        <br><br>
+        <br>
 
         <div id="orderConfirmList" class="card">
             <div id="excelbtn">

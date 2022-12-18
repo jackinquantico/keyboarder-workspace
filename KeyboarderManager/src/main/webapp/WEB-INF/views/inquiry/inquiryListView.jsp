@@ -20,7 +20,7 @@
     
 	<style>
         .inquiry{
-            width:90%;
+            width:95%;
             margin: auto;
         }
 
@@ -64,13 +64,13 @@
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
 <div class="content-wrapper">
-
+<br>
 <!-- 콘텐츠 영역 제목 -->
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;1:1 문의게시판</h1>
+        <h1 class="m-0" style="margin-left:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:1 문의게시판</h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -78,7 +78,7 @@
 
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
-	<div class="inquiry">
+	<div class="inquiry" class="card">
         <div class="inquiryList">
         <c:if test="${ loginUser.sellerId ne 'admin'}">
         	<button type="button" class="btn btn-dark" id="erollbtn" onclick="location.href='enrollForm.iq'">글작성</button>        

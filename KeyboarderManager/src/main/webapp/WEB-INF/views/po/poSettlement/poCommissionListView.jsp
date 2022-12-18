@@ -15,13 +15,13 @@
 	
 	<!-- 콘텐츠 영역 전체 래퍼 -->
 	<div class="content-wrapper">
-	
+	<br>
 		<!-- 콘텐츠 영역 제목 -->
 		<div class="content-header">
 		  <div class="container-fluid">
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
-		        <h1 class="m-0">&nbsp;수수료 내역 조회</h1>
+		        <h1 class="m-0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수수료 내역 조회</h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
@@ -34,11 +34,11 @@
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간</th>
 						<td width="10%">
-							<input type="date">
+							<input type="date" class="form-control">
 						</td>
 						<td width="10px" style="text-align:center">&nbsp;~&nbsp;</td>
 						<td width="10%">
-							<input type="date">
+							<input type="date" class="form-control">
 						</td>
 						<td></td>
 					</tr>
@@ -47,8 +47,8 @@
 					</tr>
 					<tr>
 						<td id="option_btns" colspan="5" style="text-align:center;">
-							<input type="button" id="search_btn" value="검색">&nbsp;&nbsp;&nbsp;
-							<input type="reset" id="reset_btn" onclick="resetOption();">
+							<input type="button" id="search_btn" value="검색" class="btn btn-secondary">&nbsp;&nbsp;&nbsp;
+							<input type="reset" id="reset_btn" onclick="resetOption();" class="btn btn-outline-secondary">
 						</td>
 					</tr>
 				</table>
@@ -56,17 +56,17 @@
 
 			<br><br>
 
-			<div id="allCommission_result">
+			<div id="allCommission_result" class="card">
 				<div id="result_div">
 					 <h4>총 합계</h4>
 				</div>
 				<hr><br>
 				<div id="table_div">
-					<table id="result_table" border="1">
+					<table id="result_table" class="table-bordered">
 						<thead>
 							<tr>
 								<th width="25%">기간</th>
-								<th width="25%">수수료 합계 (a-b)</td>
+								<th width="25%">수수료 합계 (a-b)</th>
 								<th width="25%">판매 수수료 (a)</th>
 								<th width="25%">수수료 할인액 (b)</th>
 							</tr>

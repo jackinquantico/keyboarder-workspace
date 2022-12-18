@@ -15,7 +15,7 @@
         }
 
         .delivery-view-main{
-            width: 97%;
+            width: 95%;
             height: 863px;
         }
 
@@ -157,12 +157,12 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
 
 	<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
 
 	<div class="content-wrapper">
-
+	<br>
 		<div class="content">
 		
 			<c:choose>

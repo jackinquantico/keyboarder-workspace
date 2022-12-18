@@ -1,13 +1,14 @@
 @charset "UTF-8";
 
 .content {
-    width : 100%;
+    width : 95%;
+    margin: auto;
     height : 800px;
 }
 
 #selectOption{
     /*border : 1px solid black;*/
-    margin : 0px 10px 10px 10px;
+    /* margin : 0px 10px 10px 10px; */
     padding : 10px 30px 10px 30px;
     height : 120px;
 }
@@ -23,26 +24,26 @@
 
 #option_table select {
     width : 150px;
-    height : 60%;
 }
 
 #option_table input {
     width : 180px;
-    height : 60%;
 }
+
+
 
 #search_btn {
     width : 100px;
-    background-color: #323232;
+    /* background-color: #323232;
     color : white;
     border : none;
-    text-align : center;
+    text-align : center; */
 }
 
 
 #allOrder_result{
     /*border : 1px solid black;*/
-    height : 600px;
+    height : 650px;
     margin : 0px 10px 10px 10px;
     padding : 10px 10px 10px 10px;
 }
@@ -58,7 +59,7 @@
     height : 100%;
     position : absolute;
     font-size : 23px;
-    padding : 5px 20px 5px 20px;
+    padding : 10px 20px 10px 20px;
 }
 
 #result_btn {
@@ -79,7 +80,7 @@
 }
 
 #result_table{
-    border : 1px solid black;
+   /*  border : 1px solid black; */
     text-align : center;
     width:100%;
     height:500px;
