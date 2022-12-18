@@ -31,13 +31,16 @@ public class InquiryController {
 	 * @return
 	 */
 	@RequestMapping("list.iq")
-	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model) {
-		int listCount = inquiryService.selectListCount();
+	public String selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, Model model, HttpSession session) {
+		
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		int listCount = inquiryService.selectListCount(sellerNo);
 		int pageLimit = 5;
 		int boardLimit = 10;
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-		ArrayList<Inquiry> list = inquiryService.selectList(pi);
+		System.out.println(pi);
+		ArrayList<Inquiry> list = inquiryService.selectList(pi, sellerNo);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);

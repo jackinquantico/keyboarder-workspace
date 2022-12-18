@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>KEYBOAR-DER</title>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -33,7 +33,7 @@
 </style>
 </head>
 <body>
-    <h1>KEYBOAR-DER</h1>
+    <h1><a href="/keyboarder" style="color:black; text-decoration : none;">KEYBOAR-DER</a></h1>
     <hr>
     <br><br>
     <div class="agreeform" align="center">

@@ -7,10 +7,10 @@ import com.kh.kmanager.common.model.vo.PageInfo;
 
 public interface InquiryService {
 	// 문의글 총 개수
-	int selectListCount(); 
+	int selectListCount(int sellerNo); 
 	
 	// 문의글 리스트조회
-	ArrayList<Inquiry> selectList(PageInfo pi);
+	ArrayList<Inquiry> selectList(PageInfo pi, int sellerNo);
 	
 	// 문의글 상세조회
 	Inquiry selectInquiry(int inquiryNo);

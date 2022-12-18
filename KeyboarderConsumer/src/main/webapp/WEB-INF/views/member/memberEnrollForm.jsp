@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>KEYBOAR-DER</title>
 
     <!--부트스트랩-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -50,7 +50,7 @@
 
 <body>
 	<div id="header">
-        <h1>&nbsp;&nbsp;KEYBOAR-DER</h1>
+        <h1><a href="/keyboarder" style="color:black; text-decoration : none;">&nbsp;&nbsp;KEYBOAR-DER</a></h1>
     <hr>
     </div>
     <br><br>

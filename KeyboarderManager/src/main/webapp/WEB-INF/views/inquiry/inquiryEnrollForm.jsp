@@ -70,7 +70,7 @@
           var key = window.event.keyCode;
           // enter키 처리
           if (key === 13) {
-              document.getElementById("contentText").value = document.getElementById("contentText").value + "";
+              document.getElementById("contentText").value = document.getElementById("contentText").value + " ";
               return false;
           }
           else {

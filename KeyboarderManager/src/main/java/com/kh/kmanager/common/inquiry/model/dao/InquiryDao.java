@@ -12,15 +12,15 @@ import com.kh.kmanager.common.model.vo.PageInfo;
 @Repository
 public class InquiryDao {
 	
-	public int selectListCount(SqlSessionTemplate sqlSession) { 
-		return sqlSession.selectOne("inquiryMapper.selectListCount");
+	public int selectListCount(SqlSessionTemplate sqlSession, int sellerNo) { 
+		return sqlSession.selectOne("inquiryMapper.selectListCount", sellerNo);
 	}
 	
-	public ArrayList<Inquiry> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Inquiry> selectList(SqlSessionTemplate sqlSession, PageInfo pi, int sellerNo) {
 		int limit = pi.getBoardLimit();
 		int offset = (pi.getCurrentPage()-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return (ArrayList)sqlSession.selectList("inquiryMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("inquiryMapper.selectList", sellerNo, rowBounds);
 	}
 	
 	public int insertInquiry(SqlSessionTemplate sqlSession, Inquiry i) { 

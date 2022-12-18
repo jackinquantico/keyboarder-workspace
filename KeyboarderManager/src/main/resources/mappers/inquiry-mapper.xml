@@ -15,6 +15,9 @@
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM INQUIRY
+		<if test="sellerNo != null">
+			WHERE SELLER_NO = #{sellerNo}
+		</if>
 	</select>
 	
 	<select id="selectList" resultMap="inquiryResultSet">
@@ -23,6 +26,9 @@
 					, INQUIRY_NAME
 					, TO_CHAR(INQUIRY_DATE, 'YYYY-MM-DD') AS "INQUIRY_DATE"
 		FROM INQUIRY
+		<if test="sellerNo != null">
+			WHERE SELLER_NO = #{sellerNo}
+		</if>
 		ORDER BY INQUIRY_NO DESC
 	</select>
 	
