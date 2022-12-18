@@ -15,7 +15,6 @@
 }
 
 #selectOption{
-    border : 1px solid black;
     margin : 0px 10px 10px 10px;
     padding : 10px 30px 10px 30px;
     height : 120px;
@@ -61,7 +60,6 @@
 
 
 #allOrder_result{
-    border : 1px solid black;
     height : 600px;
     margin : 0px 10px 10px 10px;
     padding : 10px 10px 10px 10px;
@@ -139,7 +137,7 @@ th {
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<div id="selectOption">
+			<div id="selectOption" class="card">
 				<form action="searchStoreSettlement.bo">
 					<table id="option_table">
 						<c:choose>
@@ -207,7 +205,7 @@ th {
 
 			<br>
 
-			<div id="allOrder_result">
+			<div id="allOrder_result" class="card">
 				<div id="result_div">
 					<div id="result_count">입점업체 정산 목록 (전체 <c:out value="${ list.size() }"/>건)</div>
 					<div id="result_btn">

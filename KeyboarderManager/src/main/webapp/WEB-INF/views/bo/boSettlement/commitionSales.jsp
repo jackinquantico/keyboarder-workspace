@@ -9,24 +9,9 @@
 	<style>
 		
 		.content {
-			margin-top : 30px;
-			margin-left : 100px;
+			margin-top : 10px;
+			margin-left : 10px;
 		}
-		
-		hr {
-			position : relative;
-			width : 1300px;
-			left : -250px;
-			border : 1px solid darkgray;
-	 	}
-	 	
-	 	form {
-	 		margin-left : 200px;
-	 	}
-	 	
-	 	.formHr {
-	 		left : -348px;
-	 	}
 		
 		#searchConditions>div {
 			float : left;
@@ -34,77 +19,39 @@
 			font-weight : 600;
 		}
 		
-		#searchCondition1 {
-			margin-left : 100px;
+		#conditionTable {
+			width : 700px;
+			height: 130px;
+			font-size : 22px;
 		}
 		
-		#searchCondition2 {
-			margin-left : 50px;
+		#conditionTalbe>td {
+			width : 200px;
+		}
+		
+		#conditionTalbe>td>div {
+			width : 200px;
 		}
 		
 		#searchCondition2 select {
 			width : 170px;
+			font-size : 20px;
 		}
 		
-		#searchCondition3 {
-			margin-left : 100px;
-		}
-		
-		#searchCondition4 {
-			margin-left : 100px;
-		}
-		
-		#searchCondition4 input {
-			position : relative;
-			top : -1px;
-			font-size : 17px;
-		}
-		
-		.v-line {
-		  border-left : 3px solid darkgray;
-		  height : 50px;
-		  position : relative;
-		  top : -10px;
-		  left : 25px;
-		}
-				
-		#v-line2 {
-			left : 50px;
-		}
-		
-		#v-line3 {
-			left : 50px;
-		}
-		
-		
-		#line1 {
-			position : relative;
-			top : 50px;
-		}
-		
-		#buttons {
-			position : relative;
-			top : 50px;
-			left : -480px;
-		}
 						
 		#searchButton {
-			background-Color : #9496CA;
+			background-Color : #323232;
 			color : white;
 			font-size : 20px;
-			padding : 5px 25px 5px 25px;
-			border : none;
+			padding : 5px 30px 5px 30px;
 			border-radius : 5px;
 		}
 		
 		#resetButton {
-			background-Color : darkGray;
-			color : white;
+			background-Color : white;
 			font-size : 20px;
 			padding : 5px 20px 5px 20px;
-			border : none;
-			border-radius : 5px;
-			margin-left : 30px;		
+			border-radius : 5px;			
 		}
 		
 		#result_div {
@@ -115,12 +62,7 @@
 		#result_div>div {
 			float : left;
 		}
-		
-		#result_btn {
-			margin-left : 743px;
-		}
-		
-		#result_co
+
 		#table_div {
 			text-align : center;
 		} 
@@ -179,46 +121,42 @@
 		<div class="content">
 		
 			<form id="searchSettlementForm" action="searchSettlement.bo">
-				<hr class="formHr">
-					<div id="searchConditions">
-						<div id="searchCondition1">입점사</div>
-						<div class='v-line'></div>
-						<div id="searchCondition2">
-							<select id="sellerList" name="seller">
-								<option value="allStore">전체</option>
-								<c:forEach var="sl" items="${ sellerList }">
-									<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
-								</c:forEach>
-							</select>							
-						</div>
-						<div class='v-line' id="v-line2"></div>
-						<div id="searchCondition3">정산년월</div>
-						<div class='v-line' id="v-line3"></div>
-						<div id="searchCondition4">
-							<input type="month" id="settleDate" name="searchSettlementDate">
-						</div>
-					</div>
-					<hr id="line1" class="formHr">					
-				<div id="buttons">
-					<input type="submit" id="searchButton" value="조회">
-					<input type="button" id="resetButton" value="초기화">		
-				</div>
+				<div id="searchConditions" class="card" style="width : 76%;">
+					<table id="conditionTable">
+						<tr>
+							<td><div id="searchCondition1" style="margin-left : 20px;">입점사</div></td>
+							<td>
+								<div id="searchCondition2" style="margin-left : 20px;">
+									<select id="sellerList" name="seller" style="font-size : 23px;">
+										<option value="allStore">전체</option>
+										<c:forEach var="sl" items="${ sellerList }">
+											<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
+										</c:forEach>
+									</select>							
+								</div>							
+							</td>
+							<td style="margin-left : 20px;"><input type="submit" id="searchButton" value="조회"></td>
+						</tr>
+						<tr>					
+							<td><div id="searchCondition3" style="margin-left : 20px;">정산년월</div></td>
+							<td>
+								<div id="searchCondition4" style="margin-left : 20px;">
+									<input type="month" id="settleDate" name="searchSettlementDate">
+								</div>							
+							</td>
+							<td style="margin-left : 20px;"><input type="button" id="resetButton" value="초기화">	</td>
+						</tr>
+					</table>																	
+				</div>					
 			</form>
-		
-
-			<br><br><br>
-			
-			<hr>
-			<div id="allOrder_result">
+						
+			<div id="allOrder_result" class="card" style="width : 76%;">
 				<div id="result_div">
-					<div style="font-size : 18px;">지불내역&nbsp;&nbsp;</div>
-					<div id="result_count" style="font-size : 18px;">총<div id="result_count_content" style="color:red;"> <c:out value="${ list.size() }"/></div> 건</div>
-					<div id="result_btn">
-						<!--<button>엑셀 다운로드</button>-->
-					</div>
+					<div style="font-size : 25px; margin-top: 10px; margin-left : 10px;">지불내역&nbsp;&nbsp;</div>
+					<div id="result_count" style="font-size : 25px; margin-top: 10px; margin-left : 10px;">총<div id="result_count_content" style="color:red;"> <c:out value="${ list.size() }"/></div> 건</div>
 				</div>
-				<div id="table_div" style="overflow:scroll; width:1300px; height:500px; text-align:center;">
-					<table id="result_table" border="1" width="1280px;">
+				<div id="table_div" style="overflow:scroll; width:1590px; height:600px; text-align:center; margin-left : 10px;">
+					<table id="result_table" border="1" width="1580px;">
 						<thead style="background-color:darkgray; font-weight:bold;">
 							<td width="%">협력사번호</td>
 							<td width="%">협력사명</td>

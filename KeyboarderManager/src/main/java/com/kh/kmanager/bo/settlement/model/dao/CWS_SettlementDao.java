@@ -46,6 +46,7 @@ public class CWS_SettlementDao {
 			
 			list.get(i).setRealPayPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice());
 			list.get(i).setBillPublishAmount(list.get(i).getSupplyValue() - list.get(i).getTaxAmount());
+			list.get(i).setCommition(list.get(i).getCommition() + list.get(i).getKcouponPrice());
 			list.get(i).setSales((int)(list.get(i).getBillPublishAmount()/1.1));
 			
 		}	
