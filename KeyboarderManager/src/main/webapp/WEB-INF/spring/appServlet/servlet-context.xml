@@ -64,6 +64,18 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/withdraw.po" />
 			<mapping path="/mainSettlement.po" />
 			
+			<!-- PO 주문관리 -->
+			<mapping path="/decision.po" />
+			<mapping path="/searchDecision.po" />
+			<mapping path="/excelDownloadDecision.po" />
+			<mapping path="/excelDownloadSearch.po" />
+			
+			<!-- PO 정산내역 -->
+			<mapping path="/list.se"/>
+			<mapping path="/searchSettlementTotal.po"/>
+			<mapping path="/excelDownloadTotal.se" />
+			<mapping path="/excelDownloadSearch.se" />
+			
 			<!-- BO - 쿠폰 관리 관련 페이지 -->
 			<mapping path="/coupon.bo" />
 			<mapping path="/registCoupon.bo" />

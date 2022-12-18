@@ -39,7 +39,7 @@ public class InquiryController {
 		int boardLimit = 10;
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-		System.out.println(pi);
+		//System.out.println(pi);
 		ArrayList<Inquiry> list = inquiryService.selectList(pi, sellerNo);
 		
 		model.addAttribute("pi", pi);
