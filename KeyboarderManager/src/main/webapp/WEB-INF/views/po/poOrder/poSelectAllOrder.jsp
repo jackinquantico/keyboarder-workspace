@@ -30,7 +30,7 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<div id="selectOption">
+			<div id="selectOption" class="card">
 				<table id="option_table">
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간 *</th>
@@ -71,7 +71,7 @@
 
 			<br>
 
-			<div id="allOrder_result">
+			<div id="allOrder_result" class="card">
 				<div id="result_div">
 					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">

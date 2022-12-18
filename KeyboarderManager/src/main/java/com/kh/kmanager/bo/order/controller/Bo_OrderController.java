@@ -58,4 +58,14 @@ public class Bo_OrderController {
 		
 		return new Gson().toJson(list);
 	}
+	
+	/**
+	 * BO 전체 주문내역 조회 페이지의 주문내역들 중 선택한 내역들 엑셀다운로드 메소드 - 백성현
+	 * @param orderList
+	 */
+	@RequestMapping("excelDownload_OrderList.bo")
+	public void excelDown_OrderList(Object orderList) {
+		
+		System.out.println(orderList);
+	}
 }

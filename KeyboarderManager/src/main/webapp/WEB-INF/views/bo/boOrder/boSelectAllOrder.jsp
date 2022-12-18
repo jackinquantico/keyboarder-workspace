@@ -30,7 +30,7 @@
 		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
-			<div id="selectOption">
+			<div id="selectOption" class="card">
 				<table id="option_table">
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간 *</th>
@@ -81,11 +81,11 @@
 
 			<br>
 
-			<div id="allOrder_result">
+			<div id="allOrder_result" class="card">
 				<div id="result_div">
 					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">
-						<button>엑셀 다운로드</button>
+						<button onclick="excelDownloadSubmit();">엑셀 다운로드</button>
 					</div>
 				</div>
 				<div id="table_div" style="overflow-x:scroll;">
@@ -112,7 +112,7 @@
 								<c:when test="${ not empty list }">
 									<c:forEach var="o" items="${ list }">
 										<tr>
-											<td><input type="checkbox" name="chk[]" onclick="isAllCheck(this.name, 'chkAll');"></td>
+											<td><input type="checkbox" name="chk[]" onclick="isAllCheck(this.name, 'chkAll');" value="${ o }"></td>
 											<td>${ o.buyConfirmDate }</td>
 											<td>${ o.orderDate }</td>
 											<td>${ o.orderNo }</td>
@@ -138,6 +138,25 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		<script>
+			function excelDownloadSubmit() {
+				
+				let test = $("#result_table>tbody input[type=checkbox]:checked");
+				
+				$.ajax({
+					url : "excelDownload_OrderList.bo",
+					data : {orderList:test},
+					success : function() {
+						
+					},
+					error : function() {
+						console.log('왜아ㅗㄴ대로ㅑㅐㅁㄴ어랴ㅐㅁ');
+					}
+				});
+			}
+		</script>
 		
 		
 		<script>
