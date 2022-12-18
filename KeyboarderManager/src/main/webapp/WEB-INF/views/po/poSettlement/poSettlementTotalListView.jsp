@@ -19,13 +19,11 @@
 <style>
         #orderConfirmForm {
             width: 90%;
-            height: 550px;
+            height: 480px;
             margin: auto;
             margin-top: 30px;
         }
-        #info{ border : 1px solid rgb(187, 187, 187);}
         #date{ 
-            border : 1px solid; 
             height : 70px;
         }
         #searchbtn {
@@ -33,11 +31,10 @@
         	height: 35px; 
         	background-color:black; 
         	line-height: 1px; 
-        	margin-left: 30px;"
+        	margin-left: 30px;
         }
         #orderConfirmList {
             height : 500px;
-            border: 1px solid;
             margin :auto; 
 	       	margin-bottom: 30px; 
 	       	font-size: 13px;
@@ -69,7 +66,7 @@
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
 	<div id="orderConfirmForm">
-        <div id="info">
+        <div id="info" class="card">
             <p style="margin-top : 20px; margin-left:20px;">
                 ⦁ &nbsp;&nbsp;정산확정금액은 구매자가 구매확정 후 K-Money 로 전환됩니다. <br>
                 ⦁ &nbsp;&nbsp;지급된 K-Money 는 판매자님의 출금 요청 후 영업일 기준 3일 이내에 입금됩니다.
@@ -77,7 +74,7 @@
         </div>
         <br><br>
         
-        <div id="date">
+        <div id="date" class="card">
          <form action="searchSettlementTotal.po">
         	 <div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
@@ -89,26 +86,26 @@
         </div>
         <br><br>
 
-        <div id="orderConfirmList" >
-            <br>
-            <c:choose>
-            	<c:when test="${ not empty  searchSettleDate }">
-            		<a href="excelDownloadSearch.se?searchSettleDate=${ searchSettleDate }">
-            			 <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
-			           				엑셀다운로드
-						</button>
-            		</a>
-            	</c:when>
-            	<c:otherwise>
-            		<a href="excelDownloadTotal.se">
-			            <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
-					           				엑셀다운로드
-						</button>
-					</a>
-            	</c:otherwise>
-            </c:choose>
-            
-            <br><br><br>
+        <div id="orderConfirmList" class="card">
+            <div id="excelbtn">
+                <c:choose>
+                    <c:when test="${ not empty  searchSettleDate }">
+                        <a href="excelDownloadSearch.se?searchSettleDate=${ searchSettleDate }">
+                            <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 35px; margin-top :20px; margin-bottom:20px;">
+                                엑셀다운로드
+                            </button>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="excelDownloadTotal.se">
+                            <button type="button" class="btn btn-outline-secondary" style="float:right; margin-right: 35px; margin-top :20px; margin-bottom:20px;">
+                                엑셀다운로드
+                            </button>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
@@ -125,22 +122,23 @@
                     </tr>
                 </thead>
                 <tbody style="background-color : white;">
-                	<c:forEach var="s" items="${ list }">
-                		<tr align="center">
-	                        <td>${ s.orderNo }</td>
-	                        <td>${ s.settleDate }</td>
-	                        <td>${ s.productNo }
-	                        <td>${s.price } 원</td>
-	                        <td>2500원</td>
-	                        <td>${ s.paymentBill } 원</td>
-	                        <td>${ s.commition } 원</td>
-	                        <td>${ s.keyCouponPrice } 원</td>
-	                        <td>${ s.stoCouponPrice } 원</td>
-	                        <td>${ s.settleDept } 원</td>
-                    </tr>
-                	</c:forEach>
+                    <c:forEach var="s" items="${ list }">
+                        <tr align="center">
+                            <td>${ s.orderNo }</td>
+                            <td>${ s.settleDate }</td>
+                            <td>${ s.productNo }
+                            <td>${s.price } 원</td>
+                            <td>2500원</td>
+                            <td>${ s.paymentBill } 원</td>
+                            <td>${ s.commition } 원</td>
+                            <td>${ s.keyCouponPrice } 원</td>
+                            <td>${ s.stoCouponPrice } 원</td>
+                            <td>${ s.settleDept } 원</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
+            <br>
         </div>
     </div>
 	

@@ -16,15 +16,14 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
- <style>
+    <style>
         #orderConfirmForm {
             width: 90%;
             margin: auto;
             margin-top: 30px;
         }
-        #info { border : 1px solid rgb(187, 187, 187);}
+
         #date {  
-            border : 1px solid; 
             height : 70px;
         }
         
@@ -42,10 +41,12 @@
         	margin-left : 10px;
         }
         
+        #excelbtn {
+
+        }
         
         #decisionList {
-        	height : 500px;
-            border: 1px solid;
+        	height : 480px;
             margin :auto; 
 	       	margin-bottom: 30px; 
 	       	font-size: 13px;
@@ -75,8 +76,8 @@
 
 <!-- 실제 콘텐츠 영역 -->
 <div class="content">
-		<div id="orderConfirmForm">
-        <div id="info">
+		<div id="orderConfirmForm" >
+        <div id="info" class="card">
             <p style="margin-top : 15px; margin-left:15px;">
                 ⦁ &nbsp;&nbsp;자동 구매확정 : 배송완료 후 7일 후 자동 구매확정됩니다. <br>
                 ⦁ &nbsp;&nbsp;구매확정이 완료되면 K-Money로 지급되며, 관련자료는 [정산관리>정산내역조회] 에서 확인하실 수 있습니다. <br>
@@ -84,7 +85,7 @@
             </p>
         </div>
         <br><br>
-       <div id="date">
+       <div id="date" class="card">
        	<form action="searchDecision.po">
        		<div style="line-height: 70px; margin-left: 20px;">
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
@@ -97,23 +98,27 @@
         </div>
        <br><br>
        
-        <div id="decisionList">
-        <c:choose>
-        <c:when test="${ not empty searchDecisionDate  }">
-        			<a href="excelDownloadSearch.po?searchDecisionDate=${ searchDecisionDate }">
-        				 <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
-				                    	엑셀다운로드
-				         </button>
-        			</a>
-        </c:when>
-        <c:otherwise>
-        	        <a href="excelDownloadDecision.po">
-        				 <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 40px; margin-top:20px; margin-bottom:20px;">
-				                    	엑셀다운로드
-				         </button>
-        			</a>
-        </c:otherwise>
-        </c:choose>
+        <div id="decisionList" class="card">
+            <div id="excelbtn">
+                <c:choose>
+                    <c:when test="${ not empty searchDecisionDate }">
+                        <a href="excelDownloadSearch.po?searchDecisionDate=${ searchDecisionDate }">
+                            <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 35px; margin-top :20px;">
+                                엑셀다운로드
+                            </button>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="excelDownloadDecision.po" width="100%">
+                            <button type="submit" class="btn btn-outline-secondary" style="float:right; margin-right: 35px; margin-top :20px;">
+                                엑셀다운로드
+                            </button>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <br>
+        
             <table class="table table-bordered" align="center" style="width:95%; ">
                 <thead align="center">
                     <tr>
@@ -141,8 +146,8 @@
                     </tr>
                     </c:forEach>
                 </tbody>
-                <br><br><br>
             </table>
+            <br><br>
         </div>
     </div>
 </div> <!-- /.content -->
