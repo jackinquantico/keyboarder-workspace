@@ -65,7 +65,7 @@ height:500px;
 		 <div class="card" style="padding:30px;">
 			 <div>
 			 	<span style="font-size :25px; margin-left:20px; margin-right:50px;">조회기간</span>
-			 	<input type="date" style="height:45px;" name="startDate">&nbsp; ~ &nbsp; <input type="date" name="endDate" style="height:45px;"></td>
+			 	<input type="search" style="height:45px;" name="startDate" value="${param.startDate}">&nbsp; ~ &nbsp; <input type="date" name="endDate" value="${param.endDate}" style="height:45px;"></td>
 			 </div>
 			 <div align="center">  
 			 	 <button class="btn btn-dark" style="width:100px; margin-right:10px;">검색</button>  

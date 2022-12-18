@@ -125,7 +125,7 @@
                 <table width="100%">
                    <tr>
                       <td width="5%" align="right">${p.productName}</td>
-                      <td width="85%"><input type="text" class="form-control" name="productName">
+                      <td width="85%"><input type="text" class="form-control" name="productName"  value="${param.productName}">
                       </td>
                       <td width="10%">
                          <button type="submit" class="btn btn-secondary" style="width: 80%;" 

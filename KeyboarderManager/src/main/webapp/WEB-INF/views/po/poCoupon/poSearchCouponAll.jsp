@@ -62,7 +62,7 @@ input[type=date] {
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
 		        <h1 class="m-0">
-		        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYBOAR-DER 쿠폰 관리
+		        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.sellerName}&nbsp;쿠폰 관리
 		        </h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
@@ -85,8 +85,8 @@ input[type=date] {
 	   		
        		<select class="form-control" id="select" name="couponStmt">
 	        		<option value="0" selected>선택 안 함</option>
-	            	<option value="Y" >사용가능</option>
-	            	<option value="N">만료</option>
+	            	<option value="${param.Y}" >사용가능</option>
+	            	<option value="${param.N}">만료</option>
 	        	</select>
 	        </td>
 	    </tr>
@@ -94,7 +94,7 @@ input[type=date] {
 	   		<tr>
 		        <td>발행일 기준 기간 검색</td>
 		        <td>
-       	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
+       	<input type="date" name="fromDate" id="fromDate" value="${param.fromDate}" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" value="${param.toDate}" class="form-control col-lg-2">
 		        	
 		        </td>  
 	   		</tr>

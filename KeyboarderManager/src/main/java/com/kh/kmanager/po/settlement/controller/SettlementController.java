@@ -184,10 +184,11 @@ public class SettlementController {
 	 * @return
 	 */
 	@RequestMapping("settleView.po")
-	public String selectSettleDetailList(HttpSession session, Model model,PoOrder o) {
+	public String selectSettleDetailList(HttpSession session, Model model, PoOrder o) {
 		
 		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
 		o.setSellerNo(sellerNo);
+		
 		
 		ArrayList<Settlement> list = settlementService.selectSettleDetailList(o);
 		ArrayList<Settlement> list2 =settlementService.selectSettleSumList(o);
@@ -202,7 +203,10 @@ public class SettlementController {
 		return "po/poSettlement/poSettlementDetailList";
 	}
 	
-	
+	/**
+	 *	정산내역 상세조회- 성진 
+	 * @return
+	 */
 	@RequestMapping("searchSettle.po")
 
 	public String selectSearchList(HttpSession session, Model model,PoOrder o) {

@@ -66,7 +66,7 @@ input[type=date] {
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">
-        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYBOAR-DER 쿠폰 사용 내역
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.sellerName}&nbsp;쿠폰 사용 내역
         </h1>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -86,7 +86,7 @@ input[type=date] {
    		<tr>
 	        <td>사용기간 기준 기간 검색</td>
 	        <td>
-	        	<input type="date" id="fromDate" name="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate"class="form-control col-lg-2">
+	        	<input type="date" style="height:45px;" name="fromDate" value="${param.fromDate}">&nbsp; ~ &nbsp; <input type="date" name="toDate" value="${param.toDate}" style="height:45px;"></td>
 	        	
 	        
 	        </td>  

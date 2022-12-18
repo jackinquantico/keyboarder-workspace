@@ -82,7 +82,7 @@ input[type=date] {
 	   		<tr>
 		        <td>발행일 기준 기간 검색</td>
 		        <td>
-		        	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
+		        	<input type="date" name="fromDate" id="fromDate"  value="${param.fromDate}"class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate"  value="${param.toDate}"class="form-control col-lg-2">
 		        	
 		        </td>  
 	   		</tr>

@@ -62,7 +62,7 @@ input[type=date] {
 		    <div class="row mb-2">
 		      <div class="col-sm-6">
 		        <h1 class="m-0">
-		        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYBOAR-DER 쿠폰 관리
+		        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.sellerName}&nbsp;쿠폰 관리
 		        </h1>
 		      </div><!-- /.col -->
 		    </div><!-- /.row -->
@@ -90,13 +90,11 @@ input[type=date] {
 	        	</select>
 	        </td>
 	    </tr>
+   		<tr>	
    		<tr>
-			   		
-			   		<tr>
-				        <td>발행일 기준 기간 검색</td>
-				        <td>
-				        	<input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">
-				        	
+		<td>발행일 기준 기간 검색</td>
+				     <td>
+				        <input type="date" name="fromDate" id="fromDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="toDate" name="toDate" class="form-control col-lg-2">	
 				        </td>  
 			   		</tr>
 				</table>
