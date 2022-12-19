@@ -48,7 +48,7 @@ td{
 				
 										<tr>
 									<td>
-					<canvas id="productGraph" width="500" height="730" style="margin-right:100px;"></canvas>
+					<canvas id="productGraph" width="350" height="730" style="margin-right:100px;"></canvas>
 								</td>
 							<td>
 						<table>
