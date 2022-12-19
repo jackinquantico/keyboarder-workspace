@@ -55,7 +55,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/poheader.jsp" />
 
 	<jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
 

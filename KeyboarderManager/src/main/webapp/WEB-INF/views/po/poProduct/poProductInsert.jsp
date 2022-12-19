@@ -63,7 +63,7 @@ height:150px;
 </head>
 <body class="hold-transition sidebar-mini">
 
-	<jsp:include page="../../common/header.jsp" />
+	<jsp:include page="../../common/poheader.jsp" />
 
 	<jsp:include page="../../common/posidebar.jsp" />
 
