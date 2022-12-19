@@ -118,7 +118,13 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/select.pro" />
 			<mapping path="/change.pro" />
 			
-		
+			<!--  PO BO 1:1 문의 -->
+			<mapping path="/list.iq"/>
+			<mapping path="/enrollForm.iq"/>
+			<mapping path="/insert.iq"/>
+			<mapping path="/detail.iq"/>
+			<mapping path="/rlist.iq"/>
+			<mapping path="/rinsert.iq"/>
 			
 			<!-- BO - 매출 통계 관련 페이지 -->
 			<mapping path="/salesStatics.bo" />

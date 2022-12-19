@@ -15,7 +15,7 @@
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM INQUIRY
-		<if test="sellerNo != null">
+		<if test="sellerNo != 0">
 			WHERE SELLER_NO = #{sellerNo}
 		</if>
 	</select>
