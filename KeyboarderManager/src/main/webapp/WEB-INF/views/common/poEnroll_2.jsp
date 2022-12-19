@@ -25,7 +25,7 @@
             float : left;
             position: relative;
             top : 25px;
-            left : 17%;
+            left : 30%;
         }
         
         #login_text1 {
@@ -34,7 +34,7 @@
     
         #termsContent {
             position: relative;
-            left : 17%;
+            left : 30%;
         }
 
         #termsContent div {
@@ -101,6 +101,10 @@
             top : 300px;
             left : 350px;
             color : white;
+            width: 250px;
+            height: 50px;
+            border-radius: 5px;
+            border: none;
         }
 
 
@@ -136,6 +140,10 @@
         #corpNoCheck {            
             font-size: 14px;
             margin : 10px 0px 0px 8px;
+            width: 150px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
         }
 
         #corpNoGuide {

@@ -21,7 +21,7 @@
             float : left;
             position: relative;
             top : 25px;
-            left : 17%;
+            left : 30%;
         }
         
         #login_text1 {
@@ -30,7 +30,7 @@
     
         #enrollContent {
             position: relative;
-            left : 17%;
+            left : 30%;
         }
 
         #enrollContent div {
@@ -53,23 +53,29 @@
             height : 140px;
             background-color: rgb(226, 226, 226);
             top : 150px;
+            padding-top: 20px;
+            padding-bottom: 25px;
         }
 
         #text3 {
-            padding : 25px 0 0 20px;
-            font-size: 21px;
+            padding : 25px 0 0 200px;
+            font-size: 18px;
         }
 
         #corpNo {
-            font-size: 21px;
+            font-size: 16px;
             width : 300px;
+            height: 30px;
+            border-radius: 5px;
         }
 
         #sellerId {
-            font-size: 21px;
+            font-size: 16px;
             width : 300px;
             position: relative;
             left : 95px;
+            height: 30px;
+            border-radius: 5px;
         }
 
         button {
@@ -77,12 +83,14 @@
             font-size: 20px;
             font-weight: 540;
             top : 200px;
-            left : 400px;
+            left : 330px;
             background-color: #323232;
             color : white;
             width : 15%;
             padding : 10px 20px 10px 20px;
             text-align: center;
+            border-radius: 5px;
+            border: none;
         }
 
         button:hover {
@@ -101,7 +109,7 @@
         </div>
         <hr>
         <div id="enrollContent">
-            <div id="text1">판매자 아이디 찾기</div>
+            <div id="text1">판매자 비밀번호 찾기</div>
             <div id="text2">
                 * 회원가입시 입력한 사업자 등록번호와 아이디를 입력해주세요.
             </div>
@@ -110,7 +118,7 @@
                     <div id="text3">
                         사업자 등록 번호 :&nbsp;&nbsp;&nbsp;
                         <input type="text" id="corpNo" name="corpNo" minlength="12" maxlength="12" placeholder=" - 포함 12자 입력" required><br><br>
-                        아이디 :&nbsp;&nbsp;&nbsp;
+                        아이디 :&nbsp;
                         <input type="text" id="sellerId" name="sellerId" required> 
                     </div>                
                 </div>

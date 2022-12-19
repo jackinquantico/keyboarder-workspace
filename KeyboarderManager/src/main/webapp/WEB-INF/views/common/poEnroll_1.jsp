@@ -23,7 +23,7 @@
             float : left;
             position: relative;
             top : 25px;
-            left : 17%;
+            left : 23%;
         }
         
         #login_text1 {
@@ -32,7 +32,7 @@
     
         #enrollContent {
             position: relative;
-            left : 17%;
+            left : 23%;
         }
 
         #enrollContent div {
@@ -87,8 +87,8 @@
 
         #text6 {
             width : 250px;
-            height : 50px;
-            background-color: #323232;
+            /* height : 50px;
+            background-color: #323232; */
             line-height: 50px;
             font-size: 20px;
             text-align: center;
@@ -105,6 +105,17 @@
 
 
     </style>
+    <!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+    <script src="http://kit.fontawesome.com/77ad8525ff.js" crossorigin="anonymous"></script>
 </head>
 <body>
     
@@ -135,7 +146,7 @@
                 -  사업자 등록증을 갖춘 개인 또는 법인이라면 누구나 사업자 판매자로 가입할 수 있습니다.<br>
                 - 가입신청 후, 사업자 서류 인증 절차를 통한 인증 후 상품 판매가 가능합니다.
             </div>
-            <a href="poEnroll2.me"><div id="text6">판매자 가입하기</div></a>
+            <a href="poEnroll2.me" class="btn btn-dark"><div id="text6">판매자 가입하기</div></a>
         </div>
     </div>
 

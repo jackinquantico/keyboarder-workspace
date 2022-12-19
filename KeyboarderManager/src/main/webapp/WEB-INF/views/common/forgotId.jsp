@@ -23,7 +23,7 @@
             float : left;
             position: relative;
             top : 25px;
-            left : 17%;
+            left : 30%;
         }
         
         #login_text1 {
@@ -32,7 +32,7 @@
     
         #enrollContent {
             position: relative;
-            left : 17%;
+            left : 30%;
         }
 
         #enrollContent div {
@@ -55,28 +55,32 @@
             height : 100px;
             background-color: rgb(226, 226, 226);
             top : 150px;
+            padding-top: 20px;
         }
 
         #text3 {
-            padding : 25px 0 0 20px;
-            font-size: 21px;
+            padding : 25px 0 0 120px;
+            font-size: 18px;
         }
 
         #corpNo {
-            font-size: 21px;
+            font-size: 16px;
             width : 300px;
+            height: 25px;
+            border-radius: 5px;
         }
 
         #nextStep {
             position: relative;        
             left : 40px;
-            width : 250px;
-            height : 50px;
-            background-color: #a7a7a7;
+            width : 150px;
+            height : 33px;
+            background-color: #323232;
             color : white;
-            line-height: 50px;
-            font-size: 20px;
+            font-size: 16px;
             text-align: center;
+            border-radius: 5px;
+            border: none;
         }
 
         #checkResult {
@@ -101,12 +105,14 @@
             font-size: 20px;
             font-weight: 540;
             top : 250px;
-            left : 800px;
+            left : 890px;
             background-color: #323232;
             color : white;
             width : 15%;
             padding : 10px 20px 10px 20px;
             text-align: center;
+            border-radius: 5px;
+            border: none;
         }
 
         #result {
