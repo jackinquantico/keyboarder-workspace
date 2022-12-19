@@ -169,7 +169,7 @@
                         <tr>
                         	<th style="border:none; text-align: center;" class="td">우편번호 <h6 style="display: inline; color : red;">*</h6></th>
                         	<td style="border:none;" class="td">
-                        	<input type="text" id="postCode" class="form-control" name="zip" id="sample6_postcode" maxlength="5" placeholder="우편번호" style="width:154px; display:inline-block;" required>&nbsp;&nbsp;&nbsp;
+                        	<input type="text" class="form-control" name="zip" id="sample6_postcode" maxlength="5" placeholder="우편번호" style="width:154px; display:inline-block;" required>&nbsp;&nbsp;&nbsp;
                             <input type="button" id="findPostCode" name="address_search" class="btn btn-dark" style="display:inline-block;  vertical-align: top; background-color: black;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                         	</td>
                         </tr>
@@ -400,7 +400,7 @@
 	           var address = "(" + $("#sample6_postcode").val() +")"+ " "+ $("#sample6_address").val() + " " + $("#sample6_detailAddress").val();
 	           
 	           $("#findPostCode").attr("disabled", true);
-	           $("#postCode").attr("readonly", true);
+	           $("#sample6_postcode").attr("readonly", true);
 	           $("#sample6_address").attr("readonly", true);
 	           $("#sample6_detailAddress").attr("readonly", true);
 	           $("#sample6_extraAddress").attr("readonly", true);
