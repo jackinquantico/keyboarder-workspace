@@ -39,6 +39,10 @@ public class CWS_SettlementController {
 	@RequestMapping("commitionSales.bo")
 	public String commitionSalesPage(HttpSession session) {
 		
+		if(session.getAttribute("searchCondition")!=null) {
+			session.removeAttribute("searchCondition");
+		}
+		
 		ArrayList <Member> sellerList = settlementService.selectSeller();
 		ArrayList <CWS_Settlement> list = settlementService.selectSellerCommition();							
 		
@@ -155,76 +159,6 @@ public class CWS_SettlementController {
 		return "bo/boSettlement/commitionSales";
 	}
 	
-	@RequestMapping("resetCommitionSales.bo")
-	public String resetCommitionSalesPage(HttpSession session) {
-		
-		session.removeAttribute("searchCondition");
-		
-		ArrayList <Member> sellerList = settlementService.selectSeller();
-		ArrayList <CWS_Settlement> list = settlementService.selectSellerCommition();							
-		
-        // 현재 날짜 구하기
-        now = LocalDate.now();
- 
-        // 포맷 정의	
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
- 
-        // 포맷 적용
-        formatedNow = now.format(formatter);     
-        
-        // 결과값 필터링
-        for(int i = 0; i < list.size(); i++) {
-        	
-        	int day2 = Integer.parseInt(formatedNow.substring(8)); // 오늘이 몇일인지
-        	
-        	int month1 = Integer.parseInt(list.get(i).getSettleDate().substring(5, 7)); // 정산월
-        	int month2 = Integer.parseInt(formatedNow.substring(5, 7)); // 오늘이 몇달인지
-        	
-        	int year1 = Integer.parseInt(list.get(i).getSettleDate().substring(0, 4)); // 정산연도
-        	int year2 = Integer.parseInt(formatedNow.substring(0, 4)); // 오늘이 몇년도인지
-        	
-        	if(month1 == month2 && year1 == year2) { // 정산일이 오늘 기준 월과 연도가 같으면(아직 이번달이 끝나지 않은 경우)
-        		list.remove(list.get(i)); // 해당 행 제거
-        		--i;
-        	} else if(month1 == 12 // 정산일이 12월일때,
-        			&& month2 == 1 // 이번달이 1월이면서
-        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
-        			&& day2 < 10) {   // 오늘이 10일보다 전일때
-        		list.remove(list.get(i));
-        		--i;
-        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
-        		list.remove(list.get(i));
-        		--i;
-        	}
-        }
-        
-        for(int i = 0; i < list.size(); i++) {
-        	
-    		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
-    		String endSettleDate = list.get(i).getSettleDate();
-    		
-    		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
-    		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
-            
-            // 해당 월의 마지막 일수 구하기
-            Calendar cal = Calendar.getInstance();
-
-            cal.set(settleDateYear, settleDateMonth, 1);
-
-            endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-            
-            list.get(i).setSettleDate(endSettleDate);
-        }
-
-		
-        
-		session.setAttribute("sellerList", sellerList);
-		
-		session.setAttribute("list", list);
-		
-		return "bo/boSettlement/commitionSales";
-	}	
-	
 	@ResponseBody
 	@RequestMapping(value="sellerBillModal.bo")
 	public CWS_Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate, int commition) {	
@@ -248,26 +182,9 @@ public class CWS_SettlementController {
 	@RequestMapping("storeSettlement.bo")
 	public String storeSettlementPage(HttpSession session) {
 		
-		ArrayList <Member> sellerList = settlementService.selectSeller();
-		ArrayList <CWS_Settlement> list = settlementService.selectStoreSettlement();
-		
-		for(int i = 0; i < list.size(); i ++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
-			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
-			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
-			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
-		};
-		
-		session.setAttribute("sellerList", sellerList);
-		session.setAttribute("list", list);
-		
-		return "bo/boSettlement/storeSettlement";
-	}
-	
-	@RequestMapping("resetStoreSettlement.bo")
-	public String resetStoreSettlement(HttpSession session) {
-		
-		session.removeAttribute("searchCondition");
+		if(session.getAttribute("searchCondition")!=null) {
+			session.removeAttribute("searchCondition");
+		}
 		
 		ArrayList <Member> sellerList = settlementService.selectSeller();
 		ArrayList <CWS_Settlement> list = settlementService.selectStoreSettlement();

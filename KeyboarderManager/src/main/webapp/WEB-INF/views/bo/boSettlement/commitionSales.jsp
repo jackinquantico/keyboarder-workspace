@@ -157,7 +157,7 @@
 										</div>							
 									</td>
 									<td>
-										<a href="resetCommitionSales.bo"><input type="button" id="resetButton" value="초기화" class="btn btn-outline-secondary"></a>
+										<a href="commitionSales.bo"><input type="button" id="resetButton" value="초기화" class="btn btn-outline-secondary"></a>
 									</td>
 								</tr>							
 							</c:when>

@@ -127,6 +127,7 @@
 		        LEFT JOIN STORE_USE SU USING (ORDER_NO)) A
 		LEFT JOIN COUPON_KEYBOARDER K ON (KCOUPON_NO = K.COUPON_NO)
 		LEFT JOIN COUPON_STORE  S ON (SCOUPON_NO = S.COUPON_NO)
+		ORDER BY SETTLE_DATE DESC
 	</select>
 	
 	<select id="searchStoreSettlement" parameterType="cws_settlement" resultMap="storeResultSet">
@@ -142,6 +143,7 @@
         WHERE SELLER_NAME = #{sellerName}
           AND SETTLE_DATE <![CDATA[>]]>= TO_DATE(#{settleDate}, 'YYYY-MM-DD')
           AND SETTLE_DATE <![CDATA[<]]>= TO_DATE(#{searchSettleDate2}, 'YYYY-MM-DD')
+          ORDER BY SETTLE_DATE DESC
 	</select>
 	
 	

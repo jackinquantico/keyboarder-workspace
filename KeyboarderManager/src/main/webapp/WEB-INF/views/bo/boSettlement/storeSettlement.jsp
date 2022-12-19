@@ -162,7 +162,7 @@ th {
 									<td width="10%">
 										<input type="date" id="settleDate2" name="searchSettlementDate2" onchange="handler2(event);" value="${ searchCondition.searchSettleDate2 }" class="form-control">
 									</td>
-									<td><a href="resetStoreSettlement.bo"><button type="button" id="resetButton" class="btn btn-outline-secondary">초기화 </button></a></td>
+									<td><a href="storeSettlement.bo"><button type="button" id="resetButton" class="btn btn-outline-secondary">초기화 </button></a></td>
 								</tr>									
 							</c:when>
 							<c:otherwise>
