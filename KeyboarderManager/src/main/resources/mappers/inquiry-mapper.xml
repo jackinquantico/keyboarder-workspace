@@ -20,16 +20,21 @@
 		</if>
 	</select>
 	
-	<select id="selectList" resultMap="inquiryResultSet">
+	<select id="selectList" parameterType="_int" resultMap="inquiryResultSet">
 		SELECT INQUIRY_NO
 					, nvl(INQUIRY_REPLY, '답변대기') AS "INQUIRY_REPLY"
 					, INQUIRY_NAME
 					, TO_CHAR(INQUIRY_DATE, 'YYYY-MM-DD') AS "INQUIRY_DATE"
 		FROM INQUIRY
-		<if test="sellerNo != null">
+		<choose>
+		<when test="sellerNo != 0">
 			WHERE SELLER_NO = #{sellerNo}
-		</if>
-		ORDER BY INQUIRY_NO DESC
+			ORDER BY INQUIRY_NO DESC
+		</when>
+		<otherwise>
+			ORDER BY INQUIRY_NO DESC
+		</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="insertInquiry" parameterType="inquiry">
