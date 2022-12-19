@@ -159,7 +159,7 @@
                                                             <span>0</span> /1000
                                                         </div>
                                                     </th>
-                                                    <th style="vertical-align:middle; "><button class="btn btn-dark" style="background-color:black; width:90%; height:35px; margin-left:5px; font-size:60%;" onclick="addReply();">등록하기</button></th>
+                                                    <th style="vertical-align:middle; "><button class="btn btn-dark" style="background-color:black; width:90%; height:35px; margin-left:5px; font-size:80%;" onclick="addReply();">등록하기</button></th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -230,9 +230,7 @@
             </div>
             </div>
         </div>
-    </div> <!-- /.content -->
-</div> <!-- /.content-wrapper -->
-<script>
+        <script>
 
             function selectReplyList() {
                 $.ajax({
@@ -241,7 +239,7 @@
                     success : function(result) {
                     	//console.log(result.inquiryReply);
                         $("#replyContent1").text(result.inquiryReply);
-                        $("#replyArea tbody").html("<tr><td>" + result.inquiryReply +"</td></tr>");
+                        $("#replyArea>tbody").html("<tr><td>" + result.inquiryReply +"</td></tr>");
                     },
                     error : function() {
                         console.log("댓글리스트 조회용 ajax통신실패!");
@@ -259,9 +257,13 @@
                             inquiryReply : $("#recontent").val()
                         },
                         success : function(result) {
+                 		//  console.log(result); 
                             if(result == "success") {
-                                selectReplyList();
+                              /*   selectReplyList();
                                 $("#recontent").val("");
+                                $('#count').html("<span>0</span>/1000");
+							 */
+ 							location.reload();
                             }
                         },
                         error : function() {
@@ -275,6 +277,8 @@
             $(function() {
                 selectReplyList();
             });
-            </script>
+        </script>
+    </div> <!-- /.content -->
+</div> <!-- /.content-wrapper -->
 </body>
 </html>
