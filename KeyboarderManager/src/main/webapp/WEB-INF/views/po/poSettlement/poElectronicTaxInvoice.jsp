@@ -70,15 +70,22 @@
 		
 		        <div class="electronic-date-tracking card" style="height: 180px;">
 		            <br>
-		            <form action="">
+		            <form action="poElectronicSearchDate.settlement">
 		                <div id="electronic-lookup">
 		                    <div style="display: inline-block; padding: 12px 50px; margin: 0px; margin-left: 34%; font-size: 25px; width: 16.2%;">
 		                       	 조회기간
 		                    </div>
-		                    <input type="month" style="width:15%">
+		                    <c:choose>
+		                    	<c:when test="${ not empty dateList }">
+		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:15%">
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:15%">
+		                    	</c:otherwise>
+		                    </c:choose>
 		                </div>
 		                <div id="electronic-button" align="center">
-		                    <button type="button" class="btn btn-dark" style="margin-top: 25px; width: 15%; font-size: 17px;">
+		                    <button type="submit" class="btn btn-dark" style="margin-top: 25px; width: 15%; font-size: 17px;">
 		                        	검색하기
 		                    </button>
 		                    &nbsp;&nbsp;
@@ -108,24 +115,46 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                        	<c:forEach var="elec" items="${ elecList }">
-		                            <tr>
-		                            	<input type="hidden" class="modalsHidden1" value="${ elec.sellerName }">
-										<input type="hidden" class="modalsHidden2" value="${ elec.settleDate }">
-										<input type="hidden" class="modalsHidden3" value="${ elec.commition }">
-		                                <td>${ elec.settleDate }</td>
-		                                <td>매입</td>
-		                                <td>${ elec.supplyValue + elec.taxAmount }</td>
-		                                <td>${ elec.supplyValue }</td>
-		                                <td>${ elec.taxAmount + 1 }</td>
-		                                <td data-toggle="modal" data-target="#myModal">
-		                                	<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
-												세금계산서 확인
-											</a>
-		                                </td>
-		                            </tr>
-		                            
-	                            </c:forEach>
+	                        	<c:choose>
+	                        		<c:when test="${ not empty dateList }">
+	                        			<c:forEach var="elec" items="${ dateList }">
+				                            <tr>
+				                            	<input type="hidden" class="modalsHidden1" value="${ elec.sellerName }">
+												<input type="hidden" class="modalsHidden2" value="${ elec.settleDate }">
+												<input type="hidden" class="modalsHidden3" value="${ elec.commition }">
+				                                <td>${ elec.settleDate }</td>
+				                                <td>매입</td>
+				                                <td>${ elec.supplyValue + elec.taxAmount }</td>
+				                                <td>${ elec.supplyValue }</td>
+				                                <td>${ elec.taxAmount }</td>
+				                                <td data-toggle="modal" data-target="#myModal">
+				                                	<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
+														세금계산서 확인
+													</a>
+				                                </td>
+				                            </tr>
+			                            </c:forEach>
+	                        		</c:when>
+	                        		<c:when test="${ empty dateList and not empty elecList }">
+			                        	<c:forEach var="elec" items="${ elecList }">
+				                            <tr>
+				                            	<input type="hidden" class="modalsHidden1" value="${ elec.sellerName }">
+												<input type="hidden" class="modalsHidden2" value="${ elec.settleDate }">
+												<input type="hidden" class="modalsHidden3" value="${ elec.commition }">
+				                                <td>${ elec.settleDate }</td>
+				                                <td>매입</td>
+				                                <td>${ elec.supplyValue + elec.taxAmount }</td>
+				                                <td>${ elec.supplyValue }</td>
+				                                <td>${ elec.taxAmount }</td>
+				                                <td data-toggle="modal" data-target="#myModal">
+				                                	<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
+														세금계산서 확인
+													</a>
+				                                </td>
+				                            </tr>
+			                            </c:forEach>
+	                            	</c:when>
+	                        	</c:choose>    	
 	                        </tbody>
 	                    </table>
 	                    
@@ -133,15 +162,13 @@
 		            <br>
 		            <div>
 		            	<p style="padding: 20px 50px; margin: 0px; font-size: 13px;">
-		            		 전자세금계산서 발급은 익월 2일(영업일 기준) 이후 가능합니다.<br>
-       						인감 날인은 전자서명으로 대체하며, 전자세금계산서 뷰어가 자동으로 설치되지 않는 경우에는 직접 다운로드하시어 설치 가능합니다.<br>
+		            		 전자세금계산서 확인은 익월 2일(영업일 기준) 이후 가능합니다.<br>
        						부가세법 따라 개인판매자에게도 주민등록번호로 전자세금계산서가 자동 발급됩니다.
 
 							<br><br>
 							
 							전자세금계산서 종류<br>
-      						OM수수료매출 : 전월 1일~말일까지 OM수수료 매출에 대하여 발행되는 계산서입니다.<br>
-   						    K-Money사용 :  전월 1일~말일까지 현금성 K-Money사용분에 대하여 월단위 합산액을 기준으로 발행되는 계산서입니다.<br>
+      						OM수수료매입 : 전월 1일~말일까지 OM수수료 비용에 대하여 발행되는 계산서입니다.<br>
 		            	</p>
 		            </div>
 		        </div>
@@ -240,7 +267,7 @@
                                 <th colspan="2">현금</th>
                                 <th>수표</th>
                                 <th>어음</th>
-                                <th>왜상미수금</th>
+                                <th>외상매입금</th>
                                 <th colspan="3" rowspan="2">이 금액을 (청구)함</th>                       
                             </tr>
                             <tr style="height : 30px;">
@@ -317,49 +344,24 @@
 			});
 		});
 		
-		
-
-		
-		
-		
-		// 검색 결과 입점사명, 조회 기간 기본값으로 설정
-		/*
-		var searchSellerName = document.getElementById("searchSellerName").value;
-		
-		for(var i = 0; i < sellerNameOption.length; i++) {
-			if(searchSellerName $(".nameOption:")) {
-				sellerNameOption[i].selected = true;
-			};
-			
-		};
-		*/
-		
-		/* 나중에 검색기능을 모달로 구현하려할때 작성할 부분ㄴ
-		$("#searchButton").click(function() {
-			
-			var seller = $("#sellerList").val();		
-			var searchSettlementDate = $("#settleDate").val();
-			
-			$.ajax({
-				url : "searchSettlement.bo",
-				data : {seller : seller, searchSettlementDate : searchSettlementDate},
-				success : function(result) {
-					
-				}
-				
-			});
-			
-		});
-		*/
-		
-		// 초기화버튼
-		$("#resetButton").click(function() {
-			
-			location.href="commitionSales.bo";
-		});
-		
-		
-		
+    	$(function(){
+    		
+    		var date = new Date();
+    		
+    		String(date);
+    		
+    		var year = date.getFullYear();
+    		var month = date.getMonth() + 1;
+    		
+    		document.getElementById("electronicMonth").value = year + "-" + month;
+    		
+    		$("#resetButton").click(function() {
+    			
+    			location.href="electronicTaxInvoice.po";
+    		});
+    		
+    	});
+    	
 	});
 
 </script>

@@ -65,6 +65,10 @@ public class Settlement {
 		this.settleDate = settleDate;
 	}
 		
-		
+	public Settlement(int sellerNo, String searchDate) {
+		super();
+		this.sellerNo = sellerNo;
+		this.searchDate = searchDate;
+	}
 
 }

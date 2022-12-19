@@ -73,6 +73,11 @@ public class PoSettlementDao {
 
 		return result;
 	}
+	
+	public ArrayList<Settlement> selectElectronicDateList(SqlSessionTemplate sqlSession, Settlement settlement) {
+
+		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicDateList", settlement);
+	}
 
 	public ArrayList<PoOrder> excelDownloadSettlementDetail(SqlSessionTemplate sqlSession, PoOrder o) {
 		return (ArrayList)sqlSession.selectList("poorderMapper.excelDownloadSettlementDetail", o);

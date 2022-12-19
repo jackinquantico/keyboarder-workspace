@@ -16,12 +16,13 @@
 
         .delivery-view-main{
             width: 95%;
-            height: 863px;
+            height: 840px;
         }
 
         .delivery-header{
             width: 100%;
             height: 10%;
+            margin-top: -20px;
         }
 
         .delivery-tracking{
@@ -37,7 +38,7 @@
 
         .delivery-information{
             width: 100%;
-            height: 58%;
+            height: 52%;
         }
 
         .delivery-header>#middle-title{
@@ -100,7 +101,8 @@
 
         .delivery-information-notice{
             width: 98%;
-            height: 85%;
+            height: 70%;
+            margin-top: -40px;
             overflow: scroll;
         }
 
@@ -226,8 +228,8 @@
 				        <!-- 배송 정보 조회 -->
 				        <div class="delivery-information card">
 				            <div id="delivery-information-header">
-				                <div id="delivery-information-main">
-				                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>      
+				                <div id="delivery-information-main" style="margin-top: -20px;">
+				                    <div id="delivery-information-count">주문건&nbsp:&nbsp </div>      
 			                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ dateOrderCount }&nbsp</div>
 				                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='dateExcelDownload.poOrder?searchDate=${ searchDate }'">
 				                    	엑셀다운로드
@@ -564,9 +566,9 @@
 				        <!-- 배송 정보 조회 -->
 				        <div class="delivery-information card">
 				            <div id="delivery-information-header">
-				                <div id="delivery-information-main">
-				                    <div id="delivery-information-count" style="margin-top: 6px;">주문건&nbsp:&nbsp </div>      
-			                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ orderCount }&nbsp</div>
+				                <div id="delivery-information-main" style="margin-top: -20px;">
+				                    <div id="delivery-information-count">주문건&nbsp:&nbsp </div>      
+			                    		<div id="delivery-information-count-num">&nbsp${ orderCount }&nbsp</div>
 			                    	<c:choose>
 			                    		<c:when test="${ empty ordList }">
 						                    <button type="button" class="btn btn-dark" disabled style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">

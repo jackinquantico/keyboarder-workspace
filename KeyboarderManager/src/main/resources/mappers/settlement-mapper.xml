@@ -276,7 +276,7 @@
 
 	<select id="selectElectronicList" parameterType="_int" resultMap="settlementElectronicResultSet">
 			SELECT SETTLE_DATE
-			     , (SUM(COMMITION) - (SUM(COMMITION) / 1.1)) TAX_AMOUNT
+			     , (SUM(COMMITION) - (SUM(COMMITION) / 1.1) + 1) TAX_AMOUNT
 			     , SUM(COMMITION) / 1.1 SUPPLY_VALUE
 			     , SUM(COMMITION) COMMITION
 			     , SELLER_NAME
@@ -290,7 +290,26 @@
 			WHERE SELLER_NO = #{selNo})
 			GROUP BY SETTLE_DATE, SELLER_NAME 
 			ORDER BY SETTLE_DATE DESC
-		</select>
+	</select>
+	
+	<select id="selectElectronicDateList" parameterType="settlement" resultMap="settlementElectronicResultSet">
+		SELECT SETTLE_DATE
+		     , (SUM(COMMITION) - (SUM(COMMITION) / 1.1)) + 1 TAX_AMOUNT
+		     , SUM(COMMITION) / 1.1 SUPPLY_VALUE
+		     , SUM(COMMITION) COMMITION
+		     , SELLER_NAME
+		FROM(SELECT TO_CHAR(SETTLE_DATE, 'YYYY-MM') SETTLE_DATE
+		     , TAX_AMOUNT
+		     , SUPPLY_VALUE
+		     , SELLER_NAME
+		     , COMMITION
+		FROM SETTLEMENT
+		JOIN SELLER SL USING(SELLER_NO)
+		WHERE SELLER_NO = #{sellerNo}
+             AND EXTRACT (YEAR FROM SETTLE_DATE) = EXTRACT(YEAR FROM TO_DATE(#{searchDate}, 'YYYY-MM'))
+ 			  AND EXTRACT (MONTH FROM SETTLE_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM')))
+		GROUP BY SETTLE_DATE, SELLER_NAME
+	</select>
 	
 </mapper>
 

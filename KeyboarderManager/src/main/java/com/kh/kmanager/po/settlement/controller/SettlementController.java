@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,6 +37,10 @@ public class SettlementController {
 
 	@Autowired
 	private SettlementService settlementService;
+	
+	private LocalDate now;
+	private DateTimeFormatter formatter;
+	private String formatedNow;
 	
 	/**
 	 * K-Money 잔액관리 페이지 띄우는 용도 - 채영
@@ -589,9 +595,98 @@ public class SettlementController {
 			
 			ArrayList<Settlement> elecList = settlementService.selectElectronicList(selNo);
 			
+			// 현재 날짜 구하기
+	        now = LocalDate.now();
+	 
+	        // 포맷 정의	
+	        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	 
+	        // 포맷 적용
+	        formatedNow = now.format(formatter);     
+	        
+	        // 결과값 필터링
+	        for(int i = 0; i < elecList.size(); i++) {
+	        	
+	        	int day2 = Integer.parseInt(formatedNow.substring(8)); // 오늘이 몇일인지
+	        	
+	        	int month1 = Integer.parseInt(elecList.get(i).getSettleDate().substring(5, 7)); // 정산월
+	        	int month2 = Integer.parseInt(formatedNow.substring(5, 7)); // 오늘이 몇달인지
+	        	
+	        	int year1 = Integer.parseInt(elecList.get(i).getSettleDate().substring(0, 4)); // 정산연도
+	        	int year2 = Integer.parseInt(formatedNow.substring(0, 4)); // 오늘이 몇년도인지
+	        	
+	        	if(month1 == month2 && year1 == year2) { // 정산일이 오늘 기준 월과 연도가 같으면(아직 이번달이 끝나지 않은 경우)
+	        		elecList.remove(elecList.get(i)); // 해당 행 제거
+	        		--i;
+	        	} else if(month1 == 12 // 정산일이 12월일때,
+	        			&& month2 == 1 // 이번달이 1월이면서
+	        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
+	        			&& day2 < 10) {   // 오늘이 10일보다 전일때
+	        		elecList.remove(elecList.get(i));
+	        		--i;
+	        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
+	        		elecList.remove(elecList.get(i));
+	        		--i;
+	        	}
+	        }
+	        
 			model.addAttribute("elecList", elecList);
 			
 			return "po/poSettlement/poElectronicTaxInvoice";
+		}
+		
+		@RequestMapping("poElectronicSearchDate.settlement")
+		public String electronicTaxInvoiceSerchDate(Model model, HttpSession session, String searchElectronicMonth) {
+			
+			Member m = (Member)session.getAttribute("loginUser");
+			
+			int selNo = m.getSellerNo();
+			
+			String searchDate = searchElectronicMonth;
+			
+			Settlement settlement = new Settlement(selNo, searchDate);
+			
+			ArrayList<Settlement> dateList = settlementService.selectElectronicDateList(settlement);
+			
+			// 현재 날짜 구하기
+	        now = LocalDate.now();
+	 
+	        // 포맷 정의	
+	        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	 
+	        // 포맷 적용
+	        formatedNow = now.format(formatter);     
+	        
+	        // 결과값 필터링
+	        for(int i = 0; i < dateList.size(); i++) {
+	        	
+	        	int day2 = Integer.parseInt(formatedNow.substring(8)); // 오늘이 몇일인지
+	        	
+	        	int month1 = Integer.parseInt(dateList.get(i).getSettleDate().substring(5, 7)); // 정산월
+	        	int month2 = Integer.parseInt(formatedNow.substring(5, 7)); // 오늘이 몇달인지
+	        	
+	        	int year1 = Integer.parseInt(dateList.get(i).getSettleDate().substring(0, 4)); // 정산연도
+	        	int year2 = Integer.parseInt(formatedNow.substring(0, 4)); // 오늘이 몇년도인지
+	        	
+	        	if(month1 == month2 && year1 == year2) { // 정산일이 오늘 기준 월과 연도가 같으면(아직 이번달이 끝나지 않은 경우)
+	        		dateList.remove(dateList.get(i)); // 해당 행 제거
+	        		--i;
+	        	} else if(month1 == 12 // 정산일이 12월일때,
+	        			&& month2 == 1 // 이번달이 1월이면서
+	        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
+	        			&& day2 < 10) {   // 오늘이 10일보다 전일때
+	        		dateList.remove(dateList.get(i));
+	        		--i;
+	        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
+	        		dateList.remove(dateList.get(i));
+	        		--i;
+	        	}
+	        }
+	        	        
+			model.addAttribute("dateList", dateList);
+			
+			return "po/poSettlement/poElectronicTaxInvoice";
+			
 		}
 		
 }
