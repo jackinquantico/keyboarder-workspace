@@ -1,12 +1,24 @@
 package com.kh.kmanager.bo.order.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,15 +78,17 @@ public class Bo_OrderController {
 	 * @param orderList
 	 */
 	@RequestMapping("excelDownload_OrderList.bo")
-	public void excelDown_OrderList(HttpServletRequest request) {
-		
-		String[] arr = request.getParameterValues("orderList[]");
-		ArrayList<Order> list = new ArrayList<>();
+	public void excelDown_OrderList(String[] orderArr_input,HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		String[] arr = orderArr_input;
+
+		ArrayList<Order> list = new ArrayList<>();
+		
 		for(String s : arr) {
 			
 			Order o = new Order();
 			String[] prop = s.split("/");
+			
 			o.setOrderNo(prop[0].split("=")[1]);
 			o.setOrderDate(prop[1].split("=")[1]);
 			o.setOrderPrice(Integer.parseInt(prop[2].split("=")[1]));
@@ -94,7 +108,106 @@ public class Bo_OrderController {
 			list.add(o);
 		}
 		
-		// 엑셀로 넣기
-		
+		// 엑셀로 가공
+	    Workbook workbook = new HSSFWorkbook();
+	    
+	    // 시트 생성
+	    Sheet sheet = workbook.createSheet("1");
+	    
+	    // 행, 열, 열번호
+	    Row row = null;
+	    Cell cell = null;
+	    int rowNo = 0;
+	    
+	    // 테이블 헤더용 스타일
+	    CellStyle headStyle = workbook.createCellStyle();
+	    // 가는 경계선
+	    headStyle.setBorderTop(BorderStyle.THIN);
+	    headStyle.setBorderBottom(BorderStyle.THIN);
+	    headStyle.setBorderLeft(BorderStyle.THIN);
+	    headStyle.setBorderRight(BorderStyle.THIN);
+	    // 배경 노란색
+	    headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+	    headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+	    // 데이터용 경계 스타일 테두리 지정
+	    CellStyle bodyStyle = workbook.createCellStyle();
+	    bodyStyle.setBorderTop(BorderStyle.THIN);
+	    bodyStyle.setBorderBottom(BorderStyle.THIN);
+	    headStyle.setBorderLeft(BorderStyle.THIN);
+	    headStyle.setBorderRight(BorderStyle.THIN);
+	    
+	    // 헤더명 설정
+	    String[] headerArray = {"구매확정일시", "주문일시", "주문번호", "상품명", "입점업체명", "주문자명", "주문금액", "업체할인금액", "키보더할인액", "결제금액", "판매수수료", "결제수단"};
+	    row = sheet.createRow(rowNo++);
+	    
+	    for(int i = 0; i < headerArray.length; i++) {
+	    	
+	    	cell = row.createCell(i);
+	    	cell.setCellStyle(headStyle);
+	    	cell.setCellValue(headerArray[i]);
+	    }
+	    
+	    // 데이터 셀 작성
+	    for(Order excelData : list) {
+	    	
+	    	row = sheet.createRow(rowNo++);
+	    	
+	    	cell = row.createCell(0);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getBuyConfirmDate());
+	    	
+	    	cell = row.createCell(1);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderDate());
+	    	
+	    	cell = row.createCell(2);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderNo());
+	    	
+	    	cell = row.createCell(3);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getProductName());
+	    	
+	    	cell = row.createCell(4);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getSellerName());
+	    	
+	    	cell = row.createCell(5);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getConName());
+	    	
+	    	cell = row.createCell(6);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderPrice());
+	    	
+	    	cell = row.createCell(7);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getPoCouponPrice());
+	    	
+	    	cell = row.createCell(8);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getBoCouponPrice());
+	    	
+	    	cell = row.createCell(9);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getPaymentBill());
+	    	
+	    	cell = row.createCell(10);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getCommission());
+	    	
+	    	cell = row.createCell(11);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue("카드"); 
+	    }
+	    
+	    // 컨텐츠 타입과 파일명 지정
+	    response.setContentType("ms-vnd/excel");
+	    response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode("전체 주문내역 조회.xls", "UTF-8"));
+	    
+	    // 엑셀 출력
+	    workbook.write(response.getOutputStream());
+	    workbook.close();
 	}
+	
 }

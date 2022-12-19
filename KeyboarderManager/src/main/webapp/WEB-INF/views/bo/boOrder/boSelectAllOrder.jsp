@@ -145,29 +145,33 @@
 			</div>
 		</div>
 		
+		<form id="excelDownload" action="excelDownload_OrderList.bo" method="post">
+		</form>
+		
 		
 		<script>
 			function excelDownloadSubmit() {
 				
-				let test = $("#result_table>tbody input[type=checkbox]:checked");
-				let arr = [];
-
-				test.each(function() { // 각 배열의 인덱스에 들은 요소들에 반복적으로 접근 (input 자체에 접근)
-					console.log($(this).val()); // input 의 value 에 접근
-					arr.push($(this).val());
+				let orderList = $("#result_table>tbody input[type=checkbox]:checked");
+				let orderArr = [];
+				
+				orderList.each(function() { // 각 배열의 인덱스에 들은 요소들에 반복적으로 접근 (input 자체에 접근)
+					orderArr.push($(this).val());
 				});
 				
-				
-				$.ajax({
-					url : "excelDownload_OrderList.bo",
-					data : {orderList:arr},
-					success : function() {
+				if(orderArr == "") {
+					alert("내역 체크 후 엑셀 다운로드 버튼을 눌러주세요");
+				} else {
+					var excelDownList = ""; 
+					
+					for(let a = 0; a < orderArr.length; a++) {
 						
-					},
-					error : function() {
-						console.log('왜아ㅗㄴ대로ㅑㅐㅁㄴ어랴ㅐㅁ');
+						excelDownList += "<input type='hidden' name='orderArr_input' value='" + orderArr[a]  + "'>";
 					}
-				});
+					
+					$("#excelDownload").html(excelDownList);
+					$("#excelDownload").submit();
+				}
 			}
 		</script>
 		
