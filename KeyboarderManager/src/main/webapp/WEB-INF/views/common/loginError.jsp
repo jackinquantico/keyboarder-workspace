@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 로그인 실패</title>
     <style>
         #wrap {
             width : 1920px;

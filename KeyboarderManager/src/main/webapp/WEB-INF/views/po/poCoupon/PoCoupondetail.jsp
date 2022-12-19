@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-<title>쿠폰</title>
+<title>K-MANAGER :: 쿠폰 수정</title>
 </head>
 <style>
 #listArea {

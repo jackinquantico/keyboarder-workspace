@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 입점업체정산관리</title>
 	<style>
 	@charset "UTF-8";
 

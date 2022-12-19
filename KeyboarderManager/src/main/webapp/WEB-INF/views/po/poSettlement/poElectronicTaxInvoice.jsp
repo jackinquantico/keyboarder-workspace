@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전자세금계산서</title>
+<title>K-MANAGER :: 전자세금계산서</title>
 
     <style>
         div{

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 1:1 문의</title>
 
 <!-- 부트스트랩-->
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>K-MANAGER :: 비밀번호 초기화</title>
     <style>
         #wrap {
             width : 1920px;

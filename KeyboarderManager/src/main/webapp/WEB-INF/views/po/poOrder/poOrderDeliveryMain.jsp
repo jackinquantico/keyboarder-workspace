@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>배송주문</title>
+<title>K-MANAGER :: 배송 관리</title>
 
     <style>
         div{
