@@ -11,7 +11,7 @@
     <style>
         #wrap {
             width : 1920px;
-            height : 1080px;
+            height : 1050px;
         }
 
         #wrap>div {

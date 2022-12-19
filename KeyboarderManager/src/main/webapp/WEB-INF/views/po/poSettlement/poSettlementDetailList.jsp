@@ -73,9 +73,9 @@ height:500px;
 			     <button class="btn btn-outline-secondary" style="width:100px;">초기화</button>    
 			 </div>
 	    </div>  
-			  <br>
+		<br>
 			   
-	<div class="card">
+		<div class="card">
 		<table width="100%" class="table-bordered">
 		       <thead>
 		        <tr align="center">

@@ -37,7 +37,7 @@
 
         .delivery-information{
             width: 100%;
-            height: 50%;
+            height: 58%;
         }
 
         .delivery-header>#middle-title{

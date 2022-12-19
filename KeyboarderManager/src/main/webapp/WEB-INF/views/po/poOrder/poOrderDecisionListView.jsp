@@ -46,7 +46,7 @@
         }
         
         #decisionList {
-        	height : 480px;
+        	height : 550px;
             margin :auto; 
 	       	margin-bottom: 30px; 
 	       	font-size: 13px;
