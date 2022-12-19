@@ -70,15 +70,23 @@ public class Bo_OrderController {
 		
 		ArrayList<Order> list = orderService.selectOrderList(option);
 		
+		for(int i = 0; i < list.size(); i++) {
+			
+			// System.out.println(list.get(i));
+			// System.out.println(list.get(i).getPrintOrder());
+			// System.out.println(list.get(i).printOrder());
+			
+			list.get(i).setPrintOrder(list.get(i).printOrder());
+		}
+		
 		return new Gson().toJson(list);
 	}
 	
 	/**
 	 * BO 전체 주문내역 조회 페이지의 주문내역들 중 선택한 내역들 엑셀다운로드 메소드 - 백성현
-	 * @param orderList
 	 */
 	@RequestMapping("excelDownload_OrderList.bo")
-	public void excelDown_OrderList(String[] orderArr_input,HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void excelDown_OrderList(String[] orderArr_input, HttpServletResponse response) throws IOException {
 
 		String[] arr = orderArr_input;
 
@@ -203,7 +211,7 @@ public class Bo_OrderController {
 	    
 	    // 컨텐츠 타입과 파일명 지정
 	    response.setContentType("ms-vnd/excel");
-	    response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode("전체 주문내역 조회.xls", "UTF-8"));
+	    response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode("전체주문내역조회.xls", "UTF-8"));
 	    
 	    // 엑셀 출력
 	    workbook.write(response.getOutputStream());

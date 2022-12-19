@@ -290,7 +290,7 @@
 								for(var i = 0; i < result.length; i++) {
 									
 									resultStr += "<tr>"
-													+ "<td><input type='checkbox' name='chk[]' onclick='isAllCheck(this.name, 'chkAll');'></td>"
+													+ "<td><input type='checkbox' name='chk[]' onclick='isAllCheck(this.name, 'chkAll');' value='" + result[i].printOrder + "'></td>"
 													+ "<td>" + result[i].buyConfirmDate + "</td>"
 													+ "<td>" + result[i].orderDate + "</td>"
 													+ "<td>" + result[i].orderNo + "</td>"

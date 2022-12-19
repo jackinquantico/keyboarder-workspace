@@ -60,12 +60,17 @@ public class PoOrder {
 	
 	private String paymentNo;
 	
+	private String printOrder; // 옵션검색(ajax) 후 조회된 데이터의 값 저장용 필드(엑셀 다운로드기능 시 필요)
+	
 	public PoOrder(int sellerNo, String searchDate) {
 		super();
 		this.sellerNo = sellerNo;
 		this.searchDate = searchDate;
 	}
 	
-	
+	public String printOrder() {
+		return "orderNo=" + this.orderNo + "/orderDate=" + this.orderDate + "/orderStatus=" + this.orderStatus +
+			   "/productName=" + this.productName + "/orderPrice=" + this.orderPrice + "/conId=" + this.conId + "/conName=" + this.conName;
+	}
 
 }

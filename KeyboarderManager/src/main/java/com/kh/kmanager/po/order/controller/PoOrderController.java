@@ -13,12 +13,18 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,7 +83,127 @@ public class PoOrderController {
 		
 		ArrayList<PoOrder> list = orderService.selectOrderList(option);
 		
+		for(int i = 0; i < list.size(); i++) {
+			
+			list.get(i).setPrintOrder(list.get(i).printOrder());
+			
+		}
+		
 		return new Gson().toJson(list);
+	}
+	
+	/**
+	 * PO 전체 주문내역 조회 페이지의 주문내역들 중 선택한 내역들 엑셀다운로드 메소드 - 백성현
+	 */
+	@RequestMapping("excelDownload_OrderList.po")
+	public void excelDown_OrderList(String[] orderArr_input, HttpSession session, HttpServletResponse response) throws IOException {
+		
+		String sellerName = ((Member)session.getAttribute("loginUser")).getSellerName();
+		
+		String[] arr = orderArr_input;
+
+		ArrayList<PoOrder> list = new ArrayList<>();
+		
+		for(String s : arr) {
+			
+			PoOrder o = new PoOrder();
+			String[] prop = s.split("/");
+			
+			o.setOrderNo(prop[0].split("=")[1]);
+			o.setOrderDate(prop[1].split("=")[1]);
+			o.setOrderStatus(prop[2].split("=")[1]);
+			o.setProductName(prop[3].split("=")[1]);
+			o.setOrderPrice(Integer.parseInt(prop[4].split("=")[1]));
+			o.setConId(prop[5].split("=")[1]);
+			o.setConName(prop[6].split("=")[1]);
+			
+			list.add(o);
+		}
+		
+		// 엑셀로 가공
+	    Workbook workbook = new HSSFWorkbook();
+	    
+	    // 시트 생성
+	    Sheet sheet = workbook.createSheet("1");
+	    
+	    // 행, 열, 열번호
+	    Row row = null;
+	    Cell cell = null;
+	    int rowNo = 0;
+	    
+	    // 테이블 헤더용 스타일
+	    CellStyle headStyle = workbook.createCellStyle();
+	    // 가는 경계선
+	    headStyle.setBorderTop(BorderStyle.THIN);
+	    headStyle.setBorderBottom(BorderStyle.THIN);
+	    headStyle.setBorderLeft(BorderStyle.THIN);
+	    headStyle.setBorderRight(BorderStyle.THIN);
+	    // 배경 노란색
+	    headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+	    headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+	    // 데이터용 경계 스타일 테두리 지정
+	    CellStyle bodyStyle = workbook.createCellStyle();
+	    bodyStyle.setBorderTop(BorderStyle.THIN);
+	    bodyStyle.setBorderBottom(BorderStyle.THIN);
+	    headStyle.setBorderLeft(BorderStyle.THIN);
+	    headStyle.setBorderRight(BorderStyle.THIN);
+	    
+	    // 헤더명 설정
+	    String[] headerArray = {"상태", "주문일시", "주문번호", "상품명", "수량", "주문금액", "구매자ID", "구매자명"};
+	    row = sheet.createRow(rowNo++);
+	    
+	    for(int i = 0; i < headerArray.length; i++) {
+	    	
+	    	cell = row.createCell(i);
+	    	cell.setCellStyle(headStyle);
+	    	cell.setCellValue(headerArray[i]);
+	    }
+	    
+	    // 데이터 셀 작성
+	    for(PoOrder excelData : list) {
+	    	
+	    	row = sheet.createRow(rowNo++);
+	    	
+	    	cell = row.createCell(0);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderStatus());
+	    	
+	    	cell = row.createCell(1);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderDate());
+	    	
+	    	cell = row.createCell(2);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderNo());
+	    	
+	    	cell = row.createCell(3);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getProductName());
+	    	
+	    	cell = row.createCell(4);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue("1");
+	    	
+	    	cell = row.createCell(5);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getOrderPrice());
+	    	
+	    	cell = row.createCell(6);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getConId());
+	    	
+	    	cell = row.createCell(7);
+	    	cell.setCellStyle(bodyStyle);
+	    	cell.setCellValue(excelData.getConName());
+	    }
+	    
+	    // 컨텐츠 타입과 파일명 지정
+	    response.setContentType("ms-vnd/excel");
+	    response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(sellerName + "_전체주문내역조회.xls", "UTF-8"));
+	    
+	    // 엑셀 출력
+	    workbook.write(response.getOutputStream());
+	    workbook.close();
 	}
 	
 	/**

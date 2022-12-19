@@ -30,6 +30,8 @@ public class Order {
 	private int boCouponPrice; // 조인한 키보더발행 쿠폰 금액
 	private int commission; // 수수료 금액
 	
+	private String printOrder; // 옵션검색(ajax) 후 조회된 데이터의 값 저장용 필드(엑셀 다운로드기능 시 필요)
+	
 	public String printOrder() {
 		return "orderNo=" + this.orderNo + "/orderDate=" + this.orderDate + "/orderPrice=" + this.orderPrice + "/couponYn=" + this.couponYn + 
 				"/orderStatus=" + this.orderStatus + "/productNo=" + this.productNo + "/conNo=" + this.conNo + "/productName=" + this.productName + 
