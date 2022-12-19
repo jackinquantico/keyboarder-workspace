@@ -589,6 +589,11 @@ public class SettlementController {
 		@RequestMapping("electronicTaxInvoice.po")
 		public String electronicTaxInvoice(HttpSession session, Model model) {
 			
+			if(session.getAttribute("searchDate") != null) {
+				
+				session.removeAttribute("searchDate");
+			}
+			
 			Member m = (Member)session.getAttribute("loginUser");
 			
 			int selNo = m.getSellerNo();
@@ -643,6 +648,8 @@ public class SettlementController {
 			int selNo = m.getSellerNo();
 			
 			String searchDate = searchElectronicMonth;
+			
+			session.setAttribute("searchDate", searchDate);
 			
 			Settlement settlement = new Settlement(selNo, searchDate);
 			

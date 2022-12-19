@@ -76,7 +76,9 @@
 		                       	 조회기간
 		                    </div>
 		                    <c:choose>
-		                    	<c:when test="${ not empty dateList }">
+		                    	<c:when test="${ not empty searchDate }">
+		                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
+									<input type="hidden" id="conditionDate1" value="${ searchDate }">	
 		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:15%">
 		                    	</c:when>
 		                    	<c:otherwise>
@@ -344,7 +346,7 @@
 			});
 		});
 		
-    	$(function(){
+		/*$(function(){
     		
     		var date = new Date();
     		
@@ -360,7 +362,29 @@
     			location.href="electronicTaxInvoice.po";
     		});
     		
-    	});
+    	});*/
+    	
+    	// 검색 결과 유지***
+		var TFCondition = $("#TFCondition").val();
+		
+		if(TFCondition == "notEmptyCondition") {
+			
+			var conditionDate1 = $("#conditionDate1").val();
+			
+			document.getElementById("electronicMonth").value = conditionDate1;
+			
+		} else {
+			
+			// 지정한 날짜를 알맞은 형식으로 보내도록
+			var date = new Date();
+			
+			String(date);
+			
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			
+			document.getElementById("electronicMonth").value = year + "-" + month;
+		}		
     	
 	});
 
