@@ -39,6 +39,7 @@
     
 		#poInfo {
 			margin-top : -20px;
+			padding: 10px;
 		}
 
         #text1 {
@@ -53,7 +54,7 @@
 
         #buttons {
             position: relative;
-            left : 700px;
+            left : 880px;
             top : -50px;
         }
 
@@ -64,8 +65,8 @@
         }
         
         #infoTable {
-            width : 92%;
-            border: 1px solid #444444;
+            width : 100%;
+            /* border: 1px solid #444444; */
             border-collapse: collapse;        
         }
 
@@ -77,7 +78,7 @@
             width : 30%;
         }
 
-        th, td {
+         .td {
             border-bottom: 1px solid #444444;
          }
 
@@ -120,60 +121,61 @@
 
 	<jsp:include page="../../common/posidebar.jsp" />
     
-    <div id="wrap" class="content-wrapper" style="width:1100px; height: 900px;">
+    <div class="content-wrapper">
+    <div id="wrap" style="width:1100px; height: 900px;">
 	
 		<div class="content">
 
         <form action="updateInfo.po" style="width:1100px; height: 900px; margin-left:0px; min-height:900px;">
-            <div id="updateContent" class="card">
+            <div id="updateContent">
                 <div id="textAndButtons">
-                    <div id="text1">판매자 정보 수정</div>
+                    <div id="text1"  style="padding-top: 30px;">판매자 정보 수정</div>
                     <div id="buttons">
-                        <button type="submit" id="updateButton" name="updateButton" class="disabledBtn" disabled>수정하기</button>
-                        <button type="button" id="secessionButton" class="btn-warning">탈퇴하기</button>
+                        <button type="submit" id="updateButton" name="updateButton" class="disabledBtn btn btn-dark" disabled>수정하기</button>&nbsp;
+                        <button type="button" id="secessionButton" class="btn btn-warning">탈퇴하기</button>
                     </div>                    
                 </div>
-                <div id="poInfo" >
+                <div id="poInfo"  class="card">
                     <table id="infoTable">
                         <tr>
-                            <th>상호명 <h6 style="display: inline; color : red;">*</h6></th>                    
-                            <td>
+                            <th class="td">상호명 <h6 style="display: inline; color : red;">*</h6></th>                    
+                            <td class="td">
                             	${ loginUser.sellerName }
                             	<input type="hidden" id="sellerName" name="sellerName" value="${ loginUser.sellerName }">
                             </td>
                         </tr>
                         <tr>
-                            <th>사업자 등록번호 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td id="corpNo">${ loginUser.corpNo }</td>
+                            <th class="td">사업자 등록번호 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td id="corpNo" class="td">${ loginUser.corpNo }</td>
                         </tr>
                         <tr>
-                            <th>대표자명 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td>
+                            <th class="td">대표자명 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td class="td">
                                 <input type="text" id="updateRepName" name="updateRepName" value="${ loginUser.repName }">
                             </td>
                         </tr>
                         <tr>
-                            <th>판매자 아이디 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td id="sellerId">${ loginUser.sellerId }</td>
+                            <th class="td">판매자 아이디 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td id="sellerId" class="td">${ loginUser.sellerId }</td>
                         </tr>
                         <tr>
-                            <th>업체 서류 인증일 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td>${ loginUser.joinDate }</td>
+                            <th class="td">업체 서류 인증일 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td class="td">${ loginUser.joinDate }</td>
                         </tr>
                         <tr>
-                            <th style="border:none;">본사 소재지(기존 주소) <h6 style="display: inline; color : red;">*</h6></th>
-                            <td style="border:none; font-size:18px;">${ loginUser.location }</td>
+                            <th style="border:none;" class="td">본사 소재지(기존 주소) <h6 style="display: inline; color : red;">*</h6></th>
+                            <td style="border:none; font-size:18px;" class="td">${ loginUser.location }</td>
                         </tr>
                         <tr>
-                        	<th style="border:none; text-align: center;">우편번호 <h6 style="display: inline; color : red;">*</h6></th>
-                        	<td style="border:none;">
+                        	<th style="border:none; text-align: center;" class="td">우편번호 <h6 style="display: inline; color : red;">*</h6></th>
+                        	<td style="border:none;" class="td">
                         	<input type="text" id="postCode" class="form-control" name="zip" id="sample6_postcode" maxlength="5" placeholder="우편번호" style="width:154px; display:inline-block;" required>&nbsp;&nbsp;&nbsp;
                             <input type="button" id="findPostCode" name="address_search" class="btn btn-dark" style="display:inline-block;  vertical-align: top; background-color: black;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-                        </td>
+                        	</td>
                         </tr>
                         <tr>
-                        	<th style="text-align: center;">상세주소 <h6 style="display: inline; color : red;">*</h6></th>
-                        	<td style="padding-bottom:22px;">
+                        	<th style="text-align: center;" class="td">상세주소 <h6 style="display: inline; color : red;">*</h6></th>
+                        	<td style="padding-bottom:22px;" class="td">
                         	<input type="text" class="form-control" name="address1" id="sample6_address" placeholder="주소" style="width:300px;" required>
                        	    <input type="text" class="form-control" name="address2" id="sample6_detailAddress" placeholder="상세주소" style="width:300px; display:inline-block;" required>
                             <input type="text" class="form-control" id="sample6_extraAddress" style="width:150px; display:inline-block;" placeholder="참고항목">
@@ -182,13 +184,13 @@
                        </td>                       
                         </tr>
                         <tr>
-                            <th style="border:none;">판매자 연락처 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td style="border:none;">
+                            <th style="border:none;" class="td">판매자 연락처 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td style="border:none;" class="td">
                             </td>
                         </tr>
                         <tr>
-                            <th style="border:none; text-align: center;">이메일 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td style="border:none;">
+                            <th style="border:none; text-align: center;" class="td">이메일 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td style="border:none;" class="td">
                             	<input type="hidden" id="sellerEmail" value="${ loginUser.sellerEmail }">
                                 <input type="text" id="email1" name="email1" style="width:200px;"> @
                                 <input type="text" id="email2" name="email2" style="width:200px;">
@@ -197,8 +199,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <th style="text-align:center;">전화번호 <h6 style="display: inline; color : red;">*</h6></th>
-                            <td>
+                            <th style="text-align:center;" class="td">전화번호 <h6 style="display: inline; color : red;">*</h6></th>
+                            <td class="td">
                                 <input type="text" id="updateSellerPhone" name="updateSellerPhone" value="${ loginUser.sellerPhone }">
                             </td>
                         </tr>
@@ -216,7 +218,7 @@
 			</script>	
         </form>
     </div>    
-
+</div>
 </div>
 	<script>
 		$(function() {
