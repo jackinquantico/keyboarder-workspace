@@ -151,7 +151,7 @@ public class BoGraphController {
 
 	  		ArrayList<SalesGraph> plist = graphService.showProductImages(); 
 	  		
-	  		System.out.println(plist);
+	  		// System.out.println(plist);
 			return new Gson().toJson(plist);
 			}
 		 
