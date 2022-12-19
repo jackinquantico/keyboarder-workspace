@@ -173,7 +173,7 @@
 								<td>정산일</td>
 								<td>
 								입점사 실결제금액<br>
-								(주문금액 - 입점사 쿠폰금액)
+								(주문금액 - 쿠폰금액)
 								</td>
 								<td>주문금액</td>
 								<td>입점사 쿠폰금액</td>
@@ -308,7 +308,7 @@
 				                                <th colspan="2">현금</th>
 				                                <th>수표</th>
 				                                <th>어음</th>
-				                                <th>왜상미수금</th>
+				                                <th>외상매출금</th>
 				                                <th colspan="3" rowspan="2">이 금액을 (청구)함</th>                       
 				                            </tr>
 				                            <tr style="height : 30px;">

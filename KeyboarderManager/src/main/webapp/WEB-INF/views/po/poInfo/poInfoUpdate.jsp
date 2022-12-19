@@ -20,16 +20,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>    
     <style>
         #wrap {
-            width : 1000px;
+            width : 1100px;
             height : 900px;
-            margin-left : 300px;         
+            margin-left : 300px;        
         }
     
-        #updateContent {
-            margin-top : 10px;
-            margin-left : 30px;
-        }
-
+    	.content {
+    		width : 1100px;
+    		height : 900px;
+    		padding : 0px;
+    	}
+    	
+    	#updateContent {
+    		
+    		width : 1100px;
+    		height : 900px;
+    	}
+    
 		#poInfo {
 			margin-top : -20px;
 		}
@@ -107,24 +114,26 @@
         }
     </style>
 </head>
-<body>
+<body class="hold transition sidebar-mini">
 
    	<jsp:include page="../../common/poheader.jsp" />
 
 	<jsp:include page="../../common/posidebar.jsp" />
     
-    <div id="wrap">
+    <div id="wrap" class="content-wrapper" style="width:1100px; height: 900px;">
+	
+		<div class="content">
 
-        <form action="updateInfo.po">
-            <div id="updateContent">
+        <form action="updateInfo.po" style="width:1100px; height: 900px; margin-left:0px; min-height:900px;">
+            <div id="updateContent" class="card">
                 <div id="textAndButtons">
                     <div id="text1">판매자 정보 수정</div>
                     <div id="buttons">
                         <button type="submit" id="updateButton" name="updateButton" class="disabledBtn" disabled>수정하기</button>
-                        <button type="button" id="secessionButton" class="btn-danger">탈퇴하기</button>
+                        <button type="button" id="secessionButton" class="btn-warning">탈퇴하기</button>
                     </div>                    
                 </div>
-                <div id="poInfo">
+                <div id="poInfo" >
                     <table id="infoTable">
                         <tr>
                             <th>상호명 <h6 style="display: inline; color : red;">*</h6></th>                    
@@ -208,6 +217,7 @@
         </form>
     </div>    
 
+</div>
 	<script>
 		$(function() {
 			
