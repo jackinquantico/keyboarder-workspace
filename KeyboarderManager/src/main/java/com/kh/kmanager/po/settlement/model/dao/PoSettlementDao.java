@@ -74,4 +74,8 @@ public class PoSettlementDao {
 		return result;
 	}
 
+	public ArrayList<PoOrder> excelDownloadSettlementDetail(SqlSessionTemplate sqlSession, PoOrder o) {
+		return (ArrayList)sqlSession.selectList("poorderMapper.excelDownloadSettlementDetail", o);
+	}
+
 }

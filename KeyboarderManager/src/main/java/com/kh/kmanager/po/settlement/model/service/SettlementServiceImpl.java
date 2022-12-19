@@ -123,6 +123,14 @@ public class SettlementServiceImpl implements SettlementService {
 	public ArrayList<Settlement> selectCommissionList_Option(HashMap<String, String> option) {
 		return settlementDao.selectCommissionList_Option(sqlSession, option);
 	}
+
+	/**
+	 * PO 정산 상세내역 엑셀 다운로드- 나성진
+	 */
+	@Override
+	public ArrayList<PoOrder> excelDownloadSettlementDetail(PoOrder o) {
+		return settlementDao.excelDownloadSettlementDetail(sqlSession, o);
+	}
 	
 
 	

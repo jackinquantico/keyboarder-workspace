@@ -1,8 +1,11 @@
 package com.kh.kmanager.po.settlement.controller;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +25,7 @@ import com.kh.kmanager.member.model.vo.Member;
 import com.kh.kmanager.po.order.model.service.JKW_OrderService;
 import com.kh.kmanager.po.order.model.vo.PoOrder;
 import com.kh.kmanager.po.settlement.model.service.SettlementService;
+import com.kh.kmanager.po.settlement.model.vo.Settlement;
 import com.kh.kmanager.po.settlement.model.vo.Withdraw;
 
 @Controller
@@ -127,6 +131,168 @@ public class SCY_SettlementController {
         response.setContentType("Application/Msexcel");
         response.setHeader("Content-Disposition", "ATTachment; Filename=" 
         		+ URLEncoder.encode(wlist.get(0).getSellerName() + "_K-Money_출금신청내역" + w.getStartDate() + "_" + w.getEndDate(), "UTF-8") + ".xls");
+        
+	    OutputStream fileOut  = response.getOutputStream();
+	    objWorkBook.write(fileOut);
+	    fileOut.close();
+	
+	    response.getOutputStream().flush();
+	    response.getOutputStream().close();
+	}
+	
+	//정산 내역 상세보기 전체 엑셀 다운로드_성진
+	@RequestMapping("excelDownload.sDetail")
+	public void excelDownloadSettlementDetail(HttpSession session, PoOrder o, Model model, HttpServletResponse response) throws IOException {
+		
+		int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		o.setSellerNo(sellerNo);
+		String sellerName= ((Member)session.getAttribute("loginUser")).getSellerName();
+	
+		ArrayList<PoOrder> list = settlementService.excelDownloadSettlementDetail(o);
+		      
+     // 셀 생성
+	    HSSFWorkbook objWorkBook = new HSSFWorkbook();
+        HSSFSheet objSheet = null;
+        HSSFRow objRow = null;
+        HSSFCell objCell = null;
+        
+        // 제목 폰트
+        HSSFFont font = objWorkBook.createFont();
+        font.setFontHeightInPoints((short)10);
+        font.setFontName("맑은 고딕");
+        
+        //제목 스타일에 폰트 적용, 정렬</span>
+        HSSFCellStyle styleHd = objWorkBook.createCellStyle(); // 제목 스타일
+        styleHd.setFont(font);
+        
+        objSheet = objWorkBook.createSheet(o.getStartDate() + " ~ " + o.getEndDate() + "정산상세내역"); // 워크 시트 생성
+        
+        // Header
+        objRow = objSheet.createRow(0);
+        objRow.setHeight ((short)0x150);
+        
+        objCell = objRow.createCell(0);
+        objCell.setCellValue("구분");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(1);
+        objCell.setCellValue("취소여부");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(2);
+        objCell.setCellValue("매출일");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(3);
+        objCell.setCellValue("주문번호");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(4);
+        objCell.setCellValue("주문자");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(5);
+        objCell.setCellValue("상품번호");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(6);
+        objCell.setCellValue("상품명");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(7);
+        objCell.setCellValue("판매단가");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(8);
+        objCell.setCellValue("할인쿠폰");
+        objCell.setCellStyle(styleHd);
+        
+        objCell = objRow.createCell(9);
+        objCell.setCellValue("수수료");
+        objCell.setCellStyle(styleHd);
+        
+      //body
+        for(int i=0; i<list.size(); i++) {
+        	 objRow = objSheet.createRow(i + 1);
+ 	        objRow.setHeight ((short)0x150);
+ 	        	
+         	int count = 0;
+         	
+         	String orderStatus="";
+         	
+         	switch(list.get(i).getOrderStatus()) {
+         	
+         	case "1" : orderStatus= "배송중"; 	break;
+         	case "2" : orderStatus= "배송완료"; 	break;
+         	case "3" :orderStatus= "구매확정"; 	break;
+         	case "4" :orderStatus= "환불"; 		break;
+         	}
+         	
+         	// 구분
+         	objCell = objRow.createCell(count);
+	        objCell.setCellValue(orderStatus);
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        
+	        // 취소여부
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(orderStatus);
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 매출일
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getOrderDate());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 주문번호
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getOrderNo());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 주문자
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getConName());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 상품번호
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getProductNo());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 상품명
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getProductName());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 판매단가
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getPrice());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 할인쿠폰
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getCouponPrice());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+	        
+	        // 수수료
+	        objCell = objRow.createCell(count);
+	        objCell.setCellValue(list.get(i).getCommition());
+	        objCell.setCellStyle(styleHd);
+	        count++;
+        }
+        
+        response.setContentType("Application/Msexcel");
+        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
+        		+ URLEncoder.encode(sellerName + "_정산상세내역" + o.getStartDate() + "_" + o.getEndDate(), "UTF-8") + ".xls");
         
 	    OutputStream fileOut  = response.getOutputStream();
 	    objWorkBook.write(fileOut);

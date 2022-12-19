@@ -268,7 +268,6 @@ public class NSJ_CouponController {
 
 			return mv;
 		
-			
-		}
+	}
 }
 

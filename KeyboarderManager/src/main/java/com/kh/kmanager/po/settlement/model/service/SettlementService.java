@@ -47,4 +47,7 @@ public interface SettlementService {
 	
 	// PO 수수료 내역 조회기간 옵션 조회 - 백성현
 	ArrayList<Settlement> selectCommissionList_Option(HashMap<String, String> option);
+
+	//정산내역 상세조회 엑셀다운로드(성진)
+	public ArrayList<PoOrder> excelDownloadSettlementDetail(PoOrder o);
 }
