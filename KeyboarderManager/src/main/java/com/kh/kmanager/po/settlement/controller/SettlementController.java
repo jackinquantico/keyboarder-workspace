@@ -411,6 +411,8 @@ public class SettlementController {
 		@RequestMapping("excelDownloadSearch.se")
 		public void excelSearchDownloadSettlement(HttpSession session, Model model, HttpServletResponse response, String searchSettleDate) throws IOException {
 			int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+			String sellerName = ((Member)session.getAttribute("loginUser")).getSellerName();
+			
 			String searchDate =  searchSettleDate+"-01";
 			Settlement set = new Settlement();
 			set.setSellerNo(sellerNo);
@@ -548,7 +550,7 @@ public class SettlementController {
 	        
 	        response.setContentType("Application/Msexcel");
 	        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
-	        				+ URLEncoder.encode("정산내역기간별조회", "UTF-8") + ".xls");
+	        				+ URLEncoder.encode(sellerName +"정산내역기간별조회", "UTF-8") + ".xls");
 		 
 	        OutputStream fileOut  = response.getOutputStream();
 		    objWorkBook.write(fileOut);

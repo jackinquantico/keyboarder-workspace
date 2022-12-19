@@ -256,6 +256,7 @@ public class PoOrderController {
 	 @RequestMapping("excelDownloadSearch.po")
 	 public void excelSearchDownload(HttpSession session, Model model, HttpServletResponse response, String searchDecisionDate) throws IOException {
 		 int sellerNo = ((Member)session.getAttribute("loginUser")).getSellerNo();
+		 String sellerName = ((Member)session.getAttribute("loginUser")).getSellerName();
 		 String searchDate =  searchDecisionDate+"-01";
 		 PoOrder poOrder = new PoOrder();
 		 poOrder.setSellerNo(sellerNo);
@@ -330,8 +331,12 @@ public class PoOrderController {
 		        count++;
 		        
 		        // 구매확정일
+		        Date d = list.get(i).getSettleDate();
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		        String prevD = sdf.format(d);
+		        
 		        objCell = objRow.createCell(count);
-		        objCell.setCellValue(list.get(i).getSettleDate());
+		        objCell.setCellValue(prevD);
 		        objCell.setCellStyle(styleHd);
 		        count++;
 		        
@@ -374,7 +379,7 @@ public class PoOrderController {
 	        
 	        response.setContentType("Application/Msexcel");
 	        response.setHeader("Content-Disposition", "ATTachment; Filename=" 
-	        				+ URLEncoder.encode("기간별구매확정내역", "UTF-8") + ".xls");
+	        				+ URLEncoder.encode(sellerName +"구매확정내역", "UTF-8") + ".xls");
 		 
 	        OutputStream fileOut  = response.getOutputStream();
 		    objWorkBook.write(fileOut);
