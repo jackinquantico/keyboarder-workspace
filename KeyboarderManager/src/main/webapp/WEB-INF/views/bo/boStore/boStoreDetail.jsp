@@ -90,7 +90,7 @@
 							src="http://tourbiz.spectory.net/src/images/noImg.gif" />
 						</c:when>
 						<c:otherwise>
-							<img width="95%" height="95%"  src="${ s.logoAttachment }" />
+							<img width="95%" height="95%"  src="resources/images/${ s.logoAttachment }" />
 						</c:otherwise>
 					</c:choose>
 				</div>
