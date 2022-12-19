@@ -98,7 +98,7 @@ input[type=date] {
       
     <div align="center"> 
         <button type="button" onclick="reset();" class="btn btn-outline-secondary">초기화</button>&nbsp;
-        <button type="button" onclick="searchCoupon();" class="btn btn-secondary">조회</button>
+        <button type="button" onclick="return searchCoupon();" class="btn btn-secondary">조회</button>
     </div>
 </div> <!-- /#searchArea -->
 
@@ -184,74 +184,151 @@ function searchCoupon() {
 	
 	if ($("#select option:selected").val() == 1) {
 		
-		$.ajax({
-			url: "ableCoupon.bo",
-			data: {
-				startDate: $("#startDate").val(),
-				endDate: $("#endDate").val()
-			},
-			success: function(result) {
-				
-				var resultStr = "";
-				
-				// 조회된 arraylist 반복문돌려서 출력
-				for (var i=0; i<result.length; i++) {
-					resultStr += "<tr>"
-									+ "<td>" + '<a href="couponDetail.bo?cno=' + result[i].couponNo + '">' + result[i].couponNo + "</a></td>"
-									+ "<td>" + result[i].couponName + "</td>"
-									+ "<td>키보더쿠폰</td>"
-									+ "<td>" + result[i].couponPrice + "</td>"
-									+ "<td>" + result[i].productName + "</td>"
-									+ "<td>" + result[i].couponStmt + "</td>"
-									+ "<td>" + result[i].createDate + "</td>"
-									+ "<td>" + result[i].dueDate + "</td>"
-							   + "</tr>";
+		if ($("#startDate").val() == "" || $("#endDate").val() == "") {
+			$.ajax({
+				url: "ableCoupon.bo",
+				success: function(result) {
+					
+					var resultStr = "";
+					
+					// 조회된 arraylist 반복문돌려서 출력
+					for (var i=0; i<result.length; i++) {
+						resultStr += "<tr>"
+										+ "<td>" + '<a href="couponDetail.bo?cno=' + result[i].couponNo + '">' + result[i].couponNo + "</a></td>"
+										+ "<td>" + result[i].couponName + "</td>"
+										+ "<td>키보더쿠폰</td>"
+										+ "<td>" + result[i].couponPrice + "</td>"
+										+ "<td>" + result[i].productName + "</td>"
+										+ "<td>" + result[i].couponStmt + "</td>"
+										+ "<td>" + result[i].createDate + "</td>"
+										+ "<td>" + result[i].dueDate + "</td>"
+								   + "</tr>";
+					}
+					
+					$("#couponList").html(resultStr);
+				},
+				error: function() {
+					console.log("ableCoupon 실패");
 				}
-				
-				$("#couponList").html(resultStr);
-			},
-			error: function() {
-				console.log("ableCoupon 실패");
-			}
-		});
+			});
+		} else {
+	
+			$.ajax({
+				url: "ableCoupon.bo",
+				data: {
+					startDate: $("#startDate").val(),
+					endDate: $("#endDate").val()
+				},
+				success: function(result) {
+					
+					var resultStr = "";
+					
+					// 조회된 arraylist 반복문돌려서 출력
+					for (var i=0; i<result.length; i++) {
+						resultStr += "<tr>"
+										+ "<td>" + '<a href="couponDetail.bo?cno=' + result[i].couponNo + '">' + result[i].couponNo + "</a></td>"
+										+ "<td>" + result[i].couponName + "</td>"
+										+ "<td>키보더쿠폰</td>"
+										+ "<td>" + result[i].couponPrice + "</td>"
+										+ "<td>" + result[i].productName + "</td>"
+										+ "<td>" + result[i].couponStmt + "</td>"
+										+ "<td>" + result[i].createDate + "</td>"
+										+ "<td>" + result[i].dueDate + "</td>"
+								   + "</tr>";
+					}
+					
+					$("#couponList").html(resultStr);
+				},
+				error: function() {
+					console.log("ableCoupon 실패");
+				}
+			});
+		}
+		
 		
 	} else if ($("#select option:selected").val() == 2) {
 
-		$.ajax({
-			url: "expireCoupon.bo",
-			data: {
-				startDate: $("#startDate").val(),
-				endDate: $("#endDate").val()
-			},
-			success: function(result) {
-				var resultStr = "";
-				
-				// 조회된 arraylist 반복문돌려서 출력
-				for (var i=0; i<result.length; i++) {
-					resultStr += "<tr>"
-									+ "<td>" + result[i].couponNo + "</td>"
-									+ "<td>" + result[i].couponName + "</td>"
-									+ "<td>키보더쿠폰</td>"
-									+ "<td>" + result[i].couponPrice + "</td>"
-									+ "<td>" + result[i].productName + "</td>"
-									+ "<td>" + result[i].couponStmt + "</td>"
-									+ "<td>" + result[i].createDate + "</td>"
-									+ "<td>" + result[i].dueDate + "</td>"
-							   + "</tr>";
+		if ($("#startDate").val() == "" || $("#endDate").val() == "") {
+			$.ajax({
+				url: "expireCoupon.bo",
+				success: function(result) {
+					var resultStr = "";
+					
+					// 조회된 arraylist 반복문돌려서 출력
+					for (var i=0; i<result.length; i++) {
+						resultStr += "<tr>"
+										+ "<td>" + result[i].couponNo + "</td>"
+										+ "<td>" + result[i].couponName + "</td>"
+										+ "<td>키보더쿠폰</td>"
+										+ "<td>" + result[i].couponPrice + "</td>"
+										+ "<td>" + result[i].productName + "</td>"
+										+ "<td>" + result[i].couponStmt + "</td>"
+										+ "<td>" + result[i].createDate + "</td>"
+										+ "<td>" + result[i].dueDate + "</td>"
+								   + "</tr>";
+					}
+					
+					$("#couponList").html(resultStr);
+				},
+				error: function() {
+					console.log("expireCoupon 실패");
 				}
-				
-				$("#couponList").html(resultStr);
-			},
-			error: function() {
-				console.log("expireCoupon 실패");
-			}
-		});
+			});
+		} else {
+		
+			$.ajax({
+				url: "expireCoupon.bo",
+				data: {
+					startDate: $("#startDate").val(),
+					endDate: $("#endDate").val()
+				},
+				success: function(result) {
+					var resultStr = "";
+					
+					// 조회된 arraylist 반복문돌려서 출력
+					for (var i=0; i<result.length; i++) {
+						resultStr += "<tr>"
+										+ "<td>" + result[i].couponNo + "</td>"
+										+ "<td>" + result[i].couponName + "</td>"
+										+ "<td>키보더쿠폰</td>"
+										+ "<td>" + result[i].couponPrice + "</td>"
+										+ "<td>" + result[i].productName + "</td>"
+										+ "<td>" + result[i].couponStmt + "</td>"
+										+ "<td>" + result[i].createDate + "</td>"
+										+ "<td>" + result[i].dueDate + "</td>"
+								   + "</tr>";
+					}
+					
+					$("#couponList").html(resultStr);
+				},
+				error: function() {
+					console.log("expireCoupon 실패");
+				}
+			});
+			
+		}
 	} else {
 		
 		loadList();
 	}
 }
 
+/* 
+function dateHandler() {
+	
+	if ($("#startDate").val() > $("#endDate").val()) {
+		alert("검색 기간이 잘못되었습니다.");
+		
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var day = date.getDate();
+		
+		$("#endDate").val(year + "-" + month + "-" + day);
+		
+		// return false;
+	}
+} */
 
 $(function() {
 	loadList();
