@@ -126,33 +126,71 @@
 			<form id="searchSettlementForm" action="searchSettlement.bo">
 				<div id="searchConditions" class="card">
 					<table id="conditionTable">
-						<tr>
-							<td width="15%"><div id="searchCondition1" style="margin-left : 20px;">입점사</div></td>
-							<td width="35%">
-								<div id="searchCondition2" style="padding-right : 20px; width:100%;">
-									<select id="sellerList" name="seller" class="form-control">
-										<option value="allStore">전체</option>
-										<c:forEach var="sl" items="${ sellerList }">
-											<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
-										</c:forEach>
-									</select>							
-								</div>							
-							</td>
-							<td width="50%">
-								<input type="submit" id="searchButton" value="조회" class="btn btn-secondary">
-							</td>
-						</tr>
-						<tr>					
-							<td><div id="searchCondition3" style="margin-left : 20px;">정산년월</div></td>
-							<td>
-								<div id="searchCondition4" style="margin-right : 20px;">
-									<input type="month" id="settleDate" name="searchSettlementDate" class="form-control">
-								</div>							
-							</td>
-							<td>
-								<input type="button" id="resetButton" value="초기화" class="btn btn-outline-secondary">
-							</td>
-						</tr>
+						<c:choose>
+							<c:when test="${ not empty searchCondition }">
+								<tr>							
+									<td width="15%">
+									<input type="hidden" id="TFCondition" value="notEmptyCondition">
+									<input type="hidden" id="conditionName" value="${ searchCondition.sellerName }">
+									<input type="hidden" id="conditionDate1" value="${ searchCondition.settleDate }">	
+									<div id="searchCondition1" style="margin-left : 20px;">입점사</div>
+									</td>
+									<td width="35%">
+										<div id="searchCondition2" style="padding-right : 20px; width:100%;">
+											<select id="sellerList" name="seller" class="form-control">
+												<option value="allStore">전체</option>
+												<c:forEach var="sl" items="${ sellerList }">
+													<option id="${ sl.sellerName }" value="${ sl.sellerName }">${ sl.sellerName }</option> 
+												</c:forEach>
+											</select>							
+										</div>							
+									</td>
+									<td width="50%">
+										<input type="submit" id="searchButton" value="조회" class="btn btn-secondary">
+									</td>
+								</tr>
+								<tr>					
+									<td><div id="searchCondition3" style="margin-left : 20px;">정산년월</div></td>
+									<td>
+										<div id="searchCondition4" style="margin-right : 20px;">
+											<input type="month" id="settleDate" name="searchSettlementDate" class="form-control">
+										</div>							
+									</td>
+									<td>
+										<a href="resetCommitionSales.bo"><input type="button" id="resetButton" value="초기화" class="btn btn-outline-secondary"></a>
+									</td>
+								</tr>							
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td width="15%"><div id="searchCondition1" style="margin-left : 20px;">입점사</div></td>
+									<td width="35%">
+										<div id="searchCondition2" style="padding-right : 20px; width:100%;">
+											<select id="sellerList" name="seller" class="form-control">
+												<option value="allStore">전체</option>
+												<c:forEach var="sl" items="${ sellerList }">
+													<option value="${ sl.sellerName }">${ sl.sellerName }</option> 
+												</c:forEach>
+											</select>							
+										</div>							
+									</td>
+									<td width="50%">
+										<input type="submit" id="searchButton" value="조회" class="btn btn-secondary">
+									</td>
+								</tr>
+								<tr>					
+									<td><div id="searchCondition3" style="margin-left : 20px;">정산년월</div></td>
+									<td>
+										<div id="searchCondition4" style="margin-right : 20px;">
+											<input type="month" id="settleDate" name="searchSettlementDate" class="form-control">
+										</div>							
+									</td>
+									<td>
+										<a href="commitionSales.bo"><input type="button" id="resetButton" value="초기화" class="btn btn-outline-secondary"></a>
+									</td>
+								</tr>							
+							</c:otherwise>
+						</c:choose>
 					</table>																	
 				</div>					
 			</form>
@@ -386,10 +424,29 @@
 			});
 		});
 		
+		// 검색 결과 유지
+		var TFCondition = $("#TFCondition").val();
 		
-
-		
-		
+		if(TFCondition == "notEmptyCondition") {
+			
+			var conditionName = $("#conditionName").val();
+			var conditionDate1 = $("#conditionDate1").val();
+			
+			document.getElementById(conditionName).selected = true;
+			document.getElementById("settleDate").value = conditionDate1.substr(0, 7);
+			
+		} else {
+			
+			// 지정한 날짜를 알맞은 형식으로 보내도록
+			var date = new Date();
+			
+			String(date);
+			
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			
+			document.getElementById("settleDate").value = year + "-" + month;
+		}		
 		
 		// 검색 결과 입점사명, 조회 기간 기본값으로 설정
 		/*
@@ -426,8 +483,6 @@
 			
 			location.href="commitionSales.bo";
 		});
-		
-		
 		
 	});
 
