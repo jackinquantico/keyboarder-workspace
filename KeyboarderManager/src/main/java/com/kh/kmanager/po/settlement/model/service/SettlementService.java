@@ -43,5 +43,8 @@ public interface SettlementService {
 	ArrayList<Settlement> searchSettleExcelList(Settlement set);
 	
 	// PO 수수료 내역 조회 - 백성현
-	Settlement selectCommissionList(HashMap<String, String> optionDefault); 
+	Settlement selectCommissionList(HashMap<String, String> optionDefault);
+	
+	// PO 수수료 내역 조회기간 옵션 조회 - 백성현
+	ArrayList<Settlement> selectCommissionList_Option(HashMap<String, String> option);
 }

@@ -29,4 +29,11 @@ public class Order {
 	private int poCouponPrice; // 조인한 스토어발행 쿠폰 금액
 	private int boCouponPrice; // 조인한 키보더발행 쿠폰 금액
 	private int commission; // 수수료 금액
+	
+	public String printOrder() {
+		return "orderNo=" + this.orderNo + "/orderDate=" + this.orderDate + "/orderPrice=" + this.orderPrice + "/couponYn=" + this.couponYn + 
+				"/orderStatus=" + this.orderStatus + "/productNo=" + this.productNo + "/conNo=" + this.conNo + "/productName=" + this.productName + 
+				"/conName=" + this.conName + "/paymentBill=" + this.paymentBill + "/sellerName=" + this.sellerName + "/buyConfirmDate=" + this.buyConfirmDate + 
+				"/poCouponPrice=" + this.poCouponPrice + "/boCouponPrice=" + this.boCouponPrice + "/commission=" + this.commission;
+	}
 }

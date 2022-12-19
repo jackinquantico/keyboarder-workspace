@@ -97,6 +97,26 @@ public class SettlementController {
 	}
 	
 	/**
+	 * PO 수수료 내역 조회 페이지의 검색옵션으로 검색해주는 메소드 - 백성현
+	 * @return : ajax 데이터
+	 */
+	@ResponseBody
+	@RequestMapping(value="optionSearch_commissionList.po", produces="application/json; charset=UTF-8")
+	public String selectCommissionList_Option(HttpSession session, String currentDate, String endDate) {
+		
+		String sellerNo = Integer.toString(((Member)session.getAttribute("loginUser")).getSellerNo());
+		
+		HashMap<String, String> option = new HashMap<String, String>();
+		option.put("sellerNo", sellerNo);
+		option.put("currentDate", currentDate);
+		option.put("endDate", endDate);
+		
+		ArrayList<Settlement> list = settlementService.selectCommissionList_Option(option);
+		
+		return new Gson().toJson(list);
+	}
+	
+	/**
 	 * PO K-money 출금신청 요청 - 채영
 	 * @return
 	 */

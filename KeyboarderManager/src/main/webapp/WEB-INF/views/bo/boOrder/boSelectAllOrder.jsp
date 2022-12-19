@@ -118,7 +118,7 @@
 								<c:when test="${ not empty list }">
 									<c:forEach var="o" items="${ list }">
 										<tr>
-											<td><input type="checkbox" name="chk[]" onclick="isAllCheck(this.name, 'chkAll');" value="${ o }"></td>
+											<td><input type="checkbox" name="chk[]" onclick="isAllCheck(this.name, 'chkAll');" value="${ o.printOrder() }"></td>
 											<td>${ o.buyConfirmDate }</td>
 											<td>${ o.orderDate }</td>
 											<td>${ o.orderNo }</td>
@@ -150,10 +150,17 @@
 			function excelDownloadSubmit() {
 				
 				let test = $("#result_table>tbody input[type=checkbox]:checked");
+				let arr = [];
+
+				test.each(function() { // 각 배열의 인덱스에 들은 요소들에 반복적으로 접근 (input 자체에 접근)
+					console.log($(this).val()); // input 의 value 에 접근
+					arr.push($(this).val());
+				});
+				
 				
 				$.ajax({
 					url : "excelDownload_OrderList.bo",
-					data : {orderList:test},
+					data : {orderList:arr},
 					success : function() {
 						
 					},

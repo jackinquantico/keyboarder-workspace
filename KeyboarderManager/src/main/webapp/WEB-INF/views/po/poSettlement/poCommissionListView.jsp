@@ -34,11 +34,11 @@
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간</th>
 						<td width="10%">
-							<input type="date" class="form-control">
+							<input type="date" id="currentDate" class="form-control">
 						</td>
 						<td width="10px" style="text-align:center">&nbsp;~&nbsp;</td>
 						<td width="10%">
-							<input type="date" class="form-control">
+							<input type="date" id="endDate" class="form-control">
 						</td>
 						<td></td>
 					</tr>
@@ -47,7 +47,7 @@
 					</tr>
 					<tr>
 						<td id="option_btns" colspan="5" style="text-align:center;">
-							<input type="button" id="search_btn" value="검색" class="btn btn-secondary">&nbsp;&nbsp;&nbsp;
+							<input type="button" id="search_btn" value="검색" class="btn btn-secondary" onclick="searchFormSubmit();">&nbsp;&nbsp;&nbsp;
 							<input type="reset" id="reset_btn" onclick="resetOption();" class="btn btn-outline-secondary">
 						</td>
 					</tr>
@@ -90,6 +90,43 @@
 		function resetOption() {
 
 			$("#option_table input[type=date]").val("");
+		}
+	</script>
+	
+	<script>
+		function searchFormSubmit() {
+			
+			if($("#currentDate").val() != "" && $("#endDate").val() != "") {
+				
+				$.ajax({
+					url : "optionSearch_commissionList.po",
+					data : { currentDate : $("#currentDate").val(),
+							 endDate : $("#endDate").val(),
+						   },
+					success : function(result) {
+						
+						var resultStr = "";
+						
+						for(var i = 0; i < result.length; i++) {
+							
+							resultStr += "<tr>"
+											+ "<td>" + result[i].settleDate + "</td>"
+											+ "<td>" + (result[i].commition - result[i].keyCouponPrice) + "</td>"
+											+ "<td>" + result[i].commition + "</td>"
+											+ "<td>" + result[i].keyCouponPrice + "</td>"
+										+ "</tr>"
+						}
+						
+						$("#result_table>tbody").html(resultStr);
+					},
+					error : function() {
+						console.log("오류");
+					}
+				});
+			}
+			else {
+				alert("조회기간을 입력해주세요");	
+			}
 		}
 	</script>
 

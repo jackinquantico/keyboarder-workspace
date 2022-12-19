@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,8 +66,35 @@ public class Bo_OrderController {
 	 * @param orderList
 	 */
 	@RequestMapping("excelDownload_OrderList.bo")
-	public void excelDown_OrderList(Object orderList) {
+	public void excelDown_OrderList(HttpServletRequest request) {
 		
-		System.out.println(orderList);
+		String[] arr = request.getParameterValues("orderList[]");
+		ArrayList<Order> list = new ArrayList<>();
+
+		for(String s : arr) {
+			
+			Order o = new Order();
+			String[] prop = s.split("/");
+			o.setOrderNo(prop[0].split("=")[1]);
+			o.setOrderDate(prop[1].split("=")[1]);
+			o.setOrderPrice(Integer.parseInt(prop[2].split("=")[1]));
+			o.setCouponYn(prop[3].split("=")[1]);
+			o.setOrderStatus(prop[4].split("=")[1]);
+			o.setProductNo(Integer.parseInt(prop[5].split("=")[1]));
+			o.setConNo(Integer.parseInt(prop[6].split("=")[1]));
+			o.setProductName(prop[7].split("=")[1]);
+			o.setConName(prop[8].split("=")[1]);
+			o.setPaymentBill(Integer.parseInt(prop[9].split("=")[1]));
+			o.setSellerName(prop[10].split("=")[1]);
+			o.setBuyConfirmDate(prop[11].split("=")[1]);
+			o.setPoCouponPrice(Integer.parseInt(prop[12].split("=")[1]));
+			o.setBoCouponPrice(Integer.parseInt(prop[13].split("=")[1]));
+			o.setCommission(Integer.parseInt(prop[14].split("=")[1]));
+			
+			list.add(o);
+		}
+		
+		// 엑셀로 넣기
+		
 	}
 }

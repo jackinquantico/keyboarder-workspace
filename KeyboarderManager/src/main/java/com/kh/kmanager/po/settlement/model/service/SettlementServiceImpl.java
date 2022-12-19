@@ -115,6 +115,14 @@ public class SettlementServiceImpl implements SettlementService {
 		
 		return result;
 	}
+
+	/**
+	 * PO 수수료 내역 옵션 조회 - 백성현
+	 */
+	@Override
+	public ArrayList<Settlement> selectCommissionList_Option(HashMap<String, String> option) {
+		return settlementDao.selectCommissionList_Option(sqlSession, option);
+	}
 	
 
 	

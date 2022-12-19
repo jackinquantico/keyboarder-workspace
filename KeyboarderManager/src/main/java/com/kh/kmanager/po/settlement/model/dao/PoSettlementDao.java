@@ -58,6 +58,10 @@ public class PoSettlementDao {
 		return sqlSession.selectOne("settlementMapper.selectCommissionList", optionDefault);
 	}
 	
+	public ArrayList<Settlement> selectCommissionList_Option(SqlSessionTemplate sqlSession, HashMap<String, String> option) {
+		return (ArrayList)sqlSession.selectList("settlementMapper.selectCommissionList_Option", option);
+	}
+	
 	public ArrayList<Settlement> selectElectronicList(SqlSessionTemplate sqlSession, int selNo) {
 		
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
