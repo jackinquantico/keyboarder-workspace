@@ -17,6 +17,10 @@ td{
 	
 	padding:20px;
 }
+#productGraph {
+	width: 350px;
+	height: 750px;
+}
 
 </style>
 </head>
@@ -42,52 +46,40 @@ td{
 	<div class="content">
 
 		<div id="btm-content" class="card">
-			<div class="card-body">
-			<div id="top_product" style="float:left;">			
-										<table>
-				
-										<tr>
-									<td>
-					<canvas id="productGraph" width="350" height="730" style="margin-right:100px;"></canvas>
-								</td>
-							<td>
-						<table>
-				<c:forEach var="p" items="${ plist }"> 
-						<tr>
-							<td>
-						셀러명: 
-							</td>
-							<td>${p.sellerName}
-							</td>
-							</tr>
-							<tr>
-							<td>
-						상품명: 
-							</td>
-							<td>${p.productName}
-							</td>
-							</tr>
-							<tr>
-							<td>
-						상품가격: 
-							</td>
-							<td>${p.price}
-							</td>
-							</tr>
-							<tr><td></td><td></td></tr>
-						</c:forEach>
+			<div class="card-body" style="width: 100%;">
+			<div id="top_product" style="width: 100%;">			
+				<table style="width: 100%;">
+					<tr>
+						<td width="50%">
+							<canvas id="productGraph" width="350px" height="730px"></canvas>
+						</td>
+						<td width="50%">
+							<table>
+								<c:forEach var="p" items="${ plist }"> 
+									<tr>
+										<td>셀러명:</td>
+										<td>${p.sellerName}</td>
+									</tr>
+									<tr>
+										<td>상품명:</td>
+										<td>${p.productName}</td>
+									</tr>
+									<tr>
+										<td>상품가격:</td>
+										<td>${p.price}</td>
+									</tr>
+									<tr><td></td><td></td></tr>
+								</c:forEach>
 							</table>	
-		
-							</td>
-						</table>	
+						</td>
+					</table>	
+				</div>	
+			</div>	
+<!-- <div id="left-status" style="width:35%; margin-left: 50px;">
 	
-		</div>	
-		</div>	
-<div id="left-status" style="width:35%; margin-left: 50px;">
-	
-	<!-- <canvas id="productGraph" style="display: block; height: 100%; width: 100%;" class="chartjs-render-monitor"></canvas> -->
-</div>
-		</div>
+	<canvas id="productGraph" style="display: block; height: 100%; width: 100%;" class="chartjs-render-monitor"></canvas>
+</div> -->
+	</div>
 	<script>
 	
 	// console.log("${plist}");
