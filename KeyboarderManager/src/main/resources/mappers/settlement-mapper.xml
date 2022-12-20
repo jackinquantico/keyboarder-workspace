@@ -226,16 +226,14 @@
 	</select>
 	
 	<select id="selectCommissionList" parameterType="hashmap" resultMap="commissionResultSet">
-		SELECT DISTINCT TO_CHAR(SETTLE_DATE, 'YYYY-MM') "MONTHLY"
-		              , SUM(S.COMMITION) "MONTHLY_COMMITION"
+		SELECT DISTINCT SUM(S.COMMITION) "MONTHLY_COMMITION"
 		              , SUM(C_KEY.COUPON_PRICE) "MONTHLY_DISCOUNT"
 		  FROM SETTLEMENT S
 		  JOIN ORDERS O ON (S.ORDER_NO = O.ORDER_NO)
 		  LEFT JOIN KEYBOARDER_USE KEY_U ON (KEY_U.ORDER_NO = O.ORDER_NO)
 		  LEFT JOIN COUPON_KEYBOARDER C_KEY ON (C_KEY.COUPON_NO = KEY_U.COUPON_NO)
 		 WHERE S.SELLER_NO = #{sellerNo}
-		   AND TO_CHAR(SETTLE_DATE, 'YYYY-MM') = #{nowMonth}
-		 GROUP BY TO_CHAR(SETTLE_DATE, 'YYYY-MM')
+		   AND TO_CHAR(SETTLE_DATE, 'YYYY-MM') = #{lastMonth}
 	</select>
 	
 	<select id="selectCommissionList_Option" parameterType="hashmap" resultMap="commissionResultSet">
@@ -248,7 +246,7 @@
 		  LEFT JOIN COUPON_KEYBOARDER C_KEY ON (C_KEY.COUPON_NO = KEY_U.COUPON_NO)
 		 WHERE S.SELLER_NO = #{sellerNo}
 		   AND TO_DATE(TO_CHAR(SETTLE_DATE, 'YYYY-MM'), 'YYYY-MM')
-		       BETWEEN TO_DATE(#{currentDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+		       BETWEEN TO_DATE(#{currentMonth}, 'YYYY-MM') AND TO_DATE(#{endMonth}, 'YYYY-MM')
 		 GROUP BY TO_CHAR(SETTLE_DATE, 'YYYY-MM')
 		 ORDER BY MONTHLY DESC
 	</select>

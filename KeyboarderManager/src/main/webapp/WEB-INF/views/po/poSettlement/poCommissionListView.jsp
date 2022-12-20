@@ -34,11 +34,11 @@
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간</th>
 						<td width="10%">
-							<input type="date" id="currentDate" class="form-control">
+							<input type="month" id="currentMonth" class="form-control">
 						</td>
 						<td width="10px" style="text-align:center">&nbsp;~&nbsp;</td>
 						<td width="10%">
-							<input type="date" id="endDate" class="form-control">
+							<input type="month" id="endMonth" class="form-control">
 						</td>
 						<td></td>
 					</tr>
@@ -73,7 +73,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>${ commission.settleDate }</td>
+								<td>${ lastMonth }</td>
 								<td>${ commission.commition - commission.keyCouponPrice }</td>
 								<td>${ commission.commition }</td>
 								<td>${ commission.keyCouponPrice }</td>
@@ -89,40 +89,49 @@
 	<script>
 		function resetOption() {
 
-			$("#option_table input[type=date]").val("");
+			$("#option_table input[type=month]").val("");
 		}
 	</script>
 	
 	<script>
+		var today = new Date();
+		var today_str = today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2);
+	
 		function searchFormSubmit() {
 			
-			if($("#currentDate").val() != "" && $("#endDate").val() != "") {
+			if($("#currentMonth").val() != "" && $("#endMonth").val() != "") {
 				
-				$.ajax({
-					url : "optionSearch_commissionList.po",
-					data : { currentDate : $("#currentDate").val(),
-							 endDate : $("#endDate").val(),
-						   },
-					success : function(result) {
-						
-						var resultStr = "";
-						
-						for(var i = 0; i < result.length; i++) {
+				if($("#currentMonth").val() == today_str || $("#endMonth").val() == today_str) {
+					
+					alert("이번달 수수료 내역은 조회 불가합니다");
+				} else {
+					
+					$.ajax({
+						url : "optionSearch_commissionList.po",
+						data : { currentMonth : $("#currentMonth").val(),
+								 endMonth : $("#endMonth").val(),
+							   },
+						success : function(result) {
 							
-							resultStr += "<tr>"
-											+ "<td>" + result[i].settleDate + "</td>"
-											+ "<td>" + (result[i].commition - result[i].keyCouponPrice) + "</td>"
-											+ "<td>" + result[i].commition + "</td>"
-											+ "<td>" + result[i].keyCouponPrice + "</td>"
-										+ "</tr>"
+							var resultStr = "";
+							
+							for(var i = 0; i < result.length; i++) {
+								
+								resultStr += "<tr>"
+												+ "<td>" + result[i].settleDate + "</td>"
+												+ "<td>" + (result[i].commition - result[i].keyCouponPrice) + "</td>"
+												+ "<td>" + result[i].commition + "</td>"
+												+ "<td>" + result[i].keyCouponPrice + "</td>"
+											+ "</tr>"
+							}
+							
+							$("#result_table>tbody").html(resultStr);
+						},
+						error : function() {
+							console.log("오류");
 						}
-						
-						$("#result_table>tbody").html(resultStr);
-					},
-					error : function() {
-						console.log("오류");
-					}
-				});
+					});
+				}
 			}
 			else {
 				alert("조회기간을 입력해주세요");	

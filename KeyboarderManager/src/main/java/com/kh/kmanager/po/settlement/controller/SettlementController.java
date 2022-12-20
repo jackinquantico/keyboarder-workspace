@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -82,22 +83,26 @@ public class SettlementController {
 	
 	
 	/**
-	 * PO 수수료 내역 조회 페이지로 단순이동 처리를 해주는 메소드 - 백성현
+	 * PO 수수료 내역 조회 페이지로 단순이동 처리 및 직전 월의 수수료내역 합계 조회 해주는 메소드 - 백성현
 	 * @return : PO 수수료 내역 조회 페이지 이동
 	 */
 	@RequestMapping("commissionList.po")
 	public String selectCommissionList(HttpSession session, Model model) {
 		
 		String sellerNo = Integer.toString(((Member)session.getAttribute("loginUser")).getSellerNo());
-		String nowMonth = new SimpleDateFormat("yyyy-MM").format(new Date());
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		String lastMonth = new SimpleDateFormat("yyyy-MM").format(cal.getTime());
 		
 		HashMap<String, String> optionDefault = new HashMap<String, String>();
 		optionDefault.put("sellerNo", sellerNo);
-		optionDefault.put("nowMonth", nowMonth);
+		optionDefault.put("lastMonth", lastMonth);
 		
 		Settlement commission = settlementService.selectCommissionList(optionDefault);
 		
 		model.addAttribute("commission", commission);
+		model.addAttribute("lastMonth", lastMonth);
 		
 		return "po/poSettlement/poCommissionListView";
 	}
@@ -108,14 +113,14 @@ public class SettlementController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="optionSearch_commissionList.po", produces="application/json; charset=UTF-8")
-	public String selectCommissionList_Option(HttpSession session, String currentDate, String endDate) {
+	public String selectCommissionList_Option(HttpSession session, String currentMonth, String endMonth) {
 		
 		String sellerNo = Integer.toString(((Member)session.getAttribute("loginUser")).getSellerNo());
 		
 		HashMap<String, String> option = new HashMap<String, String>();
 		option.put("sellerNo", sellerNo);
-		option.put("currentDate", currentDate);
-		option.put("endDate", endDate);
+		option.put("currentMonth", currentMonth);
+		option.put("endMonth", endMonth);
 		
 		ArrayList<Settlement> list = settlementService.selectCommissionList_Option(option);
 		
