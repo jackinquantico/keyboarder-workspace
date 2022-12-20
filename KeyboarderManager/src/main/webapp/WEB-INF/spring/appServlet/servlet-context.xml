@@ -78,6 +78,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/excelDownloadSearch.se" />
 			<mapping path="/settleView.po"/>
 			<mapping path="/searchSettle.po"/>
+			<mapping path="/electronicTaxInvoice.po"/>
 			
 			<!-- BO - 쿠폰 관리 관련 페이지 -->
 			<mapping path="/coupon.bo" />
@@ -117,6 +118,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/count.pro" />
 			<mapping path="/select.pro" />
 			<mapping path="/change.pro" />
+			<mapping path="/delivery.poOrder" />
 			
 			<!--  PO BO 1:1 문의 -->
 			<mapping path="/list.iq"/>
