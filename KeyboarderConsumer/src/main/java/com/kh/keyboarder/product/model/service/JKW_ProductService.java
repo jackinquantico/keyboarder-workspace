@@ -8,11 +8,22 @@ import com.kh.keyboarder.product.model.vo.Product;
 
 public interface JKW_ProductService {
 
-	// 게시판 리스트 조회 서비스 + 페이징 처리
-	// 게시글 총 개수
+	/**
+	 * FO 상품 전체 조회 페이징 처리를 위한 상품 개수 확인
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	int selectListCount();
 	
-	// 게시글 리스트 조회
+	/**
+	 * FO 상품 전체 조회
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	ArrayList<Product> selectList(PageInfo pi);
 	
 }

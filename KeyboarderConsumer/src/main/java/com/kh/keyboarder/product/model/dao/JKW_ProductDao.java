@@ -13,11 +13,25 @@ import com.kh.keyboarder.product.model.vo.Product;
 @Repository
 public class JKW_ProductDao {
 
+	/**
+	 * FO 상품 전체 조회 페이징 처리를 위한 상품 개수 확인
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("productMapper.selectListCount");
 	}
 	
+	/**
+	 * FO 상품 전체 조회
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	public ArrayList<Product> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int limit = pi.getBoardLimit();

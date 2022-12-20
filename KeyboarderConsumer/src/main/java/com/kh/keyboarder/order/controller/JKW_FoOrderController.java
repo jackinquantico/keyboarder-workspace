@@ -19,6 +19,13 @@ public class JKW_FoOrderController {
 	@Autowired
 	private JKW_OrderService JKW_OrderService;
 	
+	/**
+	 * FO 주문내역 전체 조회
+	 * * 주멋돌
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("foTotalView.order")
 	public String foTotalView(Model model, HttpSession session) {
 		
@@ -38,6 +45,13 @@ public class JKW_FoOrderController {
 		return "order/foOrderTotalView";
 	}
 	
+	/**
+	 * FO 주문내역 월별 조회
+	 * * 주멋돌
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("foSearchDate.order")
 	public String foSearchDate(Model model, HttpSession session, String searchOrderMonth) {
 		
@@ -58,6 +72,13 @@ public class JKW_FoOrderController {
 		return "order/foOrderTotalView";
 	}
 	
+	/**
+	 * FO 주문내역 상세 조회
+	 * * 주멋돌
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("foDetailView.order")
 	public String foDetailView(Model model, String ordNo) {
 		

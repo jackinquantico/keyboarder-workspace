@@ -20,6 +20,13 @@ public class JKW_ProductController {
 	@Autowired
 	private JKW_ProductService JKW_ProductService;
 
+	/**
+	 * FO 상품 전체 조회
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("foProductNotice.pro")
 	public String foProductNotice(@RequestParam(value="cpage", defaultValue="1")int currentPage, Model model) {
 		

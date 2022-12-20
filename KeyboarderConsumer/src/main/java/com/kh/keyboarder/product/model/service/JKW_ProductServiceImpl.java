@@ -20,12 +20,26 @@ public class JKW_ProductServiceImpl implements JKW_ProductService {
 	@Autowired
 	private JKW_ProductDao JKW_ProductDao;
 	
+	/**
+	 * FO 상품 전체 조회 페이징 처리를 위한 상품 개수 확인
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	@Override
 	public int selectListCount() {
 		
 		return JKW_ProductDao.selectListCount(sqlSession);
 	}
 
+	/**
+	 * FO 상품 전체 조회
+	 * * 주멋돌
+	 * @param currentPage
+	 * @param model
+	 * @return
+	 */
 	@Override
 	public ArrayList<Product> selectList(PageInfo pi) {
 		

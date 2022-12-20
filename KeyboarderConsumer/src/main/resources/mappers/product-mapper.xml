@@ -23,12 +23,20 @@
 		<result column="K_PRODUCT_NO" property="keyProductNo" />
 	</resultMap>
 	
+	<!--
+		 FO 상품 전체 조회 페이징 처리를 위한 상품 개수 확인
+		 * 주멋돌
+	-->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM PRODUCT
 		WHERE PRODUCT_STATUS = 1
 	</select>
 	
+	<!--
+		 FO 상품 전체 조회
+		 * 주멋돌
+	-->
 	<select id="selectList" resultMap="productResultSet">
 		SELECT P.PRODUCT_NO
              , PRODUCT_NAME
