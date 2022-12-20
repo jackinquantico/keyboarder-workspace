@@ -33,7 +33,7 @@
         	margin-left: 30px;
         }
         #orderConfirmList {
-            height : 600px;
+            height : 550px;
             margin :auto; 
 	       	margin-bottom: 30px; 
 	       	font-size: 13px;

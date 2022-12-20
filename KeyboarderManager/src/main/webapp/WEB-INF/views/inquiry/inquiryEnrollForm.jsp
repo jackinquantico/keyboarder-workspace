@@ -20,7 +20,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
 .content {
-	width: 95%;
+	width: 100%;
 	margin: auto;
 }
 </style>
@@ -49,6 +49,7 @@
 <div class="content">
 	<form method="post" action="insert.iq">
     <div class="container">
+    <br><br>
       <table class="table table-hover">
         <tbody>
           <tr>

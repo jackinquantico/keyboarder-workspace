@@ -20,7 +20,7 @@
 
 	#inquiryDetail { 
 		width:95%;
-		height: 700px;
+		height: 750px;
 		overflow-y: scroll;
 		margin: auto;
 	}
