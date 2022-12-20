@@ -567,6 +567,16 @@ public class SettlementController {
 			
 		}
 		
+		/**
+		 * PO 전자세금 계산서
+		 * - 세금확인서 클릭 시 모달창 생성
+		 * * 주멋돌
+		 * @param session
+		 * @param sellerName
+		 * @param settleDate
+		 * @param commition
+		 * @return
+		 */
 		@ResponseBody
 		@RequestMapping(value="poSellerBillModal.bo")
 		public Settlement sellerBillModal(HttpSession session, String sellerName, String settleDate, int commition) {
@@ -586,6 +596,14 @@ public class SettlementController {
 			return result;		
 		}
 
+		/**
+		 * PO 전자세금 계산서
+		 * - 전자세금계산서 전체 조회
+		 * * 주멋돌
+		 * @param session
+		 * @param model
+		 * @return
+		 */
 		@RequestMapping("electronicTaxInvoice.po")
 		public String electronicTaxInvoice(HttpSession session, Model model) {
 			
@@ -640,6 +658,15 @@ public class SettlementController {
 			return "po/poSettlement/poElectronicTaxInvoice";
 		}
 		
+		/**
+		 * PO 전자세금 계산서
+		 * - 전자세금 계산서 월별 선택 조회
+		 * * 주멋돌
+		 * @param model
+		 * @param session
+		 * @param searchElectronicMonth
+		 * @return
+		 */
 		@RequestMapping("poElectronicSearchDate.settlement")
 		public String electronicTaxInvoiceSerchDate(Model model, HttpSession session, String searchElectronicMonth) {
 			
@@ -693,7 +720,6 @@ public class SettlementController {
 			model.addAttribute("dateList", dateList);
 			
 			return "po/poSettlement/poElectronicTaxInvoice";
-			
 		}
 		
 }

@@ -253,6 +253,10 @@
 		 ORDER BY MONTHLY DESC
 	</select>
 	
+	<!-- 
+		PO 전자세금 계산서 모달창 팝업
+		* 주멋돌
+	-->
 	<select id="sellerBillModal" parameterType="settlement" resultMap="modalResultSet">
 		SELECT SUM(PRICE) PRICE, CORP_NO, SELLER_NAME, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, SUM(SUPPLY_VALUE) SUPPLY_VALUE, SUM(TAX_AMOUNT) TAX_AMOUNT, TO_CHAR(SETTLE_DATE, 'yyyy-mm') SETTLE_DATE
 		FROM (SELECT  CORP_NO
@@ -274,6 +278,10 @@
         GROUP BY SELLER_NAME, CORP_NO, REP_NAME, LOCATION, SELLER_EMAIL, SELLER_PHONE, TO_CHAR(SETTLE_DATE, 'yyyy-mm')
 	</select>
 
+	<!-- 
+		PO 전자세금 계산서 전체 조회
+		* 주멋돌
+	-->
 	<select id="selectElectronicList" parameterType="_int" resultMap="settlementElectronicResultSet">
 			SELECT SETTLE_DATE
 			     , (SUM(COMMITION) - (SUM(COMMITION) / 1.1) + 1) TAX_AMOUNT
@@ -292,6 +300,10 @@
 			ORDER BY SETTLE_DATE DESC
 	</select>
 	
+	<!-- 
+		PO 전자세금 계산서 월 선택 시 해당 월 조회
+		* 주멋돌
+	-->
 	<select id="selectElectronicDateList" parameterType="settlement" resultMap="settlementElectronicResultSet">
 		SELECT SETTLE_DATE
 		     , (SUM(COMMITION) - (SUM(COMMITION) / 1.1)) + 1 TAX_AMOUNT

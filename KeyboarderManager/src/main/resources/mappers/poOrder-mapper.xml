@@ -152,6 +152,11 @@
 				ORDER BY ORDER_NO DESC
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			전체조회 배송중 개수 확인
+			* 주멋돌
+		 -->
 		<select id="orderStatus1" parameterType="_int" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -160,6 +165,11 @@
 			  AND ORDER_STATUS = '1'
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			전체조회 배송완료 개수 확인
+			* 주멋돌
+		 -->
 		<select id="orderStatus2" parameterType="_int" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -168,6 +178,11 @@
 			  AND ORDER_STATUS = '2'
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			전체조회 구매확정 개수 확인
+			* 주멋돌
+		 -->
 		<select id="orderStatus3" parameterType="_int" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -176,6 +191,11 @@
 			  AND ORDER_STATUS = '3'
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			전체조회 환불 개수 확인
+			* 주멋돌
+		 -->
 		<select id="orderStatus4" parameterType="_int" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -184,6 +204,11 @@
 			  AND ORDER_STATUS = '4'
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			전체조회 주문건수 확인
+			* 주멋돌
+		 -->
 		<select id="orderCount" parameterType="_int" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -191,6 +216,11 @@
 			WHERE SELLER_NO = #{selNo}
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			전체조회
+			* 주멋돌
+		 -->
 		<select id="orderList" parameterType="_int" resultMap="deliveryOrderResultSet">
 			SELECT DISTINCT ORD.ORDER_NO
 			     , ORD.ORDER_STATUS
@@ -218,6 +248,11 @@
 			ORDER BY ORD_ORDER_DATE DESC
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			월별 조회
+			* 주멋돌
+		 -->
 		<select id="deliverySearchDate" parameterType="poOrder" resultMap="deliveryOrderResultSet">
 			SELECT DISTINCT ORD.ORDER_NO
 			     , ORD.ORDER_STATUS
@@ -248,6 +283,11 @@
 			ORDER BY ORD_ORDER_DATE DESC
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			월별조회 배송중 개수 확인
+			* 주멋돌
+		 -->
 		<select id="dateOrderStatus1" parameterType="poOrder" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -258,6 +298,11 @@
   			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			월별조회 배송완료 개수 확인
+			* 주멋돌
+		 -->
 		<select id="dateOrderStatus2" parameterType="poOrder" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -268,6 +313,11 @@
   			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			월별조회 구매확정 개수 확인
+			* 주멋돌
+		 -->
 		<select id="dateOrderStatus3" parameterType="poOrder" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -278,6 +328,11 @@
   			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			월별조회 환불 개수 확인
+			* 주멋돌
+		 -->
 		<select id="dateOrderStatus4" parameterType="poOrder" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS
@@ -288,6 +343,11 @@
   			  AND EXTRACT (MONTH FROM ORDER_DATE) = EXTRACT(MONTH FROM TO_DATE(#{searchDate}, 'YYYY-MM-DD'))
 		</select>
 		
+		<!-- 
+			PO 배송관리 
+			월별조회 주문건수 확인
+			* 주멋돌
+		 -->
 		<select id="dateOrderCount" parameterType="poOrder" resultType="_int">
 			SELECT COUNT(*)
 			FROM ORDERS

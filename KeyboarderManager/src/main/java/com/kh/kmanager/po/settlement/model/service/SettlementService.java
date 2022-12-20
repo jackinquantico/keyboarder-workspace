@@ -33,7 +33,7 @@ public interface SettlementService {
 	// 전자세금계산서 조회 - 건우
 	ArrayList<Settlement> selectElectronicList(int selNo);
 	
-	// 전자세금계산서 모달 팝업
+	// 전자세금계산서 모달 팝업 - 건우
 	Settlement sellerBillModal(Settlement modalRequest);
 	
 	// 전자세금계산서 날짜 조회 - 건우

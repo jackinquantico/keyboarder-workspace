@@ -100,7 +100,9 @@ public class SettlementServiceImpl implements SettlementService {
 	}
 
 	/**
-	 * 전자세금계산서 조회 - 건우
+	 * PO 전자세금 계산서
+	 * 세금계산서 전체 조회
+	 * * 주멋돌 
 	 */
 	@Override
 	public ArrayList<Settlement> selectElectronicList(int selNo) {
@@ -108,6 +110,11 @@ public class SettlementServiceImpl implements SettlementService {
 		return settlementDao.selectElectronicList(sqlSession, selNo);
 	}
 	
+	/**
+	 * PO 전자세금 계산서
+	 * 세금계산서 확인 클릭 시 모달창 팝업
+	 * * 주멋돌 
+	 */
 	@Override
 	public Settlement sellerBillModal(Settlement modalRequest) {
 		
@@ -116,6 +123,11 @@ public class SettlementServiceImpl implements SettlementService {
 		return result;
 	}
 	
+	/**
+	 * PO 전자세금 계산서
+	 * 월 선택 시 해당 월 조회
+	 * * 주멋돌 
+	 */
 	@Override
 	public ArrayList<Settlement> selectElectronicDateList(Settlement settlement) {
 		

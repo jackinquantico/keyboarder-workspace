@@ -28,6 +28,13 @@ public class JKW_PoOrderController {
 	@Autowired
 	private JKW_OrderService JKW_OrderService;
 	
+	/**
+	 * PO 배송관리 전체조회
+	 * * 주멋돌
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("delivery.poOrder")
 	public String deliveryMain(Model model, HttpSession session) {
 		
@@ -62,6 +69,14 @@ public class JKW_PoOrderController {
 		return "po/poOrder/poOrderDeliveryMain";
 	}
 	
+	/**
+	 * PO 배송관리 월별 조회
+	 * * 주멋돌
+	 * @param model
+	 * @param session
+	 * @param searchDeliveryMonth
+	 * @return
+	 */
 	@RequestMapping("SearchDate.poOrder")
 	public String deliverySearchDate(Model model, HttpSession session, String searchDeliveryMonth) {
 		
@@ -98,6 +113,15 @@ public class JKW_PoOrderController {
 		return "po/poOrder/poOrderDeliveryMain";
 	}
 	
+	/**
+	 * PO 전자세금 계산서 
+	 * - 엑셀 다운로드(월 선택시 해당 월만 엑셀 다운로드)
+	 * * 주멋돌
+	 * @param response
+	 * @param model
+	 * @param session
+	 * @throws Exception
+	 */
 	@RequestMapping("excelDownload.poOrder")
 	public void excelDownload(HttpServletResponse response, Model model, HttpSession session) throws Exception {
 		

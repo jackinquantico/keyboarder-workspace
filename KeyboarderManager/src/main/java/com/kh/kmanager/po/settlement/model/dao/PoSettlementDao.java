@@ -62,11 +62,27 @@ public class PoSettlementDao {
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectCommissionList_Option", option);
 	}
 	
+	/**
+	 * PO 전자세금 계산서
+	 * 세금계산서 전체 조회
+	 * * 주멋돌 
+	 * @param sqlSession
+	 * @param selNo
+	 * @return
+	 */
 	public ArrayList<Settlement> selectElectronicList(SqlSessionTemplate sqlSession, int selNo) {
 		
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicList", selNo);
 	}
 	
+	/**
+	 * PO 전자세금 계산서
+	 * 세금계산서 확인 클릭 시 모달창 팝업
+	 * * 주멋돌 
+	 * @param sqlSession
+	 * @param modalRequest
+	 * @return
+	 */
 	public Settlement sellerBillModal(SqlSessionTemplate sqlSession, Settlement modalRequest) {
 		
 		Settlement result = sqlSession.selectOne("settlementMapper.sellerBillModal", modalRequest);
@@ -74,6 +90,14 @@ public class PoSettlementDao {
 		return result;
 	}
 	
+	/**
+	 * PO 전자세금 계산서
+	 * 월 선택 시 해당 월 조회
+	 * * 주멋돌 
+	 * @param sqlSession
+	 * @param settlement
+	 * @return
+	 */
 	public ArrayList<Settlement> selectElectronicDateList(SqlSessionTemplate sqlSession, Settlement settlement) {
 
 		return (ArrayList)sqlSession.selectList("settlementMapper.selectElectronicDateList", settlement);
