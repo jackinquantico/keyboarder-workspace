@@ -189,7 +189,6 @@ public class CWS_MemberController {
 	@RequestMapping(value="corpNoCheck.me", produces="text/html; charset=UTF-8")
 	public String corpNoCheck(String corpNo) {
 		int count = memberService.corpNoCheck(corpNo);
-		System.out.println(count);
 		return(count>0)? "NNNNN" : "NNNNY";
 	}
 	
