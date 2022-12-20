@@ -99,12 +99,13 @@
                   			상품명 : <input type="text" style="width:700px; border:none;" name="productName" value="${p.productName}"><br><Br>
                   			상품가격: <input type="text" style="width:400px; border:none;" name="price" value="${p.price}">
                   		</div>
-                  		<div style="height: 70%;">상품설명
+                  		<div style="height: 70%;">상품설명<hr>
                   		<textarea style="resize: none; width: 100%; height: 170px; border:none;" name="description" required>${p.description}</textarea></div>	
                   </td>
                  </tr>
 				<tr id="subpic">
                  <td>
+                 <br>
                   <div id="sub_items">
                        <!-- Product image-->
                        <img class="card-img-top" id="img2"

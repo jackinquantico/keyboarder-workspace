@@ -213,7 +213,7 @@ public class NSJ_ProductController {
 			}
 		}
 
-		System.out.println(p);
+
 		int result = productService.insertProduct(p);
 		System.out.println(result);
 		if (result > 0) {

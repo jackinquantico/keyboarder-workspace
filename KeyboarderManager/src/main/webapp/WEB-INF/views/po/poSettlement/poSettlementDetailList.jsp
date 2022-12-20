@@ -89,7 +89,7 @@ height:500px;
 		           <th rowspan="2">정산확정금액</th>
 		        </tr>
 		
-		        <tr>
+		        <tr align="center">
 		           <th>KEYBOAR-DER쿠폰</th>
 		           <th>업체쿠폰</th>
 		           <th>판매수수료</th>
@@ -141,16 +141,16 @@ height:500px;
 				
 			<c:forEach var="o" items="${list}">
 				<tr>
-				    <td>${o.orderStatus==3?"구매확정" : "미확정"}</td>
-				    <td>${o.orderStatus==3?"구매확정" : "미확정"}</td>
-				    <td>${o.orderDate}</td>
-				    <td>${o.orderNo}</td>
-				    <td>${o.conName}</td>
-				    <td>${o.productNo}</td>
+				    <td align="center">${o.orderStatus==3?"구매확정" : "미확정"}</td>
+				    <td align="center">${o.orderStatus==3?"구매확정" : "미확정"}</td>
+				    <td align="center">${o.orderDate}</td>
+				    <td align="center">${o.orderNo}</td>
+				    <td align="center">${o.conName}</td>
+				    <td align="center">${o.productNo}</td>
 				    <td>${o.productName}</td>
-				    <td>${o.price}</td>
-				    <td>${o.couponPrice}</td>
-				    <td>${o.commition}</td>
+				    <td align="center">${o.price}</td>
+				    <td align="center">${o.couponPrice}</td>
+				    <td align="center">${o.commition}</td>
 					</tr>
 					 </c:forEach>
 					</tbody>

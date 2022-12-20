@@ -77,7 +77,7 @@
 	<select id="selectSettleDetailList" parameterType="_int" resultMap="poorderResultSet">
 				  SELECT 
                   O.ORDER_STATUS  as "ORDER_STATUS", 
-                  O.ORDER_DATE as "ORDER_DATE",
+                  TO_CHAR(O.ORDER_DATE,'YYYY-MM-DD') as "ORDER_DATE",
                   O.ORDER_NO as "ORDER_NO",
                   C.CON_NAME as "CON_NAME",
                   P.PRODUCT_NO as "PRODUCT_NO",

@@ -52,6 +52,7 @@ public class NSJ_CouponController {
 	public String insertCoupon(Coupon c, HttpSession session) {
 
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		
 		c.setSellerNo(sellerNo);
 		// => 만약 안 했을 경우 c의 sellerNo 이 0인 상태
 		
@@ -76,7 +77,9 @@ public class NSJ_CouponController {
 	public String showAbleCouponList(Coupon c){
 	
 		c.setCouponStmt("Y");
+		
 		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
+		
 		return new Gson().toJson(list);
 	}
 	
@@ -89,9 +92,9 @@ public class NSJ_CouponController {
 		c.setSellerNo(sellerNo);
 		// c.setCreateDate(createDate);
 	
-		System.out.println(c);
+	
 		ArrayList<Coupon> list = couponService.ableCouponSearch(c);
-		System.out.println(list);
+		
 		if(list!=null) {
 			model.addAttribute("list", list);
 		}
@@ -106,11 +109,15 @@ public class NSJ_CouponController {
 	@RequestMapping("ableCoupon.po")
 	public String ableCouponList(Model model,Coupon c,HttpSession session) {
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		
 		c.setSellerNo(sellerNo);
+		
 		c.setCouponStmt("Y");
+		
 		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
+		
 		model.addAttribute("list", list);
-		System.out.println(list);
+		
 		return "po/poCoupon/poAbleCouponList";
 	}
 	
@@ -124,7 +131,7 @@ public class NSJ_CouponController {
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 		c.setSellerNo(sellerNo);
 		c.setCouponStmt("N");
-		System.out.println(c);
+		
 		ArrayList<Coupon> list = couponService.showAbleCouponList(c);
 		model.addAttribute("list", list);
 		return "po/poCoupon/poShowExpiredCouponList";
@@ -142,9 +149,11 @@ public class NSJ_CouponController {
 	public String searchExCouponList(Coupon c, HttpSession session, Model model){
 	
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		
 		c.setSellerNo(sellerNo);
+		
 		ArrayList<Coupon> list = couponService.searchExCouponList(c);
-		System.out.println(list);
+		
 		if(list!=null) {
 			model.addAttribute("list", list);
 		}
@@ -162,8 +171,11 @@ public class NSJ_CouponController {
 	public String poCouponUsedList(Model model,Coupon c,HttpSession session) {
 		
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		
 		c.setSellerNo(sellerNo);
+		
 		ArrayList<Coupon> list = couponService.poCouponUsedList(c);
+		
 		model.addAttribute("list", list);
 		
 		return "po/poCoupon/CouponsuedPo";
@@ -179,11 +191,15 @@ public class NSJ_CouponController {
 	public String searchPoCouponUsed(Model model,Coupon c, HttpSession session) {
 		
 		int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+		
 		c.setSellerNo(sellerNo);
 		
 		ArrayList<Coupon> list = couponService.searchPoCouponUsed(c);
+		
 		model.addAttribute("list", list);
+		
 		if(list!=null) {
+			
 			model.addAttribute("list", list);
 		}
 		return "po/poCoupon/CouponsuedPoSearch";
@@ -197,9 +213,13 @@ public class NSJ_CouponController {
 		public String showCouponListPo(Model model, Coupon c, HttpSession session) {
 			
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
+			
 			c.setSellerNo(sellerNo);
+			
 			ArrayList<Coupon> list = couponService.showCouponListPo(c);
+			
 			if(list!=null) {
+				
 				model.addAttribute("list", list);
 			}
 		
@@ -218,12 +238,15 @@ public class NSJ_CouponController {
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 			
 			c.setSellerNo(sellerNo);
+			
 			ArrayList<Coupon> list = couponService.CouponDetailSearch(c);
+			
 			model.addAttribute("list", list);
+			
 			if(list!=null) {
 		
 			}
-			// return "po/poCoupon/poSearchCouponAll";
+			
 			return "po/poCoupon/poshowAllCouponList";
 			
 	}
@@ -238,7 +261,7 @@ public class NSJ_CouponController {
 			int sellerNo = ((Member) session.getAttribute("loginUser")).getSellerNo();
 			c.setSellerNo(sellerNo);
 			int result = couponService.updateCouponPo(c);	
-			System.out.println(result);
+			
 			if (result > 0) {
 				session.setAttribute("alertMsg", "쿠폰 수정에 성공했습니다.");
 			} else {
@@ -258,11 +281,11 @@ public class NSJ_CouponController {
 		@RequestMapping("detailCoupon.po")
 		public ModelAndView detailCoupon(String couponNo, ModelAndView mv) {
 			
-			System.out.println(couponNo);
+			
 			
 			Coupon c = couponService.detailCoupon(couponNo);
 			
-			System.out.println(c);
+		
 
 			mv.addObject("c", c).setViewName("po/poCoupon/PoCoupondetail");
 

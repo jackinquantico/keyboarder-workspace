@@ -76,11 +76,11 @@
                  	</td>
                   <td colspan="6" style="height: 250px; width:60%">
                   		<div style="height: 30%;">
-                  			상품명 : <input type="text" style="width:700px; border:none;" value="${p.productName}"><br><Br>
+                  			<h3>상품명</h3> : <input type="text" style="width:700px; border:none;" value="${p.productName}"><br><Br>
                   			
-                  			상품가격: <input type="text" style="width:400px; border:none;"value="${p.price}">
+                  				<h3>상품가격</h3>: <input type="text" style="width:400px; border:none;"value="${p.price}">
                   		</div>
-                  		<div style="height: 70%;">상품설명
+                  		<div style="height: 70%;"><h3>상품설명</h3>:
                   		<textarea style="resize: none; width: 100%; height: 170px; border:none;" required>${p.description}</textarea></div>	
                   </td>
                  </tr>
