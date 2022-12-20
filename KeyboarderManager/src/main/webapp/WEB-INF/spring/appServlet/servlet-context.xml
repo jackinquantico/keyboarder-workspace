@@ -56,6 +56,20 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/commitionSales.bo" />
 			<mapping path="/storeSettlement.bo" />
 			
+			<!-- BO - 공지사항관리 관련 페이지 -->
+			<mapping path="/noticeList.bo" />
+			<mapping path="/noticeEnrollForm.bo" />
+			<mapping path="/noticeDetail.bo" />
+			<mapping path="/noticeUpdateForm.bo" />
+			<mapping path="/noticeUpdate.bo" />
+			<mapping path="/insertNotice.bo" />
+			<mapping path="/noticeDelete.bo" />
+			
+			<!-- BO - 주문관리 관련 페이지 -->
+			<mapping path="/allOrderList.bo" />
+			<mapping path="/optionSearch.bo" />
+			<mapping path="/excelDownload_OrderList.bo" />
+			
 			<!-- PO - 판매 정보 수정, 탈퇴 페이지 -->
 			<mapping path="/updateInfoPage.po" />
 			
@@ -70,6 +84,10 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/searchDecision.po" />
 			<mapping path="/excelDownloadDecision.po" />
 			<mapping path="/excelDownloadSearch.po" />
+			<mapping path="/allOrderList.po" />
+			<mapping path="/optionSearch.po" />
+			<mapping path="/excelDownload_OrderList.po" />
+			
 			
 			<!-- PO 정산내역 -->
 			<mapping path="/list.se"/>
@@ -79,6 +97,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/settleView.po"/>
 			<mapping path="/searchSettle.po"/>
 			<mapping path="/electronicTaxInvoice.po"/>
+			<mapping path="/commissionList.po" />
+			<mapping path="/optionSearch_commissionList.po" />
 			
 			<!-- BO - 쿠폰 관리 관련 페이지 -->
 			<mapping path="/coupon.bo" />
@@ -136,6 +156,10 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 			<mapping path="/SalesProduct.bo" />
 			<mapping path="/productImg.bo" />
 			<mapping path="/MainproductImg.bo" />
+			
+			<!-- PO 공지사항 관련 페이지 -->
+			<mapping path="/noticeList.po" />
+			<mapping path="/noticeDetail.po" />
 			
 			
 			<!-- beans:bean : 어느 타입의 객체를 어느 이름으로 생성할지 bean을 등록 -->
