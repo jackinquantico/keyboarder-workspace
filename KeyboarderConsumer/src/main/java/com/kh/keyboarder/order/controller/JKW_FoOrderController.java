@@ -22,6 +22,11 @@ public class JKW_FoOrderController {
 	@RequestMapping("foTotalView.order")
 	public String foTotalView(Model model, HttpSession session) {
 		
+		if(session.getAttribute("searchDate") != null) {
+			
+			session.removeAttribute("searchDate");
+		}
+		
 		Member m = (Member)session.getAttribute("loginUser");
 		
 		int conNo = m.getConNo();
@@ -41,6 +46,8 @@ public class JKW_FoOrderController {
 		int conNo = m.getConNo();
 		
 		String searchDate = searchOrderMonth + "-01";
+		
+		session.setAttribute("searchDate", searchOrderMonth);
 		
 		Order order = new Order(conNo, searchDate);
 		

@@ -31,6 +31,11 @@ public class JKW_PoOrderController {
 	@RequestMapping("delivery.poOrder")
 	public String deliveryMain(Model model, HttpSession session) {
 		
+		if(session.getAttribute("searchDate") != null) {
+			
+			session.removeAttribute("searchDate");
+		}
+		
 		Member m = (Member)session.getAttribute("loginUser");
 		
 		int selNo = m.getSellerNo();
@@ -65,6 +70,8 @@ public class JKW_PoOrderController {
 		int selNo = m.getSellerNo();
 		
 		String searchDate = searchDeliveryMonth + "-01";
+		
+		session.setAttribute("searchDate", searchDeliveryMonth);
 		
 		PoOrder poOrder = new PoOrder(selNo, searchDate);
 				

@@ -208,7 +208,16 @@
 				                    <div style="display: inline-block; margin-left: 39%; font-size: 25px; margin-top: 20px; width: 8%;">
 				                    	조회기간
 				                    </div>
-				                    <input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    <c:choose>
+				                    	<c:when test="${ not empty searchDate }">
+				                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
+											<input type="hidden" id="conditionDate1" value="${ searchDate }">
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    	</c:otherwise>
+				                    </c:choose>
 				                </div>
 				                <div id="delivery-period">
 				                    
@@ -546,7 +555,16 @@
 				                    <div style="display: inline-block; margin-left: 39%; font-size: 25px; margin-top: 20px; width: 8%;">
 				                    	조회기간
 				                    </div>
-				                    <input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    <c:choose>
+				                    	<c:when test="${ not empty searchDate }">
+				                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
+											<input type="hidden" id="conditionDate1" value="${ searchDate }">
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    	</c:when>
+				                    	<c:otherwise>
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    	</c:otherwise>
+				                    </c:choose>
 				                </div>
 				                <div id="delivery-period">
 				                    
@@ -860,7 +878,7 @@
 	<script>
     	$(function(){
     		
-    		var date = new Date();
+    		/*var date = new Date();
     		
     		String(date);
     		
@@ -872,18 +890,30 @@
     		$("#resetButton").click(function() {
     			
     			location.href="delivery.poOrder";
-    		});
+    		});*/
     		
-    		<%--
-    		$.ajax({
-    			url : "selectDate.order",
-   			data : 
+    		var TFCondition = $("#TFCondition").val();
+    		
+    		if(TFCondition == "notEmptyCondition") {
     			
-    		});
-    		--%>
+    			var conditionDate1 = $("#conditionDate1").val();
+    			
+    			document.getElementById("deliveryMonth").value = conditionDate1.substr(0, 7);
+    			
+    		} else {
+    			
+    			// 지정한 날짜를 알맞은 형식으로 보내도록
+    			var date = new Date();
+    			
+    			String(date);
+    			
+    			var year = date.getFullYear();
+    			var month = date.getMonth() + 1;
+    			
+    			document.getElementById("deliveryMonth").value = year + "-" + month;
+    		}
     	});
     	
-    	}
     </script>
 </body>
 </html>

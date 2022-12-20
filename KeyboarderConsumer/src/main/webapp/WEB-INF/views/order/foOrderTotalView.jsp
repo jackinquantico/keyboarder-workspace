@@ -85,14 +85,23 @@
 	                 <div style="display: inline-block; margin-left: 33%; font-size: 20px; margin-top: 35px; width: 12%;">
 	                    	 조회기간
 	                 </div>
-	                 <input type="month" id="orderMonth" name="searchOrderMonth" style="margin-left: 10%;">
+	                 <c:choose>
+                    	<c:when test="${ not empty searchDate }">
+                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
+							<input type="hidden" id="conditionDate1" value="${ searchDate }">
+                    		<input type="month" id="orderMonth" name="searchOrderMonth" style="margin-left: 10%;">
+                    	</c:when>
+                    	<c:otherwise>
+                    		<input type="month" id="orderMonth" name="searchOrderMonth" style="margin-left: 10%;">
+                    	</c:otherwise>
+                    </c:choose>
 	             </div>
 	             <div id="delivery-button" align="center">
-	                 <button type="submit" class="btn btn-primary" id="date-search" style="margin-top: 10px; width: 15%;" onclick="selectOrderDate">
+	                 <button type="submit" class="btn btn-primary" id="date-search" style="margin-top: 10px; width: 15%;">
 	                 	검색하기
 	                 </button>
 	                 &nbsp;&nbsp;
-	                 <button type="button" class="btn btn-outline-primary" id="resetButton" style="margin-top: 10px; width: 15%;" onclick="selectOrderDate">
+	                 <button type="button" class="btn btn-outline-primary" id="resetButton" style="margin-top: 10px; width: 15%;" onclick="location.href='foTotalView.order'">
 	                 	초기화
 	                 </button>
 	             </div>
@@ -279,27 +288,26 @@
     <script>
     	$(function(){
     		
-    		var date = new Date();
+    		var TFCondition = $("#TFCondition").val();
     		
-    		String(date);
-    		
-    		var year = date.getFullYear();
-    		var month = date.getMonth() + 1;
-    		
-    		document.getElementById("orderMonth").value = year + "-" + month;
-    		
-    		$("#resetButton").click(function() {
+    		if(TFCondition == "notEmptyCondition") {
     			
-    			location.href="foTotalView.order";
-    		});
-    		
-    		<%--
-    		$.ajax({
-    			url : "selectDate.order",
-   			data : 
+    			var conditionDate1 = $("#conditionDate1").val();
     			
-    		});
-    		--%>
+    			document.getElementById("orderMonth").value = conditionDate1.substr(0, 7);
+    			
+    		} else {
+    			
+    			// 지정한 날짜를 알맞은 형식으로 보내도록
+    			var date = new Date();
+    			
+    			String(date);
+    			
+    			var year = date.getFullYear();
+    			var month = date.getMonth() + 1;
+    			
+    			document.getElementById("orderMonth").value = year + "-" + month;
+    		}
     	});
     	
 
