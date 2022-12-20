@@ -121,7 +121,7 @@
                     <tr>
                         <th> 이메일 *</th> <!-- 이메일 선택해서 인풋에 넣기 -->
                         <td colspan="3">
-                            <input type="email" id="sellerEmail" name= "sellerEmail" class="form-control" maxlength="18" required>
+                            <input type="email" id="sellerEmail" name= "sellerEmail" class="form-control" required>
                         </td>
                     </tr>
                     <tr>
