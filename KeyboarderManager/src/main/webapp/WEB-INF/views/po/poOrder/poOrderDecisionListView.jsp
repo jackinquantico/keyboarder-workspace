@@ -151,7 +151,7 @@
         </div>
     </div>
 </div> <!-- /.content -->
-<script>
+<script>/* 
 	$(function() {
 		var date = new Date();
 		String(date);
@@ -161,7 +161,7 @@
 		document.getElementById("searchDecisionDate").value = year+"-"+month;
 		
 		//console.log(location.href);
-	})
+	}) */
 </script>
 </div> <!-- /.content-wrapper -->
 </body>

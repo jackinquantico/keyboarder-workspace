@@ -143,7 +143,7 @@
 	
 </div> <!-- /.content -->
 <script>
-	$(function() {
+	/* $(function() {
 		var date = new Date();
 		String(date);
 		var year = date.getFullYear();
@@ -151,7 +151,7 @@
 		
 		document.getElementById("searchSettleDate").value = year+"-"+month;
 		
-	})
+	}) */
 </script>
 </div> <!-- /.content-wrapper -->
 </body>
