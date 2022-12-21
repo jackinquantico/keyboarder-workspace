@@ -79,7 +79,7 @@
                 <span style="margin-right : 70px; font-size: 20px;">조회기간</span>
                 <input type="month" style="height: 35px;" id="searchSettleDate" name="searchSettleDate" value="${ searchSettleDate }">
                 <input type="submit" class="btn btn-dark" value="검색" id="searchbtn">
-                 <input type="button" class="btn btn-outline-secondary" value="초기화" id="resetbtn" onclick="selectSettleDate">
+                 <input type="button" class="btn btn-outline-secondary" value="초기화" id="resetbtn" onclick="location.href='list.se'">
             </div>
         </form>
         </div>
@@ -150,9 +150,7 @@
 		var month = date.getMonth()+1;
 		
 		document.getElementById("searchSettleDate").value = year+"-"+month;
-		$("#resetButton").click(funtion() {
-			location.href="list.se";
-		});
+		
 	})
 </script>
 </div> <!-- /.content-wrapper -->
