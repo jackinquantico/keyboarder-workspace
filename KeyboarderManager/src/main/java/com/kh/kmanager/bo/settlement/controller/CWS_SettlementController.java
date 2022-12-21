@@ -82,6 +82,8 @@ public class CWS_SettlementController {
 	        		--i;
 	        	}
 				
+			} else {
+				list.remove(i);
 			}
         	
 
@@ -150,7 +152,9 @@ public class CWS_SettlementController {
             		--i;
             	}
         		
-        	}
+        	} else {
+				list.remove(i);
+			}
         	
 
         }
@@ -194,10 +198,7 @@ public class CWS_SettlementController {
 		
 		CWS_Settlement result = settlementService.sellerBillModal(modalRequest);
 		
-		if(result.getSettleDate()!=null) {
-			 result.setSettleDate(settleDate); // 테이블의 값(해당 달의 말일)을 그대로 넣어주기
-		}
-       
+		result.setSettleDate(settleDate); // 테이블의 값(해당 달의 말일)을 그대로 넣어주기  
         result.setModalWriteDate(settleDate);
         result.setCommition(commition);
         result.setSupplyValue((int)(commition/1.1));
@@ -221,10 +222,12 @@ public class CWS_SettlementController {
 		for(int i = 0; i < list.size(); i ++) {
 			if(list.get(i).getSettleDate()!=null) {
 				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+				list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+				list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
+				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+			} else {
+				list.remove(i);
 			}			
-			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
-			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
-			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
 		};
 		
 		session.setAttribute("sellerList", sellerList);
@@ -244,10 +247,13 @@ public class CWS_SettlementController {
 		for(int i = 0; i < list.size(); i ++) {
 			if(list.get(i).getSettleDate()!=null) {
 				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+				list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+				list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
+				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+			} else {
+				list.remove(i);
 			}
-			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
-			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
-			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+
 		};
 
 		session.setAttribute("searchCondition", searchCondition);
@@ -264,10 +270,13 @@ public class CWS_SettlementController {
 		for(int i = 0; i < list.size(); i ++) {
 			if(list.get(i).getSettleDate()!=null) {
 				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+				list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+				list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
+				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+			} else {
+				list.remove(i);
 			}
-			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
-			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
-			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+
 		};
 		
 		// 셀 생성
@@ -448,10 +457,13 @@ public class CWS_SettlementController {
 		for(int i = 0; i < list.size(); i ++) {
 			if(list.get(i).getSettleDate()!=null) {
 				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+				list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
+				list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
+				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+			} else {
+				list.remove(i);
 			}
-			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
-			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
-			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
+
 		};
 		
 		// 셀 생성
