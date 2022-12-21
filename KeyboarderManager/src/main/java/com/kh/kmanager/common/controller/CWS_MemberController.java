@@ -79,7 +79,8 @@ public class CWS_MemberController {
 				
 				if(loginUser.getMailAuth() != 1) { // 이메일이 인증되지 않았을 때
 					
-					session.invalidate();
+					session.setAttribute("alertMsg", "이메일 인증 후 로그인해주세요.");
+					
 					return "redirect:/";
 					
 				} else if(loginUser.getIdentifyStatus().equals("N")) {
