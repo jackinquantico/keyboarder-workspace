@@ -34,11 +34,11 @@
 					<tr>
 						<th width="10%" style="padding-left: 20px;">조회기간</th>
 						<td width="10%">
-							<input type="month" id="currentMonth" class="form-control">
+							<input type="month" id="currentMonth" min="2022-09" class="form-control">
 						</td>
 						<td width="10px" style="text-align:center">&nbsp;~&nbsp;</td>
 						<td width="10%">
-							<input type="month" id="endMonth" class="form-control">
+							<input type="month" id="endMonth" min="2022-09" class="form-control">
 						</td>
 						<td></td>
 					</tr>
