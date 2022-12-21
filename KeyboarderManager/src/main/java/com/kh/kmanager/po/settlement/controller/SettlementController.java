@@ -247,13 +247,13 @@ public class SettlementController {
 		o.setSellerNo(sellerNo);
 		
 
-		System.out.println(o);
+		
 		
 		ArrayList<Settlement> list = settlementService.selectSettleDetailList(o);
 		ArrayList<Settlement> list2 =settlementService.selectSettleSumList(o);
 		
 		
-		System.out.println(list);
+
 		if(list!=null) {
 			model.addAttribute("list",list);
 			
@@ -262,7 +262,7 @@ public class SettlementController {
 			}
 		}
 		
-		return "po/poSettlement/poSettlementDetailList";
+		return "po/poSettlement/poSettlementDetailiSearch";
 	}
 	
 	// 정산내역 전체조회 엑셀다운로드 - 장미

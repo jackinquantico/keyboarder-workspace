@@ -46,8 +46,9 @@ height:500px;
 <jsp:include page="/WEB-INF/views/common/posidebar.jsp" />
 
 <!-- 콘텐츠 영역 전체 래퍼 -->
-	<form id="selectSettleDetailList" action="searchSettle.po" method="post">   
+	 
 	<div class="content-wrapper">
+	<br>
 			<!-- 콘텐츠 영역 제목 -->
 			<div class="content-header">
 			  <div class="container-fluid">
@@ -65,21 +66,22 @@ height:500px;
 		 <div class="card" style="padding:30px;">
 			 <div>
 			 	<span style="font-size :25px; margin-left:20px; margin-right:50px;">조회기간</span>
-			 	<input type="search" style="height:45px;" name="startDate" value="${param.startDate}">&nbsp; ~ &nbsp; <input type="date" name="endDate" value="${param.endDate}" style="height:45px;"></td>
+			 	<input type="date" style="height:45px;" name="startDate" value="${param.startDate }">&nbsp; ~ &nbsp; <input type="date" name="endDate" value="${param.endDate }" style="height:45px;">
 			 </div>
 			 <div align="center">  
 			 	 <button class="btn btn-dark" style="width:100px; margin-right:10px;">검색</button>  
-			     <button class="btn btn-outline-secondary" style="width:100px;">초기화</button>
+			     <input type="button" class="btn btn-outline-secondary" value="초기화" style="width:100px;" onclick="location.href='settleView.po'">
+			     
 			       <button class="btn btn-outline-secondary"  type="button" style="width:200px; float:right;" onclick="location.href='excelDownload.sDetail'" >
 			      엑셀다운로드</button>     
 			 </div>
 	    </div>  
-			  <br> <br>  <br>
+			  <br> 
 			   
 	<div class="card">
-		<table align="center"; width="100%" class="table-bordered">
+		<table  width="100%" class="table-bordered" align="center";>
 		       <thead>
-		        <tr>
+		        <tr align="center">
 		           <th rowspan="2">판매량</th>
 		           <th rowspan="2">실 상품 판매금액</th>
 		           <th rowspan="2">배송비</th>
@@ -88,7 +90,7 @@ height:500px;
 		           <th rowspan="2">정산확정금액</th>
 		        </tr>
 		
-		        <tr>
+		        <tr align="center">
 		           <th>KEYBOAR-DER쿠폰</th>
 		           <th>업체쿠폰</th>
 		           <th>판매수수료</th>
@@ -96,8 +98,9 @@ height:500px;
 		           <th>최종수수료</th>
 		    	</tr>
 		    <tbody>
-		        <tr>
+		        
 		       	<c:forEach var="o" items="${list2}">
+		       	<tr align="center">
 		            <td>${o.orderNo }</td>
 		            <td>${o.orderPrice}</td>
 		            <td>${o.orderNo*2500}</td>
@@ -112,7 +115,7 @@ height:500px;
 		    </tbody>
 		</table>
 	</div>
-	<br> <br>  <br>
+	<br> 
 		
 	<div id="settementList" class="card">
 	<table  id="coupone_view" class="table table-bordered" align="center" style="width:100%;">
@@ -140,16 +143,16 @@ height:500px;
 				
 			<c:forEach var="o" items="${list}">
 				<tr>
-				    <td>${o.orderStatus==3?"구매확정" : "미확정"}</td>
-				    <td>${o.orderStatus==3?"구매확정" : "미확정"}</td>
-				    <td>${o.orderDate}</td>
-				    <td>${o.orderNo}</td>
-				    <td>${o.conName}</td>
-				    <td>${o.productNo}</td>
+				   <td align="center">${o.orderStatus==3?"구매확정" : "미확정"}</td>
+				    <td align="center">${o.orderStatus==3?"구매확정" : "미확정"}</td>
+				    <td align="center">${o.orderDate}</td>
+				    <td align="center">${o.orderNo}</td>
+				    <td align="center">${o.conName}</td>
+				    <td align="center">${o.productNo}</td>
 				    <td>${o.productName}</td>
-				    <td>${o.price}</td>
-				    <td>${o.couponPrice}</td>
-				    <td>${o.commition}</td>
+				    <td align="center">${o.price}</td>
+				    <td align="center">${o.couponPrice}</td>
+				    <td align="center">${o.commition}</td>
 					</tr>
 					 </c:forEach>
 					</tbody>
@@ -157,7 +160,7 @@ height:500px;
 				</div>
 			</div>
 		</div>
-	</form>
+
 		</body>
 	</html>
 

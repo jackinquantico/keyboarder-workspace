@@ -94,7 +94,7 @@ input[type=date] {
 	</table>
       
     <div align="center"> 
-        <button type="button" onclick="reset();" class="btn btn-outline-secondary">초기화</button>&nbsp;
+        <button type="button" onclick="location.href='usedCList.po'" class="btn btn-outline-secondary">초기화</button>&nbsp;
         <button type="submit" class="btn btn-secondary">조회</button>
     </div>
 </div> <!-- /#searchArea -->

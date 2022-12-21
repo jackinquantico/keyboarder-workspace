@@ -66,23 +66,21 @@ height:500px;
 		 <div class="card" style="padding:30px;">
 			 <div>
 			 	<span style="font-size :25px; margin-left:20px; margin-right:50px;">조회기간</span>
-			 	<input type="date" style="height:45px;" name="startDate">&nbsp; ~ &nbsp; <input type="date" name="endDate" style="height:45px;"></td>
+			 	<input type="date" style="height:45px;" name="startDate" value="${param.startDate }">&nbsp; ~ &nbsp; <input type="date" name="endDate" value="${param.endDate }" style="height:45px;"></td>
 			 </div>
 			 <div align="center">  
 			 	 <button class="btn btn-dark" style="width:100px; margin-right:10px;">검색</button>  
 			     <button class="btn btn-outline-secondary" style="width:100px;">초기화</button>  
-			      <c:choose>
-                    <c:when test="${ not empty  startDate }">
+			      
 			     <button class="btn btn-outline-secondary"  type="button" style="width:200px; float:right;" onclick="location.href='excelDownload.sDetail'" >
 			      엑셀다운로드</button> 
-			      </c:when>
-			      </c:choose>
+			      
 			 </div>
 	    </div>  
 		<br>
 			   
 		<div class="card">
-		<table width="100%" class="table-bordered">
+		<table width="100%" class="table-bordered" align="center";>
 		       <thead>
 		        <tr align="center">
 		           <th rowspan="2">판매량</th>
