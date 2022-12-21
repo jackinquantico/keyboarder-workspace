@@ -82,7 +82,7 @@ input[type=date] {
            </td>
         </tr>
    		<tr>
-	        <td>사용기간 기준 기간 검색</td>
+	        <td>사용일 기준 기간 검색</td>
 	        <td>
 	        	<input type="date" id="startDate" class="form-control col-lg-2">&nbsp;~&nbsp;<input type="date" id="endDate" class="form-control col-lg-2">
 	        </td>  
