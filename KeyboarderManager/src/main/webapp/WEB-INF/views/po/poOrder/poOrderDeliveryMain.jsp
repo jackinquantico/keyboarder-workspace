@@ -42,8 +42,7 @@
         }
 
         .delivery-header>#middle-title{
-            font-size: 35px;
-            margin-left: 2%;
+            font-size: 30px;
             display: inline-block;
             margin-top: 17px;
         }
@@ -63,7 +62,7 @@
             width: 24.8%;
             height: 100%;
             display: inline-block;
-            font-size: 170%;
+            font-size: 150%;
             padding-top: 1.5%;
             padding-left: 2.0%;            
         }
@@ -220,11 +219,9 @@
 				                    </c:choose>
 				                </div>
 				                <div id="delivery-button" style="display: inline-block; width: 60%; margin-top: 10px; padding-right: 250px; padding-left: -30px;">
-				                	<button type="submit" class="btn btn-dark" style="width: 15%; font-size: 13px; height: 40px;">
-				                		검색하기
-				                	</button>
+				                	<button type="submit" class="btn btn-dark" style="width: 12%; font-size: 15px; height: 35px;">검색</button>
 				                	&nbsp;&nbsp;
-					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 15%; font-size: 13px; height: 40px;" onclick="location.href='delivery.poOrder'">
+					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 12%; font-size: 15px; height: 35px;" onclick="location.href='delivery.poOrder'">
 					                 	초기화
 					                 </button>
 				                </div>
@@ -564,11 +561,11 @@
 				                    </c:choose>
 				                </div>
 				                <div id="delivery-button" style="display: inline-block; width: 60%; margin-top: 10px; padding-right: 250px; padding-left: -30px;">
-				                	<button type="submit" class="btn btn-dark" style="width: 15%; font-size: 13px; height: 40px;">
-				                		검색하기
+				                	<button type="submit" class="btn btn-dark" style="width: 12%; font-size: 15px; height: 35px;">
+				                		검색
 				                	</button>
 				                	&nbsp;&nbsp;
-					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 15%; font-size: 13px; height: 40px;" onclick="location.href='delivery.poOrder'">
+					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 12%; font-size: 15px; height: 35px;" onclick="location.href='delivery.poOrder'">
 					                 	초기화
 					                 </button>
 				                </div>
