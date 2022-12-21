@@ -102,8 +102,8 @@
                 </div>
                 <div class="order-product-img" style="float: left; width: 30%; height: 300px;">
                 	<!-- 주문한 상품 사진이 보여짐 -->
-                    <div style="width: 85%; height: 85%; margin-left: 20px; margin-top: 22px; border-radius: 30px;">
-                        <img src="${ orderDetailList.productAttachment }" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+                    <div style="width: 85%; height: 85%; margin-left: 20px; margin-top: 22px;">
+                        <img src="resources/uploadFiles/${ orderDetailList.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
                 	</div>
                 </div>
                 <div class="order-product-name-price" style="float: left; width: 40%; height: 300px;">

@@ -129,7 +129,7 @@
 			                </div>
 			                <div class="order-product-img" style="float: left; width: 30%; height: 250px;  padding-top: 20px;">
 			                    <div style="width: 90%; height: 180px; margin: auto; margin-top: 10px">
-			                        <img src="${ date.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
+			                        <img src="resources/uploadFiles/${ date.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
 			                	</div>
 			                </div>
 			                <div class="order-product-name-price" style="float: left; width: 40%; height: 250px; padding-top: 40px;">
@@ -215,7 +215,7 @@
 			                </div>
 			                <div class="order-product-img" style="float: left; width: 30%; height: 250px; padding-top: 20px;">
 			                    <div style="width: 90%; height: 180px; margin: auto; margin-top: 10px">
-			                        <img src="${ ord.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
+			                        <img src="resources/uploadFiles/${ ord.productAttachment }" style="background-size: cover; width: 100%; height: 100%;">
 			                	</div>
 			                </div>
 			                <div class="order-product-name-price" style="float: left; width: 40%; height: 250px;  padding-top: 40px;">

@@ -139,7 +139,7 @@
 								<input type="hidden" name="amount" class="amount">
 								<input type="hidden" name="couponPrice" class="couponPrice" value="3000">
 	                            <div class="fo-product-img">
-	                                <img src="https://img.topket.co.kr/files/0/g913TKL_700X700.jpg" style="background-size: cover; width: 100%; height: 100%; border-radius: 30px;">
+	                                <img src="resources/uploadFiles/${ p.attachment1 }" style="background-size: cover; width: 100%; height: 100%;">
 	                            </div>
 	                            <div class="fo-product-name" style="padding: 10px; margin: 0px;">
 	                            	${ p.productName }
