@@ -15,7 +15,7 @@
         }
 
         .delivery-view-main{
-            width: 95%;
+            width: 90%;
             height: 840px;
         }
 
@@ -33,7 +33,7 @@
 
         .delivery-date-tracking{
             width: 100%;
-            height: 30%;
+            height: 100%;
         }
 
         .delivery-information{
@@ -201,33 +201,30 @@
 				        </div>
 				
 				        <!-- 배송 날짜별 조회 -->
-				        <div class="delivery-date-tracking card">
+				        <div class="delivery-date-tracking card" style="height: 100px;">
 				            <br>
 				            <form action="SearchDate.poOrder">
-				                <div id="delivery-lookup">
-				                    <div style="display: inline-block; margin-left: 39%; font-size: 25px; margin-top: 20px; width: 8%;">
+				                <div id="delivery-lookup" style="display: inline-block; width: 28%;">
+				                    <div style="display: inline-block; margin-left: 5%; font-size: 25px; margin-top: 8px; width: 40%;">
 				                    	조회기간
 				                    </div>
 				                    <c:choose>
 				                    	<c:when test="${ not empty searchDate }">
 				                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
 											<input type="hidden" id="conditionDate1" value="${ searchDate }">
-				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth">
 				                    	</c:when>
 				                    	<c:otherwise>
-				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth">
 				                    	</c:otherwise>
 				                    </c:choose>
 				                </div>
-				                <div id="delivery-period">
-				                    
-				                </div>
-				                <div id="delivery-button" align="center">
-				                	<button type="submit" class="btn btn-dark" style="width: 15%; font-size: 17px;">
+				                <div id="delivery-button" style="display: inline-block; width: 60%; margin-top: 10px; padding-right: 250px; padding-left: -30px;">
+				                	<button type="submit" class="btn btn-dark" style="width: 15%; font-size: 13px; height: 40px;">
 				                		검색하기
 				                	</button>
 				                	&nbsp;&nbsp;
-					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 15%; font-size: 17px;" onclick="location.href='delivery.poOrder'">
+					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 15%; font-size: 13px; height: 40px;" onclick="location.href='delivery.poOrder'">
 					                 	초기화
 					                 </button>
 				                </div>
@@ -235,12 +232,12 @@
 				        </div>
 				        		
 				        <!-- 배송 정보 조회 -->
-				        <div class="delivery-information card">
-				            <div id="delivery-information-header">
+				        <div class="delivery-information card" style="height: 550px;">
+				            <div id="delivery-information-header" style="height: 70px;">
 				                <div id="delivery-information-main" style="margin-top: -20px;">
 				                    <div id="delivery-information-count">주문건&nbsp:&nbsp </div>      
 			                    		<div id="delivery-information-count-num" style="margin-top: 5px; color: red;">${ dateOrderCount }&nbsp</div>
-				                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='dateExcelDownload.poOrder?searchDate=${ searchDate }'">
+				                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='dateExcelDownload.poOrder?searchDate=${ searchDate }'">
 				                    	엑셀다운로드
 				                    </button>
 				                </div>
@@ -548,33 +545,30 @@
 				        </div>
 				
 				        <!-- 배송 날짜별 조회 -->
-				        <div class="delivery-date-tracking card">
+				        <div class="delivery-date-tracking card" style="height: 100px;">
 				            <br>
 				            <form action="SearchDate.poOrder">
-				                <div id="delivery-lookup">
-				                    <div style="display: inline-block; margin-left: 39%; font-size: 25px; margin-top: 20px; width: 8%;">
+				                <div id="delivery-lookup" style="display: inline-block; width: 28%;">
+				                    <div style="display: inline-block; margin-left: 5%; font-size: 25px; margin-top: 8px; width: 40%;">
 				                    	조회기간
 				                    </div>
 				                    <c:choose>
 				                    	<c:when test="${ not empty searchDate }">
 				                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
 											<input type="hidden" id="conditionDate1" value="${ searchDate }">
-				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth">
 				                    	</c:when>
 				                    	<c:otherwise>
-				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth" style="margin-left: 5%;">
+				                    		<input type="month" id="deliveryMonth" name="searchDeliveryMonth">
 				                    	</c:otherwise>
 				                    </c:choose>
 				                </div>
-				                <div id="delivery-period">
-				                    
-				                </div>
-				                <div id="delivery-button" align="center">
-				                	<button type="submit" class="btn btn-dark" style="width: 15%; font-size: 17px;">
+				                <div id="delivery-button" style="display: inline-block; width: 60%; margin-top: 10px; padding-right: 250px; padding-left: -30px;">
+				                	<button type="submit" class="btn btn-dark" style="width: 15%; font-size: 13px; height: 40px;">
 				                		검색하기
 				                	</button>
 				                	&nbsp;&nbsp;
-					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 15%; font-size: 17px;" onclick="location.href='delivery.poOrder'">
+					                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 15%; font-size: 13px; height: 40px;" onclick="location.href='delivery.poOrder'">
 					                 	초기화
 					                 </button>
 				                </div>
@@ -582,19 +576,19 @@
 				        </div>
 				        		
 				        <!-- 배송 정보 조회 -->
-				        <div class="delivery-information card">
-				            <div id="delivery-information-header">
+				        <div class="delivery-information card" style="height: 550px;">
+				            <div id="delivery-information-header" style="height: 70px;">
 				                <div id="delivery-information-main" style="margin-top: -20px;">
 				                    <div id="delivery-information-count">주문건&nbsp:&nbsp </div>      
 			                    		<div id="delivery-information-count-num" style="color: red;">${ orderCount }&nbsp</div>
 			                    	<c:choose>
 			                    		<c:when test="${ empty ordList }">
-						                    <button type="button" class="btn btn-dark" disabled style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
+						                    <button type="button" class="btn btn-outline-secondary" disabled style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
 						                    	엑셀다운로드
 						                    </button>
 				                    	</c:when>
 				                    	<c:otherwise>
-						                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
+						                    <button type="button" class="btn btn-outline-secondary" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">
 						                    	엑셀다운로드
 						                    </button>
 				                    	</c:otherwise>

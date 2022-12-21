@@ -68,30 +68,30 @@
 		            <h2 style="padding: 20px 50px; margin: 0px;">전자세금계산서 관리</h2>
 		        </div>
 		
-		        <div class="electronic-date-tracking card" style="height: 180px;">
+		        <div class="electronic-date-tracking card" style="height: 100px;">
 		            <br>
 		            <form action="poElectronicSearchDate.settlement">
-		                <div id="electronic-lookup">
-		                    <div style="display: inline-block; padding: 12px 50px; margin: 0px; margin-left: 34%; font-size: 25px; width: 16.2%;">
+		                <div id="electronic-lookup" style="display: inline-block; padding: 6px 50px; margin: 0px; width: 25%;">
+		                    <div style="display: inline-block; width: 48%; font-size: 25px;">
 		                       	 조회기간
 		                    </div>
 		                    <c:choose>
 		                    	<c:when test="${ not empty searchDate }">
 		                    		<input type="hidden" id="TFCondition" value="notEmptyCondition">
 									<input type="hidden" id="conditionDate1" value="${ searchDate }">	
-		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:15%">
+		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:50%">
 		                    	</c:when>
 		                    	<c:otherwise>
-		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:15%">
+		                    		<input type="month" id="electronicMonth" name="searchElectronicMonth" style="width:50%">
 		                    	</c:otherwise>
 		                    </c:choose>
 		                </div>
-		                <div id="electronic-button" align="center">
-		                    <button type="submit" class="btn btn-dark" style="margin-top: 25px; width: 15%; font-size: 17px;">
+		                <div id="electronic-button" style="display: inline-block; width: 55%; margin-top: 2px; padding-right: 250px; padding-left: -30px;">
+		                    <button type="submit" class="btn btn-dark" style="width: 17%; font-size: 13px; height: 40px;">
 		                        	검색하기
 		                    </button>
 		                    &nbsp;&nbsp;
-			                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="margin-top: 25px; width: 15%; font-size: 17px;" onclick="location.href='electronicTaxInvoice.po'">
+			                 <button type="button" class="btn btn-outline-dark" id="resetButton" style="width: 17%; font-size: 13px; height: 40px;" onclick="location.href='electronicTaxInvoice.po'">
 			                 		초기화
 			                 </button>
 		                </div>
@@ -100,11 +100,11 @@
 		
 		        <br>
 		
-		        <div class="card">
+		        <div class="card" style="height: 600px;">
 		            <div>
 		                <h3 style="padding: 20px 30px; margin: 0px;">전자세금계산서 조회</h3>
 		            </div>
-		            <div class="electronic-information-notice">
+		            <div class="electronic-information-notice" style="height: 300px;">
 	                    <table border="1" width="100%" id="electronic-list" align="center">
 	                        <thead>
 	                            <tr>
@@ -162,8 +162,8 @@
 	                    
 		            </div>
 		            <br>
-		            <div>
-		            	<p style="padding: 20px 50px; margin: 0px; font-size: 13px;">
+		            <div style="margin-right: 830px;">
+		            	<p style="padding: 20px; margin: 0px; font-size: 13px;">
 		            		 전자세금계산서 확인은 익월 2일(영업일 기준) 이후 가능합니다.<br>
        						부가세법 따라 개인판매자에게도 주민등록번호로 전자세금계산서가 자동 발급됩니다.
 
