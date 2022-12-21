@@ -84,6 +84,7 @@ public class CWS_SettlementController {
 				
 			} else {
 				list.remove(i);
+				--i;
 			}
         	
 
@@ -154,6 +155,7 @@ public class CWS_SettlementController {
         		
         	} else {
 				list.remove(i);
+				--i;
 			}
         	
 
@@ -227,8 +229,14 @@ public class CWS_SettlementController {
 				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
 			} else {
 				list.remove(i);
+				--i;
 			}			
 		};
+		
+		for(int i = 0; i < 10; i++) {
+			System.out.println(list.get(i).getSettleDate());
+		}
+		
 		
 		session.setAttribute("sellerList", sellerList);
 		session.setAttribute("list", list);
@@ -252,6 +260,7 @@ public class CWS_SettlementController {
 				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
 			} else {
 				list.remove(i);
+				--i;
 			}
 
 		};
@@ -275,6 +284,7 @@ public class CWS_SettlementController {
 				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
 			} else {
 				list.remove(i);
+				--i;
 			}
 
 		};
@@ -462,6 +472,7 @@ public class CWS_SettlementController {
 				list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
 			} else {
 				list.remove(i);
+				--i;
 			}
 
 		};
