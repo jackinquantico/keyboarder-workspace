@@ -20,6 +20,7 @@
 		<result column="ADDRESS" property="conAddress" />
 		<result column="SELLER_NAME" property="sellerName" />
 		<result column="PAYMENT_NO" property="paymentNo" />
+		<result column="PAYMENT_BILL" property="paymentBill" />
 	</resultMap>
 
 	<!--
@@ -35,6 +36,7 @@
 		     , ORD.PRODUCT_NO
 		     , PRODUCT_NAME
 		     , ATTACHMENT1
+		     , PAYMENT_BILL
 		FROM ORDERS ORD
 		JOIN PRODUCT PRO ON (PRO.PRODUCT_NO = ORD.PRODUCT_NO)
 		JOIN PAYMENT P ON (P.ORDER_NO = ORD.ORDER_NO)

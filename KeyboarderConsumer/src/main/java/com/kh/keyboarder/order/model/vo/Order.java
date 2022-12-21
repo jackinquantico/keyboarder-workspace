@@ -32,6 +32,7 @@ public class Order {
 	private String conAddress; // 구매자 주소
 	private String sellerName; // 판매업체명
 	private String searchDate;
+	private int paymentBill;
 
 	private String paymentNo; // 결제번호
 

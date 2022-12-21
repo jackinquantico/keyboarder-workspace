@@ -239,7 +239,7 @@
 				            <div id="delivery-information-header">
 				                <div id="delivery-information-main" style="margin-top: -20px;">
 				                    <div id="delivery-information-count">주문건&nbsp:&nbsp </div>      
-			                    		<div id="delivery-information-count-num" style="margin-top: 5px;">&nbsp${ dateOrderCount }&nbsp</div>
+			                    		<div id="delivery-information-count-num" style="margin-top: 5px; color: red;">${ dateOrderCount }&nbsp</div>
 				                    <button type="button" class="btn btn-dark" style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='dateExcelDownload.poOrder?searchDate=${ searchDate }'">
 				                    	엑셀다운로드
 				                    </button>
@@ -586,7 +586,7 @@
 				            <div id="delivery-information-header">
 				                <div id="delivery-information-main" style="margin-top: -20px;">
 				                    <div id="delivery-information-count">주문건&nbsp:&nbsp </div>      
-			                    		<div id="delivery-information-count-num">&nbsp${ orderCount }&nbsp</div>
+			                    		<div id="delivery-information-count-num" style="color: red;">${ orderCount }&nbsp</div>
 			                    	<c:choose>
 			                    		<c:when test="${ empty ordList }">
 						                    <button type="button" class="btn btn-dark" disabled style="width: 20%; height: 60%; margin-left: 60%;" onclick="location.href='excelDownload.poOrder'">

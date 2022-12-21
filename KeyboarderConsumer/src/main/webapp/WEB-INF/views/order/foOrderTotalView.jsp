@@ -225,7 +225,7 @@
 			                        </a>
 			                    </div>
 			                    <div style="width: 100%; height: 100px; font-size: 17px; padding-top: 20px;" align="center">
-			                        	결제 금액 : ${ ord.orderPrice }원
+			                        	결제 금액 : ${ ord.paymentBill }원
 			                    </div>
 			                </div>
 			                <div class="order-product-delivery-status" style="float: left; width: 15%; height: 250px;">
