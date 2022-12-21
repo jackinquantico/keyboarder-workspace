@@ -10,9 +10,9 @@
 </head>
 <body>
 <div class="content-wrapper">
-	<div class="content">
+	<div class="content" >
 		<div style="width:100%; height: 1000px; background-color: white;">
-			<img src="resources/images/500.png" width="95%"/>
+			<img src="resources/images/500.png" width="100%"/>
 		</div>
 	</div>
 </div>
