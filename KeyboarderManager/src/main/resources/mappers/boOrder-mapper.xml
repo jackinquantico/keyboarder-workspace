@@ -34,9 +34,9 @@
 			         , NVL(C_STO.COUPON_PRICE, 0) "STORE_COUPON_PRICE" <!-- 스토어쿠폰 -->
 			         , NVL(C_KEY.COUPON_PRICE, 0) "KEYBOARDER_COUPON_PRICE" <!-- 키보더쿠폰 -->
 			         , PAY.PAYMENT_BILL "PAYMENT_BILL"
-			         , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 <!-- 스토어쿠폰을 사용한경우 -->
-			                WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 - C_KEY.COUPON_PRICE <!-- 키보더쿠폰을 사용한경우 -->
-			                ELSE PAY.PAYMENT_BILL * 0.15 <!-- 아무것도 안쓴경우 -->
+			         , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN O.ORDER_PRICE * 0.15 <!-- 스토어쿠폰을 사용한경우 -->
+			                WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN O.ORDER_PRICE * 0.15 - C_KEY.COUPON_PRICE <!-- 키보더쿠폰을 사용한경우 -->
+			                ELSE O.ORDER_PRICE * 0.15 <!-- 아무것도 안쓴경우 -->
 			            END "COMMISSION"
 			         , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH"
 			      FROM ORDERS O
@@ -65,9 +65,9 @@
 		             , NVL(C_STO.COUPON_PRICE, 0) "STORE_COUPON_PRICE" <!-- 스토어쿠폰 -->
 		             , NVL(C_KEY.COUPON_PRICE, 0) "KEYBOARDER_COUPON_PRICE" <!-- 키보더쿠폰 --> 
 		             , PAY.PAYMENT_BILL "PAYMENT_BILL"
-		             , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 <!-- 스토어쿠폰을 사용한경우 -->
-		                    WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN PAY.PAYMENT_BILL * 0.15 - C_KEY.COUPON_PRICE <!-- 키보더쿠폰을 사용한경우 -->
-		                    ELSE PAY.PAYMENT_BILL * 0.15 <!-- 아무것도 안쓴경우 -->
+		             , CASE WHEN C_STO.COUPON_PRICE IS NOT NULL THEN O.ORDER_PRICE * 0.15 <!-- 스토어쿠폰을 사용한경우 -->
+		                    WHEN C_KEY.COUPON_PRICE IS NOT NULL THEN O.ORDER_PRICE * 0.15 - C_KEY.COUPON_PRICE <!-- 키보더쿠폰을 사용한경우 -->
+		                    ELSE O.ORDER_PRICE * 0.15 <!-- 아무것도 안쓴경우 -->
 		                END "COMMISSION"
 		          FROM ORDERS O
 		          JOIN PRODUCT P ON (P.PRODUCT_NO = O.PRODUCT_NO)
