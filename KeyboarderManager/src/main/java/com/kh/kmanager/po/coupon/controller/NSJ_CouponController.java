@@ -285,7 +285,6 @@ public class NSJ_CouponController {
 			
 			Coupon c = couponService.detailCoupon(couponNo);
 			
-		
 
 			mv.addObject("c", c).setViewName("po/poCoupon/PoCoupondetail");
 
