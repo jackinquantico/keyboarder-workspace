@@ -116,7 +116,7 @@
                     </tr>
                     <tr>
                         <th> 전화번호 *</th>
-                        <td colspan="3"><input type="text" class="form-control" id="sellerPhone" name="sellerPhone" minlength="13" maxlength="13" placeholder="-포함" required></td>
+                        <td colspan="3"><input type="text" class="form-control" id="sellerPhone" name="sellerPhone" minlength="11" maxlength="13" placeholder="-포함" required></td>
                     </tr>
                     <tr>
                         <th> 이메일 *</th> <!-- 이메일 선택해서 인풋에 넣기 -->

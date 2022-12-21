@@ -58,45 +58,57 @@ public class CWS_SettlementController {
         // 결과값 필터링
         for(int i = 0; i < list.size(); i++) {
         	
-        	int day2 = Integer.parseInt(formatedNow.substring(8)); // 오늘이 몇일인지
+			if(list.get(i).getSettleDate()!=null) {
+				
+	        	int day2 = Integer.parseInt(formatedNow.substring(8)); // 오늘이 몇일인지
+	        	
+	        	int month1 = Integer.parseInt(list.get(i).getSettleDate().substring(5, 7)); // 정산월
+	        	int month2 = Integer.parseInt(formatedNow.substring(5, 7)); // 오늘이 몇달인지
+	        	
+	        	int year1 = Integer.parseInt(list.get(i).getSettleDate().substring(0, 4)); // 정산연도
+	        	int year2 = Integer.parseInt(formatedNow.substring(0, 4)); // 오늘이 몇년도인지
+	        	
+	        	if(month1 == month2 && year1 == year2) { // 정산일이 오늘 기준 월과 연도가 같으면(아직 이번달이 끝나지 않은 경우)
+	        		list.remove(list.get(i)); // 해당 행 제거
+	        		--i;
+	        	} else if(month1 == 12 // 정산일이 12월일때,
+	        			&& month2 == 1 // 이번달이 1월이면서
+	        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
+	        			&& day2 < 10) {   // 오늘이 10일보다 전일때
+	        		list.remove(list.get(i));
+	        		--i;
+	        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
+	        		list.remove(list.get(i));
+	        		--i;
+	        	}
+				
+			}
         	
-        	int month1 = Integer.parseInt(list.get(i).getSettleDate().substring(5, 7)); // 정산월
-        	int month2 = Integer.parseInt(formatedNow.substring(5, 7)); // 오늘이 몇달인지
-        	
-        	int year1 = Integer.parseInt(list.get(i).getSettleDate().substring(0, 4)); // 정산연도
-        	int year2 = Integer.parseInt(formatedNow.substring(0, 4)); // 오늘이 몇년도인지
-        	
-        	if(month1 == month2 && year1 == year2) { // 정산일이 오늘 기준 월과 연도가 같으면(아직 이번달이 끝나지 않은 경우)
-        		list.remove(list.get(i)); // 해당 행 제거
-        		--i;
-        	} else if(month1 == 12 // 정산일이 12월일때,
-        			&& month2 == 1 // 이번달이 1월이면서
-        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
-        			&& day2 < 10) {   // 오늘이 10일보다 전일때
-        		list.remove(list.get(i));
-        		--i;
-        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
-        		list.remove(list.get(i));
-        		--i;
-        	}
+
         }
         
         for(int i = 0; i < list.size(); i++) {
         	
-    		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
-    		String endSettleDate = list.get(i).getSettleDate();
-    		
-    		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
-    		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
-            
-            // 해당 월의 마지막 일수 구하기
-            Calendar cal = Calendar.getInstance();
+        	if(list.get(i).getSettleDate()!=null) {
+        		
+        		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+        		String endSettleDate = list.get(i).getSettleDate();
+        		
+        		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
+        		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
+                
+                // 해당 월의 마지막 일수 구하기
+                Calendar cal = Calendar.getInstance();
 
-            cal.set(settleDateYear, settleDateMonth, 1);
+                cal.set(settleDateYear, settleDateMonth, 1);
 
-            endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-            
-            list.get(i).setSettleDate(endSettleDate);
+                endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                
+                list.get(i).setSettleDate(endSettleDate);
+        		
+        	}
+        	
+
         }
 
 		
@@ -126,31 +138,44 @@ public class CWS_SettlementController {
         // 포맷 적용
         formatedNow = now.format(formatter);     
         
+        
+        
         // 결과값 중 이번달 건 빼기(이번달이 안끝난 경우)
         for(int i = 0; i < list.size(); i++) {
         	
-        	if(list.get(i).getSettleDate().equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
-        		list.remove(list.get(i)); // 해당 행 제거
-        		--i;
+        	if(list.get(i).getSettleDate()!=null) {
+        		
+            	if(list.get(i).getSettleDate().equals(formatedNow.substring(0, 7))) { // 결과값이 이번달과 같으면
+            		list.remove(list.get(i)); // 해당 행 제거
+            		--i;
+            	}
+        		
         	}
+        	
+
         }
 
         for(int i = 0; i < list.size(); i++) {
         	
-    		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
-    		String endSettleDate = list.get(i).getSettleDate();
-    		
-    		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
-    		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
-            
-            // 해당 월의 마지막 일수 구하기
-            Calendar cal = Calendar.getInstance();
+        	if(list.get(i).getSettleDate()!=null) {
+        		
+        		
+        		// 날짜 양식 맞춰주기 (월을 뽑아오므로 1일 붙여주기)
+        		String endSettleDate = list.get(i).getSettleDate();
+        		
+        		int settleDateYear = Integer.parseInt((endSettleDate.substring(0, 4)));
+        		int settleDateMonth = Integer.parseInt((endSettleDate.substring(5, 7)));       
+                
+                // 해당 월의 마지막 일수 구하기
+                Calendar cal = Calendar.getInstance();
 
-            cal.set(settleDateYear, settleDateMonth, 1);
+                cal.set(settleDateYear, settleDateMonth, 1);
 
-            endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-            
-            list.get(i).setSettleDate(endSettleDate);
+                endSettleDate = list.get(i).getSettleDate() + "-" + cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                
+                list.get(i).setSettleDate(endSettleDate);
+        	}
+        	
         }
 
         session.setAttribute("searchCondition", searchCondition);
@@ -169,7 +194,10 @@ public class CWS_SettlementController {
 		
 		CWS_Settlement result = settlementService.sellerBillModal(modalRequest);
 		
-        result.setSettleDate(settleDate); // 테이블의 값(해당 달의 말일)을 그대로 넣어주기
+		if(result.getSettleDate()!=null) {
+			 result.setSettleDate(settleDate); // 테이블의 값(해당 달의 말일)을 그대로 넣어주기
+		}
+       
         result.setModalWriteDate(settleDate);
         result.setCommition(commition);
         result.setSupplyValue((int)(commition/1.1));
@@ -189,8 +217,11 @@ public class CWS_SettlementController {
 		ArrayList <Member> sellerList = settlementService.selectSeller();
 		ArrayList <CWS_Settlement> list = settlementService.selectStoreSettlement();
 		
+		
 		for(int i = 0; i < list.size(); i ++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			if(list.get(i).getSettleDate()!=null) {
+				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			}			
 			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
 			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
 			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
@@ -211,7 +242,9 @@ public class CWS_SettlementController {
 		ArrayList <CWS_Settlement> list = settlementService.searchStoreSettlement(searchCondition);
 		
 		for(int i = 0; i < list.size(); i ++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			if(list.get(i).getSettleDate()!=null) {
+				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			}
 			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
 			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
 			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
@@ -229,7 +262,9 @@ public class CWS_SettlementController {
 		ArrayList <CWS_Settlement> list = settlementService.selectStoreSettlement();
 		
 		for(int i = 0; i < list.size(); i ++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			if(list.get(i).getSettleDate()!=null) {
+				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			}
 			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
 			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
 			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());
@@ -408,12 +443,12 @@ public class CWS_SettlementController {
 		
 		CWS_Settlement searchCondition = new CWS_Settlement(1, conditionName, conditionDate1, conditionDate2);
 		
-		System.out.println(searchCondition);
-		
 		ArrayList <CWS_Settlement> list = settlementService.searchStoreSettlement(searchCondition);
 		
 		for(int i = 0; i < list.size(); i ++) {
-			list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			if(list.get(i).getSettleDate()!=null) {
+				list.get(i).setSettleDate(list.get(i).getSettleDate().substring(0, 10));
+			}
 			list.get(i).setTotalOrderPrice(list.get(i).getOrderPrice() - list.get(i).getScouponPrice() - list.get(i).getKcouponPrice());
 			list.get(i).setTotalDeductible(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice() - list.get(i).getCommition() + list.get(i).getKcouponPrice());
 			list.get(i).setTotalCouponPrice(list.get(i).getScouponPrice() + list.get(i).getKcouponPrice());

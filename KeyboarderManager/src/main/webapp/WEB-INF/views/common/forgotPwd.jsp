@@ -79,11 +79,8 @@
         }
 
         button {
-            position: relative;
             font-size: 20px;
             font-weight: 540;
-            top : 200px;
-            left : 330px;
             background-color: #323232;
             color : white;
             width : 15%;
@@ -117,12 +114,13 @@
                 <div id="forgotId">
                     <div id="text3">
                         사업자 등록 번호 :&nbsp;&nbsp;&nbsp;
-                        <input type="text" id="corpNo" name="corpNo" minlength="12" maxlength="12" placeholder=" - 포함 12자 입력" required><br><br>
+                        <input type="text" id="corpNo" name="corpNo" pattern=",{12, 12}" placeholder=" - 포함 12자 입력" required>
+                        <br><br>
                         아이디 :&nbsp;
                         <input type="text" id="sellerId" name="sellerId" required> 
                     </div>                
                 </div>
-		        <div>
+		        <div style="position:relative; top : 200px; left : 350px;">
 		            <button type="submit">비밀번호 초기화</button>
 		        </div>                       
             </form>
