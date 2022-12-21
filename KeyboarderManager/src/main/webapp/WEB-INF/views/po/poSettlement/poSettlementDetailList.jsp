@@ -71,8 +71,12 @@ height:500px;
 			 <div align="center">  
 			 	 <button class="btn btn-dark" style="width:100px; margin-right:10px;">검색</button>  
 			     <button class="btn btn-outline-secondary" style="width:100px;">초기화</button>  
+			      <c:choose>
+                    <c:when test="${ not empty  startDate }">
 			     <button class="btn btn-outline-secondary"  type="button" style="width:200px; float:right;" onclick="location.href='excelDownload.sDetail'" >
 			      엑셀다운로드</button> 
+			      </c:when>
+			      </c:choose>
 			 </div>
 	    </div>  
 		<br>
@@ -126,7 +130,6 @@ height:500px;
 				   <th colspan="3">주문결제정보</th>
 				</tr>
 				
-		
 				<tr>
 				    <th>주문번호</th>
 				    <th>주문자</th>

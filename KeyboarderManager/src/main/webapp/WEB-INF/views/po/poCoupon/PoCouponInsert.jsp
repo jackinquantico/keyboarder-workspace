@@ -74,20 +74,20 @@ select[name=productNo] {
 	
 	    	<tr>
 	        <td>쿠폰종류*</td>
-	        <td><input type="radio" name="couponPrice" value="3000">&nbsp;3000원&nbsp;
-	        <input type="radio" name="couponPrice" value="5000">&nbsp;5000원&nbsp;
-	        <input type="radio" name="couponPrice" value="10000">10000원 &nbsp;</td>
+	        <td><input type="radio" name="couponPrice" value="3000" required>&nbsp;3000원&nbsp;
+	        <input type="radio" name="couponPrice" value="5000" required>&nbsp;5000원&nbsp;
+	        <input type="radio" name="couponPrice" value="10000" required>10000원 &nbsp;</td>
 	        
 		</tr>
 	<tr>
 	    <td>쿠폰 유효기간*&nbsp;</td>
-	    <td><input type="date" name="createDate" style="width:100%;"class="form-control col-lg-4">&nbsp;~&nbsp;<input type="date" name="dueDate" style="width:250px;" class="form-control col-lg-4"></td>
+	    <td><input type="date" name="createDate" required style="width:100%;"class="form-control col-lg-4">&nbsp;~&nbsp;<input type="date" name="dueDate" style="width:250px;" class="form-control col-lg-4" required></td>
 		</tr>
 
 		<tr>
 		<td>쿠폰 발행상품*</td>
 			<td>
-			<select name ="productNo" required id="productNo" style="width:100%;" class="form-control select">
+			<select name ="productNo" required id="productNo" style="width:100%;" class="form-control select" required>
 				<option selected value="">상품선택</option>
 				<c:forEach var="p" items="${list}">
 					<option value="${p.productNo}">${p.productName}</option>

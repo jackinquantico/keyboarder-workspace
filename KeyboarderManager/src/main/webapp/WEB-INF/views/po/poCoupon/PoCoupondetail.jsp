@@ -79,11 +79,15 @@ select[name=productNo] {
 	        
 		</tr>
 	<tr>
-	    <td>쿠폰 유효기간*&nbsp;</td>
-	    <td><input type="date" name="createDate" style="width:230px;"class="form-control col-lg-4">&nbsp;~&nbsp;<input type="date" name="dueDate" style="width:230px;" class="form-control col-lg-4"></td>
+	    <td>쿠폰 발행기간*&nbsp;</td>
+	    <td><input type="date" name="createDate" style="width:230px;"class="form-control col-lg-4"  value="${c.createDate }">&nbsp;~&nbsp;<input type="date" name="dueDate" style="width:230px;" value="${c.dueDate}" class="form-control col-lg-4" ></td>
 		</tr>
-
-		
+		<tr>
+			<td>쿠폰 발행상품 *</td>
+			<td>
+			<input type="text" name="productNo" id="productNo" class="form-control select" value="${c.productName}" disabled>
+				</td>
+			</tr>
 	   	 </table>
 	   	 <button style="float:right; margin-right:20px;" class="btn btn-secondary">수정하기</button><br><br>
 	    <hr style="clear:both">
@@ -105,9 +109,7 @@ select[name=productNo] {
 
 
     <script>
-       	$(function() {
-       		
-       		// 쿠폰 체크용 로직
+       	$(function() {// 쿠폰 체크용 로직
        		var couponPrices = $("input[name=couponPrice]");
        		
        		couponPrices.each(function(index, el) {
@@ -128,6 +130,7 @@ select[name=productNo] {
        		dueDate.val(endDate);
        		
        	});
+       
     </script>
 
 
