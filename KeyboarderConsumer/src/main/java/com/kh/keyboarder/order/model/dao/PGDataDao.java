@@ -45,4 +45,8 @@ public class PGDataDao {
 		return sqlSession.update("pgdMapper.confirmPay", pgd);
 	}
 
+	public int confirmSettle(SqlSessionTemplate sqlSession, PGData pgd) {
+		return sqlSession.update("pgdMapper.confirmSettle", pgd);
+	}
+
 }

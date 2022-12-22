@@ -165,6 +165,7 @@ public class PGDataService {
 	}
 	
 	public int confirmPay(PGData pgd) {
-		return dao.confirmPay(sqlSession, pgd);
+		return dao.confirmPay(sqlSession, pgd)
+					* dao.confirmSettle(sqlSession, pgd);
 	}
 }

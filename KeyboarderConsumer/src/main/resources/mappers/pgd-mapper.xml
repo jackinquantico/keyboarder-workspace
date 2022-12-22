@@ -86,4 +86,10 @@
 		WHERE ORDER_NO = #{orderNo}
 	</update>
 	
+	<update id="confirmSettle" parameterType="pgd">
+		UPDATE SETTLEMENT
+		SET SETTLE_DATE = SYSDATE
+		WHERE ORDER_NO = #{orderNo}
+	</update>
+	
 </mapper>
