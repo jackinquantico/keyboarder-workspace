@@ -45,6 +45,9 @@
 		margin: auto;
 	}
 
+#pro .card-img-top:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">

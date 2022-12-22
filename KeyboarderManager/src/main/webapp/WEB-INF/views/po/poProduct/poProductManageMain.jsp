@@ -69,6 +69,10 @@
 		padding: 10px;
 	}
 	
+	#pro img:hover {
+		cursor: pointer;
+	}
+	
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
