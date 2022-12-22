@@ -89,9 +89,7 @@
 #result_table>thead {
     background-color: lightgray;
 }
- #result_table>tbody td {
- 	height: 50px;
- }
+ 
 
 /* -------------- 주문내역 상세조회 모달창 설정 ------------------ */
 

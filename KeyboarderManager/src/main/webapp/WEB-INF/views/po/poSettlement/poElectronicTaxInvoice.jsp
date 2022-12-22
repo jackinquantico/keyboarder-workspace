@@ -27,7 +27,7 @@
 		.electronic-information-notice{
 			width: 92%;
 			height: 235px;
-			overflow: scroll;
+			overflow-y: scroll;
 		}
 		
 		#electronic-list{
@@ -44,7 +44,7 @@
 		.electronic-view-all{
 			width: 97%;
 		}
-        
+		
     </style>
     
      <!-- jQuery 라이브러리 -->
@@ -112,7 +112,7 @@
 	                                <th width="13%">계산서 종류</th>
 	                                <th width="16%">합계</th>
 	                                <th width="18%">공급가액</th>
-	                                <th width="18%">새액</th>
+	                                <th width="18%">세액</th>
 	                                <th width="15%">세금계산서</th>
 	                            </tr>
 	                        </thead>
@@ -149,7 +149,7 @@
 				                                <td>${ elec.supplyValue }</td>
 				                                <td>${ elec.taxAmount }</td>
 				                                <td data-toggle="modal" data-target="#myModal">
-				                                	<a data-toggle="modal" href="#myModal" style="cursor:pointer;" class="btn modalCalls">
+				                                	<a data-toggle="modal" href="#myModal" style="cursor:pointer; color :blue; text-decoration : underline;" class="btn modalCalls">
 														세금계산서 확인
 													</a>
 				                                </td>
