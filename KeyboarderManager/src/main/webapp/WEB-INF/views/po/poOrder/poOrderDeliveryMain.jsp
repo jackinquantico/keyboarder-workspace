@@ -326,7 +326,7 @@
 												                	<hr>
 												                    <div class="all">
 												                        <div class="title" style="display: inline-block;">주문번호</div>
-												                        <div class="content" style="display: inline-block;"><${ date.orderNo }</div>
+												                        <div class="content" style="display: inline-block;">${ date.orderNo }</div>
 												                    </div>
 												                    <c:choose>
 						                                				<c:when test="${ date.orderStatus eq 1 }">
