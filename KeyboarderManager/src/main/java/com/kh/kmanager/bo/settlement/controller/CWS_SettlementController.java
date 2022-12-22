@@ -74,10 +74,10 @@ public class CWS_SettlementController {
 	        	} else if(month1 == 12 // 정산일이 12월일때,
 	        			&& month2 == 1 // 이번달이 1월이면서
 	        			&& year1 == (year2 - 1) // 정산연도가 오늘 연도 기준 작년이며
-	        			&& day2 < 10) {   // 오늘이 10일보다 전일때
+	        			&& day2 < 2) {   // 오늘이 2일보다 전일때
 	        		list.remove(list.get(i));
 	        		--i;
-	        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 10) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 10일이 안됐을 때   
+	        	} else if(year1 == year2 && month1 == (month2 - 1) && day2 < 2) { // 정산월이 12월이 아니고, 오늘 기준 저번달이고, 오늘이 아직 3일이 안됐을 때   
 	        		list.remove(list.get(i));
 	        		--i;
 	        	}
