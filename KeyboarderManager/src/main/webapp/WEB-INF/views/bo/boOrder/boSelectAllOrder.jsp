@@ -12,6 +12,9 @@
 	width: 95%;
 	margin: auto;
 }
+#allOrder_result {
+	height: 550px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">

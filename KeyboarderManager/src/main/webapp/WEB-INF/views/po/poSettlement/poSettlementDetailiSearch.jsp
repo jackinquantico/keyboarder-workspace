@@ -34,7 +34,7 @@
 
 margin:auto;
 overflow-y:scroll;
-height:500px;
+height:470px;
 }
 
  </style>

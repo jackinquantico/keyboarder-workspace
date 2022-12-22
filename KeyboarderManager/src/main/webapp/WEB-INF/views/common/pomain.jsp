@@ -99,7 +99,7 @@
 }
 .tableBox .atag {
 	position: absolute;
-	left: 450px;
+	left: 380px;
 	top: 30px;
 }
 

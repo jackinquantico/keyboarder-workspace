@@ -15,7 +15,7 @@
 #noticeList {
 	width: 95%;
 	margin: auto;
-	height: 750px;
+	height: 550px;
 	padding: 0px;
 }
 #noticeList_table {
@@ -24,7 +24,7 @@
 }
 #noticeList_table td {
 	text-align: center;
-	height: 70px;
+	height: 50px;
 }
 #noticeList_table thead {
 	height: 50px;
@@ -36,6 +36,12 @@
 	float: right;
 	background-color: white;
 	border: 1px solid gray;
+	height: 40px;
+	margin-bottom: 0px;
+}
+.card {
+width: 95%;
+height: 550px;
 }
 </style>
 </head>
@@ -77,7 +83,7 @@
 		</div>
 		
 		<!-- 실제 콘텐츠 영역 -->
-		<div class="content">
+		<div class="content" style="height: 700px;">
 
 			<div id="noticeList" class="card">
 				<table id="noticeList_table" class="table-bordered">

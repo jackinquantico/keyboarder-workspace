@@ -19,7 +19,7 @@ td{
 }
 #productGraph {
 	width: 350px;
-	height: 750px;
+	height: 700px;
 }
 
 </style>
@@ -51,7 +51,7 @@ td{
 				<table style="width: 100%;">
 					<tr>
 						<td width="50%">
-							<canvas id="productGraph" width="350px" height="730px"></canvas>
+							<canvas id="productGraph" width="350px" height="700px"></canvas>
 						</td>
 						<td width="50%">
 							<table>

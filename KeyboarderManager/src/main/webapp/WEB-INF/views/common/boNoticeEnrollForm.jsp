@@ -10,7 +10,7 @@
 #noticeArea {
 	width: 95%;
 	margin: auto;
-	height: 830px;
+	height: 750px;
 }
 </style>
 </head>
@@ -40,11 +40,11 @@
 		<div id="noticeArea" class="card">
 			<form id="noticeEnrollForm" method="post" action="insertNotice.bo">
 				<div id="noticeTitle" style="margin-top: 15px;">
-					<input type="text" id="title" placeholder="제목을 입력해주세요" name="noticeTitle" required>
+					<input type="text" id="title" placeholder="제목을 입력해주세요" name="noticeTitle" required style="font-size: 16px;">
 				</div>
 				<hr>
-				<div id="noticeContent">
-					<textarea id="content" rows="10" style="resize:none;" placeholder="내용을 입력해주세요 " name="noticeContent" required></textarea>
+				<div id="noticeContent" style="height: 550px;">
+					<textarea id="content" rows="10" style="resize:none;font-size: 16px;" placeholder="내용을 입력해주세요 " name="noticeContent" required></textarea>
 				</div>
 				<div id="noticeBtns">
 					<button type="submit" class="btn" id="write_btn">작성하기</button>&nbsp;&nbsp;&nbsp;

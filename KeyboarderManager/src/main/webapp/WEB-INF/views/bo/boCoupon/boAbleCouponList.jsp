@@ -14,7 +14,7 @@
 #searchArea { padding: 30px; }
 #searchArea table { width: 100%; }
 #listArea {
-	height: 600px;
+	height: 500px;
 	overflow: auto;
 }
 td{

@@ -10,7 +10,7 @@
 #noticeArea {
 	width: 95%;
 	margin: auto;
-	height: 820px;
+	height: 750px;
 }
 </style>
 </head>
@@ -40,11 +40,11 @@
 			<form id="noticeUpdateForm" method="post" action="noticeUpdate.bo">
 				<input type="hidden" value="${ n.noticeNo }" name="noticeNo">
 				<div id="noticeTitle">
-					<input type="text" id="title" value="${ n.noticeTitle }" name="noticeTitle" required>
+					<input type="text" id="title" value="${ n.noticeTitle }" name="noticeTitle" required style="font-size: 16px;">
 				</div>
 				<hr>
-				<div id="noticeContent">
-					<textarea id="content" rows="10" style="resize:none;" name="noticeContent" required>${ n.noticeContent }</textarea>
+				<div id="noticeContent" style="height: 550px;">
+					<textarea id="content" rows="10" style="resize:none;font-size: 16px; height: 500px;" name="noticeContent" required>${ n.noticeContent }</textarea>
 				</div>
 				<div id="noticeBtns">
 					<button type="submit" id="write_btn" class="btn">수정하기</button>&nbsp;&nbsp;&nbsp;

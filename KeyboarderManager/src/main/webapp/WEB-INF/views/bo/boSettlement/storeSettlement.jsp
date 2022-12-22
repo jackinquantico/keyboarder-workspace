@@ -53,7 +53,7 @@
 
 #allOrder_result{
     width: 95%;
-    height : 650px;
+    height : 600px;
     margin: auto;
     /* margin : 0px 10px 10px 10px; */
     padding : 20px 10px 10px 10px;
@@ -197,7 +197,7 @@ th {
 
 			</div>
 
-			<br>
+			<br><br>
 
 			<div id="allOrder_result" class="card">
 				<div id="result_div">

@@ -10,8 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         #wrap {
-            width : 1920px;
-            height : 1050px;
+            width : 1860px;
+            height : 930px;
         }
 
         #wrap>div {
@@ -20,7 +20,7 @@
 
         #login_left {
             background-color: #323232;
-            width : 777px;
+            width :45%;
             height : 100%;
         }
 
@@ -44,7 +44,7 @@
         }
 
         #login_right {
-            width : 1143px;
+            width :55%;
             height : 100%;
         }
 

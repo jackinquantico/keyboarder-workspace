@@ -93,6 +93,10 @@
         	text-decoration : none;
         	color : black;
         }				
+        
+        #allOrder_result {
+        	height: 600px;
+        }
 	</style>
 	    <!-- jQuery 라이브러리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -194,7 +198,7 @@
 					</table>																	
 				</div>					
 			</form>
-						
+						<br>
 			<div id="allOrder_result" class="card">
 				<div id="result_div">
 					<div style="font-size : 25px; margin: 20px 0px 30px 20px;">지불내역&nbsp;&nbsp;</div>

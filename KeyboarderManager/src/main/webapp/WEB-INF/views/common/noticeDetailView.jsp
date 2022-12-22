@@ -13,7 +13,7 @@
 #noticeArea {
 	width: 95%;
 	margin: auto;
-	height: 800px;
+	height: 750px;
 }
 #noticeTitle {
 	padding: 15px;
@@ -50,18 +50,17 @@
 		    </div><!-- /.row -->
 		  </div><!-- /.container-fluid -->
 		</div>
-		
 		<!-- 실제 콘텐츠 영역 -->
 		<div class="content">
 			<div id="noticeArea" class="card">
-				<div id="noticeTitle">
-					<input type="text" id="title" value="${ n.noticeTitle }" readonly style="width:65%;">
-					<input type="text" id="writeDate" value="${ n.writeDate }">
-					<input type="text" id="writer" value="관리자">
+				<div id="noticeTitle" >
+					<input type="text" id="title" value="${ n.noticeTitle }" readonly style="width:65%; font-size: 16px;">
+					<input type="text" id="writeDate" value="${ n.writeDate }" style="font-size: 16px;">
+					<input type="text" id="writer" value="관리자" style="font-size: 16px;">
 				</div>
 				<hr>
 				<div id="noticeContent">
-					<textarea id="content" rows="10" style="resize:none;" readonly>${ n.noticeContent }</textarea>
+					<textarea id="content" rows="10" style="resize:none; font-size: 16px;" readonly>${ n.noticeContent }</textarea>
 				</div>
 				<!-- bo/po 공통으로 사용하는 jsp파일이라 추후 로그인세션의 계정 검사해서 관리자일 경우에만 수정,삭제 버튼 보이게끔 if문 설정해야함 -->
 				<c:if test="${ loginUser.sellerId eq 'admin' }">
