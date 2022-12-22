@@ -292,7 +292,7 @@ public class SCY_SettlementController {
         
         response.setContentType("Application/Msexcel");
         response.setHeader("Content-Disposition", "ATTachment; Filename=" 
-        		+ URLEncoder.encode(sellerName + "_정산상세내역" + o.getStartDate() + "_" + o.getEndDate(), "UTF-8") + ".xls");
+        		+ URLEncoder.encode(sellerName + "_정산상세내역", "UTF-8") + ".xls");
         
 	    OutputStream fileOut  = response.getOutputStream();
 	    objWorkBook.write(fileOut);
