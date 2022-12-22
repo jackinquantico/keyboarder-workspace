@@ -72,14 +72,14 @@
 
 			<br>
 
-			<div id="allOrder_result" class="card" style="margin:auto; border: none;">
+			<div id="allOrder_result" class="card" style="margin:auto; border: none; height:600px;">
 				<div id="result_div" style="height: 50px;">
 					<div id="result_count">주문건&nbsp;&nbsp;${ listCount }</div>
 					<div id="result_btn">
 						<button class="btn btn-outline-secondary" onclick="excelDownloadSubmit();">엑셀 다운로드</button>
 					</div>
 				</div>
-				<div id="table_div" style="overflow:scroll;">
+				<div id="table_div" style="overflow-y: scroll;">
 					<table id="result_table" border="1" class="table-bordered">
 						<thead>
 							<tr>
@@ -99,11 +99,11 @@
 							<c:choose>
 								<c:when test="${ not empty list }">
 									<c:forEach var="o" items="${ list }">
-										<tr>
+										<tr style="height: 50px;">
 											<td><input type="checkbox" name="chk[]" onclick="isAllCheck(this.name, 'chkAll');" value="${ o.printOrder() }"></td>
 											<td>${ o.orderStatus }</td>
 											<td>${ o.orderDate }</td>
-											<td data-toggle="modal" data-target="#orderDetailModal_${ o.orderNo }">${ o.orderNo }</td>
+											<td data-toggle="modal" data-target="#orderDetailModal_${ o.orderNo }"><a href="#">${ o.orderNo }</a></td>
 											<td>${ o.productName }</td>
 											<td>1</td>
 											<td>${ o.orderPrice }</td>
@@ -360,11 +360,11 @@
 						
 						for(var i = 0; i < result.length; i++) {
 							
-							resultStr += "<tr>"
+							resultStr += '<tr style="height:50px;">'
 											+ "<td><input type='checkbox' name='chk[]' onclick='isAllCheck(this.name, 'chkAll');' value='" + result[i].printOrder + "'></td>"
 											+ "<td>" + result[i].orderStatus + "</td>"
 											+ "<td>" + result[i].orderDate + "</td>"
-											+ "<td data-toggle='modal' data-target='#orderDetailModal_" + result[i].orderNo + "'>" + result[i].orderNo + "</td>"
+											+ "<td data-toggle='modal' data-target='#orderDetailModal_" + result[i].orderNo + "'><a href='#'>" + result[i].orderNo + "</a></td>"
 											+ "<td>" + result[i].productName + "</td>"
 											+ "<td>1</td>"
 											+ "<td>" + result[i].orderPrice + "</td>"

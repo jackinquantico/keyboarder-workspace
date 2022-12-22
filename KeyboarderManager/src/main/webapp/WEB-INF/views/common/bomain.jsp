@@ -26,13 +26,20 @@
 	height: 350px; 
 	padding-bottom: 20px;
 }
-#left-status, #right-status {
+#left-status {
 	height: 100%; 
 	display:inline;
 	margin: 0px;
 	float: left;
 	padding: 10px;
 }
+#right-status  {
+height: 100%; 
+	display:inline;
+	margin: 0px;
+	float: left;
+}
+
 #right-status table {
 	width: 100%;
 	height: 100%;

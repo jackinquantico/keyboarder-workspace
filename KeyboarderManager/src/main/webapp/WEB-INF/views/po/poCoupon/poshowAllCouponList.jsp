@@ -128,7 +128,7 @@ input[type=date] {
 			        <tbody id="couponList">
 			        <c:forEach var="c" items="${list}">
 			            <tr>
-			               <td width="10%"onclick="location.href='detailCoupon.po?couponNo=${c.couponNo}'">${c.couponNo}</td>
+			               <td width="10%"><a href="detailCoupon.po?couponNo=${c.couponNo}">${c.couponNo}</a></td>
 			               <td width="25%">${c.couponName}</td>
 			               <td width="10%">${c.couponPrice}</td>
 			               <td width="5%" >${c.couponPrice}</td>

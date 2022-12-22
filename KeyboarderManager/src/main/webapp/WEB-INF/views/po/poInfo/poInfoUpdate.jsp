@@ -21,20 +21,20 @@
     <style>
         #wrap {
             width : 1100px;
-            height : 900px;
+            height : 500px;
             margin-left : 300px;        
         }
     
     	.content {
     		width : 1100px;
-    		height : 900px;
+    		height : 500px;
     		padding : 0px;
     	}
     	
     	#updateContent {
     		
     		width : 1100px;
-    		height : 900px;
+    		height : 500px;
     	}
     
 		#poInfo {
@@ -60,7 +60,7 @@
 
         #buttons button {
             margin-top: 10px;
-            font-size: 20px;
+            font-size: 16px;
             border-radius: 3px;
         }
         
@@ -73,7 +73,7 @@
         th{
             text-align: left;
             padding: 18px 0px 18px 20px;
-            font-size: 20px;
+            font-size: 14px;
             font-weight : 540;
             width : 30%;
         }
@@ -83,7 +83,7 @@
          }
 
          td{
-            font-size : 22px;
+            font-size : 14px;
             font-weight: 540;
             padding-left : 50px;
          }
@@ -122,11 +122,11 @@
 	<jsp:include page="../../common/posidebar.jsp" />
     
     <div class="content-wrapper">
-    <div id="wrap" style="width:1100px; height: 900px;">
+    <div id="wrap" style="width:1100px; height: 700px;">
 	
 		<div class="content">
 
-        <form action="updateInfo.po" style="width:1100px; height: 900px; margin-left:0px; min-height:900px;">
+        <form action="updateInfo.po" style="width:1100px; height: 700px; margin-left:0px; min-height:700px;">
             <div id="updateContent">
                 <div id="textAndButtons">
                     <div id="text1"  style="padding-top: 30px;">판매자 정보 수정</div>
@@ -151,7 +151,7 @@
                         <tr>
                             <th class="td">대표자명 <h6 style="display: inline; color : red;">*</h6></th>
                             <td class="td">
-                                <input type="text" id="updateRepName" name="updateRepName" value="${ loginUser.repName }">
+                                <input type="text" id="updateRepName" name="updateRepName" value="${ loginUser.repName }"  class="col-sm-3 form-control">
                             </td>
                         </tr>
                         <tr>
@@ -164,7 +164,7 @@
                         </tr>
                         <tr>
                             <th style="border:none;" class="td">본사 소재지(기존 주소) <h6 style="display: inline; color : red;">*</h6></th>
-                            <td style="border:none; font-size:18px;" class="td">${ loginUser.location }</td>
+                            <td style="border:none; font-size:14px;" class="td">${ loginUser.location }</td>
                         </tr>
                         <tr>
                         	<th style="border:none; text-align: center;" class="td">우편번호 <h6 style="display: inline; color : red;">*</h6></th>
@@ -180,7 +180,7 @@
                        	    <input type="text" class="form-control" name="address2" id="sample6_detailAddress" placeholder="상세주소" style="width:300px; display:inline-block;" required>
                             <input type="text" class="form-control" id="sample6_extraAddress" style="width:150px; display:inline-block;" placeholder="참고항목">
                             <input type="hidden" id="updateLocation" name="updateLocation" value="" />
-                            <input type="button" id="confirmLocation" class="btn btn-dark" value="주소 확정" style="width:100px; height:40px; font-size: 75%; margin-left:10px;">
+                            <input type="button" id="confirmLocation" class="btn btn-dark" value="주소 확정" style="width:100px; height:40px;  margin-left:10px;">
                        </td>                       
                         </tr>
                         <tr>
@@ -192,22 +192,22 @@
                             <th style="border:none; text-align: center;" class="td">이메일 <h6 style="display: inline; color : red;">*</h6></th>
                             <td style="border:none;" class="td">
                             	<input type="hidden" id="sellerEmail" value="${ loginUser.sellerEmail }">
-                                <input type="text" id="email1" name="email1" style="width:200px;"> @
-                                <input type="text" id="email2" name="email2" style="width:200px;">
+                                <input type="text" id="email1" name="email1" style="width:200px; display:inline-block;" class="col-sm-3 form-control"> @
+                                <input type="text" id="email2" name="email2" style="width:200px; display:inline-block;" class="col-sm-3 form-control">
                                 <input type="hidden" name="updateSellerEmail" id="updateSellerEmail" value="">
-                                <button type="button" id="checkbutton" style="width:100px; height:40px; font-size: 75%; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">중복체크</button>
+                                <button type="button" id="checkbutton" style="width:100px; height:40px; margin-left:10px;" class="btn btn-dark" onclick="emailCheck();">중복체크</button>
                             </td>
                         </tr>
                         <tr>
                             <th style="text-align:center;" class="td">전화번호 <h6 style="display: inline; color : red;">*</h6></th>
                             <td class="td">
-                                <input type="text" id="updateSellerPhone" name="updateSellerPhone" value="${ loginUser.sellerPhone }">
+                                <input type="text" id="updateSellerPhone" name="updateSellerPhone" value="${ loginUser.sellerPhone }"  class="col-sm-3 form-control">
                             </td>
                         </tr>
                         <tr>
                             <th>계좌번호 <h6 style="display: inline; color : red;">*</h6></th>
                             <td>
-                                <input type="text" id="updateAccountNo" name="updateAccountNo" style="width:400px;" placeholder=" - 포함" value="${ loginUser.accountNo }">
+                                <input type="text" id="updateAccountNo" name="updateAccountNo" style="width:400px;" placeholder=" - 포함" value="${ loginUser.accountNo }"   class="col-sm-3 form-control">
                             </td>
                         </tr>
                     </table>

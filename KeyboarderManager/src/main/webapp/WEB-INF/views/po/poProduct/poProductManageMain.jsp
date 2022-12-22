@@ -26,7 +26,7 @@
     }
     #productList {
 		width: 100%;
-        height: 550px;
+        height: 500px;
         overflow-y: scroll;
         overflow-x:hidden; 
         overflow-y:auto;
