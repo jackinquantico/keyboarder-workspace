@@ -80,7 +80,7 @@ select[name=productNo] {
 		</tr>
 	<tr>
 	    <td>쿠폰 발행기간*&nbsp;</td>
-	    <td><input type="date" name="createDate" style="width:230px;"class="form-control col-lg-4"  value="${c.createDate }">&nbsp;~&nbsp;<input type="date" name="dueDate" style="width:230px;" value="${c.dueDate}" class="form-control col-lg-4" ></td>
+	    <td><input type="date" name="createDate" style="width:230px;"class="form-control col-lg-4"  value="${c.createDate }" disabled>&nbsp;~&nbsp;<input type="date" name="dueDate" style="width:230px;" value="${c.dueDate}" class="form-control col-lg-4" disabled></td>
 		</tr>
 		<tr>
 			<td>쿠폰 발행상품 *</td>
