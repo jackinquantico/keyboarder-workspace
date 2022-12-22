@@ -102,7 +102,7 @@
             width: 98%;
             height: 70%;
             margin-top: -40px;
-            overflow: scroll;
+            overflow-y: scroll;
         }
 
         #delivery-list{
@@ -140,6 +140,10 @@
         	height: 55px;
         }
         
+        #modalClick {
+        	text-decoration : underline;
+        	color : blue;
+        }
         #modalClick:hover{
         	cursor: pointer;
         }
@@ -264,7 +268,7 @@
 			                        		<c:choose>
 			                        			<c:when test="${ not empty dateList }">
 						                            <tr>
-						                                <td id="modalClick" class="click" data-toggle="modal" data-target="#deliveryModal<%= count %>">
+						                                <td id="modalClick" class="click"  data-toggle="modal" data-target="#deliveryModal<%= count %>">
 						                                	${ date.orderNo }
 						                                </td>
 						                                <c:choose>
@@ -322,7 +326,7 @@
 												                	<hr>
 												                    <div class="all">
 												                        <div class="title" style="display: inline-block;">주문번호</div>
-												                        <div class="content" style="display: inline-block;">${ date.orderNo }</div>
+												                        <div class="content" style="display: inline-block;"><${ date.orderNo }</div>
 												                    </div>
 												                    <c:choose>
 						                                				<c:when test="${ date.orderStatus eq 1 }">
@@ -617,7 +621,7 @@
 			                        		<c:choose>
 			                        			<c:when test="${ not empty ordList }">
 						                            <tr>
-						                                <td id="modalClick" class="click" data-toggle="modal" data-target="#deliveryModal<%= count %>">
+						                                <td id="modalClick" class="click" data-toggle="modal" data-target="#deliveryModal<%= count %>" >
 						                                	${ ord.orderNo }
 						                                </td>
 						                                <c:choose>
