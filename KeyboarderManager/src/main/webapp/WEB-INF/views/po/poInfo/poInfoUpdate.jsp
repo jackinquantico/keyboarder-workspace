@@ -20,20 +20,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>    
     <style>
         #wrap {
-            width : 1100px;
+            /* width : 1100px; */
             height : 500px;
             margin-left : 300px;        
         }
     
     	.content {
-    		width : 1100px;
+    		/* width : 1100px; */
     		height : 500px;
     		padding : 0px;
     	}
     	
     	#updateContent {
     		
-    		width : 1100px;
+    		/* width : 1100px; */
     		height : 500px;
     	}
     
@@ -56,6 +56,7 @@
             position: relative;
             left : 880px;
             top : -50px;
+            width: 200px;
         }
 
         #buttons button {
