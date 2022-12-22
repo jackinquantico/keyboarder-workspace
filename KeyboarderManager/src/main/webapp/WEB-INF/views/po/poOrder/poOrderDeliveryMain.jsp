@@ -149,13 +149,13 @@
         }
         
         .all{
-            width: 500px;
+            width: 630px;
             height: 35px;
             font-size: 18px;
         }
 
         .title{
-            width: 180px;
+            width: 170px;
         }
         
     </style>
@@ -317,7 +317,7 @@
 						                            <!-- The Modal -->
 												    <div class="modal" id="deliveryModal<%= count++ %>">
 												        <div class="modal-dialog">
-												        <div class="modal-content">
+												        <div class="modal-content" style="width: 630px;">
 												        
 												            <!-- Modal body -->
 												            <div class="modal-body">
@@ -490,7 +490,7 @@
 												                    	</c:otherwise>
 												                    </c:choose>
 												                    <hr>
-												                    <p style="margin: auto;">
+												                    <p style="margin-left: 75px; width: 450px;">
 												                   	 배송관리에서 조회하시는 정산예정금액은 주문상품별 예상되는 금액으로,
 												                    	정확한 정산금액은 ‘정산관리’ 메뉴에서 확인해주세요.
 												                	</p>
@@ -670,7 +670,7 @@
 						                            <!-- The Modal -->
 												    <div class="modal" id="deliveryModal<%= count++ %>">
 												        <div class="modal-dialog">
-												        <div class="modal-content">
+												        <div class="modal-content"  style="width: 630px;">
 												        
 												            <!-- Modal body -->
 												            <div class="modal-body">
@@ -843,7 +843,7 @@
 												                    	</c:otherwise>
 												                    </c:choose>
 												                    <hr>
-												                    <p style="margin: auto;">
+												                    <p style="margin-left: 75px; width: 450px;">
 												                   	 배송관리에서 조회하시는 정산예정금액은 주문상품별 예상되는 금액으로,
 												                    	정확한 정산금액은 ‘정산관리’ 메뉴에서 확인해주세요.
 												                	</p>
