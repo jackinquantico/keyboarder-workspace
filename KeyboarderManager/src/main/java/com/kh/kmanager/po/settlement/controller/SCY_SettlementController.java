@@ -220,7 +220,7 @@ public class SCY_SettlementController {
          	
          	String orderStatus="";
          	
-         	switch(list.get(i).getOrderStatus()) {
+         	switch(list.get(i).getOrderStatus(	)) {
          	
          	case "1" : orderStatus= "배송중"; 	break;
          	case "2" : orderStatus= "배송완료"; 	break;

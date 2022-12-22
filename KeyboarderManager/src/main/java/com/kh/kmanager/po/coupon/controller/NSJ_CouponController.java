@@ -84,7 +84,6 @@ public class NSJ_CouponController {
 	}
 	
 	
-
 	@RequestMapping("SearchAble.co")
 	public String ableCouponSearch(Coupon c, HttpSession session, Model model) {
 		
@@ -268,7 +267,7 @@ public class NSJ_CouponController {
 				session.setAttribute("alertMsg", "쿠폰 수정에 실패했습니다.");
 			}
 		
-			return "po/poCoupon/poshowAllCouponList";
+			return  "redirect:/CouponList.po";
 		}
 		
 

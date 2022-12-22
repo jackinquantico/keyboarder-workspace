@@ -116,7 +116,6 @@ height:470px;
 		</table>
 	</div>
 	<br> 
-		
 	<div id="settementList" class="card">
 	<table  id="coupone_view" class="table table-bordered" align="center" style="width:100%;">
 				<thead align="center"> 
@@ -127,8 +126,6 @@ height:470px;
 				   <th colspan="4" >주문상품정보</th>
 				   <th colspan="3">주문결제정보</th>
 				</tr>
-				
-		
 				<tr>
 				    <th>주문번호</th>
 				    <th>주문자</th>
