@@ -203,7 +203,7 @@
 										<table id="expectedSettlement_table">
 											<tr style="border-top:2px solid black;">
 												<td width="28%" style="border-left:none;">정산기준금액</td>
-												<td width="72%" style="border-right:none;">${ m.paymentBill }</td>
+												<td width="72%" style="border-right:none;">${ m.orderPrice }</td>
 											</tr>
 											<tr>
 												<td style="border-left:none;">수수료율</td>
@@ -211,11 +211,11 @@
 											</tr>
 											<tr>
 												<td style="border-left:none;">판매수수료(예상)</td>
-												<td style="border-right:none;">${ Math.round(m.paymentBill * 0.15) }</td>
+												<td style="border-right:none;">${ m.commission }</td>
 											</tr>
 											<tr style="border-bottom:2px solid black;">
 												<td style="border-left:none;">정산예정금액</td>
-												<td style="border-right:none;">${ Math.round(m.paymentBill - (m.paymentBill * 0.15)) }</td>
+												<td style="border-right:none;">${ m.paymentBill - m.commission }</td>
 											</tr>
 										</table>
 									</div>
@@ -455,7 +455,7 @@
 															+ "<table id='expectedSettlement_table'>"
 																+ "<tr style='border-top:2px solid black;'>"
 																	+ "<td width='28%' style='border-left:none;'>정산기준금액</td>"
-																	+ "<td width='72%' style='border-right:none;'>" + result[m].paymentBill + "</td>"
+																	+ "<td width='72%' style='border-right:none;'>" + result[m].orderPrice + "</td>"
 																+ "</tr>"
 																+ "<tr>"
 																	+ "<td style='border-left:none;'>수수료율</td>"
@@ -463,11 +463,11 @@
 																+ "</tr>"
 																+ "<tr>"
 																	+ "<td style='border-left:none;'>판매수수료(예상)</td>"
-																	+ "<td style='border-right:none;'>" + Math.round(result[m].paymentBill * 0.15) + "</td>"
+																	+ "<td style='border-right:none;'>" + result[m].commission + "</td>"
 																+ "</tr>"
 																+ "<tr style='border-bottom:2px solid black;'>"
 																	+ "<td style='border-left:none;'>정산예정금액</td>"
-																	+ "<td style='border-right:none;'>" + (result[m].paymentBill - Math.round(result[m].paymentBill * 0.15)) + "</td>"
+																	+ "<td style='border-right:none;'>" + (result[m].paymentBill - result[m].commission) + "</td>"
 																+ "</tr>"
 															+ "</table>"
 														+ "</div>"

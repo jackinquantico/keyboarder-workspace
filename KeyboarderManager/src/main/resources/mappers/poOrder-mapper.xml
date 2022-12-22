@@ -394,6 +394,7 @@
 			                      , S.SELLER_NO "SELLER_NO" <!-- WHERE절의 판매자 비교를 위한 데이터 추출 -->
 			                      , TO_CHAR(O.ORDER_DATE, 'YYYY-MM') "MONTH" <!-- WHERE절의 날짜 비교를 위한 데이터 추출 -->
 			                      , PAY.PAYMENT_NO
+			                      , SETT.COMMITION "COMMISSION"
 			                   FROM ORDERS O
 			                   JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
 			                   JOIN CONSUMER C ON (O.CON_NO = C.CON_NO)
@@ -437,6 +438,7 @@
 			                      , PAY.PAYMENT_BILL "PAYMENT_BILL" <!-- 정산기준금액(결제금액) -->
 			                      , S.SELLER_NO "SELLER_NO" <!-- WHERE절의 판매자 비교를 위한 데이터 추출 -->
 			                      , PAY.PAYMENT_NO
+			                      , SETT.COMMITION "COMMISSION"
 			                   FROM ORDERS O
 			                   JOIN PRODUCT P ON (O.PRODUCT_NO = P.PRODUCT_NO)
 			                   JOIN CONSUMER C ON (O.CON_NO = C.CON_NO)
