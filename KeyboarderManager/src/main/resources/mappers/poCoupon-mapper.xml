@@ -106,18 +106,20 @@
 		</select>
 			<select id="poCouponUsedList" parameterType="coupon" resultMap="poCouponResultMap">
 	
-			SELECT O.ORDER_NO as "ORDER_NO",
-            COUPON_NAME as "COUPON_NAME",
-			P.PRODUCT_NAME as "PRODUCT_NAME",
-			TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as "ORDER_DATE",
-			ORDER_PRICE as "ORDER_PRICE",
-            COUPON_PRICE as "COUPON_PRICE",
-			T.PAYMENT_BILL as "PAYMENT_BILL"
-		    FROM COUPON_STORE S
-		    JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
-		    JOIN ORDERS  O ON (O.PRODUCT_NO =P. PRODUCT_NO)
-		    JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
-		    WHERE S.SELLER_NO=#{sellerNo}
+			        SELECT O.ORDER_NO as "ORDER_NO",
+	            COUPON_NAME as "COUPON_NAME",
+	         P.PRODUCT_NAME as "PRODUCT_NAME",
+	         TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as "ORDER_DATE",
+	         ORDER_PRICE as "ORDER_PRICE",
+	            COUPON_PRICE as "COUPON_PRICE",
+	         T.PAYMENT_BILL as "PAYMENT_BILL"
+			FROM ORDERS O
+			JOIN PRODUCT P ON (P.PRODUCT_NO=O.PRODUCT_NO)
+			JOIN STORE_USE SU ON (SU.ORDER_NO = O.ORDER_NO)
+			JOIN COUPON_STORE C ON (C.COUPON_NO = SU.COUPON_NO)
+			JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
+			JOIN SELLER S ON (S.SELLER_NO = P.SELLER_NO)
+			WHERE S.SELLER_NO=#{sellerNo}
 		    <if test="fromDate != null">
 		    AND ORDER_DATE BETWEEN #{fromDate} AND #{toDate}
 		    </if>
@@ -125,18 +127,20 @@
 			</select>
 			
 			<select id="searchPoCouponUsed"  parameterType="coupon" resultMap="poCouponResultMap">
-			SELECT O.ORDER_NO as "ORDER_NO",
-            COUPON_NAME as "COUPON_NAME",
-			P.PRODUCT_NAME as "PRODUCT_NAME",
-			TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as "ORDER_DATE",
-			ORDER_PRICE as "ORDER_PRICE",
-            COUPON_PRICE as "COUPON_PRICE",
-			T.PAYMENT_BILL as "PAYMENT_BILL"
-		    FROM COUPON_STORE S
-		    JOIN PRODUCT P ON (P.PRODUCT_NO=S.PRODUCT_NO)
-		    JOIN ORDERS  O ON (O.PRODUCT_NO =P. PRODUCT_NO)
-		    JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
-		    WHERE S.SELLER_NO=#{sellerNo}
+			        SELECT O.ORDER_NO as "ORDER_NO",
+	            COUPON_NAME as "COUPON_NAME",
+	         P.PRODUCT_NAME as "PRODUCT_NAME",
+	         TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as "ORDER_DATE",
+	         ORDER_PRICE as "ORDER_PRICE",
+	            COUPON_PRICE as "COUPON_PRICE",
+	         T.PAYMENT_BILL as "PAYMENT_BILL"
+			FROM ORDERS O
+			JOIN PRODUCT P ON (P.PRODUCT_NO=O.PRODUCT_NO)
+			JOIN STORE_USE SU ON (SU.ORDER_NO = O.ORDER_NO)
+			JOIN COUPON_STORE C ON (C.COUPON_NO = SU.COUPON_NO)
+			JOIN PAYMENT T ON (T.ORDER_NO=O.ORDER_NO)
+			JOIN SELLER S ON (S.SELLER_NO = P.SELLER_NO)
+			WHERE S.SELLER_NO=#{sellerNo}
 		    <if test="fromDate != null">
 		    AND ORDER_DATE BETWEEN #{fromDate} AND #{toDate}
 		    </if>
