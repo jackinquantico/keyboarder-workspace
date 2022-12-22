@@ -233,10 +233,6 @@ public class CWS_SettlementController {
 			}			
 		};
 		
-		for(int i = 0; i < 10; i++) {
-			System.out.println(list.get(i).getSettleDate());
-		}
-		
 		
 		session.setAttribute("sellerList", sellerList);
 		session.setAttribute("list", list);
