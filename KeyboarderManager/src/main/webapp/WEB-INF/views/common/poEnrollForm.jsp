@@ -94,7 +94,7 @@
                 <table>
                     <tr>
                         <th width="130px"> 아이디 *</th>
-                        <td colspan="3"><input type="text" class="form-control" id="sellerId" name="sellerId" minlength="1" maxlength="20" placeholder="띄어쓰기 없는 영문,숫자 7~20자" required ></td>
+                        <td colspan="3"><input type="text" class="form-control" id="sellerId" name="sellerId" minlength="7" maxlength="20" placeholder="띄어쓰기 없는 영문,숫자 7~20자" required ></td>
                         <td width="130px" align="center"><button type="button" id="checkbutton" style="width:106px;" class="btn btn-dark" onclick="idCheck();">중복체크</button></td>
                     </tr>
                     <tr>
