@@ -217,7 +217,7 @@ public class NSJ_ProductController {
 		int result = productService.insertProduct(p);
 		System.out.println(result);
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 사진이 업로드 되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 상품이 등록 되었습니다.");
 
 			mv.setViewName("redirect:/show.pro");
 		} else { // 실패 => 에러페이지로 포워딩
