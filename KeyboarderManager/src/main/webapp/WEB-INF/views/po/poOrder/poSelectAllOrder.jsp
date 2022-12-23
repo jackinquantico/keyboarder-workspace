@@ -360,7 +360,7 @@
 						
 						for(var i = 0; i < result.length; i++) {
 							
-							resultStr += '<tr style="height:50px;">'
+							resultStr += "<tr style='height:50px;'>"
 											+ "<td><input type='checkbox' name='chk[]' onclick='isAllCheck(this.name, 'chkAll');' value='" + result[i].printOrder + "'></td>"
 											+ "<td>" + result[i].orderStatus + "</td>"
 											+ "<td>" + result[i].orderDate + "</td>"
